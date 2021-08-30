@@ -49,7 +49,7 @@ CREATE TABLE `product` (
   `product_name` varchar(50) NOT NULL,
   `category_id` int(50) NOT NULL,
   `description` varchar(50) NOT NULL,
-  `price` varchar(50) NOT NULL
+  `price` float(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
