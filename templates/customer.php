@@ -3,7 +3,7 @@ class customer {
   // Properties
   public $username;
   public $password;
-  static $cus_id;
+  public static $cus_id=12;
   public $email;
 
    
@@ -14,6 +14,7 @@ class customer {
     $this->password = $password;
     $this->email = $email;
     static ::$cus_id++;
+    return true;
   }
 
 }
