@@ -1,11 +1,19 @@
 <?php 
-// define variables and set to empty values
-$passworderr = $emailErr =  "";
-$password = $email = "";
+include 'templates/customer.php';
+include 'templates/seller.php';
+include 'database/db_connection.php';
 
-if (isset($_POST["submit1"])) {
+
+
+
+
+// define variables and set to empty values
+$passwordErr = $emailErr =$usernameErr=$confirmPswErr=  "";
+$password = $email =$username=$confirmPsw=$userType= "";
+
+if (isset($_POST["submitLogin"])) {
   if (empty($_POST["password"])) {
-    $passworderr = "password is required";
+    $passwordErr = "password is required";
   } else {
     $password = ($_POST["password"]);
   }
@@ -20,7 +28,64 @@ if (isset($_POST["submit1"])) {
  
 }
 
-elseif(isset($_POST["submit2"]))
+if(isset($_POST["submitSign"])){
+    if (empty($_POST["password"])) {
+        $passwordErr = "password is required";
+      } else {
+        $password = ($_POST["password"]);
+      }
+    
+      if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+      } else {
+        $email = ($_POST["email"]);
+      }
+      if (empty($_POST["username"])) {
+        $usernameErr = "username is required";
+      } else {
+        $username = ($_POST["username"]);
+      }
+      if (empty($_POST["confirmPsw"])) {
+        $confirmPswErr = "confirm password is required";
+      } else {
+        $confirmPsw = ($_POST["confirmPsw"]);
+      }
+      if  ($_POST["userType"]=="seller"){
+          $seller=new seller($username,$password,$email);
+          $Seller=serialize($seller);
+          
+      $sql = "INSERT INTO sellers (seller_obj) VALUES ('$Seller')";
+
+      if ($conn->query($sql) === TRUE) {
+             echo "New record created successfully";
+     } else {
+             echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+          
+      }
+      else{
+          
+          $customer=new customer($username,$password,$email);
+          $Customer=serialize($customer);
+          echo customer::$cus_id;
+          echo $customer1->username;
+        
+
+      $sql = "INSERT INTO customers (customer_obj) VALUES ('$Customer')";
+
+      if ($conn->query($sql) === TRUE) {
+             echo "New record created successfully";
+     } else {
+             echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+    }
+
+$conn->close();
+    //   echo $email;
+    //   echo $password;
+    //   echo $confirmPsw;
+    //   echo $username;
+}
 ?>
 
 <html lang="en">
@@ -69,12 +134,12 @@ elseif(isset($_POST["submit2"]))
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="error"><?php echo $passworderr;?></span>
+                                <span class="error"><?php echo $passwordErr;?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
                           
-                             <button class="btn solid login" name="submit1">
+                             <button class="btn solid login" name="submitLogin">
                                 <span class="buttonText">Login</span>
                             </button> 
                             
@@ -84,7 +149,7 @@ elseif(isset($_POST["submit2"]))
         
                     <div class="signin-signup sign-up">
 
-                        <form class="sign-up-form">
+                        <form class="sign-up-form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
                             <h2 class="title">Sign up</h2>
 
@@ -92,7 +157,7 @@ elseif(isset($_POST["submit2"]))
                                 <i class="fas fa-user"></i>
                                 <input name="username" type="text" placeholder="Username" class="username">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $usernameErr;?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -101,7 +166,7 @@ elseif(isset($_POST["submit2"]))
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="email" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $emailErr;?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -111,7 +176,7 @@ elseif(isset($_POST["submit2"]))
                                 <input name="password" type="password" placeholder="Password" class="psw">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $passwordErr;?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -121,7 +186,7 @@ elseif(isset($_POST["submit2"]))
                                 <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $confirmPswErr;?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -137,7 +202,7 @@ elseif(isset($_POST["submit2"]))
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <button class="btn solid signup">
+                            <button class="btn solid signup" name="submitSign">
                                 <span class="buttonText">Sign Up</span>
                             </button>
 
@@ -167,7 +232,7 @@ elseif(isset($_POST["submit2"]))
                             <p>
                                 Join us and enjoy the services
                             </p>
-                            <button class="btn transparent" id="sign-up-button">
+                            <button class="btn transparent" id="sign-up-button" name="submitign">
                                 <span class="buttonText">Sign up</span>
                             </button>
                         </div>
