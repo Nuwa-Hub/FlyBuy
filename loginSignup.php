@@ -3,7 +3,7 @@ include 'templates/customer.php';
 include 'templates/seller.php';
 include 'database/db_connection.php';
 
-
+session_start();
 
 
 
@@ -50,41 +50,40 @@ if(isset($_POST["submitSign"])){
       } else {
         $confirmPsw = ($_POST["confirmPsw"]);
       }
-      if  ($_POST["userType"]=="seller"){
-          $seller=new seller($username,$password,$email);
-          $Seller=serialize($seller);
-          
-      $sql = "INSERT INTO sellers (seller_obj) VALUES ('$Seller')";
 
-      if ($conn->query($sql) === TRUE) {
-             echo "New record created successfully";
-     } else {
-             echo "Error: " . $sql . "<br>" . $conn->error;
-      }
-          
-      }
-      else{
-          
-          $customer=new customer($username,$password,$email);
-          $Customer=serialize($customer);
-          echo customer::$cus_id;
-          echo $customer->username;
-        
+    
+    if (!empty($_POST["password"]) && !empty($_POST["email"]) && !empty($_POS["username"]) ){
 
-      $sql = "INSERT INTO customers (customer_obj) VALUES ('$Customer')";
 
-      if ($conn->query($sql) === TRUE) {
-             echo "New record created successfully";
-     } else {
-             echo "Error: " . $sql . "<br>" . $conn->error;
-      }
-    }
+                if  ($_POST["userType"]=="seller"){
+                
+                $sql = "INSERT INTO sellers (username,email,password) VALUES ('$username','$password','$email')";
 
-$conn->close();
-    //   echo $email;
-    //   echo $password;
-    //   echo $confirmPsw;
-    //   echo $username;
+                if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+                    
+                }
+                else{
+                    
+
+                $sql = "INSERT INTO customers(username,email,password) VALUES ('$username','$password','$email')";
+
+                if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+                }
+
+                $conn->close();
+                //   echo $email;
+                //   echo $password;
+                //   echo $confirmPsw;
+                //   echo $username;
+            }
 }
 ?>
 
