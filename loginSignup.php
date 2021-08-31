@@ -1,5 +1,9 @@
 <?php 
+    $doc = new DOMDocument;
 
+    $signinBtn = $doc->getElementById('sign-in-button');
+
+    
 ?>
 
 <html lang="en">
@@ -14,6 +18,8 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous" 
     />
+
+    <link rel="stylesheet" href="./css/styles_signinLogin.css">
     
     <title>SignIn and SignUp</title>
 </head>
@@ -21,7 +27,7 @@
 
     <main>
         
-        <div class="column-left">
+        <div class="column">
 
             <div class="container">
 
@@ -161,4 +167,20 @@
     </main>
     
 </body>
+
+<script>
+    // toggle login and signup animation
+    const sign_in_btn = document.querySelector('#sign-in-button');
+    const sign_up_btn = document.querySelector('#sign-up-button');
+    const container = document.querySelector('.container');
+
+    sign_up_btn.addEventListener('click', () => {
+        container.classList.add('sign-up-mode');
+    });
+
+    sign_in_btn.addEventListener('click', () => {
+        container.classList.remove('sign-up-mode');
+    });
+</script>
+
 </html>
