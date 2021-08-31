@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 10:26 AM
+-- Generation Time: Aug 31, 2021 at 11:22 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -24,71 +24,100 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
-  `cust_id` int(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `tel_num` int(50) NOT NULL
+CREATE TABLE `customers` (
+  `cus_id` int(11) NOT NULL,
+  `customer_obj` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`cus_id`, `customer_obj`) VALUES
+(1, 'O:8:\"customer\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(2, 'O:8:\"customer\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(3, 'O:8:\"customer\":3:{s:8:\"username\";s:14:\"nuan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(4, ''),
+(5, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `product_obj` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `sellers`
 --
 
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product` (
-  `product_id` int(50) NOT NULL,
-  `product_name` varchar(50) NOT NULL,
-  `category_id` int(50) NOT NULL,
-  `description` varchar(50) NOT NULL,
-  `price` float(50) NOT NULL
+CREATE TABLE `sellers` (
+  `seller_id` int(11) NOT NULL,
+  `seller_obj` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `seller`
+-- Dumping data for table `sellers`
 --
 
-DROP TABLE IF EXISTS `seller`;
-CREATE TABLE `seller` (
-  `seller_id` int(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `tel_num` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `sellers` (`seller_id`, `seller_obj`) VALUES
+(1, 'O:6:\"seller\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(2, 'O:6:\"seller\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(3, 'O:6:\"seller\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}'),
+(4, 'O:6:\"seller\":3:{s:8:\"username\";s:15:\"nuwan@gmail.com\";s:8:\"password\";s:3:\"123\";s:5:\"email\";s:0:\"\";}');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `customer`
+-- Indexes for table `customers`
 --
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cust_id`);
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`cus_id`);
 
 --
--- Indexes for table `product`
+-- Indexes for table `products`
 --
-ALTER TABLE `product`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `seller`
+-- Indexes for table `sellers`
 --
-ALTER TABLE `seller`
+ALTER TABLE `sellers`
   ADD PRIMARY KEY (`seller_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `cus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sellers`
+--
+ALTER TABLE `sellers`
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
