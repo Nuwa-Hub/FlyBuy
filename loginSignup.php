@@ -52,7 +52,7 @@ if(isset($_POST["submitSign"])){
       }
 
     
-    if (!empty($_POST["password"]) && !empty($_POST["email"]) && !empty($_POS["username"]) ){
+    if (!empty($_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["username"]) && !empty($_POST["confirmPsw"])){
 
 
                 if  ($_POST["userType"]=="seller"){
