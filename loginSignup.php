@@ -1,5 +1,26 @@
 <?php 
+// define variables and set to empty values
+$passworderr = $emailErr =  "";
+$password = $email = "";
 
+if (isset($_POST["submit1"])) {
+  if (empty($_POST["password"])) {
+    $passworderr = "password is required";
+  } else {
+    $password = ($_POST["password"]);
+  }
+
+  if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
+  } else {
+    $email = ($_POST["email"]);
+  }
+  echo $email;
+  echo $password;
+ 
+}
+
+elseif(isset($_POST["submit2"]))
 ?>
 
 <html lang="en">
@@ -29,7 +50,7 @@
         
                     <div class="signin-signup sign-in">
 
-                        <form class="sign-in-form">
+                        <form class="sign-in-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
                             <h2 class="title">Sign in</h2>
 
@@ -37,25 +58,25 @@
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                <span class="error"><?php echo $emailErr;?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
                             <div class="input-field">
                                 <i class="fas fa-lock"></i>
-                                <input name="Psw" type="password" placeholder="Password" class="psw">
+                                <input name="password" type="password" placeholder="Password" class="psw">
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                <span class="error"><?php echo $passworderr;?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
-
-                            <button class="btn solid login">
+                          
+                             <button class="btn solid login" name="submit1">
                                 <span class="buttonText">Login</span>
-                            </button>
+                            </button> 
                             
                         </form>
 
