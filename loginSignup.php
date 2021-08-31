@@ -68,7 +68,7 @@ if(isset($_POST["submitSign"])){
           $customer=new customer($username,$password,$email);
           $Customer=serialize($customer);
           echo customer::$cus_id;
-          echo $customer1->username;
+          echo $customer->username;
         
 
       $sql = "INSERT INTO customers (customer_obj) VALUES ('$Customer')";
