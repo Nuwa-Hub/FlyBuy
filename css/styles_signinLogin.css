@@ -48,7 +48,7 @@ input{
 .container::before{
     content: '';
     position: absolute;
-    height: 80vw;
+    height: 140vh;
     width: 80vw;
     top: 50%;
     right: -45%;
@@ -99,9 +99,13 @@ input{
 }
 
 .input-field.radio{
-    background-color: transparent;
     grid-template-columns: 5% 45% 5% 45%;
     align-items: center;
+}
+
+.input-field.store.remove{
+    position: absolute;
+    transform: scale(0);
 }
 
 .input-field i{
@@ -258,7 +262,7 @@ form.sign-in-form{
 
 form.sign-up-form{
     opacity: 0;
-    transform: translateX(-800px);
+    transform: translateX(-1000px);
     transition: 1.8s ease-in-out;
 }
 

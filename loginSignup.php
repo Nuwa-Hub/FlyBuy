@@ -175,6 +175,24 @@ if(isset($_POST["submitSign"])){
                             </div>
 
                             <div class="input-field">
+                                <i class="fas fa-mobile-alt"></i>
+                                <input name="phoneNumber" type="tel" placeholder="Phone Number" class="phone">
+                                <i class="fas fa-exclamation-circle tooltip">
+                                    <small class="tooltip-text">Error Message</small>
+                                </i>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <input name="address" type="text" placeholder="Address" class="address">
+                                <i class="fas fa-exclamation-circle tooltip">
+                                    <small class="tooltip-text">Error Message</small>
+                                </i>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+
+                            <div class="input-field">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw">
                                 <i class="fas fa-eye togglePassword"></i>
@@ -194,10 +212,19 @@ if(isset($_POST["submitSign"])){
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
+                            <div class="input-field store remove">
+                                <i class="fas fa-store"></i>
+                                <input name="storeName" type="text" placeholder="Store Name" class="store">
+                                <i class="fas fa-exclamation-circle tooltip">
+                                    <small class="tooltip-text">Error Message</small>
+                                </i>
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+
                             <div class="input-field radio">
-                                <input type="radio" class="radio" name="userType" value="buyer" checked>
+                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
                                 <label for="radio">Buyer</label>
-                                <input type="radio" class="radio" name="userType" value="seller">
+                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
                                 <label for="radio">Seller</label>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text">Error Message</small>
@@ -286,6 +313,19 @@ if(isset($_POST["submitSign"])){
 
     if (toggleView){
         togglePasswordView(toggleView);
+    }
+
+    // add extra seller information
+    let radioBtns = document.querySelectorAll('.radioBtn');
+    let storeName = document.querySelector('.input-field.store');
+    
+    function addField(){
+        storeName.classList.remove('remove');
+
+    }
+
+    function removeField(){
+        storeName.classList.add('remove');
     }
 
 </script>
