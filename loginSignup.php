@@ -89,6 +89,7 @@ $conn->close();
 ?>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -105,6 +106,7 @@ $conn->close();
     
     <title>SignIn and SignUp</title>
 </head>
+
 <body>
 
     <main>
@@ -117,7 +119,7 @@ $conn->close();
         
                     <div class="signin-signup sign-in">
 
-                        <form class="sign-in-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form class="sign-in-form">
 
                             <h2 class="title">Sign in</h2>
 
@@ -125,7 +127,7 @@ $conn->close();
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="error"><?php echo $emailErr;?></span>
+                                <span class="error">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -136,7 +138,7 @@ $conn->close();
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="error"><?php echo $passwordErr;?></span>
+                                <span class="error">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -151,7 +153,7 @@ $conn->close();
         
                     <div class="signin-signup sign-up">
 
-                        <form class="sign-up-form"  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form class="sign-up-form">
 
                             <h2 class="title">Sign up</h2>
 
@@ -159,7 +161,7 @@ $conn->close();
                                 <i class="fas fa-user"></i>
                                 <input name="username" type="text" placeholder="Username" class="username">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $usernameErr;?></small>
+                                    <small class="tooltip-text">Error Message</small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -168,7 +170,7 @@ $conn->close();
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="email" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $emailErr;?></small>
+                                    <small class="tooltip-text">Error Message</small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -178,7 +180,7 @@ $conn->close();
                                 <input name="password" type="password" placeholder="Password" class="psw">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $passwordErr;?></small>
+                                    <small class="tooltip-text">Error Message</small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -188,12 +190,12 @@ $conn->close();
                                 <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $confirmPswErr;?></small>
+                                    <small class="tooltip-text">Error Message</small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field radio">
                                 <input type="radio" class="radio" name="userType" value="buyer" checked>
                                 <label for="radio">Buyer</label>
                                 <input type="radio" class="radio" name="userType" value="seller">
@@ -216,7 +218,7 @@ $conn->close();
         
                 <div class="panels-container">
         
-                    <div class="panel upper-panel">
+                    <div class="panel left-panel">
                         <div class="content">
                             <h3>One of Us?</h3>
                             <p>
@@ -225,11 +227,13 @@ $conn->close();
                             <button class="btn transparent" id="sign-in-button">
                                 <span class="buttonText">Sign in</span>
                             </button>
+                            <img src="user.png" alt="user">
                         </div>
                     </div>
         
-                    <div class="panel lower-panel">
+                    <div class="panel right-panel">
                         <div class="content">
+                            <img src="user.png" alt="user">
                             <h3>New Here?</h3>
                             <p>
                                 Join us and enjoy the services
@@ -252,9 +256,9 @@ $conn->close();
 
 <script>
     // toggle login and signup animation
-    const sign_in_btn = document.querySelector('#sign-in-button');
-    const sign_up_btn = document.querySelector('#sign-up-button');
-    const container = document.querySelector('.container');
+    const sign_in_btn   = document.querySelector('#sign-in-button');
+    const sign_up_btn   = document.querySelector('#sign-up-button');
+    const container     = document.querySelector('.container');
 
     sign_up_btn.addEventListener('click', () => {
         container.classList.add('sign-up-mode');
@@ -263,6 +267,28 @@ $conn->close();
     sign_in_btn.addEventListener('click', () => {
         container.classList.remove('sign-up-mode');
     });
+
+    // toggle password view---------------------------------------------------------------
+    let toggleView      = document.querySelectorAll('.togglePassword');
+
+    function togglePasswordView(toggleView){
+        for (let i = 0; i < toggleView.length; i++){
+            let pswField = toggleView[i].parentElement.querySelector('input');
+
+            toggleView[i].addEventListener('click', (event) => {
+                // toggle the type attribute
+                let type = pswField.getAttribute('type') === 'password' ? 'text' : 'password';
+                pswField.setAttribute('type', type);
+                // toggle the eye slash icon
+                toggleView[i].classList.toggle('fa-eye-slash');
+            });
+        }
+    };
+
+    if (toggleView){
+        togglePasswordView(toggleView);
+    }
+
 </script>
 
 </html>
