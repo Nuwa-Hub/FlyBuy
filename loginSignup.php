@@ -200,7 +200,7 @@ if (isset($_POST['submitLogin'])){
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="error">Error Message</span>
+                                <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -211,27 +211,19 @@ if (isset($_POST['submitLogin'])){
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="error">Error Message</span>
+                                <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
+                          
+                            <button class="btn solid login buyer" name="submitLogin">
+                                <span class="buttonText">Login as a cutomer</span>
+                            </button> 
 
-
-                            <div class="input-field radio">
-                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
-                                <label for="radio">Buyer</label>
-                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
-                                <label for="radio">Seller</label>
-                                <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
-                                </i>
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-
-                            <button class="btn solid login" name="submitLogin">
-                                <span class="buttonText">Login</span>
-                            </button>
-
+                            <button class="btn solid login seller" name="submitLogin">
+                                <span class="buttonText">Login as a seller</span>
+                            </button> 
+                            
                         </form>
 
                     </div>
@@ -413,6 +405,32 @@ if (isset($_POST['submitLogin'])){
     function removeField() {
         storeName.classList.add('remove');
     }
+
+    // set errors set success
+    // function setError(element, msg){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.add('error');
+    //     let small = inputField.querySelector('.tooltip-text');
+    //     if (small){
+    //         small.innerText = msg;
+    //     }
+        
+    // }
+
+    // function setSuccess(element){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.add('success');
+    // }
+
+    // function removeError(element){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.remove('error', 'success');
+    //     let small = inputField.querySelector('.tooltip-text');
+    //     if (small){
+    //         small.innerText = '';
+    //     }
+    // }
+
 </script>
 
 </html>
