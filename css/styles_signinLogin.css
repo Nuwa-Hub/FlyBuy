@@ -1,17 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     outline: none !important;
 }
 
-*:focus{
+*:focus {
     outline: none !important;
 }
 
-main{
+main {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
@@ -19,7 +18,7 @@ main{
     height: 100vh;
 }
 
-.column{
+.column {
     grid-column: 1/13;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -31,11 +30,11 @@ main{
 }
 
 body,
-input{
+input {
     font-family: 'Poppins', sans-serif;
 }
 
-.container{
+.container {
     grid-column: 2/12;
     position: relative;
     background: #fff;
@@ -45,7 +44,7 @@ input{
     border-radius: 10px;
 }
 
-.container::before{
+.container::before {
     content: '';
     position: absolute;
     height: 140vh;
@@ -53,8 +52,8 @@ input{
     top: 50%;
     right: -45%;
     /* background-image: linear-gradient(-45deg, #20dbc2 0%, #00bfa6 100%); */
-    background-image: url('../background3.jpg');
-    background-size:cover;
+    background-image: url('../images/online\ shopping1.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
     border-radius: 50%;
@@ -63,7 +62,7 @@ input{
     transition: 1.8s ease-in-out;
 }
 
-.forms-container{
+.forms-container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -72,7 +71,7 @@ input{
     grid-auto-rows: auto;
 }
 
-.signin-signup{
+.signin-signup {
     position: relative;
     display: flex;
     flex-direction: absolute;
@@ -80,13 +79,13 @@ input{
     justify-content: center;
 }
 
-.title{
+.title {
     font-size: 1.4rem;
     color: #444;
     margin: 0.6em;
 }
 
-.input-field{
+.input-field {
     width: 85%;
     height: 2.1em;
     background-color: #f0f0f0;
@@ -98,24 +97,24 @@ input{
     position: relative;
 }
 
-.input-field.radio{
+.input-field.radio {
     grid-template-columns: 5% 45% 5% 45%;
     align-items: center;
 }
 
-.input-field.store.remove{
+.input-field.store.remove {
     position: absolute;
     transform: scale(0);
 }
 
-.input-field i{
+.input-field i {
     text-align: center;
     line-height: 2em;
     color: #acacac;
     font-size: 1rem;
 }
 
-.input-field small.forgotPsw{
+.input-field small.forgotPsw {
     position: absolute;
     right: 0;
     font-size: 0.7em;
@@ -123,12 +122,12 @@ input{
     color: #00bfa6;
 }
 
-.input-field small.forgotPsw:hover{
+.input-field small.forgotPsw:hover {
     text-decoration: underline;
 }
 
 .input-field i.fa-exclamation-circle,
-.input-field i.fa-check-circle{
+.input-field i.fa-check-circle {
     position: absolute;
     right: 0;
     transform: translateX(110%);
@@ -139,23 +138,24 @@ input{
     display: none;
 }
 
-.input-field.success i.fa-check-circle{
+.input-field.success i.fa-check-circle {
     color: #34df34;
     display: block;
 }
-.input-field.error i.fa-exclamation-circle{
+
+.input-field.error i.fa-exclamation-circle {
     display: block;
 }
 
 .input-field i.fa-eye,
-.input-field i.fa-eye-slash{
+.input-field i.fa-eye-slash {
     position: absolute;
     right: 0;
     margin-right: 5px;
     cursor: pointer;
 }
 
-.tooltip .tooltip-text{
+.tooltip .tooltip-text {
     visibility: hidden;
     background-color: rgba(73, 72, 72, 0.9);
     color: #fff;
@@ -168,7 +168,7 @@ input{
     min-width: 300px;
 }
 
-.tooltip small a{
+.tooltip small a {
     position: absolute;
     right: 0;
     bottom: -20px;
@@ -177,16 +177,16 @@ input{
     text-decoration: none;
     font-size: 11px;
     font-weight: 500;
-    width:100px;
+    width: 100px;
     padding: 0;
     margin: 0;
 }
-.tooltip small a:hover{
+
+.tooltip small a:hover {
     text-decoration: underline;
 }
 
-
-.tooltip .tooltip-text::after{
+.tooltip .tooltip-text::after {
     content: " ";
     position: absolute;
     top: 100%;
@@ -197,11 +197,11 @@ input{
     border-color: rgba(73, 72, 72, 0.9) transparent transparent transparent;
 }
 
-.tooltip:hover .tooltip-text{
+.tooltip:hover .tooltip-text {
     visibility: visible;
 }
 
-.input-field input{
+.input-field input {
     background: none;
     outline: none;
     border: none;
@@ -211,19 +211,20 @@ input{
     color: #333;
 }
 
-.input-field.success{
+.input-field.success {
     border: 1.5px solid #34df34;
 }
-.input-field.error{
+
+.input-field.error {
     border: 1.5px solid #f03f63;
 }
 
-.input-field input:placeholder-shown{
+.input-field input:placeholder-shown {
     color: #aaa;
     font-weight: 500;
 }
 
-.btn{
+.btn {
     width: 40%;
     height: 2.5em;
     padding: 0.5em;
@@ -240,14 +241,15 @@ input{
     position: relative;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #00bfa6;
 }
-.btn:active{
+
+.btn:active {
     opacity: 0.5;
 }
 
-form{
+form {
     display: flex;
     width: 88%;
     flex-direction: column;
@@ -256,17 +258,17 @@ form{
     grid-column: 1/2;
 }
 
-form.sign-in-form{
+form.sign-in-form {
     transition: 1.8s ease-in-out;
 }
 
-form.sign-up-form{
+form.sign-up-form {
     opacity: 0;
     transform: translateX(-1000px);
     transition: 1.8s ease-in-out;
 }
 
-.panels-container{
+.panels-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -276,7 +278,7 @@ form.sign-up-form{
     grid-template-columns: 1fr 1fr;
 }
 
-.panel{
+.panel {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     align-items: flex-end;
@@ -285,12 +287,12 @@ form.sign-up-form{
     z-index: 7;
 }
 
-.panel img{
+.panel img {
     display: block;
     margin: 10px auto;
 }
 
-.right-panel{
+.right-panel {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     padding: 5em 17% 2em 12%;
@@ -299,7 +301,7 @@ form.sign-up-form{
     text-align: center;
 }
 
-.left-panel{
+.left-panel {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     padding: 3rem 12% 2rem 17%;
@@ -309,32 +311,31 @@ form.sign-up-form{
     text-align: center;
 }
 
-.panel .content{
+.panel .content {
     grid-column: 1/13;
     color: #fff;
     position: relative;
     transition: .9s .6s ease-in-out;
 }
 
-.left-panel .content{
+.left-panel .content {
     color: #000;
 }
 
-
-.panel h3{
+.panel h3 {
     grid-column: 1/13;
     font-weight: 600;
     line-height: 1;
     font-size: 1.5rem;
 }
 
-.panel p{
+.panel p {
     grid-column: 1/13;
     font-size: 0.95rem;
     padding: 0.7rem 0;
 }
 
-.btn.transparent{
+.btn.transparent {
     margin: 0;
     background: none;
     border: 2px solid #fff;
@@ -344,47 +345,49 @@ form.sign-up-form{
     font-size: 0.8rem;
 }
 
-.left-panel .btn.transparent{
+.left-panel .btn.transparent {
     color: #000;
     border: 2px solid #000;
 }
 
-.left-panel .content{
+.left-panel .content {
     /* transform: translateX(800px); */
     right: 800px;
 }
 
-.input-field input:-webkit-autofill { 
+.input-field input:-webkit-autofill {
     -webkit-background-clip: text;
 }
 
+
 /* animations */
-.container.sign-up-mode::before{
+
+.container.sign-up-mode::before {
     right: 48%;
 }
 
-.container.sign-up-mode .right-panel .content{
+.container.sign-up-mode .right-panel .content {
     transform: translateX(800px);
 }
 
-.container.sign-up-mode .left-panel .content{
+.container.sign-up-mode .left-panel .content {
     transform: translateX(800px);
 }
 
-.container.sign-up-mode .right-panel{
+.container.sign-up-mode .right-panel {
     pointer-events: none;
 }
 
-.container.sign-up-mode .left-panel{
+.container.sign-up-mode .left-panel {
     pointer-events: all;
 }
 
-.container.sign-up-mode form.sign-in-form{
+.container.sign-up-mode form.sign-in-form {
     opacity: 0;
     transform: translateX(100%);
 }
 
-.container.sign-up-mode form.sign-up-form{
+.container.sign-up-mode form.sign-up-form {
     opacity: 1;
     transform: translateX(0%);
 }
