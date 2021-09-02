@@ -4,7 +4,7 @@ include 'templates/seller.php';
 include 'database/db_connection.php';
 require('user_validator.php');
 
-session_start();
+
 
 
 
@@ -13,22 +13,24 @@ $errors = [];
 function checknone($arr)
 {
     foreach ($arr as $ele) {
-        if ($ele != 'none') {
+        if ($ele != 'none' ) {
             return false;
         }
     }
     return true;
 }
 
+
+
+
+if (isset($_POST['submitSignup'])){
+      echo "dsf";
+}
+//print_r($_POST['submitSignup']);
 if (isset($_POST['submitSignup'])) {
 
 
-
-
-
-
-
-if ($_POST['userType'] == "buyer") {
+    if ($_POST['userType'] == "buyer") {
 
         //write query for all users
         $sql = 'SELECT * FROM customers';
@@ -68,7 +70,7 @@ if ($_POST['userType'] == "buyer") {
         //fetch the resulting rows as an array
         $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-
+        print_r($users);
         // validate entries
         $validation = new UserValidator($_POST, $users, "seller");
         $errors = $validation->validateForm('signup');
@@ -85,65 +87,70 @@ if ($_POST['userType'] == "buyer") {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         } else {
-            print_r(array_values($errors));
-        }
+           print_r(array_values($errors));
+       }
     }
-} 
+}
 
-if (isset($_POST['submitLogin'])){
+if (isset($_POST['userTypeBuyer'])) {
 
 
-       if ($_POST['userType'] == "buyer") {
 
-        //write query for all users
-        $sql = 'SELECT * FROM customers';
 
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
+    //write query for all users
+    $sql = 'SELECT * FROM customers';
 
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    //make query and get result
+    $result = mysqli_query($conn, $sql);
 
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "buyer");
-        $errors = $validation->validateForm('login');
+    //fetch the resulting rows as an array
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-        //array_filter($errors)
+    // validate entries
+    $validation = new UserValidator($_POST, $users, "buyer");
+    $errors = $validation->validateForm('login');
+   // print_r($users);
+    array_filter($errors);
 
-        if (checknone($errors)) {
-             echo "c";
-          //  header('Location: home.php');
-        } else {
-            print_r(array_values($errors));
-        }
+    if (checknone($errors)) {
+        echo "Home";
+     //   $_POST['userTypeBuyer']==null;
+        //  header('Location: home.php');
     } else {
-
-        //write query for all users
-        $sql = 'SELECT * FROM sellers';
-
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+      print_r(array_values($errors));
+  }
+}
 
 
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "seller");
-        $errors = $validation->validateForm('login');
+if (isset($_POST['userTypeSeller'])) {
+
+    //write query for all users
+    $sql = 'SELECT * FROM sellers';
+
+    //make query and get result
+    $result = mysqli_query($conn, $sql);
+
+    //fetch the resulting rows as an array
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+   // print_r($users);
+
+    // validate entries
+    $validation = new UserValidator($_POST, $users, "seller");
+    $errors = $validation->validateForm('login');
 
 
 
-        if (checknone($errors)) {
-                echo "c";
-          //  header('Location: home.php ');
-        } else {
-            print_r(array_values($errors));
-        }
+    if (checknone($errors)) {
+        echo "Home";
+        $_POST['userTypeSeller']=null;
+        //  header('Location: home.php ');
+    } else {
+       print_r(array_values($errors));
     }
 }
 
 
+$conn->close();
 
 
 
@@ -200,7 +207,7 @@ if (isset($_POST['submitLogin'])){
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -211,19 +218,19 @@ if (isset($_POST['submitLogin'])){
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
-                          
-                            <button class="btn solid login buyer" name="submitLogin">
-                                <span class="buttonText">Login as a cutomer</span>
-                            </button> 
 
-                            <button class="btn solid login seller" name="submitLogin">
+                            <button class="btn solid login buyer" name="userTypeBuyer" value="buyer">
+                                <span class="buttonText">Login as a cutomer</span>
+                            </button>
+
+                            <button class="btn solid login seller" name="userTypeSeller" value="seller">
                                 <span class="buttonText">Login as a seller</span>
-                            </button> 
-                            
+                            </button>
+
                         </form>
 
                     </div>
@@ -414,7 +421,7 @@ if (isset($_POST['submitLogin'])){
     //     if (small){
     //         small.innerText = msg;
     //     }
-        
+
     // }
 
     // function setSuccess(element){
@@ -430,7 +437,6 @@ if (isset($_POST['submitLogin'])){
     //         small.innerText = '';
     //     }
     // }
-
 </script>
 
 </html>
