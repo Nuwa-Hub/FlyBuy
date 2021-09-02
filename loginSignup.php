@@ -126,7 +126,7 @@ if(isset($_POST["submitSign"])){
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="error">Error Message</span>
+                                <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -137,7 +137,7 @@ if(isset($_POST["submitSign"])){
                                 <a href="#"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                <span class="error">Error Message</span>
+                                <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -327,6 +327,31 @@ if(isset($_POST["submitSign"])){
     function removeField(){
         storeName.classList.add('remove');
     }
+
+    // set errors set success
+    // function setError(element, msg){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.add('error');
+    //     let small = inputField.querySelector('.tooltip-text');
+    //     if (small){
+    //         small.innerText = msg;
+    //     }
+        
+    // }
+
+    // function setSuccess(element){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.add('success');
+    // }
+
+    // function removeError(element){
+    //     let inputField = element.parentElement;
+    //     inputField.classList.remove('error', 'success');
+    //     let small = inputField.querySelector('.tooltip-text');
+    //     if (small){
+    //         small.innerText = '';
+    //     }
+    // }
 
 </script>
 

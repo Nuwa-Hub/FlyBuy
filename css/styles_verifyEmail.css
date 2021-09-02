@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.shape-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 0;
+}
+
+.shape-wrapper svg{
+    position: relative;
+    display: block;
+    width: calc(300% + 1.3px);
+    height: 50vh;
+    opacity: 0.7;
+}
+
+.shape-wrapper .shape-fill{
+    fill: #43e97b;
+}
+
+.container *{
+    z-index: 1;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 0;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 30vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container img{
+    height: 12.5em;
+    width: 12.5em;
+    padding: 0.5em;
+}
+
+.container h2{
+    font-size: 2rem;
+    line-height: 2.2em;
+    font-weight: 600;
+    margin: 0;
+    color: #979393;
+}
+
+.container h3,
+.container h4{
+    font-weight: 400;
+    color: #979393;
+}
+
+.container a{
+    text-decoration: none;
+}
+
+.sendAgainLink{
+    color: #00bfa6;
+    transition: all 0.2s ease-in;
+}
+
+.sendAgainLink:hover{
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.sendAgainLink:active{
+    transform: scale(0.97);
+}
+
+.loginLink{
+    border: none;
+    background: linear-gradient(to right, #43e97b, #38f9d7);
+    padding: 0.6em 1.2em;
+    margin:  1em 0.3em;
+    border-radius: 1.25em;
+    color: #fff;
+    transition: all 0.2s ease-in;
+}
+
+.loginLink:hover{
+    opacity: 0.9;
+    transform: scale(1.05);
+    background: linear-gradient(to right, #38f9d7, #43e97b);
+}
+
+.loginLink:active{
+    transform: scale(0.97);
+}
+
+@media screen and (max-width: 1030px){
+    .container{
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width: 620px){
+    .container{
+        width: 70vw;
+    }
+}
+
+@media screen and (max-width: 430px){
+    .container{
+        width: 85vw;
+    }
+}
