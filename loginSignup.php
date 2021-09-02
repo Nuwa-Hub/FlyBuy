@@ -142,8 +142,12 @@ if(isset($_POST["submitSign"])){
                                 <i class="fas fa-check-circle"></i>
                             </div>
                           
-                             <button class="btn solid login" name="submitLogin">
-                                <span class="buttonText">Login</span>
+                            <button class="btn solid login buyer" name="submitLogin">
+                                <span class="buttonText">Login as a cutomer</span>
+                            </button> 
+
+                            <button class="btn solid login seller" name="submitLogin">
+                                <span class="buttonText">Login as a seller</span>
                             </button> 
                             
                         </form>
