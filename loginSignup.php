@@ -13,7 +13,7 @@ $errors = [];
 function checknone($arr)
 {
     foreach ($arr as $ele) {
-        if ($ele != 'none' ) {
+        if ($ele != 'none') {
             return false;
         }
     }
