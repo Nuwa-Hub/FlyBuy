@@ -148,7 +148,7 @@ if (isset($_POST['userTypeSeller'])) {
        print_r(array_values($errors));
     }
 }
-
+if(isset($_POST['userTypeBuyer']))
 
 $conn->close();
 
@@ -215,7 +215,7 @@ $conn->close();
                             <div class="input-field">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw">
-                                <a href="#"><small class="forgotPsw">forgotten password?</small></a>
+                                <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <span class="tooltip-text">Error Message</span>
