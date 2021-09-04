@@ -3,6 +3,7 @@
 include 'models/buyer.php';
 include 'models/seller.php';
 include 'database/db_connection.php';
+
 require('user_validator.php');
 
 
@@ -56,7 +57,11 @@ if (isset($_POST['submitSignup'])) {
 
         if (checknone($errors)) {
 
-            $sql = "INSERT INTO buyers (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','false','$vkey')";
+            
+            $vkey = $return_data['vkey'];
+            $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO buyers (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
             $errors = [];
             if ($conn->query($sql) === TRUE) {
 
@@ -87,14 +92,17 @@ if (isset($_POST['submitSignup'])) {
 
         // validate entries
         $validation = new UserValidator($_POST, $users, "seller");
-        $errors = $validation->validateForm('signup');
+        $return_data = $validation->validateForm('signup');
 
         //    $errors = $return_data['errors'];
         //  $vkey = $return_data['vkey'];
 
         if (checknone($errors)) {
+ 
+            $vkey = $return_data['vkey'];
+            $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO sellers (username,email,password,telNo,address,storeName) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','$_POST[storeName]')";
+            $sql = "INSERT INTO sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
             $errors = [];
             if ($conn->query($sql) === TRUE) {
 
