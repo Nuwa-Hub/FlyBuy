@@ -5,7 +5,6 @@ include 'models/seller.php';
 include 'database/db_connection.php';
 require('user_validator.php');
 
-session_start();
 
 $errors = [];
 
@@ -198,7 +197,7 @@ if (isset($_POST['submitLogin'])){
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="error">Error Message</span>
+                                    <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -206,28 +205,20 @@ if (isset($_POST['submitLogin'])){
                             <div class="input-field">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw">
-                                <a href="#"><small class="forgotPsw">forgotten password?</small></a>
+                                <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="error">Error Message</span>
+                                    <span class="tooltip-text">Error Message</span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
+                            <button class="btn solid login buyer" name="userTypeBuyer" value="buyer">
+                                <span class="buttonText">Login as a cutomer</span>
+                            </button>
 
-                            <div class="input-field radio">
-                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
-                                <label for="radio">Buyer</label>
-                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
-                                <label for="radio">Seller</label>
-                                <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
-                                </i>
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-
-                            <button class="btn solid login" name="submitLogin">
-                                <span class="buttonText">Login</span>
+                            <button class="btn solid login seller" name="userTypeSeller" value="seller">
+                                <span class="buttonText">Login as a seller</span>
                             </button>
 
                         </form>
@@ -362,55 +353,8 @@ if (isset($_POST['submitLogin'])){
 
     </main>
 
+    <script src="./form.js"></script>
+    
 </body>
-
-<script>
-    // toggle login and signup animation
-    const sign_in_btn = document.querySelector('#sign-in-button');
-    const sign_up_btn = document.querySelector('#sign-up-button');
-    const container = document.querySelector('.container');
-
-    sign_up_btn.addEventListener('click', () => {
-        container.classList.add('sign-up-mode');
-    });
-
-    sign_in_btn.addEventListener('click', () => {
-        container.classList.remove('sign-up-mode');
-    });
-
-    // toggle password view---------------------------------------------------------------
-    let toggleView = document.querySelectorAll('.togglePassword');
-
-    function togglePasswordView(toggleView) {
-        for (let i = 0; i < toggleView.length; i++) {
-            let pswField = toggleView[i].parentElement.querySelector('input');
-
-            toggleView[i].addEventListener('click', (event) => {
-                // toggle the type attribute
-                let type = pswField.getAttribute('type') === 'password' ? 'text' : 'password';
-                pswField.setAttribute('type', type);
-                // toggle the eye slash icon
-                toggleView[i].classList.toggle('fa-eye-slash');
-            });
-        }
-    };
-
-    if (toggleView) {
-        togglePasswordView(toggleView);
-    }
-
-    // add extra seller information
-    let radioBtns = document.querySelectorAll('.radioBtn');
-    let storeName = document.querySelector('.input-field.store');
-
-    function addField() {
-        storeName.classList.remove('remove');
-
-    }
-
-    function removeField() {
-        storeName.classList.add('remove');
-    }
-</script>
 
 </html>

@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+}
+
+.shape-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 0;
+}
+
+.shape-wrapper svg{
+    position: relative;
+    display: block;
+    width: calc(300% + 1.3px);
+    height: 50vh;
+    opacity: 0.7;
+}
+
+.shape-wrapper .shape-fill{
+    fill: #43e97b;
+}
+
+.container *{
+    z-index: 1;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 3px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.6em;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 30vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+}
+
+.container img{
+    height: 12.5em;
+    width: 12.5em;
+    padding: 1em;
+}
+
+.container h2{
+    font-size: 1.5rem;
+    line-height: 2em;
+    font-weight: 800;
+}
+
+.container form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1/2;
+}
+
+.input-field{
+    max-width: 250px;
+    width: 100%;
+    height: 1.875em;
+    background-color: #f0f0f0;
+    margin: 0.5em 0;
+    border-radius: 1.875em;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+}
+.input-field input{
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1.2em;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.input-field input:-webkit-autofill { 
+    -webkit-background-clip: text;
+}
+
+.input-field i{
+    text-align: center;
+    line-height: 1.875em;
+    color: #acacac;
+    font-size: 1rem;
+}
+
+.input-field i.fa-exclamation-circle,
+.input-field i.fa-check-circle{
+    position: absolute;
+    right: 0;
+    transform: translateX(110%);
+    margin: 0;
+    padding: 0;
+    color: #f03f63;
+    cursor: pointer;
+    display: none;
+}
+.input-field.success i.fa-check-circle{
+    color: #34df34;
+    display: block;
+}
+.input-field.error i.fa-exclamation-circle{
+    display: block;
+}
+
+.input-field i.fa-eye,
+.input-field i.fa-eye-slash{
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text{
+    visibility: hidden;
+    min-width: 12.5em;
+    background-color: rgba(73, 72, 72, 0.9);
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 0.2em;
+    position: absolute;
+    bottom: 100%;
+    right: -30%;
+    margin-left: -3.75em;
+    z-index: 10;
+}
+
+.tooltip .tooltip-text::after{
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 95%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(73, 72, 72, 0.9) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text{
+    visibility: visible;
+}
+
+.input-field.success{
+    border: 2px solid #34df34;
+}
+.input-field.error{
+    border: 2px solid #f03f63;
+}
+
+.input-field input:placeholder-shown{
+    color: #aaa;
+    font-weight: 500;
+}
+
+.btn{
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    background-color: #20dbc2;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 12px 0;
+    padding: 0.8em 2em;
+    cursor: pointer;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.btn:hover{
+    background-color: #00bfa6;
+}
+.btn:active{
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 1000px){
+    .container{
+        width: 50vw;
+    }
+}
+
+@media screen and (max-width: 570px){
+    .container{
+        width: 70vw;
+    }
+}
+
+@media screen and (max-width: 370px){
+    .container{
+        width: 90vw;
+    }
+}
