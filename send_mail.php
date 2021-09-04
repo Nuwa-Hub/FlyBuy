@@ -14,36 +14,7 @@ $mail = new PHPMailer(true);
 
 
 
-$body='<p><a href="forgotPsw.php">HTML Images</a></p>';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$body= "<a href='http://192.168.1.4/OOP%20project/FlyBuy/forgotPsw.php'>here</a>";
 
 
 
