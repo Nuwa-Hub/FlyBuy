@@ -1,39 +1,29 @@
 <?php
-include 'templates/customer.php';
-include 'templates/seller.php';
+
+include 'models/buyer.php';
+include 'models/seller.php';
 include 'database/db_connection.php';
 require('user_validator.php');
 
 
-
-
-
 $errors = [];
 
-function checknone($arr)
-{
+function checknone($arr){
+
     foreach ($arr as $ele) {
-        if ($ele != 'none' ) {
+        if ($ele != 'none') {
             return false;
         }
     }
     return true;
 }
 
-
-
-
-if (isset($_POST['submitSignup'])){
-      echo "dsf";
-}
-//print_r($_POST['submitSignup']);
 if (isset($_POST['submitSignup'])) {
-
 
     if ($_POST['userType'] == "buyer") {
 
         //write query for all users
-        $sql = 'SELECT * FROM customers';
+        $sql = 'SELECT * FROM buyers';
 
         //make query and get result
         $result = mysqli_query($conn, $sql);
@@ -43,23 +33,36 @@ if (isset($_POST['submitSignup'])) {
 
         // validate entries
         $validation = new UserValidator($_POST, $users, "buyer");
-        $errors = $validation->validateForm('signup');
+        $return_data = $validation->validateForm('signup');
+
+        $errors = $return_data['errors'];
+        $vkey = $return_data['vkey'];
 
         //array_filter($errors)
 
         if (checknone($errors)) {
 
-            $sql = "INSERT INTO customers (username,email,password,telNo,address) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]')";
+            $sql = "INSERT INTO buyers (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','false','$vkey')";
             $errors = [];
             if ($conn->query($sql) === TRUE) {
+
                 echo "New record created successfully";
-            } else {
+
+                $additionalData  = ['vkey' => $vkey, 'table' => 'buyers'];
+                $val = $_POST['email'];
+
+                sendMail($val, 'signup', $additionalData);
+                header('location:verifyEmail.php');
+            }
+            else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        } else {
+        }
+        else {
             print_r(array_values($errors));
         }
-    } else {
+    }
+    else {
 
         //write query for all users
         $sql = 'SELECT * FROM sellers';
@@ -70,106 +73,93 @@ if (isset($_POST['submitSignup'])) {
         //fetch the resulting rows as an array
         $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-        print_r($users);
+
         // validate entries
         $validation = new UserValidator($_POST, $users, "seller");
         $errors = $validation->validateForm('signup');
 
-
+        $errors = $return_data['errors'];
+        $vkey = $return_data['vkey'];
 
         if (checknone($errors)) {
 
             $sql = "INSERT INTO sellers (username,email,password,telNo,address,storeName) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','$_POST[storeName]')";
             $errors = [];
             if ($conn->query($sql) === TRUE) {
+
                 echo "New record created successfully";
-            } else {
+
+                $additionalData  = ['vkey' => $vkey, 'table' => 'sellers'];
+                $val = $_POST['email'];
+
+                sendMail($val, 'signup', $additionalData);
+                header('location:verifyEmail.php');
+            }
+            else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        } else {
-           print_r(array_values($errors));
-       }
+
+        }
+        else {
+            print_r(array_values($errors));
+        }
+    }
+} 
+
+if (isset($_POST['submitLogin'])){
+
+    if ($_POST['userType'] == "buyer") {
+
+        //write query for all users
+        $sql = 'SELECT * FROM buyers';
+
+        //make query and get result
+        $result = mysqli_query($conn, $sql);
+
+        //fetch the resulting rows as an array
+        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        // validate entries
+        $validation = new UserValidator($_POST, $users, "buyer");
+        $errors = $validation->validateForm('login');
+
+        //array_filter($errors)
+
+        if (checknone($errors)) {
+                echo "c";
+            //  header('Location: home.php');
+        }
+        else {
+            print_r(array_values($errors));
+        }
+    }
+    else {
+
+        //write query for all users
+        $sql = 'SELECT * FROM sellers';
+
+        //make query and get result
+        $result = mysqli_query($conn, $sql);
+
+        //fetch the resulting rows as an array
+        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+        // validate entries
+        $validation = new UserValidator($_POST, $users, "seller");
+        $errors = $validation->validateForm('login');
+
+
+
+        if (checknone($errors)) {
+            echo "c";
+          //  header('Location: home.php ');
+        }
+        else {
+            print_r(array_values($errors));
+        }
     }
 }
-
-if (isset($_POST['userTypeBuyer'])) {
-
-
-
-
-    //write query for all users
-    $sql = 'SELECT * FROM customers';
-
-    //make query and get result
-    $result = mysqli_query($conn, $sql);
-
-    //fetch the resulting rows as an array
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    // validate entries
-    $validation = new UserValidator($_POST, $users, "buyer");
-    $errors = $validation->validateForm('login');
-   // print_r($users);
-    array_filter($errors);
-
-    if (checknone($errors)) {
-        echo "Home";
-     //   $_POST['userTypeBuyer']==null;
-        //  header('Location: home.php');
-    } else {
-      print_r(array_values($errors));
-  }
-}
-
-
-if (isset($_POST['userTypeSeller'])) {
-
-    //write query for all users
-    $sql = 'SELECT * FROM sellers';
-
-    //make query and get result
-    $result = mysqli_query($conn, $sql);
-
-    //fetch the resulting rows as an array
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-   // print_r($users);
-
-    // validate entries
-    $validation = new UserValidator($_POST, $users, "seller");
-    $errors = $validation->validateForm('login');
-
-
-
-    if (checknone($errors)) {
-        echo "Home";
-        $_POST['userTypeSeller']=null;
-        //  header('Location: home.php ');
-    } else {
-       print_r(array_values($errors));
-    }
-}
-if(isset($_POST['userTypeBuyer']))
-
-$conn->close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
 
