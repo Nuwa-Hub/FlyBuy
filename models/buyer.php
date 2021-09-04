@@ -1,20 +1,17 @@
 <?php
-class seller {
+class buyer {
   // Properties
   public $username;
   public $password;
-  static $sel_id;
+  public static $cus_id=12;
   public $email;
-
-   
-
 
   function __construct( $username,$password, $email) {
     $this->username = $username;
     $this->password = $password;
     $this->email = $email;
-    static ::$sel_id++;
-
+    static ::$cus_id++;
+    return true;
   }
 
 }

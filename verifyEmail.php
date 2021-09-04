@@ -24,7 +24,7 @@
 
             <a href="#" class="sendAgainLink">Click Here to Re-send</a>
             
-            <a class="loginLink" href="/">Login To Your Account</a>
+            <a class="loginLink" href="./loginSignup.php">Login To Your Account</a>
 
         </div>
 
