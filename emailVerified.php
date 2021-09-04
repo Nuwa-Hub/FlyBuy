@@ -7,18 +7,24 @@ if(isset($_GET['vkey'])){
     $vkey = $_GET['vkey'];
     $table = $_GET['table'];
 
-    // $sql = "SELECT * FROM $table WHERE verified = 0 AND vkey = $vkey LIMIT 1";
-    // $resultSet = mysqli_query($conn, $sql);
-    // print_r($resultSet);
-
-    $resultSet = $conn->query("SELECT * FROM $table WHERE verified = 0 AND vkey = $vkey LIMIT 1");
-
+    if($table === "buyers"){
+        $resultSet = $conn->query("SELECT * FROM buyers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1");
+    }
+    else{
+        $resultSet = $conn->query("SELECT * FROM sellers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1");
+    }
+    
     if($resultSet){
 
-        $update = $conn->query("UPDATE $table SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
-        
+        if($table === "buyers"){
+            $update = $conn->query("UPDATE buyers SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
+        }
+        else{
+            $update = $conn->query("UPDATE sellers SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
+        }
+
         if($update){
-            echo 'verification success..';
+            //echo 'verification success..';
         }
         else{
             echo $conn->error;
