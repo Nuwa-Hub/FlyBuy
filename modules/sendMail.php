@@ -42,7 +42,7 @@ try {
             $table = $additionalData['table'];
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - email verification';
-            $mail->Body    = "You have successfully created your Flybuy account. Click <a href='http://192.168.1.4/FlyBuy/emailVerified.php?vkey=$vkey&table=$table'>here</a> to verify your email";
+            $mail->Body    = "You have successfully created your Flybuy account. Click <a href='http://192.168.1.4/OOP%20project/FlyBuy/emailVerified.php?vkey=$vkey&table=$table'>here</a> to verify your email";
         }
 
         $mail->send();
