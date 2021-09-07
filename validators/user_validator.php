@@ -64,7 +64,7 @@ class UserValidator{
 
             $this->validateLoginEmail();
 
-            $this->return_data['errors'] = $this->lerrors;
+            $this->return_data['errors'] = $this->errors;
             return $this->return_data;
         }
 
