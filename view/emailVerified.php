@@ -1,6 +1,6 @@
 <?php
 
-include 'database/db_connection.php';
+include '../database/db_connection.php';
 
 if(isset($_GET['vkey'])){
     
@@ -24,7 +24,7 @@ if(isset($_GET['vkey'])){
         }
 
         if($update){
-            //echo 'verification success..';
+            echo 'verification success..';
         }
         else{
             echo $conn->error;
@@ -49,7 +49,7 @@ else{
         <title>Email Verified</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/styles_verifyEmail.css" />
+        <link rel="stylesheet" href="../css//styles_verifyEmail.css" />
     </head>
 
     <body>
@@ -63,9 +63,9 @@ else{
                 </svg>
             </div>
 
-            <img class="mail-icon" src="./checked.png">
+            <img class="mail-icon" src="../resources/checked.png">
             <h2>Verification Successful!</h2>
-            <a class="loginLink" href="./loginSignup.php">Login To Your Account</a>
+            <a class="loginLink" href="../view/loginSignup.php">Login To Your Account</a>
         </div>
     </body>
 </html>

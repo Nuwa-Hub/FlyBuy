@@ -1,11 +1,10 @@
 <?php
 
-include 'models/buyer.php';
-include 'models/seller.php';
-include 'database/db_connection.php';
+include '../models/buyer.php';
+include '../models/seller.php';
+include '../database/db_connection.php';
 
-require('user_validator.php');
-
+require('../validators/user_validator.php');
 
 $errors = [];
 
@@ -21,149 +20,73 @@ function checknone($arr){
 
 if (isset($_POST['submitSignup'])) {
 
-    if ($_POST['userType'] == "buyer") {
+    //fetch the resulting rows as an array
+    if($_POST['userType'] == "buyer"){
+        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
+    }
+    else{
+        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+    }
 
-        //write query for all users
-        $sql = 'SELECT * FROM buyers';
+    // validate entries
+    $validation = new UserValidator($_POST, $users, $_POST['userType'] );
+    $return_data = $validation->validateForm('signup');
 
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
+    $errors = $return_data['errors'];
+    $vkey = $return_data['vkey'];
 
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    array_filter($errors);
 
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "buyer");
-        $return_data = $validation->validateForm('signup');
+    if (checknone($errors)) {
 
-        $errors = $return_data['errors'];
+        $vkey = $return_data['vkey'];
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        //array_filter($errors)
+        if  ($_POST['userType'] == "buyer") {
+            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
+        }
+        else{
+            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
+        }
 
-        if (checknone($errors)) {
+        $errors = [];
 
-            
-            $vkey = $return_data['vkey'];
-            $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        if ($conn->query($sql) === TRUE) {
 
-            $sql = "INSERT INTO buyers (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
-            $errors = [];
-            if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
 
-                echo "New record created successfully";
+            $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
+            $email = $_POST['email'];
 
-                $additionalData  = ['vkey' => $vkey, 'table' => 'buyers'];
-                $val = $_POST['email'];
-
-                sendMail($val, 'signup', $additionalData);
-                header('location:verifyEmail.php');
-            }
-            else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            sendMail($email, 'signup', $additionalData);
+            header('location:verifyEmail.php');
         }
         else {
-            print_r(array_values($errors));
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
     else {
-
-        //write query for all users
-        $sql = 'SELECT * FROM sellers';
-
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "seller");
-        $return_data = $validation->validateForm('signup');
-
-        $errors = $return_data['errors'];
-
-        if (checknone($errors)) {
- 
-            $vkey = $return_data['vkey'];
-            $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-            $sql = "INSERT INTO sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
-            $errors = [];
-            if ($conn->query($sql) === TRUE) {
-
-                echo "New record created successfully";
-
-                $additionalData  = ['vkey' => $vkey, 'table' => 'sellers'];
-                $val = $_POST['email'];
-
-                sendMail($val, 'signup', $additionalData);
-                header('location:verifyEmail.php');
-            }
-            else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-
-        }
-        else {
-            print_r(array_values($errors));
-        }
+        print_r(array_values($errors));
     }
-} 
+}
 
-if (isset($_POST['submitLogin'])){
+if (isset($_POST['userLog'])) {
 
-    if ($_POST['userType'] == "buyer") {
+    //fetch the resulting rows as an array
+    $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM $_POST[userLog]"), MYSQLI_ASSOC);
+    
+    // validate entries
+    $validation = new UserValidator($_POST, $users,$_POST['userLog']);
+    $data = $validation->validateForm('login');
 
-        //write query for all users
-        $sql = 'SELECT * FROM buyers';
+    // array_filter($data);
 
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "buyer");
-        $errors = $validation->validateForm('login');
-
-        //array_filter($errors)
-
-        if (checknone($errors)) {
-                echo "c";
-            //  header('Location: home.php');
-        }
-        else {
-            print_r(array_values($errors));
-        }
+    if (checknone($data['errors'])) {
+        echo "c";
+        header('Location: home.php');
     }
     else {
-
-        //write query for all users
-        $sql = 'SELECT * FROM sellers';
-
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "seller");
-        $errors = $validation->validateForm('login');
-
-
-
-        if (checknone($errors)) {
-            echo "c";
-          //  header('Location: home.php ');
-        }
-        else {
-            print_r(array_values($errors));
-        }
+        print_r(array_values($data['errors']));
     }
 }
 
@@ -178,7 +101,7 @@ if (isset($_POST['submitLogin'])){
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-     <link rel="stylesheet" href="./css/styles_signinLogin.css">  
+    <link rel="stylesheet" href="../css/styles_signinLogin.css">
 
     <title>SignIn and SignUp</title>
 </head>
@@ -219,11 +142,11 @@ if (isset($_POST['submitLogin'])){
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <button class="btn solid login buyer" name="userTypeBuyer" value="buyer">
+                            <button class="btn solid login buyer" name="userLog" value="buyer">
                                 <span class="buttonText">Login as a cutomer</span>
                             </button>
 
-                            <button class="btn solid login seller" name="userTypeSeller" value="seller">
+                            <button class="btn solid login seller" name="userLog" value="seller">
                                 <span class="buttonText">Login as a seller</span>
                             </button>
 
@@ -334,13 +257,13 @@ if (isset($_POST['submitLogin'])){
                             <button class="btn transparent" id="sign-in-button">
                                 <span class="buttonText">Sign in</span>
                             </button>
-                            <img src="user.png" alt="user">
+                            <img src="../resources/user.png" alt="user">
                         </div>
                     </div>
 
                     <div class="panel right-panel">
                         <div class="content">
-                            <img src="user.png" alt="user">
+                            <img src="../resources/user.png" alt="user">
                             <h3>New Here?</h3>
                             <p>
                                 Join us and enjoy the services
@@ -359,8 +282,8 @@ if (isset($_POST['submitLogin'])){
 
     </main>
 
-    <script src="./form.js"></script>
-    
+    <script src="../javaScript/form.js"></script>
+
 </body>
 
 </html>
