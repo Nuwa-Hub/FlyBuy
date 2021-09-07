@@ -1,16 +1,15 @@
 <?php
 
-include 'models/buyer.php';
-include 'models/seller.php';
-include 'database/db_connection.php';
+include '../models/buyer.php';
+include '../models/seller.php';
+include '../database/db_connection.php';
 
-require('user_validator.php');
-
+require('../validators/user_validator.php');
 
 $errors = [];
 
-function checknone($arr)
-{
+function checknone($arr){
+
     foreach ($arr as $ele) {
         if ($ele != 'none') {
             return false;
@@ -18,62 +17,64 @@ function checknone($arr)
     }
     return true;
 }
+
 if (isset($_POST['submitSignup'])) {
 
-    
+    //fetch the resulting rows as an array
+    if($_POST['userType'] == "buyer"){
+        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
+    }
+    else{
+        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+    }
 
-    
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  $_POST[userType]"), MYSQLI_ASSOC);
-    
-        // validate entries
-        $validation = new UserValidator($_POST, $users, $_POST['userType'] );
-        $return_data = $validation->validateForm('signup');
+    // validate entries
+    $validation = new UserValidator($_POST, $users, $_POST['userType'] );
+    $return_data = $validation->validateForm('signup');
 
-        $errors = $return_data['errors'];
-       $vkey = $return_data['vkey'];
+    $errors = $return_data['errors'];
+    $vkey = $return_data['vkey'];
 
-        array_filter($errors);
+    array_filter($errors);
 
-        if (checknone($errors)) {
+    if (checknone($errors)) {
 
+        $vkey = $return_data['vkey'];
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $vkey = $return_data['vkey'];
-            //   $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            if  ($_POST['userType'] == "buyer") {
-            $sql = "INSERT INTO  $_POST[userType]  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','false','$vkey')";
-            }
-            if($_POST['userType'] == "seller") {
-                $sql = "INSERT INTO  $_POST[userType] (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$_POST[password]','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
-            
-            }
-            $errors = [];
-            if ($conn->query($sql) === TRUE) {
-
-                echo "New record created successfully";
-
-                //    $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST[userType]];
-               //     $val = $_POST['email'];
-
-               //     sendMail($val, 'signup', $additionalData);
-               //     header('location:verifyEmail.php');
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        } else {
-            print_r(array_values($errors));
+        if  ($_POST['userType'] == "buyer") {
+            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
         }
-    
+        else{
+            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
+        }
+
+        $errors = [];
+
+        if ($conn->query($sql) === TRUE) {
+
+            echo "New record created successfully";
+
+            $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
+            $email = $_POST['email'];
+
+            sendMail($email, 'signup', $additionalData);
+            header('location:verifyEmail.php');
+        }
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+    else {
+        print_r(array_values($errors));
+    }
 }
+
 if (isset($_POST['userLog'])) {
-
-
-
 
     //fetch the resulting rows as an array
     $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM $_POST[userLog]"), MYSQLI_ASSOC);
     
-
     // validate entries
     $validation = new UserValidator($_POST, $users,$_POST['userLog']);
     $data = $validation->validateForm('login');
@@ -82,8 +83,9 @@ if (isset($_POST['userLog'])) {
 
     if (checknone($data['errors'])) {
         echo "c";
-        //  header('Location: home.php');
-    } else {
+        header('Location: home.php');
+    }
+    else {
         print_r(array_values($data['errors']));
     }
 }
@@ -99,7 +101,7 @@ if (isset($_POST['userLog'])) {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="./css/styles_signinLogin.css">
+    <link rel="stylesheet" href="../css/styles_signinLogin.css">
 
     <title>SignIn and SignUp</title>
 </head>
@@ -255,13 +257,13 @@ if (isset($_POST['userLog'])) {
                             <button class="btn transparent" id="sign-in-button">
                                 <span class="buttonText">Sign in</span>
                             </button>
-                            <img src="user.png" alt="user">
+                            <img src="../resources/user.png" alt="user">
                         </div>
                     </div>
 
                     <div class="panel right-panel">
                         <div class="content">
-                            <img src="user.png" alt="user">
+                            <img src="../resources/user.png" alt="user">
                             <h3>New Here?</h3>
                             <p>
                                 Join us and enjoy the services
@@ -280,7 +282,7 @@ if (isset($_POST['userLog'])) {
 
     </main>
 
-    <script src="./form.js"></script>
+    <script src="../javaScript/form.js"></script>
 
 </body>
 
