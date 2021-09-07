@@ -236,11 +236,12 @@ class UserValidator{
         
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
-            return;
         }
-        else if ($val === $user['password']) { //insert de-hashing
+        else if (password_verify($val, $user['password'])) { //insert de-hashing
             $this->setError('password', 'none');
-            return;
+        }
+        else{
+            $this->setError('password', 'Incorrect password');
         }
     }
 
