@@ -33,6 +33,7 @@ if (isset($_POST['submitSignup'])) {
     $return_data = $validation->validateForm('signup');
 
     $errors = $return_data['errors'];
+    $classNames = $return_data['classNames'];
     $vkey = $return_data['vkey'];
 
     array_filter($errors);
@@ -83,16 +84,20 @@ if (isset($_POST['userLog'])) {
     
     // validate entries
     $validation = new UserValidator($_POST, $users,$_POST['userLog']);
-    $data = $validation->validateForm('login');
+    $return_data = $validation->validateForm('login');
+
+    $errors = $return_data['errors'];
+    $classNames = $return_data['classNames'];
 
     // array_filter($data);
 
-    if (checknone($data['errors'])) {
+    if (checknone($errors)) {
         echo "c";
-        // header('Location: home.php');
+        header('Location: home.php');
     }
     else {
-        print_r(array_values($data['errors']));
+        print_r(array_values($errors));
+        print_r(array_values($classNames));
     }
 }
 

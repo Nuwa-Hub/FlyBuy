@@ -9,6 +9,7 @@ class UserValidator{
     private $users;
     private $errors;
     private $return_data;
+    private $classNames;
     private static $fields = ['username', 'email', 'password', 'address', 'telNo'];
     private static $Lfields = ['email', 'password'];
 
@@ -18,7 +19,8 @@ class UserValidator{
         $this->users = $users;
         $this->userType = $userType;
         $this->errors = [];
-        $this->return_data = ['errors' => [], 'vkey' => ''];
+        $this->classNames = [];
+        $this->return_data = ['errors' => [], 'classNames' => [], 'vkey' => ''];
     }
 
     public function validateForm($formType){
@@ -34,8 +36,10 @@ class UserValidator{
 
             if ($this->userType == "seller") {
                 $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
+                $this->classNames = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
             } else {
                 $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
+                $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
             }
 
             $this->validateNewUsername();
@@ -47,9 +51,6 @@ class UserValidator{
             if ($this->userType === "seller") {
                 $this->validateNewStorename();
             }
-
-            $this->return_data['errors'] = $this->errors;
-            return $this->return_data;
         }
         else if ($formType === 'login') {
             
@@ -61,12 +62,17 @@ class UserValidator{
             }
 
             $this->errors= ['email' => '', 'password' => ''];
+            $this->classNames= ['email' => '', 'password' => ''];
 
             $this->validateLoginEmail();
-
-            $this->return_data['errors'] = $this->errors;
-            return $this->return_data;
         }
+
+        $this->setClassNames();
+
+        $this->return_data['errors'] = $this->errors;
+        $this->return_data['classNames'] = $this->classNames;
+
+        return $this->return_data;
     }
 
     //signup data validation
@@ -215,12 +221,12 @@ class UserValidator{
 
             $this->setError('email', 'email cannot be empty');
 
-            if(empty($this->data['password'])){
-                $this->setError('password', 'password cannot be empty');
-            }
-            else{
-                $this->setError('password', 'account not found');
-            }
+            // if(empty($this->data['password'])){
+            //     $this->setError('password', 'password cannot be empty');
+            // }
+            // else{
+            //     $this->setError('password', 'account not found');
+            // }
         }
         else {
 
@@ -243,13 +249,13 @@ class UserValidator{
                 }
                 else{
                     
-                    if($curr_user['verified'] === false){
+                    if(!$curr_user['verified']){
                         $this->setError('email', 'email is not verified');
                     }
                     else{
                         $this->setError('email', 'none');
                     }
-                    $this->setError('email', 'none');
+                    // $this->setError('email', 'none');
                     $this->validateLoginPassword($curr_user);
                 }
             }
@@ -276,5 +282,16 @@ class UserValidator{
 
     private function setError($key, $val){
         $this->errors[$key] = $val;
+    }
+
+    private function setClassNames(){
+        foreach ($this->errors as $field => $error) {
+            if($error === 'none'){
+                $this->classNames[$field] = 'success';
+            }
+            else{
+                $this->classNames[$field] = 'error';
+            }
+        }
     }
 }
