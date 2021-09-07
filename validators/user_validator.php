@@ -67,8 +67,6 @@ class UserValidator{
             $this->return_data['errors'] = $this->errors;
             return $this->return_data;
         }
-
-        
     }
 
     //signup data validation
@@ -160,7 +158,7 @@ class UserValidator{
 
                 foreach ($this->users as $user) {
                     
-                    if ($user['email'] === $val && $user['verified'] === true) {
+                    if ($user['email'] === $val && $user['verified']) {
                         $this->setError('email', 'email already exists');
                         break;
                     }
@@ -214,7 +212,15 @@ class UserValidator{
         $val = trim($this->data['email']);
 
         if (empty($val)) {
+
             $this->setError('email', 'email cannot be empty');
+
+            if(empty($this->data['password'])){
+                $this->setError('password', 'password cannot be empty');
+            }
+            else{
+                $this->setError('password', 'account not found');
+            }
         }
         else {
 
@@ -257,7 +263,10 @@ class UserValidator{
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
         }
-        else if (password_verify($val, $user['password'])) { //insert de-hashing
+        // else if (password_verify($val, $user['password'])) { //insert de-hashing
+        //     $this->setError('password', 'none');
+        // }
+        else if($val === $user['password']){
             $this->setError('password', 'none');
         }
         else{
