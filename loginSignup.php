@@ -9,7 +9,8 @@ require('user_validator.php');
 
 $errors = [];
 
-function checknone($arr){
+function checknone($arr)
+{
 
     foreach ($arr as $ele) {
         if ($ele != 'none') {
@@ -18,6 +19,19 @@ function checknone($arr){
     }
     return true;
 }
+
+function lchecknone($arr)
+{
+
+    foreach ($arr as $ele) {
+       
+         if($ele != 'none'){
+            return false;
+        }
+    }
+    return true;
+}
+
 
 if (isset($_POST['submitSignup'])) {
 
@@ -37,6 +51,7 @@ if (isset($_POST['submitSignup'])) {
         $return_data = $validation->validateForm('signup');
 
         $errors = $return_data['errors'];
+        //   $vkey = $return_data['vkey'];
 
         //array_filter($errors)
 
@@ -52,21 +67,18 @@ if (isset($_POST['submitSignup'])) {
 
                 echo "New record created successfully";
 
-                $additionalData  = ['vkey' => $vkey, 'table' => 'buyers'];
-                $val = $_POST['email'];
+                //     $additionalData  = ['vkey' => $vkey, 'table' => 'buyers'];
+                //     $val = $_POST['email'];
 
-                sendMail($val, 'signup', $additionalData);
-                header('location:verifyEmail.php');
-            }
-            else {
+                //   sendMail($val, 'signup', $additionalData);
+                //  header('location:verifyEmail.php');
+            } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        }
-        else {
+        } else {
             print_r(array_values($errors));
         }
-    }
-    else {
+    } else {
 
         //write query for all users
         $sql = 'SELECT * FROM sellers';
@@ -82,7 +94,8 @@ if (isset($_POST['submitSignup'])) {
         $validation = new UserValidator($_POST, $users, "seller");
         $return_data = $validation->validateForm('signup');
 
-        $errors = $return_data['errors'];
+        //    $errors = $return_data['errors'];
+        //  $vkey = $return_data['vkey'];
 
         if (checknone($errors)) {
  
@@ -95,77 +108,99 @@ if (isset($_POST['submitSignup'])) {
 
                 echo "New record created successfully";
 
-                $additionalData  = ['vkey' => $vkey, 'table' => 'sellers'];
-                $val = $_POST['email'];
+                //    $additionalData  = ['vkey' => $vkey, 'table' => 'sellers'];
+                //     $val = $_POST['email'];
 
-                sendMail($val, 'signup', $additionalData);
-                header('location:verifyEmail.php');
-            }
-            else {
+                //  sendMail($val, 'signup', $additionalData);
+                //  header('location:verifyEmail.php');
+            } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
-        }
-        else {
-            print_r(array_values($errors));
-        }
-    }
-} 
-
-if (isset($_POST['submitLogin'])){
-
-    if ($_POST['userType'] == "buyer") {
-
-        //write query for all users
-        $sql = 'SELECT * FROM buyers';
-
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "buyer");
-        $errors = $validation->validateForm('login');
-
-        //array_filter($errors)
-
-        if (checknone($errors)) {
-                echo "c";
-            //  header('Location: home.php');
-        }
-        else {
-            print_r(array_values($errors));
-        }
-    }
-    else {
-
-        //write query for all users
-        $sql = 'SELECT * FROM sellers';
-
-        //make query and get result
-        $result = mysqli_query($conn, $sql);
-
-        //fetch the resulting rows as an array
-        $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-
-        // validate entries
-        $validation = new UserValidator($_POST, $users, "seller");
-        $errors = $validation->validateForm('login');
-
-
-
-        if (checknone($errors)) {
-            echo "c";
-          //  header('Location: home.php ');
-        }
-        else {
+        } else {
             print_r(array_values($errors));
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+if (isset($_POST['userTypeBuyer'])) {
+
+
+
+    //write query for all users
+    $sql = 'SELECT * FROM buyers';
+
+    //make query and get result
+    $result = mysqli_query($conn, $sql);
+
+    //fetch the resulting rows as an array
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // validate entries
+    $validation = new UserValidator($_POST, $users, "buyer");
+    $data = $validation->validateForm('login');
+
+   // array_filter($data);
+    print_r($data['errors']);
+    if (lchecknone($data['errors'])) {
+        echo "c";
+        //  header('Location: home.php');
+    } else {
+        print_r(array_values($errors));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (isset($_POST['userTypeSeller'])) {
+
+    //write query for all users
+    $sql = 'SELECT * FROM sellers';
+
+    //make query and get result
+    $result = mysqli_query($conn, $sql);
+
+    //fetch the resulting rows as an array
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+    // validate entries
+    $validation = new UserValidator($_POST, $users, "seller");
+    $data = $validation->validateForm('login');
+
+
+
+    if (lchecknone($data['errors'])) {
+        echo "c";
+        //  header('Location: home.php ');
+    } else {
+        print_r(array_values($errors));
+    }
+}
+
 
 ?>
 
@@ -178,7 +213,7 @@ if (isset($_POST['submitLogin'])){
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-     <link rel="stylesheet" href="./css/styles_signinLogin.css">  
+    <link rel="stylesheet" href="./css/styles_signinLogin.css">
 
     <title>SignIn and SignUp</title>
 </head>
@@ -360,7 +395,7 @@ if (isset($_POST['submitLogin'])){
     </main>
 
     <script src="./form.js"></script>
-    
+
 </body>
 
 </html>
