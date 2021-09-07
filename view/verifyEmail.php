@@ -9,7 +9,7 @@
         <title>Verify email</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="stylesheet" href="./css/styles_verifyEmail.css" />
+        <link rel="stylesheet" href="../css/styles_verifyEmail.css" />
     </head>
 
     <body class="main-body">
@@ -24,7 +24,7 @@
                 </svg>
             </div>
 
-            <img class="mail-icon" src="./envelope_user.png">
+            <img class="mail-icon" src="../resources/envelope_user.png">
             
             <h2>Hey Nigga</h2>
             <h3>You&#8217;re almost ready to start enjoying <b>FlyBuy</b></h3>
@@ -34,7 +34,7 @@
 
             <a href="#" class="sendAgainLink">Click Here to Re-send</a>
             
-            <a class="loginLink" href="./loginSignup.php">Login To Your Account</a>
+            <a class="loginLink" href="../view/loginSignup.php">Login To Your Account</a>
 
         </div>
 

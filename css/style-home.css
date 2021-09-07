@@ -12,7 +12,7 @@
 }
 body{
     overflow-x: hidden;
-    background-image: url(background-home.jpg); 
+    background-image: url("../images/background-home.jpg"); 
     background-size: cover;
     height: 100vh;
     
