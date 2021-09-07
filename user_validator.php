@@ -16,9 +16,9 @@ class UserValidator{
     public function __construct($post_data, $users, $userType){
 
         if ($userType == "seller") {
-            $this->errors = ['username' => 'none', 'email' =>  'none', 'password' =>  'none', 'telNo' => 'none', 'address' => 'none', 'storeName' => 'none'];
+            $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
         } else {
-            $this->errors = ['username' => 'none', 'email' => 'none', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
+            $this->errors = ['username' => '', 'email' => '', 'password' => '', 'telNo' => '', 'address' => ''];
         }
 
         $this->data = $post_data;
@@ -41,13 +41,13 @@ class UserValidator{
                 }
             }
 
-           // $this->validateNewUsername();
-           // $this->validateNewPassword();
-           // $this->validateNewEmail();
-           // $this->validateNewTelNo();
-           // $this->validateAddress();
+            $this->validateNewUsername();
+            $this->validateNewPassword();
+            $this->validateNewEmail();
+            $this->validateNewTelNo();
+            $this->validateAddress();
             if ($this->userType === "seller") {
-              //  $this->validateNewStorename();
+                $this->validateNewStorename();
             }
             $this->return_data['errors'] = $this->errors;
             return $this->return_data;
