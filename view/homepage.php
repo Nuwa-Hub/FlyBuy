@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project cosmos</title>
-    <link rel="stylesheet" href="style-home.css">
+    <link rel="stylesheet" href="../css/style-home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   </head>
   <body>
@@ -26,10 +26,10 @@
   </header>
   <section>
       <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
-      <img src="item1.png" id="item1">
+      <img src="../images/item1.png" id="item1">
       <a href="#products" id='btn'>Explore</a>
       
-      <img src="item2.png" id="item2">
+      <img src="../images/item2.png" id="item2">
   </section>
   <div class="sec" id="products">
       <h2>ADD Products Below Machanla</h2>
