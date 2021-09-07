@@ -264,7 +264,7 @@ form.sign-in-form {
 
 form.sign-up-form {
     opacity: 0;
-    transform: translateX(-1000px);
+    transform: translateX(-2000px);
     transition: 1.8s ease-in-out;
 }
 
