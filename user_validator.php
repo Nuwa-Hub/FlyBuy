@@ -33,7 +33,7 @@ class UserValidator{
 
         if ($formType === 'signup') {
 
-
+    
             foreach (self::$fields as $field) {
                 if (!array_key_exists($field, $this->data)) {
                     trigger_error("'$field' is not present in the data");
@@ -53,6 +53,14 @@ class UserValidator{
             return $this->return_data;
         }
         else if ($formType === 'login') {
+            
+            foreach (self::$Lfields as $field) {
+                if (!array_key_exists($field, $this->data)) {
+                    trigger_error("'$field' is not present in the data");
+                    return;
+                }
+            }
+
             $this->lerrors= ['email' => '', 'password' => ''];
             $this->validateLoginEmail();
             $this->return_data['errors'] = $this->lerrors;
@@ -146,7 +154,6 @@ class UserValidator{
                 $this->setError('email', 'email must be a valid');
             }
             else {
-                $this->setError('email', 'none');
 
 
                 foreach ($this->users as $user) {
@@ -228,12 +235,12 @@ class UserValidator{
                 }
                 else{
                     
-                    // if($curr_user['verified'] === false){
-                    //     $this->setError('email', 'email is not verified');
-                    // }
-                    // else{
-                    //     $this->setError('email', 'none');
-                    // }
+                    if($curr_user['verified'] === false){
+                        $this->setError('email', 'email is not verified');
+                    }
+                    else{
+                        $this->setError('email', 'none');
+                    }
                     $this->lsetError('email', 'none');
                     $this->validateLoginPassword($curr_user);
                 }
@@ -244,8 +251,8 @@ class UserValidator{
     private function validateLoginPassword($user){
         
         $val = $this->data['password'];
-        print_r($val);
-        print_r($user['password']);
+        
+        
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
         }
