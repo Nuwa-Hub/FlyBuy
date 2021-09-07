@@ -18,7 +18,7 @@ class UserValidator{
         if ($userType == "seller") {
             $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
         } else {
-            $this->errors = ['username' => '', 'email' => '', 'password' => '', 'telNo' => '', 'address' => ''];
+            $this->errors = ['username' => 'none', 'email' => '', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
         }
 
         $this->data = $post_data;
@@ -41,13 +41,13 @@ class UserValidator{
                 }
             }
 
-            $this->validateNewUsername();
-            $this->validateNewPassword();
+          //  $this->validateNewUsername();
+          //  $this->validateNewPassword();
             $this->validateNewEmail();
-            $this->validateNewTelNo();
-            $this->validateAddress();
+           // $this->validateNewTelNo();
+          //  $this->validateAddress();
             if ($this->userType === "seller") {
-                $this->validateNewStorename();
+              //  $this->validateNewStorename();
             }
             $this->return_data['errors'] = $this->errors;
             return $this->return_data;
@@ -142,7 +142,7 @@ class UserValidator{
     }
 
     private function validateNewEmail(){
-
+        
         $val = trim($this->data['email']);
 
         if (empty($val)) {
@@ -155,7 +155,7 @@ class UserValidator{
             }
             else {
 
-
+                
                 foreach ($this->users as $user) {
 
                     if ($user['email'] === $val && $user['verified'] === true) {
@@ -207,7 +207,7 @@ class UserValidator{
     }
 
     private function validateLoginEmail(){
-    
+        
         $val = trim($this->data['email']);
 
         if (empty($val)) {
