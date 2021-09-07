@@ -1,5 +1,44 @@
 <?php
 
+include 'database/db_connection.php';
+
+if(isset($_GET['vkey'])){
+    
+    $vkey = $_GET['vkey'];
+    $table = $_GET['table'];
+
+    if($table === "buyers"){
+        $resultSet = $conn->query("SELECT * FROM buyers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1");
+    }
+    else{
+        $resultSet = $conn->query("SELECT * FROM sellers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1");
+    }
+    
+    if($resultSet){
+
+        if($table === "buyers"){
+            $update = $conn->query("UPDATE buyers SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
+        }
+        else{
+            $update = $conn->query("UPDATE sellers SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
+        }
+
+        if($update){
+            //echo 'verification success..';
+        }
+        else{
+            echo $conn->error;
+        }
+    }
+    else{
+        echo "This account is already verified";
+    }
+    // mysqli_free_result($resultSet);
+}
+else{
+    die('verification error');
+}
+
 ?>
 
 
@@ -26,7 +65,7 @@
 
             <img class="mail-icon" src="./checked.png">
             <h2>Verification Successful!</h2>
-            <a class="loginLink" href="#">Login To Your Account</a>
+            <a class="loginLink" href="./loginSignup.php">Login To Your Account</a>
         </div>
     </body>
 </html>
