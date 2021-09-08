@@ -21,7 +21,7 @@ function checknone($arr){
 if (isset($_POST['submitSignup'])) {
 
     //fetch the resulting rows as an array
-    if($_POST['userType'] == "buyer"){
+    if($_POST['userType'] === "buyer"){
         $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
     }
     else{
@@ -33,6 +33,7 @@ if (isset($_POST['submitSignup'])) {
     $return_data = $validation->validateForm('signup');
 
     $errors = $return_data['errors'];
+    $classNames = $return_data['classNames'];
     $vkey = $return_data['vkey'];
 
     array_filter($errors);
@@ -40,9 +41,10 @@ if (isset($_POST['submitSignup'])) {
     if (checknone($errors)) {
 
         $vkey = $return_data['vkey'];
-        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        // $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $hashed_password = $_POST['password'];
 
-        if  ($_POST['userType'] == "buyer") {
+        if  ($_POST['userType'] === "buyer") {
             $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
         }
         else{
@@ -73,20 +75,29 @@ if (isset($_POST['submitSignup'])) {
 if (isset($_POST['userLog'])) {
 
     //fetch the resulting rows as an array
-    $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM $_POST[userLog]"), MYSQLI_ASSOC);
+    if($_POST['userLog'] === 'buyer'){
+        $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
+    }
+    else{
+        $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers"), MYSQLI_ASSOC);
+    }
     
     // validate entries
     $validation = new UserValidator($_POST, $users,$_POST['userLog']);
-    $data = $validation->validateForm('login');
+    $return_data = $validation->validateForm('login');
+
+    $errors = $return_data['errors'];
+    $classNames = $return_data['classNames'];
 
     // array_filter($data);
 
-    if (checknone($data['errors'])) {
+    if (checknone($errors)) {
         echo "c";
         header('Location: home.php');
     }
     else {
-        print_r(array_values($data['errors']));
+        print_r(array_values($errors));
+        print_r(array_values($classNames));
     }
 }
 
@@ -226,9 +237,9 @@ if (isset($_POST['userLog'])) {
                             </div>
 
                             <div class="input-field radio">
-                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
+                                <input type="radio" class="radioBtn buyer" name="userType" value="buyers" onchange="removeField()" checked>
                                 <label for="radio">Buyer</label>
-                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
+                                <input type="radio" class="radioBtn seller" name="userType" value="sellers" onchange="addField()">
                                 <label for="radio">Seller</label>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text">Error Message</small>

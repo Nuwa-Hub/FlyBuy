@@ -24,7 +24,7 @@ main {
     grid-template-columns: repeat(12, 1fr);
     position: relative;
     /* background: #f5f5f5; */
-    background: url('../background2.jpg');
+    background-image: url('../images/background2.jpg');
     justify-content: center;
     align-items: center;
 }
@@ -264,7 +264,7 @@ form.sign-in-form {
 
 form.sign-up-form {
     opacity: 0;
-    transform: translateX(-1000px);
+    transform: translateX(-2000px);
     transition: 1.8s ease-in-out;
 }
 

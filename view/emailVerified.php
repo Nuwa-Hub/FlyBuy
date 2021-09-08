@@ -7,7 +7,7 @@ if(isset($_GET['vkey'])){
     $vkey = $_GET['vkey'];
     $table = $_GET['table'];
 
-    if($table === "buyers"){
+    if($table === 'buyer'){
         $resultSet = $conn->query("SELECT * FROM buyers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1");
     }
     else{
@@ -16,7 +16,7 @@ if(isset($_GET['vkey'])){
     
     if($resultSet){
 
-        if($table === "buyers"){
+        if($table === 'buyer'){
             $update = $conn->query("UPDATE buyers SET verified = 1 WHERE vkey = '$vkey' LIMIT 1");
         }
         else{
