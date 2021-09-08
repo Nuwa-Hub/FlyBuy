@@ -5,8 +5,8 @@ if (isset($_POST['submit'])){
 
         $email=$_POST['email'];
         $type='forgotPsw';
-        sendMail($email,$type,"");
-    
+        sendMail($email,$type,"");  
+        header("Location: loginSignup.php");
 
 }
 
