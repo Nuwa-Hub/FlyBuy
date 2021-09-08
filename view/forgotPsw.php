@@ -1,8 +1,11 @@
 <?php
-
+include '../modules/sendMail.php';
 
 if (isset($_POST['submit'])){
-  
+
+        $email=$_POST['email'];
+        $type='forgotPsw';
+        sendMail($email,$type,"");
     
 
 }
@@ -53,22 +56,14 @@ if (isset($_POST['cancel'])){
 
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw">
+                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw" name="email">
                         <i class="fas fa-exclamation-circle tooltip">
                             <small class="tooltip-text">Error Message</small>
                         </i>
                         <i class="fas fa-check-circle"></i>
                     </div>
 
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input name="Psw" type="password" placeholder="New Password" class="ForgotPsw">
-                        <i class="fas fa-eye togglePassword"></i>
-                        <i class="fas fa-exclamation-circle tooltip">
-                            <small class="tooltip-text">Error Message</small>
-                        </i>
-                        <i class="fas fa-check-circle"></i>
-                    </div>
+              
 
                     <button class="btn solid forgotPsw" name="submit">
                         <span class="buttontext">Submit</span>
