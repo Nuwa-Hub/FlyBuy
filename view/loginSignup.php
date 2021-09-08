@@ -21,7 +21,7 @@ function checknone($arr){
 if (isset($_POST['submitSignup'])) {
 
     //fetch the resulting rows as an array
-    if($_POST['userType'] == "buyer"){
+    if($_POST['userType'] === "buyer"){
         $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
     }
     else{
@@ -35,6 +35,7 @@ if (isset($_POST['submitSignup'])) {
     $errors = $return_data['errors'];
     $vkey = $return_data['vkey'];
 
+    // what is this mchn?????
     array_filter($errors);
 
     if (checknone($errors)) {
@@ -73,7 +74,12 @@ if (isset($_POST['submitSignup'])) {
 if (isset($_POST['userLog'])) {
 
     //fetch the resulting rows as an array
-    $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM $_POST[userLog]"), MYSQLI_ASSOC);
+    if($_POST['userLog'] === 'buyer'){
+        $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
+    }
+    else{
+        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+    }
     
     // validate entries
     $validation = new UserValidator($_POST, $users,$_POST['userLog']);
