@@ -97,8 +97,8 @@ if (isset($_POST['userLog'])) {
         header('Location: home.php');
     }
     else {
-        print_r(array_values($errors));
-        print_r(array_values($classNames));
+        // print_r(array_values($errors));
+        // print_r(array_values($classNames));
     }
 }
 
@@ -134,7 +134,7 @@ if (isset($_POST['userLog'])) {
 
                             <h2 class="title">Sign in</h2>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -143,7 +143,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw">
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
