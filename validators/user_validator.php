@@ -18,7 +18,7 @@ class UserValidator{
         if ($userType == "seller") {
             $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
         } else {
-            $this->errors = ['username' => 'none', 'email' => '', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
+            $this->errors = ['username' => '', 'email' => '', 'password' => '', 'telNo' => '', 'address' => ''];
         }
 
         $this->data = $post_data;
@@ -281,6 +281,9 @@ class UserValidator{
         else if($val === $user['password']){
             $this->setError('password', 'none');
         }
+        // else if(md5($val) == $user['password']){
+        //     $this->setError('password', 'none');
+        // }
         else{
             $this->setError('password', 'Incorrect password');
         }

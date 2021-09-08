@@ -43,6 +43,7 @@ if (isset($_POST['submitSignup'])) {
         $vkey = $return_data['vkey'];
         // $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $hashed_password = $_POST['password'];
+        // $hashed_password = md5($_POST['password']);
 
         if  ($_POST['userType'] === "buyer") {
             $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
@@ -93,7 +94,7 @@ if (isset($_POST['userLog'])) {
 
     if (checknone($errors)) {
         echo "c";
-        header('Location: home.php');
+        header('Location: homepage.php');
     }
     else {
         print_r(array_values($errors));
@@ -237,9 +238,9 @@ if (isset($_POST['userLog'])) {
                             </div>
 
                             <div class="input-field radio">
-                                <input type="radio" class="radioBtn buyer" name="userType" value="buyers" onchange="removeField()" checked>
+                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
                                 <label for="radio">Buyer</label>
-                                <input type="radio" class="radioBtn seller" name="userType" value="sellers" onchange="addField()">
+                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
                                 <label for="radio">Seller</label>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text">Error Message</small>
