@@ -170,7 +170,7 @@ class UserValidator{
 
                 foreach ($this->users as $user) {
                     
-                    if ($user['email'] === $val && $user['verified']) {
+                    if ($user['email'] === $val) {
                         $this->setError('email', 'email already exists');
                         break;
                     }
