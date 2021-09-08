@@ -1,8 +1,24 @@
-<?php 
+<?php
+include '../modules/sendMail.php';
 
+if (isset($_POST['submit'])){
+
+        $email=$_POST['email'];
+        $type='forgotPsw';
+        sendMail($email,$type,"");  
+        header("Location: loginSignup.php");
+
+}
+
+
+if (isset($_POST['cancel'])){
+    header("Location: loginSignup.php");
+
+}
 ?>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +32,7 @@
     />
     <title>Forgot Password</title>
 </head>
+
 <body>
     <main>
 
@@ -31,7 +48,7 @@
 
             <div class="forgotPsw">
 
-                <form class="forgotPsw-form">
+                <form class="forgotPsw-form" method="post" action="forgotPsw.php">
 
                     <h2 class="title">Forgot Password?</h2>
 
@@ -39,26 +56,22 @@
 
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw">
+                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw" name="email">
                         <i class="fas fa-exclamation-circle tooltip">
                             <small class="tooltip-text">Error Message</small>
                         </i>
                         <i class="fas fa-check-circle"></i>
                     </div>
 
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input name="Psw" type="password" placeholder="New Password" class="ForgotPsw">
-                        <i class="fas fa-eye togglePassword"></i>
-                        <i class="fas fa-exclamation-circle tooltip">
-                            <small class="tooltip-text">Error Message</small>
-                        </i>
-                        <i class="fas fa-check-circle"></i>
-                    </div>
+              
 
-                    <button class="btn solid forgotPsw">
+                    <button class="btn solid forgotPsw" name="submit">
                         <span class="buttontext">Submit</span>
-                    </button>  
+                    </button>
+                
+                        <button class="btn solid forgotPsw" name="cancel">
+                            <span class="buttontext">Cancel</span>
+                        </button>
                     
                 </form>
 

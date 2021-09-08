@@ -9,16 +9,24 @@ class UserValidator{
     private $users;
     private $errors;
     private $return_data;
+    private $classNames;
     private static $fields = ['username', 'email', 'password', 'address', 'telNo'];
     private static $Lfields = ['email', 'password'];
 
     public function __construct($post_data, $users, $userType){
 
+        if ($userType == "seller") {
+            $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
+        } else {
+            $this->errors = ['username' => 'none', 'email' => '', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
+        }
+
         $this->data = $post_data;
         $this->users = $users;
         $this->userType = $userType;
         $this->errors = [];
-        $this->return_data = ['errors' => [], 'vkey' => ''];
+        $this->classNames = [];
+        $this->return_data = ['errors' => [], 'classNames' => [], 'vkey' => ''];
     }
 
     public function validateForm($formType){
@@ -34,8 +42,10 @@ class UserValidator{
 
             if ($this->userType == "seller") {
                 $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
+                $this->classNames = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
             } else {
                 $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
+                $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
             }
 
             $this->validateNewUsername();
@@ -45,11 +55,8 @@ class UserValidator{
             $this->validateAddress();
 
             if ($this->userType === "seller") {
-                $this->validateNewStorename();
+              //  $this->validateNewStorename();
             }
-
-            $this->return_data['errors'] = $this->errors;
-            return $this->return_data;
         }
         else if ($formType === 'login') {
             
@@ -61,14 +68,17 @@ class UserValidator{
             }
 
             $this->errors= ['email' => '', 'password' => ''];
+            $this->classNames= ['email' => '', 'password' => ''];
 
             $this->validateLoginEmail();
-
-            $this->return_data['errors'] = $this->errors;
-            return $this->return_data;
         }
 
-        
+        $this->setClassNames();
+
+        $this->return_data['errors'] = $this->errors;
+        $this->return_data['classNames'] = $this->classNames;
+
+        return $this->return_data;
     }
 
     //signup data validation
@@ -143,7 +153,7 @@ class UserValidator{
     }
 
     private function validateNewEmail(){
-
+        
         $val = trim($this->data['email']);
 
         if (empty($val)) {
@@ -160,7 +170,7 @@ class UserValidator{
 
                 foreach ($this->users as $user) {
                     
-                    if ($user['email'] === $val && $user['verified'] === true) {
+                    if ($user['email'] === $val && $user['verified']) {
                         $this->setError('email', 'email already exists');
                         break;
                     }
@@ -210,11 +220,19 @@ class UserValidator{
 
     //login data validation
     private function validateLoginEmail(){
-    
+        
         $val = trim($this->data['email']);
 
         if (empty($val)) {
+
             $this->setError('email', 'email cannot be empty');
+
+            // if(empty($this->data['password'])){
+            //     $this->setError('password', 'password cannot be empty');
+            // }
+            // else{
+            //     $this->setError('password', 'account not found');
+            // }
         }
         else {
 
@@ -237,13 +255,13 @@ class UserValidator{
                 }
                 else{
                     
-                    if($curr_user['verified'] === false){
+                    if(!$curr_user['verified']){
                         $this->setError('email', 'email is not verified');
                     }
                     else{
                         $this->setError('email', 'none');
                     }
-                    $this->setError('email', 'none');
+                    // $this->setError('email', 'none');
                     $this->validateLoginPassword($curr_user);
                 }
             }
@@ -257,7 +275,10 @@ class UserValidator{
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
         }
-        else if (password_verify($val, $user['password'])) { //insert de-hashing
+        // else if (password_verify($val, $user['password'])) { //insert de-hashing
+        //     $this->setError('password', 'none');
+        // }
+        else if($val === $user['password']){
             $this->setError('password', 'none');
         }
         else{
@@ -267,5 +288,16 @@ class UserValidator{
 
     private function setError($key, $val){
         $this->errors[$key] = $val;
+    }
+
+    private function setClassNames(){
+        foreach ($this->errors as $field => $error) {
+            if($error === 'none'){
+                $this->classNames[$field] = 'success';
+            }
+            else{
+                $this->classNames[$field] = 'error';
+            }
+        }
     }
 }
