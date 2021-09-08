@@ -24,7 +24,7 @@ if(isset($_GET['vkey'])){
         }
 
         if($update){
-            echo 'verification success..';
+            // echo 'verification success..';
         }
         else{
             echo $conn->error;
