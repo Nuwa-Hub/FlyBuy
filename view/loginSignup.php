@@ -113,7 +113,11 @@ if (isset($_POST['userLog'])) {
     // array_filter($data);
 
     if (checknone($errors)) {
-        echo "c";
+
+        $curr_email = $_POST['email'];
+
+        //create cookie to keep the user logged in
+        setcookie('user_login', $curr_email, time() + 86400, "/");
         header('Location: homepage.php');
     }
     else {
