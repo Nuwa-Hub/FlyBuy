@@ -71,3 +71,20 @@ function removeField(){
 //         small.innerText = '';
 //     }
 // }
+
+
+// prevent refreshing page
+// const loginSubmitBtn = document.querySelectorAll('.btn.login');
+
+// if(loginSubmitBtn){
+//     const buyerLogin = loginSubmitBtn[0];
+//     const sellerLogin = loginSubmitBtn[1];
+
+//     buyerLogin.addEventListener('click', event => {
+//         event.preventDefault();
+//     });
+
+//     sellerLogin.addEventListener('click', event => {
+//         event.preventDefault();
+//     });
+// }

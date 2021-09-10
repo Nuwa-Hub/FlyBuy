@@ -134,11 +134,11 @@ if (isset($_POST['userLog'])) {
 
                             <h2 class="title">Sign in</h2>
 
-                            <div class="input-field <?php echo $classNames['email']; ?>">
+                            <div class="input-field <?php if($errors['email'] != ''){echo $classNames['email'];} ?>">
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="text" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text"><?php echo $errors['email']; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -149,7 +149,7 @@ if (isset($_POST['userLog'])) {
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text"><?php echo $errors['password']; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -172,7 +172,7 @@ if (isset($_POST['userLog'])) {
 
                             <h2 class="title">Sign up</h2>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['username']; ?>">
                                 <i class="fas fa-user"></i>
                                 <input name="username" type="text" placeholder="Username" class="username">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -181,7 +181,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
                                 <input name="email" type="email" placeholder="Email" class="email">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -190,7 +190,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['telNo']; ?>">
                                 <i class="fas fa-mobile-alt"></i>
                                 <input name="telNo" type="tel" placeholder="Phone Number" class="phone">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -199,7 +199,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['address']; ?>">
                                 <i class="fas fa-map-marked-alt"></i>
                                 <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -208,7 +208,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw">
                                 <i class="fas fa-eye togglePassword"></i>
@@ -218,7 +218,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $classNames['confirmPsw']; ?>">
                                 <i class="fas fa-lock"></i>
                                 <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
                                 <i class="fas fa-eye togglePassword"></i>
@@ -228,7 +228,7 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field store remove">
+                            <div class="input-field store remove <?php echo $classNames['storeName']; ?>">
                                 <i class="fas fa-store"></i>
                                 <input name="storeName" type="text" placeholder="Store Name" class="store">
                                 <i class="fas fa-exclamation-circle tooltip">
