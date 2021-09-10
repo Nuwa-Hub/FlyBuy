@@ -15,12 +15,6 @@ class UserValidator{
 
     public function __construct($post_data, $users, $userType){
 
-        if ($userType == "seller") {
-            $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
-        } else {
-            $this->errors = ['username' => 'none', 'email' => '', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
-        }
-
         $this->data = $post_data;
         $this->users = $users;
         $this->userType = $userType;
@@ -41,11 +35,11 @@ class UserValidator{
             }
 
             if ($this->userType == "seller") {
-                $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
-                $this->classNames = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
+                $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => '', 'storeName' => ''];
+                $this->classNames = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => '', 'storeName' => ''];
             } else {
-                $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
-                $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
+                $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => ''];
+                $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => ''];
             }
 
             $this->validateNewUsername();
@@ -55,7 +49,7 @@ class UserValidator{
             $this->validateAddress();
 
             if ($this->userType === "seller") {
-              //  $this->validateNewStorename();
+               $this->validateNewStorename();
             }
         }
         else if ($formType === 'login') {
@@ -170,7 +164,7 @@ class UserValidator{
 
                 foreach ($this->users as $user) {
                     
-                    if ($user['email'] === $val && $user['verified']) {
+                    if ($user['email'] === $val) {
                         $this->setError('email', 'email already exists');
                         break;
                     }
@@ -207,13 +201,14 @@ class UserValidator{
                 $this->setError('password', 'Password must be atleast 6 characters');
             }
             else if(empty($confirm_val)){
-                $this->setError('password', 'You must confirm the password');
+                $this->setError('password', 'none');
+                $this->setError('confirmPsw', 'You must confirm the password');
             }
             else if($val !== $confirm_val){
-                $this->setError('password', 'Password mismatch');
+                $this->setError('confirmPsw', 'Password mismatch');
             }
             else{
-                $this->setError('password', 'none');
+                $this->setError('confirmPsw', 'none');
             }
         }
     }
@@ -281,6 +276,9 @@ class UserValidator{
         else if($val === $user['password']){
             $this->setError('password', 'none');
         }
+        // else if(md5($val) == $user['password']){
+        //     $this->setError('password', 'none');
+        // }
         else{
             $this->setError('password', 'Incorrect password');
         }

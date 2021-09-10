@@ -1,3 +1,20 @@
+<?php 
+
+include '../models/buyer.php';
+include '../models/seller.php';
+include '../database/db_connection.php';
+
+require('../validators/user_validator.php');
+
+if(!isset($_COOKIE['user_login'])){      //if the cookie is not set redirect -> loginSignup
+  header('Location: loginSignup.php');
+}
+else{
+  $curr_email = $_COOKIE['user_login'];  //logged in user email
+}
+
+?>
+
 <!DOCTYPE html5>
 <html lang="en">
   <head>
