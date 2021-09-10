@@ -41,8 +41,8 @@ if (isset($_POST['submitSignup'])) {
     if (checknone($errors)) {
 
         $vkey = $return_data['vkey'];
-        // $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $hashed_password = $_POST['password'];
+         $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+     //   $hashed_password = $_POST['password'];
 
         if  ($_POST['userType'] === "buyer") {
             $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
@@ -93,7 +93,7 @@ if (isset($_POST['userLog'])) {
 
     if (checknone($errors)) {
         echo "c";
-        header('Location: home.php');
+        header('Location: homepage.php');
     }
     else {
         print_r(array_values($errors));

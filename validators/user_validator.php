@@ -15,11 +15,7 @@ class UserValidator{
 
     public function __construct($post_data, $users, $userType){
 
-        if ($userType == "seller") {
-            $this->errors = ['username' => '', 'email' =>  '', 'password' =>  '', 'telNo' => '', 'address' => '', 'storeName' => ''];
-        } else {
-            $this->errors = ['username' => 'none', 'email' => '', 'password' => 'none', 'telNo' => 'none', 'address' => 'none'];
-        }
+       
 
         $this->data = $post_data;
         $this->users = $users;
@@ -44,15 +40,15 @@ class UserValidator{
                 $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
                 $this->classNames = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'storeName' => ''];
             } else {
-                $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
+                $this->errors = ['username' => 'none', 'email' => 'none', 'telNo' => 'none', 'address' => 'none', 'password' =>  ''];
                 $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  ''];
             }
 
-            $this->validateNewUsername();
+       //     $this->validateNewUsername();
             $this->validateNewPassword();
-            $this->validateNewEmail();
-            $this->validateNewTelNo();
-            $this->validateAddress();
+         //   $this->validateNewEmail();
+           // $this->validateNewTelNo();
+          //  $this->validateAddress();
 
             if ($this->userType === "seller") {
               //  $this->validateNewStorename();
@@ -67,7 +63,7 @@ class UserValidator{
                 }
             }
 
-            $this->errors= ['email' => '', 'password' => ''];
+            $this->errors= ['email' => 'none', 'password' => ''];
             $this->classNames= ['email' => '', 'password' => ''];
 
             $this->validateLoginEmail();
@@ -276,7 +272,7 @@ class UserValidator{
             $this->setError('password', 'password cannot be empty');
         }
         // else if (password_verify($val, $user['password'])) { //insert de-hashing
-        //     $this->setError('password', 'none');
+          //   $this->setError('password', 'none');
         // }
         else if($val === $user['password']){
             $this->setError('password', 'none');
