@@ -3,15 +3,32 @@ const sign_in_btn   = document.querySelector('#sign-in-button');
 const sign_up_btn   = document.querySelector('#sign-up-button');
 const container     = document.querySelector('.container');
 
+
 if(sign_in_btn){
     sign_up_btn.addEventListener('click', () => {
         container.classList.add('sign-up-mode');
+        sessionStorage['signup'] = true;
     });
     
     sign_in_btn.addEventListener('click', () => {
         container.classList.remove('sign-up-mode');
+        sessionStorage['signup'] = false;
     });
 }
+
+// sessionStorage is used to set the login page to signin or signup when refreshed in submit
+
+// console.log(sessionStorage.getItem('signup'));
+
+if(sessionStorage.getItem('signup') == 'true'){
+    // console.log("in signup");
+    sign_up_btn.click();
+}
+else if(sessionStorage.getItem('signup') == 'false'){
+    // console.log("in signin");
+    sign_in_btn.click();
+}
+
 
 // toggle password view---------------------------------------------------------------
 let toggleView      = document.querySelectorAll('.togglePassword');
@@ -70,4 +87,21 @@ function removeField(){
 //     if (small){
 //         small.innerText = '';
 //     }
+// }
+
+
+// prevent refreshing page
+// const loginSubmitBtn = document.querySelectorAll('.btn.login');
+
+// if(loginSubmitBtn){
+//     const buyerLogin = loginSubmitBtn[0];
+//     const sellerLogin = loginSubmitBtn[1];
+
+//     buyerLogin.addEventListener('click', event => {
+//         event.preventDefault();
+//     });
+
+//     sellerLogin.addEventListener('click', event => {
+//         event.preventDefault();
+//     });
 // }
