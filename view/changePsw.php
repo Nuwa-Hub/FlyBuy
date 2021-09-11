@@ -4,7 +4,22 @@ include '../database/db_connection.php';
 
 if (isset($_POST['submit1'])) {
     $email = $_POST['email'];
-    $password = $_POST['Psw'];
+    $password = $_POST['password'];
+    $ConPassword =$_POST['cangePsw'];
+    
+    $validation = new UserValidator($_POST);
+    $return_data = $validation->validateForm('changePsw');
+
+    $errors = $return_data['errors'];
+    $classNames = $return_data['classNames'];
+
+
+
+
+
+
+
+    
     $Bquery = "SELECT * FROM buyers WHERE email='$email'";
     $Squery = "SELECT * FROM sellers WHERE email='$email'";
     $sql1 = "UPDATE buyers SET password='$password' WHERE email='$email'";
@@ -72,7 +87,7 @@ if (isset($_POST['submit1'])) {
 
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input name="Psw" type="password" placeholder="New Password" class="ForgotPsw">
+                        <input name="password" type="password" placeholder="New Password" class="ForgotPsw">
                         <i class="fas fa-eye togglePassword"></i>
                         <i class="fas fa-exclamation-circle tooltip">
                             <small class="tooltip-text">Error Message</small>
@@ -82,7 +97,7 @@ if (isset($_POST['submit1'])) {
 
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input name="Cpsw" type="password" placeholder="Confirm Password" class="ForgotPsw">
+                        <input name="changePsw" type="password" placeholder="Confirm Password" class="ForgotPsw">
                         <i class="fas fa-eye togglePassword"></i>
                         <i class="fas fa-exclamation-circle tooltip">
                             <small class="tooltip-text">Error Message</small>
