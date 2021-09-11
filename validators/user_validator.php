@@ -10,8 +10,6 @@ class UserValidator{
     private $errors;
     private $return_data;
     private $classNames;
-    private static $fields = ['username', 'email', 'password', 'address', 'telNo'];
-    private static $Lfields = ['email', 'password'];
 
     public function __construct($post_data, $users, $userType){
 
@@ -26,13 +24,6 @@ class UserValidator{
     public function validateForm($formType){
         
         if ($formType === 'signup') {
-
-            foreach (self::$fields as $field) {
-                if (!array_key_exists($field, $this->data)) {
-                    trigger_error("'$field' is not present in the data");
-                    return;
-                }
-            }
 
             if ($this->userType == "seller") {
                 $this->errors = ['username' => '', 'email' =>  '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => '', 'storeName' => ''];
@@ -53,13 +44,6 @@ class UserValidator{
             }
         }
         else if ($formType === 'login') {
-            
-            foreach (self::$Lfields as $field) {
-                if (!array_key_exists($field, $this->data)) {
-                    trigger_error("'$field' is not present in the data");
-                    return;
-                }
-            }
 
             $this->errors= ['email' => '', 'password' => ''];
             $this->classNames= ['email' => '', 'password' => ''];
