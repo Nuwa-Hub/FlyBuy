@@ -293,7 +293,7 @@ class UserValidator{
             if($error === 'none'){
                 $this->classNames[$field] = 'success';
             }
-            else{
+            else if($error != ''){
                 $this->classNames[$field] = 'error';
             }
         }
