@@ -55,9 +55,15 @@ class UserValidator
 
             $this->validateLoginEmail();
         } else if ($formType === 'changePsw') {
-            $this->errors = ['email' => 'none', 'password' => '', 'confirmPsw' => ''];
-            $this->classNames = ['email' => '', 'password' => '', 'confirmPsw' => ''];
+            $this->errors = [ 'password' => '', 'confirmPsw' => ''];
+            $this->classNames = ['password' => '', 'confirmPsw' => ''];
             $this->validateNewPassword();
+        
+        }
+        else if($formType === 'forgotPsw'){
+             $this->errors = ['email' => 'none', ];
+            $this->classNames = ['email' => ''];
+            $this->validateChangePswEmail();
         }
 
         $this->setClassNames();
@@ -263,6 +269,44 @@ class UserValidator
             $this->setError('password', 'Incorrect password');
         }
     }
+
+    private function validateChangePswEmail()
+    {
+        $val = trim($this->data['email']);
+
+        if (empty($val)) {
+
+            $this->setError('email', 'email cannot be empty');
+
+         
+        } else {
+
+            if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+                $this->setError('email', 'email must be a valid');
+            } else {
+                $curr_user = NULL;
+                foreach ($this->users as $user) {
+                    if ($user['email'] === $val) {
+                        $this->setError('email', 'none');
+                        $curr_user = $user;
+                        break;
+                    }
+                }
+
+                if ($curr_user == NULL) {
+                    $this->setError('email', 'email is not registered');
+                    $this->setError('password', 'incorrect password');
+                } else {
+
+                    if (!$curr_user['verified']) {
+                        $this->setError('email', 'email is not verified');
+                    } else {
+                        $this->setError('email', 'none');
+                    }
+                }
+            }
+    }
+}
 
     private function setError($key, $val)
     {
