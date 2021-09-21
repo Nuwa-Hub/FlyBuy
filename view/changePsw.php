@@ -13,13 +13,6 @@ if (isset($_POST['submit1'])) {
     $errors = $return_data['errors'];
     $classNames = $return_data['classNames'];
 
-
-
-
-
-
-
-    
     $Bquery = "SELECT * FROM buyers WHERE email='$email'";
     $Squery = "SELECT * FROM sellers WHERE email='$email'";
     $sql1 = "UPDATE buyers SET password='$password' WHERE email='$email'";
