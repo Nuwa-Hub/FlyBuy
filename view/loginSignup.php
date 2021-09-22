@@ -8,6 +8,14 @@ require('../validators/user_validator.php');
 
 $errors = [];
 
+$username   = '';
+$email      = '';
+$password   = '';
+$confirmPsw = '';
+$telNo      = '';
+$address    = '';
+$storeName  = '';
+
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -18,37 +26,48 @@ function checknone($arr){
     return true;
 }
 
-if (isset($_POST['submitSignup'])) {
+if (isset($_POST['submitSignup'])){
+
+    $username   = mysqli_real_escape_string($conn, $_POST['username']);
+    $email      = mysqli_real_escape_string($conn, $_POST['email']);
+    $password   = mysqli_real_escape_string($conn, $_POST['password']);
+    $confirmPsw = mysqli_real_escape_string($conn, $_POST['confirmPsw']);
+    $telNo      = mysqli_real_escape_string($conn, $_POST['telNo']);
+    $address    = mysqli_real_escape_string($conn, $_POST['address']);
 
     //fetch the resulting rows as an array
     if($_POST['userType'] === "buyer"){
         $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
     }
     else{
-        $users = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+        //store name is specific to sellers
+        $storeName  = mysqli_real_escape_string($conn, $_POST['storeName']);
+
+        $users      = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
     }
 
     // validate entries
-    $validation = new UserValidator($_POST, $users, $_POST['userType'] );
-    $return_data = $validation->validateForm('signup');
+    $validation     = new UserValidator($_POST, $users, $_POST['userType'] );
+    $return_data    = $validation->validateForm('signup');
 
-    $errors = $return_data['errors'];
-    $classNames = $return_data['classNames'];
-    $vkey = $return_data['vkey'];
+    $signupErrors       = $return_data['errors'];
+    $signupClassNames   = $return_data['classNames'];
+    $vkey               = $return_data['vkey'];
 
-    array_filter($errors);
+    // what is this mchn?????
+    array_filter($signupErrors);
 
-    if (checknone($errors)) {
+    if (checknone($signupErrors)) {
 
-        $vkey = $return_data['vkey'];
-        // $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $hashed_password = $_POST['password'];
+        // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = $password;
+        // $hashed_password = md5($password);
 
         if  ($_POST['userType'] === "buyer") {
-            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','false','$vkey')";
+            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$username','$email','$hashed_password','$telNo','$address','false','$vkey')";
         }
         else{
-            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$_POST[username]','$_POST[email]','$hashed_password','$_POST[telNo]','$_POST[address]','$_POST[storeName]','false','$vkey')";
+            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$username','$email','$hashed_password','$telNo','$address','$storeName','false','$vkey')";
         }
 
         $errors = [];
@@ -68,41 +87,49 @@ if (isset($_POST['submitSignup'])) {
         }
     }
     else {
-        print_r(array_values($errors));
+        // print_r(array_values($errors));
     }
 }
 
 if (isset($_POST['userLog'])) {
 
+    $email      = mysqli_real_escape_string($conn, $_POST['email']);
+    $password   = mysqli_real_escape_string($conn, $_POST['password']);
+
     //fetch the resulting rows as an array
     if($_POST['userLog'] === 'buyer'){
-        $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
+        $users  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
     }
     else{
-        $users = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers"), MYSQLI_ASSOC);
+        $users  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers"), MYSQLI_ASSOC);
     }
     
     // validate entries
-    $validation = new UserValidator($_POST, $users,$_POST['userLog']);
-    $return_data = $validation->validateForm('login');
+    $validation     = new UserValidator($_POST, $users, $_POST['userLog']);
+    $return_data    = $validation->validateForm('login');
 
-    $errors = $return_data['errors'];
-    $classNames = $return_data['classNames'];
+    $loginErrors         = $return_data['errors'];
+    $loginClassNames     = $return_data['classNames'];
 
     // array_filter($data);
 
-    if (checknone($errors)) {
-        echo "c";
-        header('Location: home.php');
+    if (checknone($loginErrors)) {
+
+        $curr_email = $_POST['email'];
+
+        //create cookie to keep the user logged in
+        setcookie('user_login', $curr_email, time() + 86400, "/");
+        header('Location: homepage.php');
     }
     else {
-        print_r(array_values($errors));
-        print_r(array_values($classNames));
+        // print_r(array_values($errors));
+        // print_r(array_values($classNames));
     }
 }
 
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -133,22 +160,22 @@ if (isset($_POST['userLog'])) {
 
                             <h2 class="title">Sign in</h2>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $loginClassNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="text" placeholder="Email" class="email">
+                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($email);?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text"><?php echo $loginErrors['email']; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $loginClassNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($password);?>">
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text">Error Message</span>
+                                    <span class="tooltip-text"><?php echo $loginErrors['password']; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -171,75 +198,75 @@ if (isset($_POST['userLog'])) {
 
                             <h2 class="title">Sign up</h2>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['username']; ?>">
                                 <i class="fas fa-user"></i>
-                                <input name="username" type="text" placeholder="Username" class="username">
+                                <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($username)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['username']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="email" placeholder="Email" class="email">
+                                <input name="email" type="email" placeholder="Email" class="email" value="<?php echo htmlspecialchars($email)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['email']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['telNo']; ?>">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone">
+                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo htmlspecialchars($telNo)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['telNo']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['address']; ?>">
                                 <i class="fas fa-map-marked-alt"></i>
-                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address">
+                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address" value="<?php echo htmlspecialchars($address)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['address']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($password)?>">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['password']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field">
+                            <div class="input-field <?php echo $signupClassNames['confirmPsw']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
+                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($confirmPsw)?>">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['confirmPsw']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field store remove">
+                            <div class="input-field store remove <?php echo $signupClassNames['storeName']; ?>">
                                 <i class="fas fa-store"></i>
-                                <input name="storeName" type="text" placeholder="Store Name" class="store">
+                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo htmlspecialchars($storeName)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text">Error Message</small>
+                                    <small class="tooltip-text"><?php echo $signupErrors['storeName']; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
                             <div class="input-field radio">
-                                <input type="radio" class="radioBtn buyer" name="userType" value="buyers" onchange="removeField()" checked>
+                                <input type="radio" class="radioBtn buyer" name="userType" value="buyer" onchange="removeField()" checked>
                                 <label for="radio">Buyer</label>
-                                <input type="radio" class="radioBtn seller" name="userType" value="sellers" onchange="addField()">
+                                <input type="radio" class="radioBtn seller" name="userType" value="seller" onchange="addField()">
                                 <label for="radio">Seller</label>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text">Error Message</small>
