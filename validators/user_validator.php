@@ -50,11 +50,23 @@ class UserValidator{
             $this->classNames = ['email' => '', 'password' => ''];
 
             $this->validateLoginEmail();
+<<<<<<< HEAD
+        } else if ($formType === 'changePsw') {
+            $this->errors = [ 'password' => '', 'confirmPsw' => ''];
+            $this->classNames = ['password' => '', 'confirmPsw' => ''];
+=======
         }
         else if ($formType === 'changePsw') {
             $this->errors = ['email' => 'none', 'password' => '', 'confirmPsw' => ''];
             $this->classNames = ['email' => '', 'password' => '', 'confirmPsw' => ''];
+>>>>>>> f73db11bb55cd5064269d4d2b905bae4590df8d8
             $this->validateNewPassword();
+        
+        }
+        else if($formType === 'forgotPsw'){
+             $this->errors = ['email' => 'none', ];
+            $this->classNames = ['email' => ''];
+            $this->validateChangePswEmail();
         }
 
         $this->setClassNames();
@@ -274,7 +286,50 @@ class UserValidator{
         }
     }
 
+<<<<<<< HEAD
+    private function validateChangePswEmail()
+    {
+        $val = trim($this->data['email']);
+
+        if (empty($val)) {
+
+            $this->setError('email', 'email cannot be empty');
+
+         
+        } else {
+
+            if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+                $this->setError('email', 'email must be a valid');
+            } else {
+                $curr_user = NULL;
+                foreach ($this->users as $user) {
+                    if ($user['email'] === $val) {
+                        $this->setError('email', 'none');
+                        $curr_user = $user;
+                        break;
+                    }
+                }
+
+                if ($curr_user == NULL) {
+                    $this->setError('email', 'email is not registered');
+                    $this->setError('password', 'incorrect password');
+                } else {
+
+                    if (!$curr_user['verified']) {
+                        $this->setError('email', 'email is not verified');
+                    } else {
+                        $this->setError('email', 'none');
+                    }
+                }
+            }
+    }
+}
+
+    private function setError($key, $val)
+    {
+=======
     private function setError($key, $val){
+>>>>>>> f73db11bb55cd5064269d4d2b905bae4590df8d8
         $this->errors[$key] = $val;
     }
 

@@ -7,19 +7,12 @@ if (isset($_POST['submit1'])) {
     $password = $_POST['password'];
     $ConPassword =$_POST['cangePsw'];
     
-    $validation = new UserValidator($_POST);
+    $validation = new UserValidator($_POST,"","");
     $return_data = $validation->validateForm('changePsw');
 
     $errors = $return_data['errors'];
     $classNames = $return_data['classNames'];
 
-
-
-
-
-
-
-    
     $Bquery = "SELECT * FROM buyers WHERE email='$email'";
     $Squery = "SELECT * FROM sellers WHERE email='$email'";
     $sql1 = "UPDATE buyers SET password='$password' WHERE email='$email'";
@@ -76,14 +69,7 @@ if (isset($_POST['submit1'])) {
 
                     <img src="../resources/password.png" alt="forgotPsw-image">
 
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw" name="email">
-                        <i class="fas fa-exclamation-circle tooltip">
-                            <small class="tooltip-text">Error Message</small>
-                        </i>
-                        <i class="fas fa-check-circle"></i>
-                    </div>
+            
 
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
