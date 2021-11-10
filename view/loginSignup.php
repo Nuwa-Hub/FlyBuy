@@ -8,14 +8,6 @@ require('../validators/user_validator.php');
 
 $errors = [];
 
-$username   = '';
-$email      = '';
-$password   = '';
-$confirmPsw = '';
-$telNo      = '';
-$address    = '';
-$storeName  = '';
-
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -26,14 +18,22 @@ function checknone($arr){
     return true;
 }
 
+$signup_username   = '';
+$signup_email      = '';
+$signup_password   = '';
+$signup_confirmPsw = '';
+$signup_telNo      = '';
+$signup_address    = '';
+$signup_storeName  = '';
+
 if (isset($_POST['submitSignup'])){
 
-    $username   = mysqli_real_escape_string($conn, $_POST['username']);
-    $email      = mysqli_real_escape_string($conn, $_POST['email']);
-    $password   = mysqli_real_escape_string($conn, $_POST['password']);
-    $confirmPsw = mysqli_real_escape_string($conn, $_POST['confirmPsw']);
-    $telNo      = mysqli_real_escape_string($conn, $_POST['telNo']);
-    $address    = mysqli_real_escape_string($conn, $_POST['address']);
+    $signup_username   = mysqli_real_escape_string($conn, $_POST['username']);
+    $signup_email      = mysqli_real_escape_string($conn, $_POST['email']);
+    $signup_password   = mysqli_real_escape_string($conn, $_POST['password']);
+    $signup_confirmPsw = mysqli_real_escape_string($conn, $_POST['confirmPsw']);
+    $signup_telNo      = mysqli_real_escape_string($conn, $_POST['telNo']);
+    $signup_address    = mysqli_real_escape_string($conn, $_POST['address']);
 
     //fetch the resulting rows as an array
     if($_POST['userType'] === "buyer"){
@@ -55,19 +55,19 @@ if (isset($_POST['submitSignup'])){
     $vkey               = $return_data['vkey'];
 
     // what is this mchn?????
-    array_filter($signupErrors);
+    // array_filter($signupErrors);
 
     if (checknone($signupErrors)) {
 
-        // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $hashed_password = $password;
-        // $hashed_password = md5($password);
+        // $hashed_password = password_hash($signup_password, PASSWORD_DEFAULT);
+        $hashed_password = $signup_password;
+        // $hashed_password = md5($signup_password);
 
         if  ($_POST['userType'] === "buyer") {
-            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$username','$email','$hashed_password','$telNo','$address','false','$vkey')";
+            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','false','$vkey')";
         }
         else{
-            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$username','$email','$hashed_password','$telNo','$address','$storeName','false','$vkey')";
+            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','$signup_storeName','false','$vkey')";
         }
 
         $errors = [];
@@ -91,13 +91,16 @@ if (isset($_POST['submitSignup'])){
     }
 }
 
-if (isset($_POST['userLog'])) {
+$login_email      = '';
+$login_password   = '';
 
-    $email      = mysqli_real_escape_string($conn, $_POST['email']);
-    $password   = mysqli_real_escape_string($conn, $_POST['password']);
+if (isset($_POST['submitLogin'])) {
+
+    $login_email      = mysqli_real_escape_string($conn, $_POST['email']);
+    $login_password   = mysqli_real_escape_string($conn, $_POST['password']);
 
     //fetch the resulting rows as an array
-    if($_POST['userLog'] === 'buyer'){
+    if($_POST['submitLogin'] === 'buyer'){
         $users  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
     }
     else{
@@ -105,7 +108,7 @@ if (isset($_POST['userLog'])) {
     }
     
     // validate entries
-    $validation     = new UserValidator($_POST, $users, $_POST['userLog']);
+    $validation     = new UserValidator($_POST, $users, $_POST['submitLogin']);
     $return_data    = $validation->validateForm('login');
 
     $loginErrors         = $return_data['errors'];
@@ -162,7 +165,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $loginClassNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($email);?>">
+                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($login_email);?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <span class="tooltip-text"><?php echo $loginErrors['email']; ?></span>
                                 </i>
@@ -171,7 +174,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $loginClassNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($password);?>">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($login_password);?>">
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -180,11 +183,11 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <button class="btn solid login buyer" name="userLog" value="buyer">
+                            <button class="btn solid login buyer" name="submitLogin" value="buyer">
                                 <span class="buttonText">Login as a cutomer</span>
                             </button>
 
-                            <button class="btn solid login seller" name="userLog" value="seller">
+                            <button class="btn solid login seller" name="submitLogin" value="seller">
                                 <span class="buttonText">Login as a seller</span>
                             </button>
 
@@ -200,7 +203,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['username']; ?>">
                                 <i class="fas fa-user"></i>
-                                <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($username)?>">
+                                <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($signup_username)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['username']; ?></small>
                                 </i>
@@ -209,7 +212,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['email']; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="email" placeholder="Email" class="email" value="<?php echo htmlspecialchars($email)?>">
+                                <input name="email" type="email" placeholder="Email" class="email" value="<?php echo htmlspecialchars($signup_email)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['email']; ?></small>
                                 </i>
@@ -218,7 +221,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['telNo']; ?>">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo htmlspecialchars($telNo)?>">
+                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo htmlspecialchars($signup_telNo)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['telNo']; ?></small>
                                 </i>
@@ -227,7 +230,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['address']; ?>">
                                 <i class="fas fa-map-marked-alt"></i>
-                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address" value="<?php echo htmlspecialchars($address)?>">
+                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address" value="<?php echo htmlspecialchars($signup_address)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['address']; ?></small>
                                 </i>
@@ -236,7 +239,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($password)?>">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($signup_password)?>">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['password']; ?></small>
@@ -246,7 +249,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field <?php echo $signupClassNames['confirmPsw']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($confirmPsw)?>">
+                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($signup_confirmPsw)?>">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['confirmPsw']; ?></small>
@@ -256,7 +259,7 @@ if (isset($_POST['userLog'])) {
 
                             <div class="input-field store remove <?php echo $signupClassNames['storeName']; ?>">
                                 <i class="fas fa-store"></i>
-                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo htmlspecialchars($storeName)?>">
+                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo htmlspecialchars($signup_storeName)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo $signupErrors['storeName']; ?></small>
                                 </i>
