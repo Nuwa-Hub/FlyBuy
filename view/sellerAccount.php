@@ -48,7 +48,7 @@
         </aside>
 
         <section class="control-section">
-            <a class="create-list" onclick="toggleDisplay()">New List+</a>
+            <a class="create-list" onclick="toggleDisplay()">New Item+</a>
             <div class="search-main">
                 <div class="search-box-main">
                     <input class="search-txt-main" type="text" placeholder="search here...">
