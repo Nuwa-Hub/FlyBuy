@@ -94,13 +94,13 @@ if (isset($_POST['submitSignup'])){
 $login_email      = '';
 $login_password   = '';
 
-if (isset($_POST['userLog'])) {
+if (isset($_POST['submitLogin'])) {
 
     $login_email      = mysqli_real_escape_string($conn, $_POST['email']);
     $login_password   = mysqli_real_escape_string($conn, $_POST['password']);
 
     //fetch the resulting rows as an array
-    if($_POST['userLog'] === 'buyer'){
+    if($_POST['submitLogin'] === 'buyer'){
         $users  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers"), MYSQLI_ASSOC);
     }
     else{
@@ -108,7 +108,7 @@ if (isset($_POST['userLog'])) {
     }
     
     // validate entries
-    $validation     = new UserValidator($_POST, $users, $_POST['userLog']);
+    $validation     = new UserValidator($_POST, $users, $_POST['submitLogin']);
     $return_data    = $validation->validateForm('login');
 
     $loginErrors         = $return_data['errors'];
@@ -183,11 +183,11 @@ if (isset($_POST['userLog'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <button class="btn solid login buyer" name="userLog" value="buyer">
+                            <button class="btn solid login buyer" name="submitLogin" value="buyer">
                                 <span class="buttonText">Login as a cutomer</span>
                             </button>
 
-                            <button class="btn solid login seller" name="userLog" value="seller">
+                            <button class="btn solid login seller" name="submitLogin" value="seller">
                                 <span class="buttonText">Login as a seller</span>
                             </button>
 
