@@ -15,7 +15,6 @@ class UserValidator
 
     public function __construct($post_data, $users, $userType)
     {
-
         $this->data = $post_data;
         $this->users = $users;
         $this->userType = $userType;
@@ -26,7 +25,6 @@ class UserValidator
 
     public function validateForm($formType)
     {
-
         if ($formType === 'signup') {
 
             $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => ''];
@@ -71,7 +69,6 @@ class UserValidator
     //signup data validation
     private function validateNewTelNo()
     {
-
         $val = trim($this->data['telNo']);
 
         if (empty($val)) {
@@ -182,10 +179,11 @@ class UserValidator
             //     $this->setError('password', 'Password must contain atleast one from a-z, A-Z, 0-9');
             // }
 
+            $this->setError('password', 'none');
+            
             if (strlen($val) < 6) {
                 $this->setError('password', 'Password must be atleast 6 characters');
             } else if (empty($confirm_val)) {
-                $this->setError('password', 'none');
                 $this->setError('confirmPsw', 'You must confirm the password');
             } else if ($val !== $confirm_val) {
                 $this->setError('confirmPsw', 'Password mismatch');
