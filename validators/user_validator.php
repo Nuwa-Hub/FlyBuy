@@ -50,16 +50,10 @@ class UserValidator{
             $this->classNames = ['email' => '', 'password' => ''];
 
             $this->validateLoginEmail();
-<<<<<<< HEAD
-        } else if ($formType === 'changePsw') {
-            $this->errors = [ 'password' => '', 'confirmPsw' => ''];
-            $this->classNames = ['password' => '', 'confirmPsw' => ''];
-=======
         }
         else if ($formType === 'changePsw') {
             $this->errors = ['email' => 'none', 'password' => '', 'confirmPsw' => ''];
             $this->classNames = ['email' => '', 'password' => '', 'confirmPsw' => ''];
->>>>>>> f73db11bb55cd5064269d4d2b905bae4590df8d8
             $this->validateNewPassword();
         
         }
@@ -286,7 +280,6 @@ class UserValidator{
         }
     }
 
-<<<<<<< HEAD
     private function validateChangePswEmail()
     {
         $val = trim($this->data['email']);
@@ -322,14 +315,10 @@ class UserValidator{
                     }
                 }
             }
+        }
     }
-}
 
-    private function setError($key, $val)
-    {
-=======
     private function setError($key, $val){
->>>>>>> f73db11bb55cd5064269d4d2b905bae4590df8d8
         $this->errors[$key] = $val;
     }
 
