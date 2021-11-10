@@ -31,7 +31,7 @@
                 <a href="#" class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
-                <img src="/user.png" alt="profile picture">
+                <img src="../resources/user.png" alt="profile picture">
                 <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
             </div>
             <div class="store">COSMOS</div>
