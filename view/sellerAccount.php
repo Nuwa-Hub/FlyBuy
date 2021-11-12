@@ -114,7 +114,7 @@ else{
         </aside>
 
         <section class="control-section">
-            <a class="create-list" onclick="toggleDisplay()">New List+</a>
+            <a class="create-list" onclick="toggleDisplay()">New Item+</a>
             <div class="search-main">
                 <div class="search-box-main">
                     <input class="search-txt-main" type="text" placeholder="search here...">
@@ -125,7 +125,17 @@ else{
             </div>
         </section>
 
-        <section class="item-container">item-container</section>
+        <section class="item-container">
+            <div class="item-details">
+                <div class="item-name">
+                    <div>Sugar 500g</div>
+                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
+                </div>
+                <div class="item-price">Rs. 500</div>
+                <div class="item-amount">5</div>
+                <div class="item-date-added">2021/11/10</div>
+            </div>
+        </section>
 
         <footer>footer</footer>
     </main>
@@ -138,7 +148,7 @@ else{
 
             <div class="closeBtn" onclick="toggleDisplay()">&times;</div>
 
-            <h1 class="title">Create List</h1>
+            <h1 class="title">Add Item</h1>
 
             <div class="items">
 
