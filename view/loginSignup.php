@@ -54,9 +54,6 @@ if (isset($_POST['submitSignup'])){
     $signupClassNames   = $return_data['classNames'];
     $vkey               = $return_data['vkey'];
 
-    // what is this mchn?????
-    // array_filter($signupErrors);
-
     if (checknone($signupErrors)) {
 
         // $hashed_password = password_hash($signup_password, PASSWORD_DEFAULT);
@@ -85,6 +82,8 @@ if (isset($_POST['submitSignup'])){
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+        
+        // header('location:verifyEmail.php');
     }
     else {
         // print_r(array_values($errors));
@@ -114,15 +113,26 @@ if (isset($_POST['submitLogin'])) {
     $loginErrors         = $return_data['errors'];
     $loginClassNames     = $return_data['classNames'];
 
-    // array_filter($data);
-
     if (checknone($loginErrors)) {
 
         $curr_email = $_POST['email'];
 
+        foreach ($users as $user) {
+            if ($user['email'] === $curr_email) {
+                $curr_user = $user;
+                break;
+            }
+        }
+
         //create cookie to keep the user logged in
         setcookie('user_login', $curr_email, time() + 86400, "/");
-        header('Location: homepage.php');
+
+        if($_POST['submitLogin'] == 'buyer'){
+            header('Location: homepage.php?id='.$curr_user['buy_id']);
+        }
+        else{
+            header('Location: sellerAccount.php?id='.$curr_user['seller_id']);
+        }
     }
     else {
         // print_r(array_values($errors));

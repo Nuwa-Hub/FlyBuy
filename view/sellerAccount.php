@@ -1,3 +1,69 @@
+<?php 
+
+include '../models/buyer.php';
+include '../models/seller.php';
+include '../database/db_connection.php';
+
+require('../validators/product_validator.php');
+
+function checknone($arr){
+
+    foreach ($arr as $ele) {
+        if ($ele != 'none') {
+            return false;
+        }
+    }
+    return true;
+}
+
+if(!isset($_COOKIE['user_login']) or !isset($_GET['id'])){      //if the cookie is not set redirect -> loginSignup
+  header('Location: loginSignup.php');
+}
+else{
+
+    $curr_email = $_COOKIE['user_login'];  //logged in user email
+    
+    $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+    $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+    
+    $add_itemName   = '';
+    $add_amount   = '';
+    $add_price   = '';
+    $add_description   = '';
+
+    if (isset($_POST['submitAddItem'])){
+
+        $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
+        $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
+        $add_price = mysqli_real_escape_string($conn, $_POST['price']);
+        $add_description = mysqli_real_escape_string($conn, $_POST['description']);
+    
+        $validation = new ProductValidator($_POST);
+        $return_data    = $validation->validateForm('addItem');
+        
+        $addItemErrors = $return_data['errors'];
+        $addItemClassNames = $return_data['classNames'];
+        
+        if(checknone($addItemErrors)){
+
+            $seller_id = $_GET['id'];
+            
+            $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
+            
+            if ($conn->query($sql) === TRUE) {
+                echo "New record created successfully";
+                header('Location: sellerAccount.php?id='.$seller_id);
+            }
+            else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +144,7 @@
 
             </div>
 
-            <form class="item-form">
+            <form class="item-form" method="POST">
                 <div class="input-field">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -115,9 +181,10 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
+                <button type="submit" class="add-item btn" name="submitAddItem">Add</button>
+
             </form>
 
-            <button type="button" class="add-item btn">Add</button>
             <!-- <button type="button" class="submit btn">Submit</button> -->
 
         </div>

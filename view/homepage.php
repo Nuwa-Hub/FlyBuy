@@ -11,6 +11,7 @@ if(!isset($_COOKIE['user_login'])){      //if the cookie is not set redirect -> 
 }
 else{
   $curr_email = $_COOKIE['user_login'];  //logged in user email
+  $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
 }
 
 ?>

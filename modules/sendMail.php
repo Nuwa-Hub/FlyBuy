@@ -40,7 +40,7 @@ try {
             //Content
             $vkey = $additionalData['vkey'];
             $table = $additionalData['table'];
-            $path = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
+            $path = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - email verification';
             $mail->Body    = "You have successfully created your Flybuy account. Click <a href='$path?vkey=$vkey&table=$table'>here</a> to verify your email";

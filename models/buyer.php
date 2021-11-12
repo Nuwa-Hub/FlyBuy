@@ -10,15 +10,29 @@ class buyer extends user{
     return true;
   }
 
-  public function saveUser(){
-    $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$this->username','$this->email','$this->password','$this->telNo','$this->address','$this->verified','$this->vkey')";
-    return $sql;
-  }
+  public function saveUser($conn){
 
-  public function getAllUsers($conn){
-    return mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
-  }
+    // $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
+    $hashed_password = $this->password;
+    // $hashed_password = md5($this->password);
 
+    $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$this->username','$this->email','$hashed_password','$this->telNo','$this->address','$this->verified','$this->vkey')";
+    
+    $errors = [];
+
+    if ($conn->query($sql) === TRUE) {
+
+        echo "New record created successfully";
+
+        $additionalData  = ['vkey' => $this->vkey, 'table' => 'buyer'];
+        $email = $_POST['email'];
+
+        sendMail($email, 'signup', $additionalData);
+    }
+    else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+  }
 }
 
 ?>
