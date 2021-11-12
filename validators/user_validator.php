@@ -94,7 +94,7 @@ class UserValidator{
         #I require the text field should contains Alphabets in Upper and lower case, numbers, hyphen, fullstops 
         #forward and back slash and commas and spaces in it
 
-        $RegEx = '/^[a-z0-9 ,#-\'\/.]{3,50}$/i';
+        $RegEx = '/^[a-z0-9 ,#-\'\/.]{3,100}$/i';
 
         $val = trim($this->data['address']);
 
