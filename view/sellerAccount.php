@@ -74,6 +74,8 @@
         <footer>footer</footer>
     </main>
 
+    <!-- ------------------------------Popup window to add items-------------------------------------------- -->
+
     <div class="popup-window">
 
         <div class="overlay"></div>
@@ -128,7 +130,6 @@
             </form>
 
             <button type="button" class="add-item btn">Add</button>
-            <!-- <button type="button" class="submit btn">Submit</button> -->
 
         </div>
 
