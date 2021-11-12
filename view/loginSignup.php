@@ -6,6 +6,10 @@ include '../database/db_connection.php';
 
 require('../validators/user_validator.php');
 
+// relevent paths for admins :)
+$path_akash = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
+$path_kalana = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
+
 $errors = [];
 
 function checknone($arr){
@@ -76,7 +80,7 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData);
+            sendMail($email, 'signup', $additionalData, $path_akash);
             header('location:verifyEmail.php');
         }
         else {

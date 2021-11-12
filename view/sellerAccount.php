@@ -197,12 +197,6 @@ else{
 
             </form>
 
-<<<<<<< HEAD
-            <!-- <button type="button" class="submit btn">Submit</button> -->
-=======
-            <button type="button" class="add-item btn">Add</button>
->>>>>>> 6562d5cafc1cb2fcea0cbf24a5481fce150ef553
-
         </div>
 
     </div>

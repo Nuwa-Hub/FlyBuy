@@ -27,7 +27,7 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;
 
-    function sendMail($clientEmail, $type, $additionalData){
+    function sendMail($clientEmail, $type, $additionalData, $path){
 
         $mail = $GLOBALS['mail'];
 
@@ -40,7 +40,7 @@ try {
             //Content
             $vkey = $additionalData['vkey'];
             $table = $additionalData['table'];
-            $path = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
+            // $path = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - email verification';
             $mail->Body    = "You have successfully created your Flybuy account. Click <a href='$path?vkey=$vkey&table=$table'>here</a> to verify your email";
@@ -53,7 +53,7 @@ try {
     
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - Change Password';
-            $mail->Body    ="Click <a href='http://192.168.1.4/OOP%20project/FlyBuy/view/changePsw.php'>here</a> to change your password";
+            $mail->Body    ="Click <a href=$path>here</a> to change your password";
         }
 
         $mail->send();
