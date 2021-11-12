@@ -80,14 +80,12 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_akash);
+            sendMail($email, 'signup', $additionalData, $path_kalana);
             header('location:verifyEmail.php');
         }
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-        
-        // header('location:verifyEmail.php');
     }
     else {
         // print_r(array_values($errors));

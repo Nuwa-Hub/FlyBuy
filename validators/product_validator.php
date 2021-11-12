@@ -19,13 +19,12 @@ class ProductValidator{
 
         if($formType === 'addItem'){
 
-            $this->errors = ['itemName' => 'none', 'amount' => 'none', 'price' => 'none', 'discription' => 'none'];
+            $this->errors = ['itemName' => '', 'amount' => '', 'price' => '', 'discription' => 'none'];
             $this->classNames = ['itemName' => '', 'amount' => '', 'price' => '', 'discription' => ''];
 
             $this->validateItemName();
             $this->validateAmount();
             $this->validatePrice();
-            $this->validateDiscription();
         }
 
         $this->setClassNames();
@@ -36,13 +35,45 @@ class ProductValidator{
         return $this->return_data;
     }
     
-    private function validateItemName(){}
+    private function validateItemName(){
 
-    private function validateAmount(){}
+        $val = trim($this->data['itemName']);
+        $RegEx = '/^[a-z0-9 ,#-\'\/.]$/i';
 
-    private function validatePrice(){}
+        if (empty($val)) {
+            $this->setError('itemName', 'Item name cannot be empty');
+        }
+        else if (preg_match($RegEx, $val)) {
+            $this->setError('itemName', 'none');
+        }
+        else {
+            $this->setError('itemName', 'Invalid itemName');
+        }
+    }
 
-    private function validateDiscription(){}
+    private function validateAmount(){
+
+        $val = $this->data['amount'];
+
+        if (empty($val)) {
+            $this->setError('amount', 'Amount cannot be empty');
+        }
+        else {
+            $this->setError('amount', 'none');
+        }
+    }
+
+    private function validatePrice(){
+
+        $val = $this->data['price'];
+
+        if (empty($val)) {
+            $this->setError('price', 'Price cannot be empty');
+        }
+        else {
+            $this->setError('price', 'none');
+        }
+    }
 
     private function setError($key, $val){
         $this->errors[$key] = $val;
