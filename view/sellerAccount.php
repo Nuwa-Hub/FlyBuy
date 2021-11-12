@@ -109,7 +109,7 @@
 
                 <div class="input-field">
                     <i class="fas fa-dollar-sign"></i>
-                    <input name="price" type="text" placeholder="Price" class="price">
+                    <input name="price" type="number" placeholder="Price" min="0.01" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
                         <small class="tooltip-text">Error Message</small>
                     </i>
