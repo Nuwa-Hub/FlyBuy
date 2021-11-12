@@ -100,16 +100,16 @@ else{
                 <img src="../resources/user.png" alt="profile picture">
                 <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
             </div>
-            <div class="store">COSMOS</div>
-            <div class="name">akash tharuka</div>
-            <div class="email">akash_tharuka@yahoo.</div>
-            <div class="contact">071-569-4899</div>
-            <div class="location">
-                <div class="address-content">
+            <div class="store"><?php echo $user['storeName']; ?></div>
+            <div class="name"><?php echo $user['username']; ?></div>
+            <div class="email"><?php echo $user['email']; ?></div>
+            <div class="contact"><?php echo $user['telNo']; ?></div>
+            <div class="location"><?php echo $user['Address']; ?>
+                <!-- <div class="address-content">
                     <section class="street-no">No. 221/B</section>
                     <section class="street">Baker Street</section>
                     <section class="city">London</section>
-                </div>
+                </div> -->
             </div>
         </aside>
 
@@ -157,34 +157,34 @@ else{
             </div>
 
             <form class="item-form" method="POST">
-                <div class="input-field">
+                <div class="input-field <?php echo $addItemClassNames['itemName']; ?>">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error Message</small>
+                        <small class="tooltip-text"><?php echo $addItemErrors['itemName']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field">
+                <div class="input-field <?php echo $addItemClassNames['amount']; ?>">
                     <i class="fas fa-sort-numeric-up-alt"></i>
-                    <input name="amount" type="number" placeholder="Amount" class="amount">
+                    <input name="amount" type="number" placeholder="Amount" min="1" class="amount">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error Message</small>
+                        <small class="tooltip-text"><?php echo $addItemErrors['amount']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field">
+                <div class="input-field <?php echo $addItemClassNames['price']; ?>">
                     <i class="fas fa-dollar-sign"></i>
                     <input name="price" type="number" placeholder="Price" min="0.01" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error Message</small>
+                        <small class="tooltip-text"><?php echo $addItemErrors['price']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field">
+                <div class="input-field <?php echo $addItemClassNames['description']; ?>">
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description">
                     <!-- <i class="fas fa-exclamation-circle tooltip">

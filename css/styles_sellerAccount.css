@@ -106,7 +106,7 @@ div a.user-edit-icon:active{
     transform: scale(0.9);
 }
 
-div.address-content{
+/* div.address-content{
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -114,7 +114,7 @@ div.address-content{
 
 div.address-content section{
     width: 100%;
-}
+} */
 
 section.control-section{
     display: grid;
