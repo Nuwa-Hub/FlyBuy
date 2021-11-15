@@ -1,4 +1,4 @@
-const form = document.querySelector('.item-form');
+const form = document.getElementById("item-form");
 
 const inputField = document.querySelectorAll('.input-field');
 
@@ -8,7 +8,6 @@ let correct = true;
 
 if (form){
     form.addEventListener('submit', e => {
-        e.preventDefault();
 
         correct = true
         
@@ -25,19 +24,22 @@ if (form){
 
         if (correct){
             
-            const formData = new FormData(this);
+            const formData = new FormData(form);
 
-            fetch('sellerAccount.php', {
+            fetch('../view/sellerAccount.php', {
                 method: 'post',
                 body: formData
             }).then(res => {
                 return res.text();
             }).then(text => {
-                console.log(text);
+                // console.log(text);
             }).catch(err => {
                 console.error(err);
             })
 
+        }
+        else{
+            e.preventDefault();
         }
     });
 }

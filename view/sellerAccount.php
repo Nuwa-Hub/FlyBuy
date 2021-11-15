@@ -27,26 +27,18 @@ else{
     
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-
-    // print_r($products);
     
     $add_itemName   = '';
     $add_amount   = '';
     $add_price   = '';
     $add_description   = '';
 
-    if (count($_POST)){
-
+    if (count($_POST) > 0){
+        
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
-    
-        // $validation = new ProductValidator($_POST);
-        // $return_data    = $validation->validateForm('addItem');
-        
-        // $addItemErrors = $return_data['errors'];
-        // $addItemClassNames = $return_data['classNames'];
         
         $seller_id = $_GET['id'];
             
@@ -129,7 +121,7 @@ else{
                     </div>
                     <div class="item-price"><?php echo $product['price']; ?></div>
                     <div class="item-amount"><?php echo $product['amount']; ?></div>
-                    <!-- <div class="item-date-added"><?php echo $product['itemName']; ?></div> -->
+                    <!-- <div class="item-date-added"><?php echo $product['dateAdded']; ?></div> -->
                 </div>
             <?php endforeach; ?>
             
@@ -154,7 +146,7 @@ else{
 
             </div>
 
-            <form class="item-form" method="POST">
+            <form class="item-form" id="item-form" method="POST">
                 <div class="input-field ">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -175,7 +167,7 @@ else{
 
                 <div class="input-field ">
                     <i class="fas fa-dollar-sign"></i>
-                    <input name="price" type="number" placeholder="Price" min="0.01" class="price">
+                    <input name="price" type="number" placeholder="Price" min="0.00" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
                         <small class="tooltip-text">Error</small>
                     </i>
@@ -191,7 +183,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <button type="button" class="add-item btn" name="submitAddItem">Add</button>
+                <input type="submit" class="add-item btn" value="Add">
 
             </form>
 

@@ -169,7 +169,7 @@ section img {
 }
 section #text{
     position: absolute;
-    color: blue;
+    color: white;
     font-size: 10vw;
     text-align: center;
     line-height: 0.55em;
