@@ -6,6 +6,8 @@ include '../database/db_connection.php';
 
 require('../validators/product_validator.php');
 
+// print_r($_POST);
+
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -25,38 +27,37 @@ else{
     
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+
+    // print_r($products);
     
     $add_itemName   = '';
     $add_amount   = '';
     $add_price   = '';
     $add_description   = '';
 
-    if (isset($_POST['submitAddItem'])){
+    if (count($_POST)){
 
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
     
-        $validation = new ProductValidator($_POST);
-        $return_data    = $validation->validateForm('addItem');
+        // $validation = new ProductValidator($_POST);
+        // $return_data    = $validation->validateForm('addItem');
         
-        $addItemErrors = $return_data['errors'];
-        $addItemClassNames = $return_data['classNames'];
+        // $addItemErrors = $return_data['errors'];
+        // $addItemClassNames = $return_data['classNames'];
         
-        if(checknone($addItemErrors)){
-
-            $seller_id = $_GET['id'];
+        $seller_id = $_GET['id'];
             
-            $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
-            
-            if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
-                header('Location: sellerAccount.php?id='.$seller_id);
-            }
-            else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+        $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+            header('Location: sellerAccount.php?id='.$seller_id);
+        }
+        else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
 }
@@ -104,13 +105,7 @@ else{
             <div class="name"><?php echo $user['username']; ?></div>
             <div class="email"><?php echo $user['email']; ?></div>
             <div class="contact"><?php echo $user['telNo']; ?></div>
-            <div class="location"><?php echo $user['Address']; ?>
-                <!-- <div class="address-content">
-                    <section class="street-no">No. 221/B</section>
-                    <section class="street">Baker Street</section>
-                    <section class="city">London</section>
-                </div> -->
-            </div>
+            <div class="location"><?php echo $user['Address']; ?></div>
         </aside>
 
         <section class="control-section">
@@ -126,15 +121,18 @@ else{
         </section>
 
         <section class="item-container">
-            <div class="item-details">
-                <div class="item-name">
-                    <div>Sugar 500g</div>
-                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit.</small>
+            <?php foreach ($products as $product): ?>
+                <div class="item-details">
+                    <div class="item-name">
+                        <div><?php echo $product['itemName']; ?></div>
+                        <small><?php echo $product['description']; ?></small>
+                    </div>
+                    <div class="item-price"><?php echo $product['price']; ?></div>
+                    <div class="item-amount"><?php echo $product['amount']; ?></div>
+                    <!-- <div class="item-date-added"><?php echo $product['itemName']; ?></div> -->
                 </div>
-                <div class="item-price">Rs. 500</div>
-                <div class="item-amount">5</div>
-                <div class="item-date-added">2021/11/10</div>
-            </div>
+            <?php endforeach; ?>
+            
         </section>
 
         <footer>footer</footer>
@@ -157,34 +155,34 @@ else{
             </div>
 
             <form class="item-form" method="POST">
-                <div class="input-field <?php echo $addItemClassNames['itemName']; ?>">
+                <div class="input-field ">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $addItemErrors['itemName']; ?></small>
+                        <small class="tooltip-text">Error</small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field <?php echo $addItemClassNames['amount']; ?>">
+                <div class="input-field ">
                     <i class="fas fa-sort-numeric-up-alt"></i>
                     <input name="amount" type="number" placeholder="Amount" min="1" class="amount">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $addItemErrors['amount']; ?></small>
+                        <small class="tooltip-text">Error</small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field <?php echo $addItemClassNames['price']; ?>">
+                <div class="input-field ">
                     <i class="fas fa-dollar-sign"></i>
                     <input name="price" type="number" placeholder="Price" min="0.01" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $addItemErrors['price']; ?></small>
+                        <small class="tooltip-text">Error</small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field <?php echo $addItemClassNames['description']; ?>">
+                <div class="input-field ">
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description">
                     <!-- <i class="fas fa-exclamation-circle tooltip">
@@ -193,7 +191,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <button type="submit" class="add-item btn" name="submitAddItem">Add</button>
+                <button type="button" class="add-item btn" name="submitAddItem">Add</button>
 
             </form>
 
@@ -209,5 +207,6 @@ else{
         popupWindow.classList.toggle('active');
     }
 </script>
+<script src="../javaScript/popupFormValidation.js"></script>
 
 </html>
