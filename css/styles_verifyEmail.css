@@ -77,6 +77,8 @@ body{
 .sendAgainLink{
     color: #00bfa6;
     transition: all 0.2s ease-in;
+    background: transparent;
+    border: none;
 }
 
 .sendAgainLink:hover{

@@ -77,11 +77,13 @@ if (isset($_POST['submitSignup'])){
 
             echo "New record created successfully";
 
-            $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
+            $table = $_POST['userType'];
+
+            $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
             sendMail($email, 'signup', $additionalData, $path_kalana);
-            header('location:verifyEmail.php');
+            header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
