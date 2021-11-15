@@ -2,7 +2,6 @@
 
 require('../modules/sendMail.php');
 
-
 class UserValidator{
 
     public $userType;
