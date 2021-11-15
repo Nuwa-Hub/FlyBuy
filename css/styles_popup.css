@@ -13,7 +13,7 @@
     position: fixed;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 25px 70px 1fr 4fr 60px;
+    grid-template-rows: 25px 70px 1fr 5fr;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
@@ -138,7 +138,7 @@ form{
 }
 
 .btn{
-    grid-column: 9/13;
+    /* grid-column: 9/13; */
     width: 150px;
     height: 3em;
     padding: 0.5em;
@@ -177,9 +177,9 @@ form{
 
 .popup-window.active .overlay {
     display: block;
-  }
-  
-  .popup-window.active .content {
+}
+
+.popup-window.active .content {
     transition:all 300ms ease-in-out;
     transform:translate(-50%,-50%) scale(1);
-  }
+}

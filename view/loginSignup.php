@@ -6,6 +6,10 @@ include '../database/db_connection.php';
 
 require('../validators/user_validator.php');
 
+// relevent paths for admins :)
+$path_akash = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
+$path_kalana = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
+
 $errors = [];
 
 function checknone($arr){
@@ -41,7 +45,7 @@ if (isset($_POST['submitSignup'])){
     }
     else{
         //store name is specific to sellers
-        $storeName  = mysqli_real_escape_string($conn, $_POST['storeName']);
+        $signup_storeName  = mysqli_real_escape_string($conn, $_POST['storeName']);
 
         $users      = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
     }
@@ -53,9 +57,6 @@ if (isset($_POST['submitSignup'])){
     $signupErrors       = $return_data['errors'];
     $signupClassNames   = $return_data['classNames'];
     $vkey               = $return_data['vkey'];
-
-    // what is this mchn?????
-    // array_filter($signupErrors);
 
     if (checknone($signupErrors)) {
 
@@ -76,11 +77,13 @@ if (isset($_POST['submitSignup'])){
 
             echo "New record created successfully";
 
-            $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
+            $table = $_POST['userType'];
+
+            $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData);
-            header('location:verifyEmail.php');
+            sendMail($email, 'signup', $additionalData, $path_kalana);
+            header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -114,15 +117,26 @@ if (isset($_POST['submitLogin'])) {
     $loginErrors         = $return_data['errors'];
     $loginClassNames     = $return_data['classNames'];
 
-    // array_filter($data);
-
     if (checknone($loginErrors)) {
 
         $curr_email = $_POST['email'];
 
+        foreach ($users as $user) {
+            if ($user['email'] === $curr_email) {
+                $curr_user = $user;
+                break;
+            }
+        }
+
         //create cookie to keep the user logged in
         setcookie('user_login', $curr_email, time() + 86400, "/");
-        header('Location: homepage.php');
+
+        if($_POST['submitLogin'] == 'buyer'){
+            header('Location: homepage.php?id='.$curr_user['buy_id']);
+        }
+        else{
+            header('Location: sellerAccount.php?id='.$curr_user['seller_id']);
+        }
     }
     else {
         // print_r(array_values($errors));

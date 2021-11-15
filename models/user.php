@@ -29,9 +29,16 @@ abstract class User {
         $this->verified = $verified;
     }
 
-    public abstract function saveUser();
+    public static function getAllUsers($type, $conn){
+        if($type === 'buyers'){
+            return mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  buyers"), MYSQLI_ASSOC);
+        }
+        else{
+            return mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+        }
+    }
 
-    public abstract function getAllUsers($conn);
+    public abstract function saveUser($conn);
 }
 
 ?>

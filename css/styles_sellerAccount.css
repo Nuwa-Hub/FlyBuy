@@ -106,7 +106,7 @@ div a.user-edit-icon:active{
     transform: scale(0.9);
 }
 
-div.address-content{
+/* div.address-content{
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -114,7 +114,7 @@ div.address-content{
 
 div.address-content section{
     width: 100%;
-}
+} */
 
 section.control-section{
     display: grid;
@@ -212,4 +212,32 @@ a.create-list:active{
     grid-row: 3/12;
     background: lightgray;
     padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 80px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-details{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    border-bottom: 1px solid #8888;
+}
+
+.item-details .item-name{
+    grid-column: 1/7;
+    border-right: 1px solid #8888;
+}
+.item-details .item-price{
+    grid-column: 7/9;
+    border-right: 1px solid #8888;
+}
+.item-details .item-amount{
+    grid-column: 9/11;
+    border-right: 1px solid #8888;
+}
+.item-details .item-date-added{
+    grid-column: 11/13;
 }
