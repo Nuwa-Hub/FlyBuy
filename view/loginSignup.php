@@ -80,7 +80,7 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' =>  $_POST['userType']];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_kalana);
+            sendMail($email, 'signup', $additionalData, $path_akash);
             header('location:verifyEmail.php');
         }
         else {
