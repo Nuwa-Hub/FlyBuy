@@ -6,8 +6,6 @@ include '../database/db_connection.php';
 
 require('../validators/product_validator.php');
 
-// print_r($_POST);
-
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -27,6 +25,10 @@ else{
     
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+
+    // foreach($products as $p){
+    //     print_r(date('Y-m-d', strtotime($product['created_at'])));
+    // }
     
     $add_itemName   = '';
     $add_amount   = '';
@@ -121,7 +123,7 @@ else{
                     </div>
                     <div class="item-price"><?php echo $product['price']; ?></div>
                     <div class="item-amount"><?php echo $product['amount']; ?></div>
-                    <!-- <div class="item-date-added"><?php echo $product['dateAdded']; ?></div> -->
+                    <div class="item-date-added"><?php echo date('Y-m-d H:i:s', strtotime($product['created_at'])); ?></div>
                 </div>
             <?php endforeach; ?>
             
