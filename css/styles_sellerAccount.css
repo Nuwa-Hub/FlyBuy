@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+}
+
+main{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-gap: 5px;
+    text-align: center;
+}
+
+nav{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column: 1/13;
+    grid-row: 1/2;
+    background: whitesmoke;
+    padding: 5px;
+}
+
+nav a{
+    margin: 5px 10px;
+    padding: 10px;
+    background: #84fab0;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+nav a:hover{
+    transform: scale(1.1);
+}
+
+nav a:active{
+    transform: scale(0.9);
+}
+
+nav .home{
+    grid-column: 10/11;
+}
+nav .notification{
+    grid-column: 11/12;
+}
+nav .logout{
+    grid-column: 12/13;
+}
+
+footer{
+    grid-column: 1/13;
+    grid-row: 12/13;
+    background: whitesmoke;
+    padding: 5px;
+}
+
+aside{
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr 1fr 1fr 1fr 2fr;
+    grid-column: 1/4;
+    grid-row: 2/12;
+    background: lightgrey;
+    padding: 5px;
+    text-align: left;
+}
+
+aside div{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 0 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div img{
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+div.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+
+div a.user-edit-icon{
+    color: #666;
+}
+
+div a.user-edit-icon:hover{
+    transform: scale(1.2);
+}
+
+div a.user-edit-icon:active{
+    transform: scale(0.9);
+}
+
+/* div.address-content{
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+div.address-content section{
+    width: 100%;
+} */
+
+section.control-section{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column: 4/13;
+    grid-row: 2/3;
+    background: #999;
+    padding: 5px;
+    align-items: center;
+}
+
+.control-section a.create-list{
+    margin: 5px 10px;
+    padding: 10px;
+    background: #84fab0;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+a.create-list:hover{
+    transform: scale(1.05);
+}
+
+a.create-list:active{
+    transform: scale(0.95);
+}
+
+.control-section .create-list{
+    grid-column: 1/4;
+}
+
+.control-section .search-main{
+    grid-column: 4/13;
+}
+
+.search-box,
+.search-box-main{
+    position: relative;
+    background: whitesmoke;
+    height: 2.1em;
+    width: fit-content;
+    border-radius: 2.1em;
+    padding: 0.3em;
+    display: flex;
+    align-items: center;
+}
+
+.search-box-main a{
+    text-decoration: none;
+}
+
+.search-btn,
+.search-btn-main{
+    color: #fff;
+    float: right;
+    width: 2.1em;
+    height: 2.1em;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-txt,
+.search-txt-main{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #333;
+    font-size: 1em;
+    transition: 0.4s;
+    width: 0px;
+}
+.search-box:hover > .search-txt,
+.search-box-main:hover > .search-txt-main,
+.search-txt:focus,
+.search-txt-main:focus{
+    width: 15em;
+    padding: 0 0.375em;
+}
+.search-box:hover > .search-btn,
+.search-box-main:hover > .search-btn-main{
+    background: #fff;
+    color: #000;
+}
+
+.item-container{
+    grid-column: 4/13;
+    grid-row: 3/12;
+    background: lightgray;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 80px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-details{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    border-bottom: 1px solid #8888;
+}
+
+.item-details .item-name{
+    grid-column: 1/7;
+    border-right: 1px solid #8888;
+}
+.item-details .item-price{
+    grid-column: 7/9;
+    border-right: 1px solid #8888;
+}
+.item-details .item-amount{
+    grid-column: 9/11;
+    border-right: 1px solid #8888;
+}
+.item-details .item-date-added{
+    grid-column: 11/13;
+}

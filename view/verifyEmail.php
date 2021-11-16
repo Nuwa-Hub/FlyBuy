@@ -1,5 +1,40 @@
 <?php
 
+include '../database/db_connection.php';
+
+require('../modules/sendMail.php');
+
+// relevent paths for admins :)
+$path_akash = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
+$path_kalana = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
+
+if(isset($_GET['vkey'])){
+
+    $vkey = $_GET['vkey'];
+    $table = $_GET['table'];
+
+    if($table === 'buyer'){
+        $user_set  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1"), MYSQLI_ASSOC);
+    }
+    else{
+        $user_set  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE verified = 0 AND vkey = '$vkey' LIMIT 1"), MYSQLI_ASSOC);
+    }
+
+    if(count($user_set) > 0){
+
+        $user = $user_set[0];
+
+        if(isset($_POST['submitSendAgain'])){
+
+            $additionalData  = ['vkey' => $vkey, 'table' => $table];
+            $email = $user['email'];
+
+            sendMail($email, 'signup', $additionalData, $path_kalana);
+            header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +67,11 @@
 
             <span>Haven't Received Your Email Yet?</span>
 
-            <a href="#" class="sendAgainLink">Click Here to Re-send</a>
+            <form method="post">
+                <button class="sendAgainLink" name="submitSendAgain" value="sendAgain">Click Here to Re-send</button>
+            </form>
+
+            <!-- <a href="#" class="sendAgainLink">Click Here to Re-send</a> -->
             
             <a class="loginLink" href="../view/loginSignup.php">Login To Your Account</a>
 

@@ -5,6 +5,8 @@ if (isset($_POST['submit'])){
 
         $email=$_POST['email'];
         $type='forgotPsw';
+        $validation = new UserValidator($_POST,"","");
+        $return_data = $validation->validateForm('changePsw');
         sendMail($email,$type,"");  
         header("Location: loginSignup.php");
 
