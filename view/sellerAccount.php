@@ -55,9 +55,10 @@ else{
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
         
         $seller_id = $_GET['id'];
-            
-        $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
-        
+
+        if($seller_id != 0){
+            $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
+        }        
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
             header('Location: sellerAccount.php?id='.$seller_id);
@@ -190,7 +191,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" value="Add">
+                <input type="submit" class="add-item btn" name="addSubmit" value="Add">
 
             </form>
 
