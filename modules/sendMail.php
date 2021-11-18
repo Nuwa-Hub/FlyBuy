@@ -50,7 +50,7 @@ try {
             $mail->addAddress($clientEmail);
 
             //Content
-    
+            $path = 'http://localhost/OOP%20project/FlyBuy/view/changePsw.php';
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - Change Password';
             $mail->Body    ="Click <a href=$path>here</a> to change your password";
