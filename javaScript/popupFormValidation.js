@@ -57,3 +57,22 @@ function setSuccess(element){
 function removeError(element){
     element.classList.remove('error')
 }
+
+
+function toggleDisplay(){
+    let addItem = document.querySelector('.popup-window.addItem');
+    addItem.classList.toggle('active');
+
+    for (let i = 0; i < inputField.length-1; i++){
+        removeError(inputField[i]);
+    }
+}
+
+function toggleLogout(){
+    let logout = document.querySelector('.popup-window.logout');
+    logout.classList.toggle('active');
+}
+
+
+
+
