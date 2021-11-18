@@ -16,8 +16,24 @@ function checknone($arr){
     return true;
 }
 
-if(!isset($_COOKIE['user_login']) or !isset($_GET['id'])){      //if the cookie is not set redirect -> loginSignup
-  header('Location: loginSignup.php');
+if(isset($_POST['submitLogout'])){
+
+    if (isset($_COOKIE['user_login'])) {
+
+        unset($_COOKIE['user_login']); 
+        setcookie('user_login', null, -1, '/');
+    }
+    // header("Refresh:0");
+    header('Location: loginSignup.php');
+    // header('Location: sellerAccount.php?id='.$_GET['id']);
+
+    // session_start();
+    // unset($_SESSION['id']);
+    // header('Location: loginSignup.php');
+}
+
+if(!isset($_COOKIE['user_login'])){
+    header('Location: loginSignup.php');
 }
 else{
 
@@ -32,16 +48,17 @@ else{
     $add_description   = '';
 
     if (count($_POST) > 0){
-        
+
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
         
         $seller_id = $_GET['id'];
-            
-        $sql = "INSERT INTO  products  (itemName, amount, price, description, seller_id) VALUES ('$add_itemName', '$add_amount', '$add_price', '$add_description', '$seller_id')";
-        
+
+        if($seller_id != 0){
+            $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
+        }        
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
             header('Location: sellerAccount.php?id='.$seller_id);
@@ -80,7 +97,7 @@ else{
             <a href="#" class="logo">FlyBuy</a>
             <a href="#" class="home">Home</a>
             <a href="#" class="notification">Notification</a>
-            <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
+            <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
         <aside>
@@ -197,7 +214,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" value="Add">
+                <input type="submit" class="add-item btn" name="addSubmit" value="Add">
 
             </form>
 
@@ -273,8 +290,8 @@ else{
 
             <img src="../resources/warn.png" alt="warn.png" class="warn-img">
 
-            <form action="#" method="post">
-                <input type="submit" class="logout btn" value="Confirm">
+            <form method="post" class="logoutForm">
+                <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
             </form>
 
         </div>

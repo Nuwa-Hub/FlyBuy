@@ -52,6 +52,20 @@ if (form){
 }
 
 
+// const logoutForm = document.querySelector('.logoutForm');
+// const logoutBtn = document.querySelector('.logout.btn');
+
+// if (logoutForm){
+//     logoutBtn.addEventListener('click', e => {
+//         e.preventDefault();
+
+//         toggleLogout();
+
+//         logoutForm.submit();
+//     });
+// }
+
+
 function setError(element, msg){
     element.classList.add('error');
     element.querySelector('.tooltip-text').innerText = msg;
