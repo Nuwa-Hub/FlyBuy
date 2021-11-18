@@ -16,8 +16,24 @@ function checknone($arr){
     return true;
 }
 
-if(!isset($_COOKIE['user_login']) or !isset($_GET['id'])){      //if the cookie is not set redirect -> loginSignup
-  header('Location: loginSignup.php');
+if(isset($_POST['submitLogout'])){
+
+    if (isset($_COOKIE['user_login'])) {
+
+        unset($_COOKIE['user_login']); 
+        setcookie('user_login', null, -1, '/');
+    }
+    // header("Refresh:0");
+    header('Location: loginSignup.php');
+    // header('Location: sellerAccount.php?id='.$_GET['id']);
+
+    // session_start();
+    // unset($_SESSION['id']);
+    // header('Location: loginSignup.php');
+}
+
+if(!isset($_COOKIE['user_login'])){
+    header('Location: loginSignup.php');
 }
 else{
 
@@ -25,10 +41,6 @@ else{
     
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-
-    // foreach($products as $p){
-    //     print_r(date('Y-m-d', strtotime($product['created_at'])));
-    // }
     
     $add_itemName   = '';
     $add_amount   = '';
@@ -36,7 +48,7 @@ else{
     $add_description   = '';
 
     if (count($_POST) > 0){
-        
+
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
@@ -83,7 +95,7 @@ else{
         <nav>
             <a href="#" class="home">Home</a>
             <a href="#" class="notification">Notification</a>
-            <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
+            <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
         <aside>
@@ -200,8 +212,8 @@ else{
 
             <img src="../resources/warn.png" alt="warn.png" class="warn-img">
 
-            <form action="#" method="post">
-                <input type="submit" class="logout btn" value="Confirm">
+            <form method="post" class="logoutForm">
+                <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
             </form>
 
         </div>

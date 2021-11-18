@@ -82,7 +82,7 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_akash);
+            sendMail($email, 'signup', $additionalData, $path_kalana);
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {
@@ -128,7 +128,6 @@ if (isset($_POST['submitLogin'])) {
             }
         }
 
-        //create cookie to keep the user logged in
         setcookie('user_login', $curr_email, time() + 86400, "/");
 
         if($_POST['submitLogin'] == 'buyer'){
