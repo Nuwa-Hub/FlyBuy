@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include '../models/buyer.php';
 include '../models/seller.php';
@@ -12,6 +12,8 @@ if(!isset($_COOKIE['user_login'])){      //if the cookie is not set redirect -> 
 else{
   $curr_email = $_COOKIE['user_login'];  //logged in user email
   $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+
+  $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
 }
 
 ?>
@@ -52,11 +54,11 @@ else{
   <div class="sec" id="products">
       <h2>Featured products</h2>
       <div class="container">
-
+        <?php foreach ($products as $product): ?>
         <div class="product">
           <div class="product-card">
-            <h3 class="name">Kottu mee-85g</h3>
-            <span class="price">Rs.70.00/-</span>
+            <h3 class="name"><?php echo $product['itemName']; ?></h3>
+            <span class="price"><?php echo "Rs. ".$product['price']; ?></span>
             <a class="popup-btn">View item</a>
             <img src="../images/Kottu mee.png" class="product-img" alt="">
           </div>
@@ -67,15 +69,14 @@ else{
                 <img src="../images/kottu mee.png" alt="">
               </div>
             <div class="info">
-              <h2>Kottu mee-85g<br><span>Chandrasena stores</span></h2>
+              <h2><?php echo $product['itemName']; ?><br><span>Chandrasena stores</span></h2>
               <h3><span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star"></span></h3>
-              <p>Information about the product is here
-              </p>
-              <span class="price">Rs.70.00/unit</span>
+              <p><?php echo $product['description']; ?></p>
+              <span class="price"><?php echo "Rs. ".$product['price']."/unit"; ?></span>
               <span class="quantity">Quantity :</span>
               <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
               <a href="#" class="add-cart-btn">Add to cart</a>
@@ -83,99 +84,7 @@ else{
           </div>
           </div>
       </div>
-
-      <div class="product">
-        <div class="product-card">
-          <h3 class="name">Fritos-440g</h3>
-          <span class="price">Rs.690.00/-</span>
-          <a class="popup-btn">View item</a>
-          <img src="../images/chips.png" class="product-img" alt="">
-        </div>
-        <div class="popup-view">
-          <div class="popup-card">
-            <a><i class="fas fa-times close-btn"></i></a>
-            <div class="product-img">
-              <img src="../images/chips.png" alt="">
-            </div>
-          <div class="info">
-            <h2>Fritos-440g<br><span>Sampath grocery</span></h2>
-            <h3><span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span></h3>
-            <p>Information about the product is here
-            </p>
-            <span class="price">Rs.690.00/unit</span>
-            <span class="quantity">Quantity :</span>
-            <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
-            <a href="#" class="add-cart-btn">Add to cart</a>
-          </div>
-        </div>
-        </div>
-    </div>
-
-    <div class="product">
-      <div class="product-card">
-        <h3 class="name">Coca Cola-2L</h3>
-        <span class="price">Rs.300.00/-</span>
-        <a class="popup-btn">View item</a>
-        <img src="../images/coke.png" class="product-img" alt="">
-      </div>
-      <div class="popup-view">
-        <div class="popup-card">
-          <a><i class="fas fa-times close-btn"></i></a>
-          <div class="product-img">
-            <img src="../images/coke.png" alt="">
-          </div>
-        <div class="info">
-          <h2>Coca Cola-2L<br><span>Kumara stores</span></h2>
-          <h3><span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span></h3>
-          <p>Information about the product is here
-          </p>
-          <span class="price">Rs.300.00/unit</span>
-          <span class="quantity">Quantity :</span>
-          <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
-          <a href="#" class="add-cart-btn">Add to cart</a>
-        </div>
-      </div>
-      </div>
-  </div>
-
-  <div class="product">
-    <div class="product-card">
-      <h3 class="name">Tomato-1kg</h3>
-      <span class="price">Rs.180.00/-</span>
-      <a class="popup-btn">View item</a>
-      <img src="../images/tomato.png" class="product-img" alt="">
-    </div>
-    <div class="popup-view">
-      <div class="popup-card">
-        <a><i class="fas fa-times close-btn"></i></a>
-        <div class="product-img">
-          <img src="../images/tomato.png" alt="">
-        </div>
-      <div class="info">
-        <h2>Tomato-1kg<br><span>Nuwan's vegitables</span></h2>
-        <h3><span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span></h3>
-        <p>Information about the product is here
-        </p>
-        <span class="price">Rs.180.00/kg</span>
-        <span class="quantity">Quantity :</span>
-        <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
-        <a href="#" class="add-cart-btn">Add to cart</a>
-      </div>
-    </div>
-    </div>
-</div>
+      <?php endforeach; ?>
 
     </div>
   </div>
@@ -195,7 +104,7 @@ else{
           item2.style.top=value* -0.12 + 'px';
           item1.style.top=value* 0.25 + 'px';
       })
-      
+
       var popupViews=document.querySelectorAll('.popup-view');
       var popupBtns=document.querySelectorAll('.popup-btn');
       var closeBtns=document.querySelectorAll('.close-btn');
