@@ -23,6 +23,7 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project cosmos</title>
     <link rel="stylesheet" href="../css/style-home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   </head>
   <body>
@@ -36,8 +37,7 @@ else{
          </div>
       <ul>
           <li><a href="#" class="active">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#">Login</a></li>
+          <li><a href="#">Login/Sign up</a></li>
           <li><a href="#"><i class="fas fa-cart-plus"></i></a>
           </li>
       </ul>
@@ -46,43 +46,141 @@ else{
       <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
       <img src="../images/item1.png" id="item1">
       <a href="#products" id='btn'>Explore</a>
-      
+
       <img src="../images/item2.png" id="item2">
   </section>
   <div class="sec" id="products">
-      <h2>ADD Products Below Machanla</h2>
-      <p>How does e-commerce work?</p>
-E-commerce is powered by the internet, where customers can access an online store to browse through, and place orders for products or services via their own devices.<br>
+      <h2>Featured products</h2>
+      <div class="container">
 
-As the order is placed, the customer's web browser will communicate back and forth with the server hosting the online store website. <br>Data pertaining to the order will then be relayed to a central computer known as the order manager -- then forwarded to databases that manage inventory levels, a merchant system that manages payment information (using applications such as PayPal), and a bank computer -- before circling back to the order manager. This is to make sure that store inventory and customer funds are sufficient for the order to be processed.<br><br> After the order is validated, the order manager will notify the store's web server, which will then display a message notifying the customer that their order has been successfully processed. The order manager will then send order data to the warehouse or fulfillment department, in order for the product or service to be successfully dispatched to the customer. <br><br>At this point tangible and/or digital products may be shipped to a customer, or access to a service may be granted.<br>
+        <div class="product">
+          <div class="product-card">
+            <h3 class="name">Kottu mee-85g</h3>
+            <span class="price">Rs.70.00/-</span>
+            <a class="popup-btn">View item</a>
+            <img src="../images/Kottu mee.png" class="product-img" alt="">
+          </div>
+          <div class="popup-view">
+            <div class="popup-card">
+              <a><i class="fas fa-times close-btn"></i></a>
+              <div class="product-img">
+                <img src="../images/kottu mee.png" alt="">
+              </div>
+            <div class="info">
+              <h2>Kottu mee-85g<br><span>Chandrasena stores</span></h2>
+              <h3><span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span></h3>
+              <p>Information about the product is here
+              </p>
+              <span class="price">Rs.70.00/unit</span>
+              <span class="quantity">Quantity :</span>
+              <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
+              <a href="#" class="add-cart-btn">Add to cart</a>
+            </div>
+          </div>
+          </div>
+      </div>
 
-Platforms that host e-commerce transactions may include online marketplaces that sellers simply sign up for, such as Amazon.com;<br> software as a service (SaaS) tools that allow customers to 'rent' online store infrastructures; or open source tools for companies to use in-house development to manage.<br>
+      <div class="product">
+        <div class="product-card">
+          <h3 class="name">Fritos-440g</h3>
+          <span class="price">Rs.690.00/-</span>
+          <a class="popup-btn">View item</a>
+          <img src="../images/chips.png" class="product-img" alt="">
+        </div>
+        <div class="popup-view">
+          <div class="popup-card">
+            <a><i class="fas fa-times close-btn"></i></a>
+            <div class="product-img">
+              <img src="../images/chips.png" alt="">
+            </div>
+          <div class="info">
+            <h2>Fritos-440g<br><span>Sampath grocery</span></h2>
+            <h3><span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span></h3>
+            <p>Information about the product is here
+            </p>
+            <span class="price">Rs.690.00/unit</span>
+            <span class="quantity">Quantity :</span>
+            <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
+            <a href="#" class="add-cart-btn">Add to cart</a>
+          </div>
+        </div>
+        </div>
+    </div>
 
-Types of e-commerce
-Business-to-business (B2B) e-commerce refers to the electronic exchange of products, services or information between businesses rather than between businesses and consumers.<br> Examples include online directories and product and supply exchange websites that allow businesses to search for products, services and information and to initiate transactions through e-procurement interfaces.<br>
+    <div class="product">
+      <div class="product-card">
+        <h3 class="name">Coca Cola-2L</h3>
+        <span class="price">Rs.300.00/-</span>
+        <a class="popup-btn">View item</a>
+        <img src="../images/coke.png" class="product-img" alt="">
+      </div>
+      <div class="popup-view">
+        <div class="popup-card">
+          <a><i class="fas fa-times close-btn"></i></a>
+          <div class="product-img">
+            <img src="../images/coke.png" alt="">
+          </div>
+        <div class="info">
+          <h2>Coca Cola-2L<br><span>Kumara stores</span></h2>
+          <h3><span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span></h3>
+          <p>Information about the product is here
+          </p>
+          <span class="price">Rs.300.00/unit</span>
+          <span class="quantity">Quantity :</span>
+          <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
+          <a href="#" class="add-cart-btn">Add to cart</a>
+        </div>
+      </div>
+      </div>
+  </div>
 
-In 2017, Forrester Research predicted that the B2B e-commerce market will top $1.1 trillion in the U.S. by 2021, accounting for 13% of all B2B sales in the nation.<br>
+  <div class="product">
+    <div class="product-card">
+      <h3 class="name">Tomato-1kg</h3>
+      <span class="price">Rs.180.00/-</span>
+      <a class="popup-btn">View item</a>
+      <img src="../images/tomato.png" class="product-img" alt="">
+    </div>
+    <div class="popup-view">
+      <div class="popup-card">
+        <a><i class="fas fa-times close-btn"></i></a>
+        <div class="product-img">
+          <img src="../images/tomato.png" alt="">
+        </div>
+      <div class="info">
+        <h2>Tomato-1kg<br><span>Nuwan's vegitables</span></h2>
+        <h3><span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span></h3>
+        <p>Information about the product is here
+        </p>
+        <span class="price">Rs.180.00/kg</span>
+        <span class="quantity">Quantity :</span>
+        <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
+        <a href="#" class="add-cart-btn">Add to cart</a>
+      </div>
+    </div>
+    </div>
+</div>
 
-Business-to-consumer (B2C) is the retail part of e-commerce on the internet. It is when businesses sell products, services or information directly to consumers. The term was popular during the dot-com boom of the late 1990s, when online retailers and sellers of goods were a novelty.<br><br>
-E-commerce is powered by the internet, where customers can access an online store to browse through, and place orders for products or services via their own devices.<br>
-
-As the order is placed, the customer's web browser will communicate back and forth with the server hosting the online store website. <br>Data pertaining to the order will then be relayed to a central computer known as the order manager -- then forwarded to databases that manage inventory levels, a merchant system that manages payment information (using applications such as PayPal), and a bank computer -- before circling back to the order manager. This is to make sure that store inventory and customer funds are sufficient for the order to be processed.<br><br> After the order is validated, the order manager will notify the store's web server, which will then display a message notifying the customer that their order has been successfully processed. The order manager will then send order data to the warehouse or fulfillment department, in order for the product or service to be successfully dispatched to the customer. <br><br>At this point tangible and/or digital products may be shipped to a customer, or access to a service may be granted.<br>
-
-Platforms that host e-commerce transactions may include online marketplaces that sellers simply sign up for, such as Amazon.com;<br> software as a service (SaaS) tools that allow customers to 'rent' online store infrastructures; or open source tools for companies to use in-house development to manage.<br>
-
-Types of e-commerce
-Business-to-business (B2B) e-commerce refers to the electronic exchange of products, services or information between businesses rather than between businesses and consumers.<br> Examples include online directories and product and supply exchange websites that allow businesses to search for products, services and information and to initiate transactions through e-procurement interfaces.<br>
-
-In 2017, Forrester Research predicted that the B2B e-commerce market will top $1.1 trillion in the U.S. by 2021, accounting for 13% of all B2B sales in the nation.<br>
-
-Business-to-consumer (B2C) is the retail part of e-commerce on the internet. It is when businesses sell products, services or information directly to consumers. The term was popular during the dot-com boom of the late 1990s, when online retailers and sellers of goods were a novelty.<br><br>
-
-Today, there are innumerable virtual stores and malls on the internet selling all types of consumer goods. The most recognized example of these sites is Amazon, which dominates the B2C market.</p>
-
-
+    </div>
   </div>
   <script type="text/javascript">
-      
+
       let text = document.getElementById('text');
       let btn = document.getElementById('btn');
       let item2 = document.getElementById('item2');
@@ -90,12 +188,41 @@ Today, there are innumerable virtual stores and malls on the internet selling al
      window.addEventListener('scroll',function(){
           var header = document.querySelector("header");
           header.classList.toggle("sticky",window.scrollY>0);
-          
+
           let value = window.scrollY;
           text.style.top=50+value* -0.5 + '%';
           btn.style.marginTop=value* 1.5 + 'px';
           item2.style.top=value* -0.12 + 'px';
           item1.style.top=value* 0.25 + 'px';
-      })</script>
+      })
+      
+      var popupViews=document.querySelectorAll('.popup-view');
+      var popupBtns=document.querySelectorAll('.popup-btn');
+      var closeBtns=document.querySelectorAll('.close-btn');
+
+      var popup = function(popupClick){
+        popupViews[popupClick].classList.add('active');
+
+        document.body.style.overflowY = 'hidden';
+      }
+
+      popupBtns.forEach((popupBtn,i)=>{
+        popupBtn.addEventListener("click",()=>{
+        popup(i)
+      });
+    });
+
+      closeBtns.forEach((closeBtn)=>{
+        closeBtn.addEventListener("click",()=>{
+          popupViews.forEach((popupView)=>{
+            popupView.classList.remove('active');
+
+            document.body.style.overflowY='';
+          });
+        });
+      });
+
+
+      </script>
   </body>
 </html>
