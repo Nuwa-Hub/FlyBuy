@@ -83,7 +83,7 @@ else{
         <nav>
             <a href="#" class="home">Home</a>
             <a href="#" class="notification">Notification</a>
-            <a href="#" class="logout">Logout</a>
+            <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
         <aside>
@@ -134,7 +134,7 @@ else{
 
     <!-- ------------------------------Popup window to add items-------------------------------------------- -->
 
-    <div class="popup-window">
+    <div class="popup-window addItem">
 
         <div class="overlay"></div>
 
@@ -143,10 +143,6 @@ else{
             <div class="closeBtn" onclick="toggleDisplay()">&times;</div>
 
             <h1 class="title">Add Item</h1>
-
-            <div class="items">
-
-            </div>
 
             <form class="item-form" id="item-form" method="POST">
                 <div class="input-field ">
@@ -179,9 +175,6 @@ else{
                 <div class="input-field ">
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description">
-                    <!-- <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error Message</small>
-                    </i> -->
                     <i class="fas fa-check-circle"></i>
                 </div>
 
@@ -192,15 +185,31 @@ else{
         </div>
 
     </div>
+
+    <!-- -----------------------------Popup window to confirm logout--------------------------------------- -->
+
+    <div class="popup-window logout">
+
+        <div class="overlay"></div>
+
+        <div class="content">
+
+            <div class="closeBtn" onclick="toggleLogout()">&times;</div>
+
+            <h1 class="title">Do you want to logout?</h1>
+
+            <img src="../resources/warn.png" alt="warn.png" class="warn-img">
+
+            <form action="#" method="post">
+                <input type="submit" class="logout btn" value="Confirm">
+            </form>
+
+        </div>
+
+    </div>
     
 </body>
 
-<script>
-    function toggleDisplay(){
-        let popupWindow = document.querySelector('.popup-window');
-        popupWindow.classList.toggle('active');
-    }
-</script>
 <script src="../javaScript/popupFormValidation.js"></script>
 
 </html>
