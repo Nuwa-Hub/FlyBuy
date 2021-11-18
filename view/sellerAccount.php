@@ -6,6 +6,10 @@ include '../database/db_connection.php';
 
 require('../validators/product_validator.php');
 
+// if(strpos($_SERVER['HTTP_USER_AGENT'],'Mediapartners-Google') !== false) {
+//     exit();
+// }
+
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -48,14 +52,15 @@ else{
     $add_description   = '';
 
     if (count($_POST) > 0){
-
+        
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
         
         $seller_id = $_GET['id'];
-
+        
+        //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme.prashna thynwd?
         if($seller_id != 0){
             $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
         }        
@@ -191,7 +196,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" name="addSubmit" value="Add">
+                <input type="submit" class="add-item btn" value="Add">
 
             </form>
 
