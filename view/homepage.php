@@ -8,26 +8,27 @@ include '../database/db_connection.php';
 require('../validators/user_validator.php');
 
 
-// if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-//  header('Location: loginSignup.php');
-//} else {
-session_start();
+ if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+  header('Location: loginSignup.php');
+} else {
+session_start();}
 
 if (!isset($_SESSION['cartarr'])) {
   $_SESSION['cartarr'] = array();
 }
-//$curr_email = $_COOKIE['user_login'];  //logged in user email
-//$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+$curr_email = $_COOKIE['user_login'];  //logged in user email
+$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
 
 
 
 $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-//for($i = 0; $i < count($products); $i++){
-// $seller_id = $products[$i]['seller_id'];
-//  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-// $products[$i]['seller'] = $seller;
-// }
-//}
+
+for($i = 0; $i < count($products); $i++){
+ $seller_id = $products[$i]['seller_id'];
+  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
+ $products[$i]['seller'] = $seller;
+ }
+
 
 
 
@@ -110,7 +111,7 @@ if (isset($_POST['addTocart'])) {
                   <img src="../images/kottu mee.png" alt="">
                 </div>
                 <div class="info">
-                  <h2><?php echo $product['itemName']; ?><br><span>Chandrasena stores</span></h2>
+                  <h2><?php echo $product['itemName']; ?><br><span><?php echo $product['seller']['storeName']; ?></span></h2>
                   <h3><span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -120,7 +121,7 @@ if (isset($_POST['addTocart'])) {
                   <p><?php echo $product['description']; ?></p>
                   <span class="price"><?php echo "Rs. " . $product['price'] . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['maxAmount'] ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['amount'] ?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product['item_id'] ?>">
                   <input type="hidden" name="pname" class="pname" value="<?php echo $product['itemName'] ?>">
