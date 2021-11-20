@@ -115,8 +115,8 @@ class UserValidator{
         if (empty($val)) {
             $this->setError('storeName', 'storeName cannot be empty');
         }
-        else if (!preg_match('/^[a-zA-Z0-9 ]{6,12}$/', $val)) {
-            $this->setError('storeName', 'storeName must be 6-12 chars & alphanumeric');
+        else if (!preg_match('/^[a-zA-Z0-9 ]{6,30}$/', $val)) {
+            $this->setError('storeName', 'storeName must be of 6-30 chars & alphanumeric');
         }
         else {
             $this->setError('storeName', 'none');
@@ -130,8 +130,8 @@ class UserValidator{
         if (empty($val)) {
             $this->setError('username', 'username cannot be empty');
         }
-        else if (!preg_match('/^[a-zA-Z0-9 ]{6,12}$/', $val)) {
-            $this->setError('username', 'username must be 6-12 chars & alphanumeric');
+        else if (!preg_match('/^[a-zA-Z0-9 ]{6,30}$/', $val)) {
+            $this->setError('username', 'username must be 6-30 chars & alphanumeric');
         }
         else {
             $this->setError('username', 'none');
@@ -266,15 +266,9 @@ class UserValidator{
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
         }
-        // else if (password_verify($val, $user['password'])) { //insert de-hashing
-        //   $this->setError('password', 'none');
-        // }
-        else if ($val === $user['password']) {
-            $this->setError('password', 'none');
+        else if (password_verify($val, $user['password'])) { //insert de-hashing
+          $this->setError('password', 'none');
         }
-        // else if(md5($val) == $user['password']){
-        //     $this->setError('password', 'none');
-        // }
         else {
             $this->setError('password', 'Incorrect password');
         }

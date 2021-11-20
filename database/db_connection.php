@@ -7,7 +7,7 @@
 
   // Create connection
 
-   $conn         = mysqli_connect($servername, $username, $password, $db);
+    $conn         = mysqli_connect($servername, $username, $password, $db);
 
   //$conn = mysqli_connect('127.0.0.1:3310', 'Kalana', '0000', 'flybuy');
 

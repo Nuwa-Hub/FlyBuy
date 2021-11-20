@@ -61,15 +61,13 @@ if (isset($_POST['submitSignup'])){
 
     if (checknone($signupErrors)) {
 
-        // $hashed_password = password_hash($signup_password, PASSWORD_DEFAULT);
-        $hashed_password = $signup_password;
-        // $hashed_password = md5($signup_password);
+        $hashed_password = password_hash($signup_password, PASSWORD_DEFAULT);
 
         if  ($_POST['userType'] === "buyer") {
             $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','false','$vkey')";
         }
         else{
-            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','$signup_storeName','false','$vkey')";
+            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey,rating) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','$signup_storeName','false','$vkey','0')";
         }
 
         $errors = [];
@@ -83,7 +81,7 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_Ransika);
+            sendMail($email, 'signup', $additionalData, $path_kalana);
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {

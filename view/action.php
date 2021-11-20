@@ -3,29 +3,30 @@ include '../models/product.php';
 session_start();
 
 // Set total price of the product in the cart table
-if (isset($_POST['pid'])) {
+if (isset($_POST['pamount'])) {
 
     $pid = $_POST['pid'];
     $pamount = $_POST['pamount'];
 
 
-    foreach ($_SESSION['cartArr'] as $product) {
-        print_r($product->amount);
+    foreach ($_SESSION['cartarr'] as $product) {
         if ($product->item_id == $pid) {
             $product->amount = $pamount;
         }
     }
+}
+//for delete the cart item when click the remove utton
+if (isset($_POST['ppid'])) {
+    $ppid = $_POST['ppid'];
+    foreach ($_SESSION['cartarr'] as $product) {
 
-    //$tprice = $qty * $pprice;
+        if (($key = array_search($product, $_SESSION['cartarr'])) !== false && $product->item_id == $ppid) {
+            unset($_SESSION['cartarr'][$key]);
+        }
+    }
+}
 
-    // $stmt = $conn->prepare('UPDATE cart SET qty=?, total_price=? WHERE id=?');
-    // $stmt->bind_param('isi', $qty, $tprice, $pid);
-    // $stmt->execute();
-}?>
-
- <script type = "text/javascript">  
-            alert (<?php $pamount ?>);  
-            console.log(<?php $pamount ?>);  
-      </script>     
-
-   
+// Get no.of items available in the cart table
+if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
+    echo sizeof($_SESSION['cartarr']);
+}

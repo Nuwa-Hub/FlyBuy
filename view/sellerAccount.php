@@ -6,6 +6,10 @@ include '../database/db_connection.php';
 
 require('../validators/product_validator.php');
 
+// if(strpos($_SERVER['HTTP_USER_AGENT'],'Mediapartners-Google') !== false) {
+//     exit();
+// }
+
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -48,14 +52,15 @@ else{
     $add_description   = '';
 
     if (count($_POST) > 0){
-
+        
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
         
         $seller_id = $_GET['id'];
-
+        
+        //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme.prashna thynwd?
         if($seller_id != 0){
             $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
         }        
@@ -94,6 +99,7 @@ else{
 
     <main>
         <nav>
+            <a href="#" class="logo">FlyBuy</a>
             <a href="#" class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
@@ -101,48 +107,70 @@ else{
 
         <aside>
             <div class="header">
-                <h3>Account Details</h3>
+                <h3 class="store"><?php echo $user['storeName']; ?></h3>
+                <h3>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star checked"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </h3>
                 <a href="#" class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
                 <img src="../resources/user.png" alt="profile picture">
                 <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
             </div>
-            <div class="store"><?php echo $user['storeName']; ?></div>
-            <div class="name"><?php echo $user['username']; ?></div>
-            <div class="email"><?php echo $user['email']; ?></div>
-            <div class="contact"><?php echo $user['telNo']; ?></div>
-            <div class="location"><?php echo $user['Address']; ?></div>
+            <div class="name"><?php echo $user['username']; ?>
+                <label for="name" class="label label-name">Username</label>
+            </div>
+            <div class="email"><?php echo $user['email']; ?>
+                <label for="name" class="label label-name">Email</label>
+            </div>
+            <div class="contact"><?php echo $user['telNo']; ?>
+                <label for="name" class="label label-name">Telephone</label>
+            </div>
+            <div class="location"><?php echo $user['Address']; ?>
+                <label for="name" class="label label-name">Address</label>
+            </div>
         </aside>
 
         <section class="control-section">
-            <a class="create-list" onclick="toggleDisplay()">New Item+</a>
-            <div class="search-main">
-                <div class="search-box-main">
-                    <input class="search-txt-main" type="text" placeholder="search here...">
-                    <a class="search-btn-main" href="#">
+            <div class="search">
+                <div class="search-box">
+                    <input class="search-txt" type="text" placeholder="search here...">
+                    <a class="search-btn" href="#">
                         <i class="fas fa-search"></i>
                     </a>
                 </div>
             </div>
+            <a class="add-item" onclick="toggleDisplay()">New Item+</a>
         </section>
 
         <section class="item-container">
             <?php foreach ($products as $product): ?>
                 <div class="item-details">
+                    <div class="item-img"><img src="../resources/sugar500g.jpg" alt="item"></div>
                     <div class="item-name">
                         <div><?php echo $product['itemName']; ?></div>
                         <small><?php echo $product['description']; ?></small>
                     </div>
-                    <div class="item-price"><?php echo $product['price']; ?></div>
-                    <div class="item-amount"><?php echo $product['amount']; ?></div>
-                    <div class="item-date-added"><?php echo date('Y-m-d H:i:s', strtotime($product['created_at'])); ?></div>
+                    <div class="item-price"><?php echo "Rs. ".$product['price']; ?></div>
+                    <div class="item-amount"><?php echo $product['amount']." Available"; ?></div>
+                    <div class="item-date-added"><?php echo date('Y-m-d H:i:s', strtotime($product['created_at'])); ?>
+                        <button class="item-edit-btn" onclick="toggleEdit()">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="item-delete-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
             <?php endforeach; ?>
             
         </section>
 
-        <footer>footer</footer>
+        <footer>Copyright</footer>
     </main>
 
     <!-- ------------------------------Popup window to add items-------------------------------------------- -->
@@ -158,7 +186,7 @@ else{
             <h1 class="title">Add Item</h1>
 
             <form class="item-form" id="item-form" method="POST">
-                <div class="input-field ">
+                <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
                     <i class="fas fa-exclamation-circle tooltip">
@@ -167,7 +195,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field ">
+                <div class="input-field addItem">
                     <i class="fas fa-sort-numeric-up-alt"></i>
                     <input name="amount" type="number" placeholder="Amount" min="1" class="amount">
                     <i class="fas fa-exclamation-circle tooltip">
@@ -176,7 +204,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field ">
+                <div class="input-field addItem">
                     <i class="fas fa-dollar-sign"></i>
                     <input name="price" type="number" placeholder="Price" min="0.00" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
@@ -185,13 +213,67 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field ">
+                <div class="input-field addItem">
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description">
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" name="addSubmit" value="Add">
+                <input type="submit" class="add-item btn" value="Add">
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ------------------------------Popup window to edit items------------------------------------------- -->
+
+    <div class="popup-window editItem">
+
+        <div class="overlay"></div>
+
+        <div class="content">
+
+            <div class="closeBtn" onclick="toggleEdit()">&times;</div>
+
+            <h1 class="title">Edit Item</h1>
+
+            <form class="item-form" id="item-form" method="POST">
+                <div class="input-field editItem">
+                    <i class="fas fa-archive"></i>
+                    <input name="itemName" type="text" placeholder="Item Name" class="itemName">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field editItem">
+                    <i class="fas fa-sort-numeric-up-alt"></i>
+                    <input name="amount" type="number" placeholder="Amount" min="1" class="amount">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field editItem">
+                    <i class="fas fa-dollar-sign"></i>
+                    <input name="price" type="number" placeholder="Price" min="0.00" class="price">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field editItem">
+                    <i class="fas fa-file-alt"></i>
+                    <input name="description" type="text" placeholder="Description" class="description">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <input type="submit" class="edit-item btn" value="Edit">
 
             </form>
 

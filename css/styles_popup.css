@@ -95,6 +95,14 @@ form{
     display: block;
 }
 
+.input-field i.fa-eye,
+.input-field i.fa-eye-slash {
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
 .tooltip .tooltip-text{
     visibility: hidden;
     background-color: rgba(73, 72, 72, 0.9);
