@@ -9,8 +9,8 @@ require('../validators/user_validator.php');
 
 
 // if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
- //  header('Location: loginSignup.php');
- //} else {
+//  header('Location: loginSignup.php');
+//} else {
 session_start();
 
 if (!isset($_SESSION['cartarr'])) {
@@ -21,12 +21,12 @@ if (!isset($_SESSION['cartarr'])) {
 
 
 
-  $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-  //for($i = 0; $i < count($products); $i++){
-   // $seller_id = $products[$i]['seller_id'];
-  //  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-   // $products[$i]['seller'] = $seller;
- // }
+$products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+//for($i = 0; $i < count($products); $i++){
+// $seller_id = $products[$i]['seller_id'];
+//  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
+// $products[$i]['seller'] = $seller;
+// }
 //}
 
 
@@ -127,12 +127,12 @@ if (isset($_POST['addTocart'])) {
                   <input type="hidden" name="pprice" class="pprice" value="<?php echo $product['price'] ?>">
                   <input type="hidden" name="pimage" class="pimage" value="<?php echo $product['item_image'] ?>">
                   <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product['seller_id'] ?>">
-                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product['maxAmount'] ?>">
+                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product['amount'] ?>">
                   <input type="hidden" name="pdes" class="pdes" value="<?php echo $product['description'] ?>">
 
-               <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                 <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                  </i>&nbsp;&nbsp;Add tocart</button>
+                  <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
+                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
+                    </i>&nbsp;&nbsp;Add tocart</button>
                 </div>
               </div>
             </form>
@@ -185,8 +185,6 @@ if (isset($_POST['addTocart'])) {
         });
       });
     });
-
-
   </script>
 </body>
 

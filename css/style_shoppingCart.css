@@ -210,12 +210,11 @@
         -o-transition: margin .2s linear, opacity .2s linear;
         transition: margin .2s linear, opacity .2s linear;
     }
-    
-    .product:hover {
+    /*.product:hover {
         border-color: black;
         border-width: 2px;
         box-shadow: #1946d8;
-    }
+    }*/
     
     .product img {
         width: 100%;
