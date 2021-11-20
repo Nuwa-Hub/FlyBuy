@@ -28,9 +28,9 @@ session_start();
             <h3>FlyBuy</h3>
             <h1>Shopping cart </h1>
             <ul>
-                <li><a href="homepage.php" class="active">Home</a></li>
+                <li><a href="homepage.php" >Home</a></li>
                 <li><a href="loginSignup.php">Login/Sign up</a></li>
-                <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
+                <li><a href="shopping_cart.php" class="active"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
             </ul>
         </div>

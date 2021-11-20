@@ -1,4 +1,5 @@
     body {
+        background-size: cover;
         background: rgb(234, 238, 234);
         overflow-x: hidden;
         background-image: url("../images/cartback.jpg");
@@ -208,6 +209,12 @@
         -ms-transition: margin .2s linear, opacity .2s linear;
         -o-transition: margin .2s linear, opacity .2s linear;
         transition: margin .2s linear, opacity .2s linear;
+    }
+    
+    .product:hover {
+        border-color: black;
+        border-width: 2px;
+        box-shadow: #1946d8;
     }
     
     .product img {
