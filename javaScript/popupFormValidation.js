@@ -10,6 +10,7 @@ const addItemBtn = document.querySelector('.add-item.btn');
 
 let correct = true;
 
+// add item form
 if (form){
     form.addEventListener('submit', e => {
 
@@ -52,20 +53,6 @@ if (form){
 }
 
 
-// const logoutForm = document.querySelector('.logoutForm');
-// const logoutBtn = document.querySelector('.logout.btn');
-
-// if (logoutForm){
-//     logoutBtn.addEventListener('click', e => {
-//         e.preventDefault();
-
-//         toggleLogout();
-
-//         logoutForm.submit();
-//     });
-// }
-
-
 function setError(element, msg){
     element.classList.add('error');
     element.querySelector('.tooltip-text').innerText = msg;
@@ -95,9 +82,30 @@ function toggleLogout(){
     logout.classList.toggle('active');
 }
 
-function toggleEdit(){
+function toggleEdit(element){
     let edit = document.querySelector('.popup-window.editItem');
     edit.classList.toggle('active');
+
+    if (element != null){
+        // console.log(element.parentElement.parentElement.getAttribute('id'));
+
+        const itemDetails = element.parentElement.parentElement;
+        const itemId = itemDetails.getAttribute('id');
+
+        edit.querySelector('.item-id').value = itemId;
+
+        const itemName = itemDetails.querySelector('.item-name').querySelector('div').innerText;
+        const itemDescription = itemDetails.querySelector('.item-name').querySelector('small').innerText;
+        const itemAmount = itemDetails.querySelector('.item-amount').innerText;
+        const itemPrice = itemDetails.querySelector('.item-price').innerText;
+
+        edit.querySelector('.itemName').value = itemName;
+        edit.querySelector('.amount').value = parseInt(itemAmount.split(" ")[0], 10);
+        edit.querySelector('.price').value = parseFloat(itemPrice.split(" ")[1]);
+        edit.querySelector('.description').value = itemDescription;
+
+    }
+
 }
 
 // toggle password view---------------------------------------------------------------

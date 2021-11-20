@@ -7,14 +7,13 @@ include '../database/db_connection.php';
 require('../validators/user_validator.php');
 
 // relevent paths for admins :)
-$path_akash = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
-$path_kalana = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
-$path_Ransika = 'http://127.0.0.1/test/FlyBuy/view/emailVerified.php';
+$path_akash     = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
+$path_kalana    = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
+$path_Ransika   = 'http://127.0.0.1/test/FlyBuy/view/emailVerified.php';
 
 $errors = [];
 
 function checknone($arr){
-
     foreach ($arr as $ele) {
         if ($ele != 'none') {
             return false;
@@ -48,7 +47,7 @@ if (isset($_POST['submitSignup'])){
         //store name is specific to sellers
         $signup_storeName  = mysqli_real_escape_string($conn, $_POST['storeName']);
 
-        $users      = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
+        $users      = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  sellers"), MYSQLI_ASSOC);
     }
 
     // validate entries
@@ -60,14 +59,13 @@ if (isset($_POST['submitSignup'])){
     $vkey               = $return_data['vkey'];
 
     if (checknone($signupErrors)) {
-
         $hashed_password = password_hash($signup_password, PASSWORD_DEFAULT);
 
         if  ($_POST['userType'] === "buyer") {
-            $sql = "INSERT INTO  buyers  (username,email,password,telNo,address,verified,vkey) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','false','$vkey')";
+            $sql = "INSERT INTO  buyers  (username, email, password, telNo, address, verified, vkey) VALUES ('$signup_username', '$signup_email', '$hashed_password', '$signup_telNo', '$signup_address', 'false', '$vkey')";
         }
         else{
-            $sql = "INSERT INTO  sellers (username,email,password,telNo,address,storeName,verified,vkey,rating) VALUES ('$signup_username','$signup_email','$hashed_password','$signup_telNo','$signup_address','$signup_storeName','false','$vkey','0')";
+            $sql = "INSERT INTO  sellers (username, email, password, telNo, address, storeName, verified, vkey, rating) VALUES ('$signup_username', '$signup_email', '$hashed_password', '$signup_telNo', '$signup_address', '$signup_storeName', 'false', '$vkey', '0')";
         }
 
         $errors = [];
@@ -81,7 +79,11 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
+<<<<<<< HEAD
             sendMail($email, 'signup', $additionalData, $path_Ransika);
+=======
+            sendMail($email, 'signup', $additionalData, $path_akash);
+>>>>>>> 23f83ce7e82a31289b309209ccbacd2b168d11d8
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {
