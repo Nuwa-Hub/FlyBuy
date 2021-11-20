@@ -159,6 +159,69 @@
         vertical-align: middle;
     }
     
+    .search-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #101010;
+        height: 40px;
+        border-radius: 40px;
+    }
+    
+    #header.sticky .search-box:hover>.search-txt {
+        width: 20px;
+        padding: 0 7px;
+        color: black;
+    }
+    
+    #header.sticky .search-box:hover>.search-btn {
+        background: #7FFF00;
+        color: white;
+    }
+    
+    #header.sticky .search-box:hover {
+        background: white;
+    }
+    
+    .search-box:hover>.search-txt {
+        width: 200px;
+        padding: 0 7px;
+        color: white;
+    }
+    
+    .search-box:hover>.search-btn {
+        background: red;
+        color: white;
+    }
+    
+    .search-btn {
+        color: white;
+        float: right;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: red;
+        font-size: 20px;
+        padding: 10px 10px;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+    }
+    
+    .search-txt {
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        color: white;
+        padding: 0;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 0px;
+    }
+    
     .container {
         font-family: 'Open Sans', sans-serif;
         margin: 0 auto;
@@ -173,6 +236,10 @@
     
     #cart {
         width: 100%;
+    }
+    
+    #cart ul li {
+        list-style: none;
     }
     
     #cart h1 {
@@ -349,7 +416,7 @@
     
     .qt-plus:hover,
     .qt-minus:hover {
-        background: #53b5aa;
+        background: #0cc5af;
         color: #fff;
         cursor: pointer;
     }

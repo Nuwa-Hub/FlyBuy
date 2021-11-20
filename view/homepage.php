@@ -94,6 +94,7 @@ if (isset($_POST['addTocart'])) {
   <div class="sec" id="products">
     <h2>Featured products</h2>
     <div class="container">
+
       <?php foreach ($products as $product) : ?>
         <div class="product">
           <div class="product-card">
@@ -120,7 +121,7 @@ if (isset($_POST['addTocart'])) {
                   <p><?php echo $product['description']; ?></p>
                   <span class="price"><?php echo "Rs. " . $product['price'] . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['maxAmount'] ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['amount'] ?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product['item_id'] ?>">
                   <input type="hidden" name="pname" class="pname" value="<?php echo $product['itemName'] ?>">
