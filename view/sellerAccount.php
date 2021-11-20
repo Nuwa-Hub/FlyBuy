@@ -81,22 +81,21 @@ else{
         $edit_description = mysqli_real_escape_string($conn, $_POST['description']);
 
         $item_id = $_POST['item_id'];
+        // $product  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM products WHERE item_id = '$item_id' LIMIT 1"), MYSQLI_ASSOC)[0];
 
-        print_r($item_id);
+        // print_r($product);
         try {
 
             if(!empty($edit_itemName)){
-                $update = $conn->query("UPDATE products SET itemName = '$edit_itemName' WHERE seller_id = $seller_id");
+                $update = $conn->query("UPDATE products SET itemName = '$edit_itemName' WHERE item_id = $item_id");
             }
             if(!empty($edit_amount)){
-                $update = $conn->query("UPDATE products SET amount = '$edit_amount' WHERE seller_id = $seller_id");
+                $update = $conn->query("UPDATE products SET amount = '$edit_amount' WHERE item_id = $item_id");
             }
             if(!empty($edit_price)){
-                $update = $conn->query("UPDATE products SET price = '$edit_price' WHERE seller_id = $seller_id");
+                $update = $conn->query("UPDATE products SET price = '$edit_price' WHERE item_id = $item_id");
             }
-            if(!empty($edit_description)){
-                $update = $conn->query("UPDATE products SET description = '$edit_description' WHERE seller_id = $seller_id");
-            }
+            $update = $conn->query("UPDATE products SET description = '$edit_description' WHERE item_id = $item_id");
         }
         catch (Exception $e) {
             echo "Data could not be change";
@@ -132,7 +131,7 @@ else{
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href='sellerAccount.php?id=<?php echo $seller_id; ?>' class="home">Home</a>
+            <a href='sellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
@@ -182,7 +181,7 @@ else{
         <section class="item-container">
             
             <?php foreach ($products as $product): ?>
-                <div class="item-details">
+                <div class="item-details" id="<?php echo $product['item_id']; ?>">
                     <div class="item-img"><img src="../resources/sugar500g.jpg" alt="item"></div>
                     <div class="item-name">
                         <div><?php echo $product['itemName']; ?></div>
@@ -191,7 +190,7 @@ else{
                     <div class="item-price"><?php echo "Rs. ".$product['price']; ?></div>
                     <div class="item-amount"><?php echo $product['amount']." Available"; ?></div>
                     <div class="item-date-added"><?php echo date('Y-m-d H:i:s', strtotime($product['created_at'])); ?>
-                        <button class="item-edit-btn" onclick="toggleEdit()">
+                        <button class="item-edit-btn" onclick="toggleEdit(this)">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="item-delete-btn">
@@ -239,7 +238,7 @@ else{
 
                 <div class="input-field addItem">
                     <i class="fas fa-dollar-sign"></i>
-                    <input name="price" type="number" placeholder="Price" min="0.00" class="price">
+                    <input name="price" type="number" placeholder="Price" min="0.00" step="0.01" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
                         <small class="tooltip-text">Error</small>
                     </i>
@@ -268,7 +267,7 @@ else{
 
         <div class="content">
 
-            <div class="closeBtn" onclick="toggleEdit()">&times;</div>
+            <div class="closeBtn" onclick="toggleEdit(null)">&times;</div>
 
             <h1 class="title">Edit Item</h1>
 
@@ -293,7 +292,7 @@ else{
 
                 <div class="input-field editItem">
                     <i class="fas fa-dollar-sign"></i>
-                    <input name="price" type="number" placeholder="Price" min="0.00" class="price">
+                    <input name="price" type="number" placeholder="Price" min="0.00" step="0.01" class="price">
                     <i class="fas fa-exclamation-circle tooltip">
                         <small class="tooltip-text">Error</small>
                     </i>
@@ -306,7 +305,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <!-- <input class="item-id" type="hidden" name="item_id" value="<?php echo $product['item_id']; ?>"> -->
+                <input class="item-id" type="hidden" name="item_id">
 
                 <input type="submit" class="edit-item btn" name="submitEditItem" value="Edit">
 
