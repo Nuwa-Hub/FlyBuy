@@ -130,10 +130,10 @@ if (isset($_POST['submitLogin'])) {
         setcookie('user_login', $curr_email, time() + 86400, "/");
 
         if($_POST['submitLogin'] == 'buyer'){
-            header('Location: homepage.php?id='.$curr_user['buy_id']);
+            header('Location: homepage.php?buyer_id='.$curr_user['buy_id']);
         }
         else{
-            header('Location: sellerAccount.php?id='.$curr_user['seller_id']);
+            header('Location: sellerAccount.php?seller_id='.$curr_user['seller_id']);
         }
     }
     else {
