@@ -135,23 +135,7 @@ if (isset($_POST['addTocart'])) {
                   </i>&nbsp;&nbsp;Add tocart</button>
                 </div>
               </div>
-            <div class="info">
-              <h2><?php echo $product['itemName']; ?><br><span><?php echo $product['seller']['storeName']; ?></span></h2>
-              <h3><span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span></h3>
-              <p><?php echo $product['description']; ?></p>
-              <span class="price"><?php echo "Rs. ".$product['price']."/unit"; ?></span>
-              <span class="quantity">Quantity :</span>
-              <input type="number" value="1" id="quantity" name="quantity" min="1" max="10">
-              <a href="#" class="add-cart-btn">Add to cart</a>
-            </div>
-          </div>
-=======
             </form>
-
           </div>
         </div>
       <?php endforeach; ?>
