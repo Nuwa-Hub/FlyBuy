@@ -1,5 +1,115 @@
 <?php 
 
+include '../models/buyer.php';
+include '../models/seller.php';
+include '../database/db_connection.php';
+
+require('../validators/user_validator.php');
+
+// if(strpos($_SERVER['HTTP_USER_AGENT'],'Mediapartners-Google') !== false) {
+//     exit();
+// }
+
+$userType = 'seller';
+$seller_id = $_GET['seller_id'];
+
+function checknone($arr){
+
+    foreach ($arr as $ele) {
+        if ($ele != 'none') {
+            return false;
+        }
+    }
+    return true;
+}
+
+if(isset($_POST['submitLogout'])){
+
+    if (isset($_COOKIE['user_login'])) {
+
+        unset($_COOKIE['user_login']); 
+        setcookie('user_login', null, -1, '/');
+    }
+    
+    header('Location: loginSignup.php');
+}
+
+if(!isset($_COOKIE['user_login'])){
+    header('Location: loginSignup.php');
+}
+else{
+
+    $curr_email = $_COOKIE['user_login'];  //logged in user email
+
+    $edit_username = '';
+    $edit_storeName = '';
+    $edit_telNo = '';
+    $edit_address = '';
+    $edit_password = '';
+    $edit_confirmPsw = '';
+
+    $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+
+    if (isset($_POST['submitEditProfile'])){
+
+        unset($_POST['submitEditProfile']);
+        
+        $edit_username   = mysqli_real_escape_string($conn, $_POST['username']);
+        $edit_storeName  = mysqli_real_escape_string($conn, $_POST['storeName']);
+        $edit_telNo      = mysqli_real_escape_string($conn, $_POST['telNo']);
+        $edit_address    = mysqli_real_escape_string($conn, $_POST['address']);
+        $edit_password   = mysqli_real_escape_string($conn, $_POST['password']);
+        $edit_confirmPsw = mysqli_real_escape_string($conn, $_POST['confirmPsw']);
+
+        // validate entries
+        $validation     = new UserValidator($_POST, [], $userType );
+        $return_data    = $validation->validateForm('editProfile');
+        
+        $editProfileErrors       = $return_data['errors'];
+        $editProfileClassNames   = $return_data['classNames'];
+
+        if(count($editProfileErrors) == 0){
+            header('Location: sellerAccount.php?seller_id='.$seller_id);
+        }
+        else if(checknone($editProfileErrors)){
+
+            $psw_changed = false;
+
+            try {
+
+                if(!empty($edit_username)){
+                    $update = $conn->query("UPDATE sellers SET username = '$edit_username' WHERE seller_id = $seller_id");
+                }
+                if(!empty($edit_storeName)){
+                    $update = $conn->query("UPDATE sellers SET storeName = '$edit_storeName' WHERE seller_id = $seller_id");
+                }
+                if(!empty($edit_telNo)){
+                    $update = $conn->query("UPDATE sellers SET telNo = '$edit_telNo' WHERE seller_id = $seller_id");
+                }
+                if(!empty($edit_address)){
+                    $update = $conn->query("UPDATE sellers SET address = '$edit_address' WHERE seller_id = $seller_id");
+                }
+                if(!empty($edit_password)){
+
+                    $hashed_password = password_hash($edit_password, PASSWORD_DEFAULT);
+                    $update = $conn->query("UPDATE sellers SET password = '$hashed_password' WHERE seller_id = $seller_id");
+                    $psw_changed = true;
+                }
+            }
+            catch (Exception $e) {
+                echo "Data could not be change";
+            }
+
+            if($psw_changed){
+                header('Location: loginSignup.php');
+            }
+            else{
+                header('Location: sellerAccount.php?seller_id='.$seller_id);
+            }
+        }
+    }
+}
+
 ?>
 
 
@@ -26,7 +136,7 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href="#" class="home">Home</a>
+            <a href='sellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
@@ -41,7 +151,7 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </h3>
-                <a href="#" class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
+                <a href='editSellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
                 <img src="../resources/user.png" alt="profile picture">
@@ -65,63 +175,69 @@
             <h1 class="title">Edit Account</h1>
     
             <form class="edit-form" id="edit-form" method="POST">
-                <div class="input-field ">
+                <!-- <div class="input-field <?php echo $editProfileClassNames['username']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['username'])) ? $editProfileClassNames['username'] : ""; ?>">
                     <i class="fas fa-user"></i>
-                    <input name="username" type="text" placeholder="Username" class="username">
+                    <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($edit_username);?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['username']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field editAccount ">
+                <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['storeName']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['storeName'])) ? $editProfileClassNames['storeName'] : ""; ?>">
                     <i class="fas fa-store"></i>
-                    <input name="storeName" type="text" placeholder="Store name" class="storeName">
+                    <input name="storeName" type="text" placeholder="Store name" class="storeName" value="<?php echo htmlspecialchars($edit_storeName);?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['storeName']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field editAccount">
+                <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['telNo']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['telNo'])) ? $editProfileClassNames['telNo'] : ""; ?>">
                     <i class="fas fa-mobile-alt"></i>
-                    <input name="telNo" type="text" placeholder="Telephone" class="telNo">
+                    <input name="telNo" type="text" placeholder="Telephone" class="telNo" value="<?php echo htmlspecialchars($edit_telNo);?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['telNo']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field editAccount">
+                <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['address']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['address'])) ? $editProfileClassNames['address'] : ""; ?>">
                     <i class="fas fa-map-marked-alt"></i>
-                    <input name="address" type="text" placeholder="Address" class="address">
+                    <input name="address" type="text" placeholder="Address" class="address" value="<?php echo htmlspecialchars($edit_address);?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['address']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field editAccount">
+                <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['password']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['password'])) ? $editProfileClassNames['password'] : ""; ?>">
                     <i class="fas fa-lock"></i>
-                    <input name="password" type="password" placeholder="Password" class="psw">
+                    <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($edit_password);?>">
                     <i class="fas fa-eye togglePassword"></i>
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['password']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div class="input-field editAccount">
+                <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['confirmPsw']; ?>"> -->
+                <div class="input-field <?php echo (isset($editProfileClassNames['confirmPsw'])) ? $editProfileClassNames['confirmPsw'] : ""; ?>">
                     <i class="fas fa-lock"></i>
-                    <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
+                    <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($edit_confirmPsw);?>">
                     <i class="fas fa-eye togglePassword"></i>
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text">Error</small>
+                        <small class="tooltip-text"><?php echo $editProfileErrors['confirmPsw']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="edit btn" value="Edit">
+                <input type="submit" class="edit btn" name="submitEditProfile" value="Edit">
 
             </form>
         </section>

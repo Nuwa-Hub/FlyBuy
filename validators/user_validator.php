@@ -52,15 +52,53 @@ class UserValidator{
             $this->validateLoginEmail();
         }
         else if ($formType === 'changePsw') {
+
             $this->errors = ['email' => 'none', 'password' => '', 'confirmPsw' => ''];
             $this->classNames = ['email' => '', 'password' => '', 'confirmPsw' => ''];
+
             $this->validateNewPassword();
         
         }
         else if($formType === 'forgotPsw'){
-             $this->errors = ['email' => 'none', ];
+
+            $this->errors = ['email' => 'none', ];
             $this->classNames = ['email' => ''];
+
             $this->validateChangePswEmail();
+        }
+        else if($formType === 'editProfile'){
+
+            $fields = array_keys($this->data);
+
+            foreach($fields as $field){
+                
+                if(!empty($this->data[$field])){
+
+                    $this->errors[$field] = '';
+                    $this->classNames[$field] = '';
+
+                    if($field === 'username'){
+                        $this->validateNewUsername();
+                    }
+                    else if($field === 'storeName'){
+                        $this->validateNewStorename();
+                    }
+                    else if($field === 'telNo'){
+                        $this->validateNewTelNo();
+                    }
+                    else if($field === 'address'){
+                        $this->validateAddress();
+                    }
+                    else if($field === 'password'){
+
+                        $this->errors['confirmPsw'] = '';
+                        $this->classNames['confirmPsw'] = '';
+
+                        $this->validateNewPassword();
+                        break;
+                    }
+                }
+            }
         }
 
         $this->setClassNames();
@@ -68,10 +106,61 @@ class UserValidator{
         $this->return_data['errors'] = $this->errors;
         $this->return_data['classNames'] = $this->classNames;
 
+        unset($this->return_data['vkey']);
+
         return $this->return_data;
     }
 
-    //signup data validation
+    //signup and edit profile data validation
+
+    private function validateNewUsername(){
+
+        $val = trim($this->data['username']);
+
+        if (empty($val)) {
+            $this->setError('username', 'username cannot be empty');
+        }
+        else if (!preg_match('/^[a-zA-Z0-9 ]{6,30}$/', $val)) {
+            $this->setError('username', 'username must be 6-30 chars & alphanumeric');
+        }
+        else {
+            $this->setError('username', 'none');
+        }
+    }
+
+    private function validateNewEmail(){
+
+        $val = trim($this->data['email']);
+
+        if (empty($val)) {
+            $this->setError('email', 'email cannot be empty');
+        }
+        else {
+
+            if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+                $this->setError('email', 'email must be a valid');
+            }
+            else {
+
+                $this->setError('email', 'none');
+
+                foreach ($this->users as $user) {
+
+                    if ($user['email'] === $val) {
+                        $this->setError('email', 'email already exists');
+                        break;
+                    }
+                }
+
+                if ($this->errors['email'] === 'none') {
+
+                    $vkey = md5(time() . $val);
+                    $this->return_data['vkey'] = $vkey;
+                }
+            }
+        }
+    }
+
     private function validateNewTelNo(){
 
         $val = trim($this->data['telNo']);
@@ -123,54 +212,6 @@ class UserValidator{
         }
     }
 
-    private function validateNewUsername(){
-
-        $val = trim($this->data['username']);
-
-        if (empty($val)) {
-            $this->setError('username', 'username cannot be empty');
-        }
-        else if (!preg_match('/^[a-zA-Z0-9 ]{6,30}$/', $val)) {
-            $this->setError('username', 'username must be 6-30 chars & alphanumeric');
-        }
-        else {
-            $this->setError('username', 'none');
-        }
-    }
-
-    private function validateNewEmail(){
-
-        $val = trim($this->data['email']);
-
-        if (empty($val)) {
-            $this->setError('email', 'email cannot be empty');
-        }
-        else {
-
-            if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
-                $this->setError('email', 'email must be a valid');
-            }
-            else {
-
-                $this->setError('email', 'none');
-
-                foreach ($this->users as $user) {
-
-                    if ($user['email'] === $val) {
-                        $this->setError('email', 'email already exists');
-                        break;
-                    }
-                }
-
-                if ($this->errors['email'] === 'none') {
-
-                    $vkey = md5(time() . $val);
-                    $this->return_data['vkey'] = $vkey;
-                }
-            }
-        }
-    }
-
     private function validateNewPassword(){
 
         $val = $this->data['password'];
@@ -198,7 +239,7 @@ class UserValidator{
                 $this->setError('password', 'none');
                 $this->setError('confirmPsw', 'You must confirm the password');
             }
-            else if ($val !== $confirm_val) {
+            else if ($val != $confirm_val) {
                 $this->setError('confirmPsw', 'Password mismatch');
             }
             else {
@@ -208,6 +249,7 @@ class UserValidator{
     }
 
     //login data validation
+
     private function validateLoginEmail(){
 
         $val = trim($this->data['email']);

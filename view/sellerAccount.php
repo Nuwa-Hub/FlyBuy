@@ -10,6 +10,8 @@ require('../validators/product_validator.php');
 //     exit();
 // }
 
+$seller_id = $_GET['seller_id'];
+
 function checknone($arr){
 
     foreach ($arr as $ele) {
@@ -27,13 +29,8 @@ if(isset($_POST['submitLogout'])){
         unset($_COOKIE['user_login']); 
         setcookie('user_login', null, -1, '/');
     }
-    // header("Refresh:0");
+    
     header('Location: loginSignup.php');
-    // header('Location: sellerAccount.php?id='.$_GET['id']);
-
-    // session_start();
-    // unset($_SESSION['id']);
-    // header('Location: loginSignup.php');
 }
 
 if(!isset($_COOKIE['user_login'])){
@@ -46,31 +43,66 @@ else{
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
     
-    $add_itemName   = '';
-    $add_amount   = '';
-    $add_price   = '';
-    $add_description   = '';
+    $add_itemName = '';
+    $add_amount = '';
+    $add_price = '';
+    $add_description = '';
 
-    if (count($_POST) > 0){
+    $edit_itemName = '';
+    $edit_amount = '';
+    $edit_price = '';
+    $edit_description = '';
+    
+    if (count($_POST) > 0 && isset($_POST['submitAddItem'])){
         
         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
         
-        $seller_id = $_GET['id'];
-        
-        //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme.prashna thynwd?
+        //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme
         if($seller_id != 0){
             $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
         }        
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
-            header('Location: sellerAccount.php?id='.$seller_id);
+            header('Location: sellerAccount.php?seller_id='.$seller_id);
         }
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+    }
+
+    if(isset($_POST['submitEditItem'])){
+
+        $edit_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
+        $edit_amount = mysqli_real_escape_string($conn, $_POST['amount']);
+        $edit_price = mysqli_real_escape_string($conn, $_POST['price']);
+        $edit_description = mysqli_real_escape_string($conn, $_POST['description']);
+
+        $item_id = $_POST['item_id'];
+
+        print_r($item_id);
+        try {
+
+            if(!empty($edit_itemName)){
+                $update = $conn->query("UPDATE products SET itemName = '$edit_itemName' WHERE seller_id = $seller_id");
+            }
+            if(!empty($edit_amount)){
+                $update = $conn->query("UPDATE products SET amount = '$edit_amount' WHERE seller_id = $seller_id");
+            }
+            if(!empty($edit_price)){
+                $update = $conn->query("UPDATE products SET price = '$edit_price' WHERE seller_id = $seller_id");
+            }
+            if(!empty($edit_description)){
+                $update = $conn->query("UPDATE products SET description = '$edit_description' WHERE seller_id = $seller_id");
+            }
+        }
+        catch (Exception $e) {
+            echo "Data could not be change";
+        }
+
+        header('Location: sellerAccount.php?seller_id='.$seller_id);
     }
 }
 
@@ -100,7 +132,7 @@ else{
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href="#" class="home">Home</a>
+            <a href='sellerAccount.php?id=<?php echo $seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
@@ -115,7 +147,7 @@ else{
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </h3>
-                <a href="#" class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
+                <a href='editSellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
                 <img src="../resources/user.png" alt="profile picture">
@@ -148,6 +180,7 @@ else{
         </section>
 
         <section class="item-container">
+            
             <?php foreach ($products as $product): ?>
                 <div class="item-details">
                     <div class="item-img"><img src="../resources/sugar500g.jpg" alt="item"></div>
@@ -219,7 +252,7 @@ else{
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" value="Add">
+                <input type="submit" class="add-item btn" name="submitAddItem" value="Add">
 
             </form>
 
@@ -269,11 +302,13 @@ else{
 
                 <div class="input-field editItem">
                     <i class="fas fa-file-alt"></i>
-                    <input name="description" type="text" placeholder="Description" class="description">
+                    <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product['description']); ?>">
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="edit-item btn" value="Edit">
+                <!-- <input class="item-id" type="hidden" name="item_id" value="<?php echo $product['item_id']; ?>"> -->
+
+                <input type="submit" class="edit-item btn" name="submitEditItem" value="Edit">
 
             </form>
 
