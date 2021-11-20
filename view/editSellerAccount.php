@@ -101,6 +101,13 @@ else{
             }
 
             if($psw_changed){
+
+                if (isset($_COOKIE['user_login'])) {
+
+                    unset($_COOKIE['user_login']); 
+                    setcookie('user_login', null, -1, '/');
+                }
+                
                 header('Location: loginSignup.php');
             }
             else{
