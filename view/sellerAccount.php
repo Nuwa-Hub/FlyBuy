@@ -132,7 +132,7 @@ else{
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href='sellerAccount.php?id=<?php echo $seller_id; ?>' class="home">Home</a>
+            <a href='sellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
