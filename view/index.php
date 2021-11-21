@@ -8,10 +8,7 @@ include '../database/db_connection.php';
 require('../validators/user_validator.php');
 
 
- if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-  header('Location: loginSignup.php');
-} else {
-session_start();}
+
 
 if (!isset($_SESSION['cartarr'])) {
   $_SESSION['cartarr'] = array();
@@ -29,30 +26,11 @@ for($i = 0; $i < count($products); $i++){
  $products[$i]['seller'] = $seller;
  }
 
-
-
-
-if (isset($_POST['addTocart'])) {
-  $item = true;
-  $pid = $_POST['pid'];
-  $pname = $_POST['pname'];
-  $pprice = $_POST['pprice'];
-  $pimage = $_POST['pimage'];
-  $pdes = $_POST['pdes'];
-  $pqty = $_POST['pqty'];
-  $pseller_id = $_POST['pseller_id'];
-  $pmaxAmount = $_POST['pmaxAmount'];
-
-  foreach ($_SESSION['cartarr'] as $product) {
-    if ($product->item_id == $pid) {
-      $item = false;
-    }
-  }
-  if ($item) {
-    array_push($_SESSION['cartarr'], new Product($pname, $pqty, $pprice,  $pdes,  $pseller_id, $pimage, $pmaxAmount, $pid));
+ if (isset($_POST['addTocart'])) {
+  if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+    header('Location: loginSignup.php');
   } else {
-    print_r("Already added");
-  }
+  session_start();}
 }
 
 
@@ -81,8 +59,8 @@ if (isset($_POST['addTocart'])) {
     </div>
     <ul>
       <li><a href="#" class="active">Home</a></li>
-      <li><a href="loginSignup.php">Sign out</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a> </li>
+      <li><a href="loginSignup.php">Login/sign up</a></li>
+      <li><a href="#">About us</a></li>
     </ul>
   </header>
   <section>
@@ -133,7 +111,7 @@ if (isset($_POST['addTocart'])) {
                   <input type="hidden" name="pdes" class="pdes" value="<?php echo $product['description'] ?>">
 
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
+                  <button  class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
                     </i>&nbsp;&nbsp;Add to cart</button>
                 </div>
               </div>
