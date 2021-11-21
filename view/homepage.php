@@ -133,7 +133,7 @@ if (isset($_POST['addTocart'])) {
 
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
                   <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart</button>
+                    </i>&nbsp;&nbsp;Add to cart</button>
                 </div>
               </div>
             </form>
