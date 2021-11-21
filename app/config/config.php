@@ -2,18 +2,18 @@
 
 // $conn = mysqli_connect('127.0.0.1:3310', 'Kalana', '0000', 'flybuy');
 //database params
-define('DB_HOST', '127.0.0.1:3310');
-define('DB_USER', 'Kalana');
-define('DB_PASS', '0000');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_NAME', 'flybuy');
 
 //app root
 define('APPROOT', dirname(dirname(__FILE__)));
 
-//url root (dynamic links)
-define('URLROOT', '127.0.0.1/mvc');
+// URL ROOT - https can be removed (Dynamic links)
+define('URLROOT', 'http://localhost/FlyBuy');
 
-//sitename
-define('SITENAME', 'MVC Tute');
+//site name
+define('SITENAME', 'COSMOS-FLYBUY');
 
 ?>
