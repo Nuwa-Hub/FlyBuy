@@ -79,7 +79,9 @@ if (isset($_POST['submitSignup'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $_POST['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_akash);
+
+            sendMail($email, 'signup', $additionalData, $path_Ransika);
+
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
         else {
