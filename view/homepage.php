@@ -19,6 +19,8 @@ if (!isset($_SESSION['cartarr'])) {
 //$curr_email = $_COOKIE['user_login'];  //logged in user email
 //$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
 
+
+
 $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
 //}
 
@@ -73,7 +75,7 @@ if (isset($_POST['addTocart'])) {
     </div>
     <ul>
       <li><a href="#" class="active">Home</a></li>
-      <li><a href="loginSignup.php">Login/Sign up</a></li>
+      <li><a href="loginSignup.php">Sign out</a></li>
       <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a> </li>
     </ul>
   </header>
@@ -87,6 +89,7 @@ if (isset($_POST['addTocart'])) {
   <div class="sec" id="products">
     <h2>Featured products</h2>
     <div class="container">
+
       <?php foreach ($products as $product) : ?>
         <div class="product">
           <div class="product-card">
@@ -103,7 +106,7 @@ if (isset($_POST['addTocart'])) {
                   <img src="../images/kottu mee.png" alt="">
                 </div>
                 <div class="info">
-                  <h2><?php echo $product['itemName']; ?><br><span>Chandrasena stores</span></h2>
+                  <h2><?php echo $product['itemName']; ?><br><span><?php echo $product['seller']['storeName']; ?></span></h2>
                   <h3><span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -113,19 +116,18 @@ if (isset($_POST['addTocart'])) {
                   <p><?php echo $product['description']; ?></p>
                   <span class="price"><?php echo "Rs. " . $product['price'] . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['maxAmount'] ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['amount'] ?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product['item_id'] ?>">
                   <input type="hidden" name="pname" class="pname" value="<?php echo $product['itemName'] ?>">
                   <input type="hidden" name="pprice" class="pprice" value="<?php echo $product['price'] ?>">
                   <input type="hidden" name="pimage" class="pimage" value="<?php echo $product['item_image'] ?>">
                   <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product['seller_id'] ?>">
-                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product['maxAmount'] ?>">
+                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product['amount'] ?>">
                   <input type="hidden" name="pdes" class="pdes" value="<?php echo $product['description'] ?>">
 
-               <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                 <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                  </i>&nbsp;&nbsp;Add tocart</button>
+                  <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
+                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add tocart</button>
                 </div>
               </div>
             </form>
@@ -178,8 +180,6 @@ if (isset($_POST['addTocart'])) {
         });
       });
     });
-
-
   </script>
 </body>
 

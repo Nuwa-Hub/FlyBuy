@@ -37,20 +37,22 @@ $(document).ready(function() {
     $(".remove").click(function() {
         var el = $(this);
         el.parent().parent().addClass("removed");
-        window.setTimeout(
+        /*   window.setTimeout(
+
             function() {
                 el.parent().parent().slideUp('fast', function() {
                     el.parent().parent().remove();
                     if ($(".product").length == 0) {
                         if (check) {
-                            $("#cart").html("<h1>The shop does not function, yet!</h /1 > < p > If you liked my shopping cart, please take a second and heart this Pen on < a href = 'https:/ / codepen.io / ziga - miklic / pen / xhpob ' >  < /a>. Thank you!</p > ");
+                            // $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
                         } else {
                             $("#cart").html("<h1>No products!</h1>");
                         }
                     }
+
                     changeTotal();
                 });
-            }, 300);
+            }, 300);*/
 
         setTimeout(function() {
             location.reload(true);
@@ -68,7 +70,7 @@ $(document).ready(function() {
                     console.log(response);
                 }
             });
-        }, 400);
+        }, 600);
 
         load_cart_item_number();
     });
@@ -162,4 +164,25 @@ function changeAmount(pid, pamount) {
         }
     });
 
+}
+
+function searchFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("pinput");
+    filter = input.value.toUpperCase();
+    alert(document.children[0].children[1].children[1].children[0].child);
+    ul = document.children[0].children[1].children[1].getElementById("pul");
+    li = ul.getElementsByTagName("pli");
+
+    for (i = 0; i < li.length; i++) {
+        txtValue = li[i].children[1].children[0].text;
+        // txtValue = a.textContent || a.innerText;
+        alert("sddf");
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
 }

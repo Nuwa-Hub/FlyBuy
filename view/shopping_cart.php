@@ -27,10 +27,17 @@ session_start();
         <div class="container">
             <h3>FlyBuy</h3>
             <h1>Shopping cart </h1>
+            <div class="search-box">
+                <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchFunction()">
+                <a class="search-btn" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
             <ul>
-                <li><a href="homepage.php" class="active">Home</a></li>
+
+                <li><a href="homepage.php">Home</a></li>
                 <li><a href="loginSignup.php">Login/Sign up</a></li>
-                <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
+                <li><a href="shopping_cart.php" class="active"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
             </ul>
         </div>
@@ -42,45 +49,49 @@ session_start();
 
     <div class="container">
         <section id="cart">
-            <header id="hidden"></header>
-            <?php
-            $total = 0;
-            foreach ($_SESSION['cartarr'] as $product) { ?>
-                <article class="product">
-                    <header>
-                        <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
-                        <a class="remove">
-                            <img src=<?php echo $product->image ?> alt="">
-                            <h3>Remove product</h3>
-                        </a>
-                    </header>
-                    <div class="content">
-                        <h1><?php echo $product->itemName ?></h1>
-                        <?php echo $product->description ?>
-                    </div>
-                    <footer class="content">
-                        <span class="qt-minus">-</span>
-                        <span class="qt" value="<?= $product->amount ?>"><?php echo $product->amount ?></span>
-                        <span class="qt-plus">+</span>
-                        <h2 class="full-price">
-                            <span><?php echo ($product->price) * ($product->amount) ?></span>/=
-                        </h2>
-                        <h2 class="price">
-                            <span><?php echo $product->price ?></span>/=
-                        </h2>
-                        <input type="hidden" name="pid" class="pid" value="<?php echo  $product->item_id ?>">
-                        <input type="hidden" name="pamount" class="pamount" value="<?php echo  $product->amount ?>">
-                        <input type="hidden" class="pprice" value="<?php echo  $product->price ?>">
-                        <input type="hidden" class="pimage" value="<?php echo  $product->image ?>">
-                        <input type="hidden" class="pmaxAmount" value="<?php echo  $product->maxAmount ?>">
-                    </footer>
-                </article>
+            <header id="hidden" value="xc" class="q"></header>
+            <ul class="pul" id="pul">
+                <?php
+                $total = 0;
 
-            <?php
-                $total += ($product->price) * ($product->amount);
-            }
-            ?>
+                foreach ($_SESSION['cartarr'] as $product) { ?>
+                    <li class="pli" id="pli" value="<?php echo $product->itemName ?>">
+                        <article class="product">
+                            <header>
+                                <a class="remove">
+                                    <img src=<?php echo $product->image ?> alt="">
+                                    <h3>Remove product</h3>
+                                </a>
+                            </header>
+                            <div class="content">
+                                <h1><?php echo $product->itemName ?></h1>
+                                <?php echo $product->description ?>
+                            </div>
+                            <footer class="content">
+                                <span class="qt-minus">-</span>
+                                <span class="qt" value="<?= $product->amount ?>"><?php echo $product->amount ?></span>
+                                <span class="qt-plus">+</span>
+                                <h2 class="full-price">
+                                    <span><?php echo ($product->price) * ($product->amount) ?></span>/=
+                                </h2>
+                                <h2 class="price">
+                                    <span><?php echo $product->price ?></span>/=
+                                </h2>
+                                <input type="hidden" name="pid" class="pid" value="<?php echo  $product->item_id ?>">
+                                <input type="hidden" name="pamount" class="pamount" value="<?php echo  $product->amount ?>">
+                                <input type="hidden" class="pprice" value="<?php echo  $product->price ?>">
+                                <input type="hidden" class="pimage" value="<?php echo  $product->image ?>">
+                                <input type="hidden" class="pmaxAmount" value="<?php echo  $product->maxAmount ?>">
+                            </footer>
+                        </article>
+                    </li>
+                <?php
+                    $total += ($product->price) * ($product->amount);
+                }
+                ?>
+            </ul>
             <header id="hidden"></header>
+
         </section>
     </div>
     <footer id="site-footer">
@@ -92,7 +103,7 @@ session_start();
                 <h3 class="shipping">Shipping: <span>169.00</span>/=</h3>
             </div>
             <div class="right">
-                <h1 class="total">Total: <span><?php echo $total + 169 ?></span>/=</h1>
+                <h1 class="total">Total: <span><?php echo ($total > 0) ? $total + 169 : 0 ?></span>/=</h1>
                 <a class="btn">Checkout</a>
             </div>
         </div>
