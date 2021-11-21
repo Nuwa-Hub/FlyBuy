@@ -58,6 +58,7 @@ session_start();
                     <li class="pli" id="pli" value="<?php echo $product->itemName ?>">
                         <article class="product">
                             <header>
+                                <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
                                 <a class="remove">
                                     <img src=<?php echo $product->image ?> alt="">
                                     <h3>Remove product</h3>
