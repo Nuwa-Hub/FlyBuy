@@ -170,13 +170,14 @@ function searchFunction() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("pinput");
     filter = input.value.toUpperCase();
-
-    ul = document.getElementById("pul");
+    alert(document.children[0].children[1].children[1].children[0].child);
+    ul = document.children[0].children[1].children[1].getElementById("pul");
     li = ul.getElementsByTagName("pli");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("input")[0];
-        txtValue = a.textContent || a.innerText;
 
+    for (i = 0; i < li.length; i++) {
+        txtValue = li[i].children[1].children[0].text;
+        // txtValue = a.textContent || a.innerText;
+        alert("sddf");
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {

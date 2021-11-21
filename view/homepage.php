@@ -132,8 +132,7 @@ if (isset($_POST['addTocart'])) {
                   <input type="hidden" name="pdes" class="pdes" value="<?php echo $product['description'] ?>">
 
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart</button>
+                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add tocart</button>
                 </div>
               </div>
             </form>
