@@ -8,16 +8,16 @@ include '../database/db_connection.php';
 require('../validators/user_validator.php');
 
 
- //if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-  // header('Location: loginSignup.php');
- //} else {
+ if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+   header('Location: loginSignup.php');
+ } else {
 session_start();
 
 if (!isset($_SESSION['cartarr'])) {
   $_SESSION['cartarr'] = array();
 }
-//$curr_email = $_COOKIE['user_login'];  //logged in user email
-//$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+$curr_email = $_COOKIE['user_login'];  //logged in user email
+$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
 
 
 
