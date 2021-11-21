@@ -47,11 +47,6 @@ else{
     $add_amount = '';
     $add_price = '';
     $add_description = '';
-
-    $edit_itemName = '';
-    $edit_amount = '';
-    $edit_price = '';
-    $edit_description = '';
     
     if (count($_POST) > 0 && isset($_POST['submitAddItem'])){
         
@@ -73,6 +68,11 @@ else{
         }
     }
 
+    $edit_itemName = '';
+    $edit_amount = '';
+    $edit_price = '';
+    $edit_description = '';
+
     if(isset($_POST['submitEditItem'])){
 
         $edit_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
@@ -81,9 +81,7 @@ else{
         $edit_description = mysqli_real_escape_string($conn, $_POST['description']);
 
         $item_id = $_POST['item_id'];
-        // $product  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM products WHERE item_id = '$item_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-
-        // print_r($product);
+        
         try {
 
             if(!empty($edit_itemName)){

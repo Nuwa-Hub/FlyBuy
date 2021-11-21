@@ -95,6 +95,7 @@ if (isset($_POST['addTocart'])) {
   <div class="sec" id="products">
     <h2>Featured products</h2>
     <div class="container">
+
       <?php foreach ($products as $product) : ?>
         <div class="product">
           <div class="product-card">
