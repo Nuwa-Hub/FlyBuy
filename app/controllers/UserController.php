@@ -7,14 +7,14 @@ class Users extends Controller {
 
     public function register() {
         $data = [
-            'username' => '',
-            'email' => '',
-            'password' => '',
-            'confirmPassword' => '',
-            'usernameError' => '',
-            'emailError' => '',
-            'passwordError' => '',
-            'confirmPasswordError' => ''
+            'username'              => '',
+            'email'                 => '',
+            'password'              => '',
+            'confirmPassword'       => '',
+            'usernameError'         => '',
+            'emailError'            => '',
+            'passwordError'         => '',
+            'confirmPasswordError'  => ''
         ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -23,14 +23,14 @@ class Users extends Controller {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
               $data = [
-                'username' => trim($_POST['username']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirmPassword' => trim($_POST['confirmPassword']),
-                'usernameError' => '',
-                'emailError' => '',
-                'passwordError' => '',
-                'confirmPasswordError' => ''
+                'username'              => trim($_POST['username']),
+                'email'                 => trim($_POST['email']),
+                'password'              => trim($_POST['password']),
+                'confirmPassword'       => trim($_POST['confirmPassword']),
+                'usernameError'         => '',
+                'emailError'            => '',
+                'passwordError'         => '',
+                'confirmPasswordError'  => ''
             ];
 
             $nameValidation = "/^[a-zA-Z0-9]*$/";
