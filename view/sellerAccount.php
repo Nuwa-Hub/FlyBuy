@@ -41,7 +41,7 @@ else{
     $curr_email = $_COOKIE['user_login'];  //logged in user email
     
     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
-    $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+    $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products WHERE seller_id = '$seller_id'"), MYSQLI_ASSOC);
     
     $add_itemName = '';
     $add_amount = '';
