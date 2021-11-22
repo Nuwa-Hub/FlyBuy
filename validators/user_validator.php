@@ -106,8 +106,6 @@ class UserValidator{
         $this->return_data['errors'] = $this->errors;
         $this->return_data['classNames'] = $this->classNames;
 
-        unset($this->return_data['vkey']);
-
         return $this->return_data;
     }
 

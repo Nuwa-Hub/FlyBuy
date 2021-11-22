@@ -10,6 +10,7 @@ require('../validators/user_validator.php');
 $path_akash     = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';
 $path_kalana    = 'http://127.0.0.1/FlyBuy/view/emailVerified.php';
 $path_Ransika   = 'http://127.0.0.1/test/FlyBuy/view/emailVerified.php';
+$path_Nuwan     = 'http://localhost/OOP%20project/FlyBuy/view/emailVerified.php';
 
 $errors = [];
 
@@ -80,7 +81,7 @@ if (isset($_POST['submitSignup'])){
             $email = $_POST['email'];
 
 
-            sendMail($email, 'signup', $additionalData, $path_Ransika);
+            sendMail($email, 'signup', $additionalData, $path_Nuwan);
 
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
@@ -269,11 +270,11 @@ if (isset($_POST['submitLogin'])) {
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field store remove <?php echo $signupClassNames['storeName']; ?>">
+                            <div class="input-field store remove <?php echo (isset($signupClassNames['storeName'])) ? $signupClassNames['storeName'] : '' ; ?>">
                                 <i class="fas fa-store"></i>
-                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo htmlspecialchars($signup_storeName)?>">
+                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo (isset($signup_storeName)) ? htmlspecialchars($signup_storeName) : '' ?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['storeName']; ?></small>
+                                    <small class="tooltip-text"><?php echo (isset($signupErrors['storeName'])) ? $signupErrors['storeName'] : "" ; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
