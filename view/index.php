@@ -31,9 +31,9 @@ $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYS
 
 if (isset($_POST['addTocart'])) {
 
-    if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+         //if the cookie is not set redirect -> loginSignup
         header('Location: loginSignup.php');
-    }
+    
 }
 
 
