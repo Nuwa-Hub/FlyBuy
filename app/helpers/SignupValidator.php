@@ -1,6 +1,6 @@
 <?php
 
-class SignupValidator implements IValidator{
+class SignupValidator extends LoginValidator implements IValidator{
 
     public $userType;
     private $data;
