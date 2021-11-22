@@ -1,3 +1,8 @@
+<?php
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -164,13 +169,13 @@
                             <button class="btn transparent" id="sign-in-button">
                                 <span class="buttonText">Sign in</span>
                             </button>
-                            <img src="../resources/user.png" alt="user">
+                            <img src="../../../public/img/resources/user.png" alt="user">
                         </div>
                     </div>
 
                     <div class="panel right-panel">
                         <div class="content">
-                            <img src="../resources/user.png" alt="user">
+                            <img src="../../../public/img/resources/user.png" alt="user">
                             <h3>New Here?</h3>
                             <p>
                                 Join us and enjoy the services
