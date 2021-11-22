@@ -2,8 +2,8 @@
 
 class Core{
 
-    protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
+    protected $currentController = 'BuyerController';
+    protected $currentMethod = 'register';
     protected $params = [];
 
     public function __construct(){
@@ -12,7 +12,7 @@ class Core{
 
         //look in controllers for first value
         //ucwords will capitalize first letter
-        if(file_exists('../app/controllers' . ucwords($url[0]) . '.php')){
+        if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
 
             //will set a new controller
             $this->currentController = ucwords($url[0]);

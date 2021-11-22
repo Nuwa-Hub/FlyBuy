@@ -2,11 +2,18 @@
 
 class ValidateOperator{
 
+    public $userType;
+    private $data;
+    private $users;
+    private $errors;
+    private $return_data;
+    private $classNames;
+
     private function __construct(){}
 
     //signup and edit profile data validation
 
-    protected static function validateNewUsername(){
+    protected function validateNewUsername(){
 
         $val = trim($this->data['username']);
 
@@ -21,7 +28,7 @@ class ValidateOperator{
         }
     }
 
-    protected static function validateNewEmail(){
+    protected function validateNewEmail(){
 
         $val = trim($this->data['email']);
 
@@ -54,7 +61,7 @@ class ValidateOperator{
         }
     }
 
-    protected static function validateNewTelNo(){
+    protected function validateNewTelNo(){
 
         $val = trim($this->data['telNo']);
 
@@ -70,7 +77,7 @@ class ValidateOperator{
     }
 
 
-    protected static function validateAddress(){
+    protected function validateAddress(){
 
         #I require the text field should contains Alphabets in Upper and lower case, numbers, hyphen, fullstops 
         #forward and back slash and commas and spaces in it
@@ -90,7 +97,7 @@ class ValidateOperator{
         }
     }
 
-    protected static function validateNewStorename(){
+    protected function validateNewStorename(){
 
         $val = trim($this->data['storeName']);
 
@@ -105,7 +112,7 @@ class ValidateOperator{
         }
     }
 
-    protected static function validateNewPassword(){
+    protected function validateNewPassword(){
 
         $val = $this->data['password'];
         $confirm_val = $this->data['confirmPsw'];
@@ -144,7 +151,7 @@ class ValidateOperator{
 
     //login data validation
 
-    protected static function validateLoginEmail(){
+    protected function validateLoginEmail(){
 
         $val = trim($this->data['email']);
 
@@ -195,7 +202,7 @@ class ValidateOperator{
         }
     }
 
-    protected static function validateLoginPassword($user){
+    protected function validateLoginPassword($user){
 
         $val = $this->data['password'];
 
@@ -210,28 +217,11 @@ class ValidateOperator{
         }
     }
 
-    protected static function setError($key, $val){
+    protected function setError($key, $val){
         $this->errors[$key] = $val;
     }
 
-    protected static function setClassNames(){
-
-        foreach ($this->errors as $field => $error) {
-            
-            if ($error === 'none') {
-                $this->classNames[$field] = 'success';
-            }
-            else if($error != ''){
-                $this->classNames[$field] = 'error';
-            }
-        }
-    }
-
-    protected static function setError($key, $val){
-        $this->errors[$key] = $val;
-    }
-
-    protected static function setClassNames(){
+    protected function setClassNames(){
 
         foreach ($this->errors as $field => $error) {
             

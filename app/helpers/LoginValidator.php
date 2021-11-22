@@ -1,13 +1,6 @@
 <?php
 
-class LoginValidator implements IValidator{
-
-    private $data;
-    private $users;
-    private $errors;
-    private $return_data;
-    private $classNames;
-
+class LoginValidator extends ValidateOperator implements IValidator{
 
     public function __construct($post_data, $users){
 

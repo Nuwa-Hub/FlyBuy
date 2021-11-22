@@ -1,10 +1,3 @@
-<?php
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +25,7 @@
 
                     <div class="signin-signup sign-in">
 
-                        <form class="sign-in-form" method="post" action="loginSignup.php">
+                        <form class="sign-in-form" method="post" action=<?php echo URLROOT . "/pages/loginSignup"; ?>>
 
                             <h2 class="title">Sign in</h2>
 

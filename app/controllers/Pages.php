@@ -3,25 +3,25 @@
 class Pages extends Controller{
 
     public function __construct(){
-        $this->userModel = $this->model('User');
+        // $this->userModel = $this->model();
     }
 
-    public function index(){
+    // public function index(){
 
-        $users = $this->userModel->getUsers();
+    //     $users = $this->userModel->getUsers();
 
-        $data = [
-            'title' => 'home page',
-            'name' => 'kalaa',
-            'users' => $users
-        ];
+    //     $data = [
+    //         'title' => 'home page',
+    //         'name' => 'kalaa',
+    //         'users' => $users
+    //     ];
 
-        $this->view('pages/index', $data);
-    }
+    //     $this->view('pages/index', $data);
+    // }
 
-    public function about(){
-        $this->view('pages/about');
-    }
+    // public function about(){
+    //     $this->view('pages/about');
+    // }
 
     public function loginSignup(){
         $this->view('pages/loginSignup');

@@ -1,14 +1,6 @@
 <?php
 
-class SignupValidator implements IValidator{
-
-    public $userType;
-    private $data;
-    private $users;
-    private $errors;
-    private $return_data;
-    private $classNames;
-
+class SignupValidator extends ValidateOperator implements IValidator{
 
     public function __construct($post_data, $users, $userType){
 
@@ -44,8 +36,6 @@ class SignupValidator implements IValidator{
 
         $this->return_data['errors'] = $this->errors;
         $this->return_data['classNames'] = $this->classNames;
-
-        unset($this->return_data['vkey']);
 
         return $this->return_data;
     }
