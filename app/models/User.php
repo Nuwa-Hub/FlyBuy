@@ -1,19 +1,13 @@
 <?php
 
-class User{
+interface User {
 
-    private $db;
+    public function register($data);
 
-    public function __construct(){
-        $this->db = new Database;
-    }
+    public function login($username, $password);
 
-    public function getUsers(){
-
-        $this->db->query("SELECT * FROM buyers");
-        $result = $this->db->resultSet();
-        return $result;
-    }
+    //Find user by email. Email is passed in by the Controller.
+    public function findUserByEmail($email);
 }
 
 ?>

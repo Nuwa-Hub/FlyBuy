@@ -1,5 +1,5 @@
 <?php
 
-var_dump($data['users'][0]->email);
+// var_dump($data['users'][0]->email);
 
 ?>
