@@ -22,7 +22,13 @@ $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email 
 
 
 $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-//}
+for($i = 0; $i < count($products); $i++){
+  $seller_id = $products[$i]['seller_id'];
+   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
+  $products[$i]['seller'] = $seller;
+  }
+ }
+
 
 
 
