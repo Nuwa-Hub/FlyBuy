@@ -55,7 +55,7 @@ session_start();
                 $total = 0;
 
                 foreach ($_SESSION['cartarr'] as $product) { ?>
-                    <li class="pli" id="pli" value="<?php echo $product->itemName ?>">
+                    <li  id="pli" class="pli" value="<?php echo $product->itemName ?>">
                         <article class="product">
                             <header>
                                 <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">

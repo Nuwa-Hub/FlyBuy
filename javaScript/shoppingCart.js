@@ -170,19 +170,17 @@ function searchFunction() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("pinput");
     filter = input.value.toUpperCase();
-    alert(document.children[0].children[1].children[1].children[0].child);
-    ul = document.children[0].children[1].children[1].getElementById("pul");
-    li = ul.getElementsByTagName("pli");
 
-    for (i = 0; i < li.length; i++) {
-        txtValue = li[i].children[1].children[0].text;
-        // txtValue = a.textContent || a.innerText;
-        alert("sddf");
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    li = document.getElementsByTagName("li");
+
+
+    for (i = 3; i < li.length; i++) {
+        a = li[i].getElementsByTagName("h1")[0];
+
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
             li[i].style.display = "none";
-
         }
     }
 }
