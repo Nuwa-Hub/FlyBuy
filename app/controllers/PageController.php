@@ -7,7 +7,7 @@ class PageController extends Controller{
     }
 
     public function index(){
-        $this->view('pages/loginSignup');
+        $this->view('pages/homepage');
     }
 
     public function about(){

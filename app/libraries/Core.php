@@ -12,11 +12,13 @@ class Core{
 
         //look in controllers for first value
         //ucwords will capitalize first letter
-        if(file_exists('../app/controllers' . ucwords($url[0]) . '.php')){
+        if (isset($url[0])){
+            if(file_exists('../app/controllers' . ucwords($url[0]) . '.php')){
 
-            //will set a new controller
-            $this->currentController = ucwords($url[0]);
-            unset($url[0]);
+                //will set a new controller
+                $this->currentController = ucwords($url[0]);
+                unset($url[0]);
+            }
         }
 
         //require the controller
@@ -25,7 +27,6 @@ class Core{
     
         //checks the second part of the url
         if(isset($url[1])){
-
             if(method_exists($this->currentController, $url[1])){
                 
                 $this->currentMethod = $url[1];
