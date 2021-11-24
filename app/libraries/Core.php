@@ -2,7 +2,7 @@
 
 class Core{
 
-    protected $currentController = 'Pages';
+    protected $currentController = 'PageController';
     protected $currentMethod = 'index';
     protected $params = [];
 

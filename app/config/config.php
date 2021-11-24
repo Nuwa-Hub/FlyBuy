@@ -13,7 +13,7 @@ define('DB_NAME', 'flybuy');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // URL ROOT - https can be removed (Dynamic links)
-define('URLROOT', 'http://localhost/FlyBuy');
+define('URLROOT', 'http://localhost/Project/FlyBuy');
 
 //site name
 define('SITENAME', 'COSMOS-FLYBUY');

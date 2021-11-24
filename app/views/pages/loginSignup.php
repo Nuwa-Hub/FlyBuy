@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="../../../public/css/styles_signinLogin.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_signinLogin.css">
 
     <title>Login and SignUp | FlyBuy</title>
 </head>
@@ -169,13 +169,13 @@
                             <button class="btn transparent" id="sign-in-button">
                                 <span class="buttonText">Sign in</span>
                             </button>
-                            <img src="../../../public/img/resources/user.png" alt="user">
+                            <img src="<?php echo URLROOT ?>/public/img/resources/user.png" alt="user">
                         </div>
                     </div>
 
                     <div class="panel right-panel">
                         <div class="content">
-                            <img src="../../../public/img/resources/user.png" alt="user">
+                            <img src="<?php echo URLROOT ?>/public/img/resources/user.png" alt="user">
                             <h3>New Here?</h3>
                             <p>
                                 Join us and enjoy the services

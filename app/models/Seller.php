@@ -1,5 +1,7 @@
 <?php
 
+require_once 'User.php';
+
 class Seller implements User{
 
     private $db;
