@@ -3,19 +3,57 @@
 class PageController extends Controller{
 
     public function __construct(){
-        $this->userModel = $this->model('Seller');
+        $this->productModel = $this->model('Product');
     }
 
     public function index(){
-        $this->view('pages/homepage');
-    }
+        $allProducts = $this->productModel->findAllProducts();
 
-    public function about(){
-        $this->view('pages/about');
+        $data = [
+            'products' => $allProducts
+        ];
+
+        $this->view('pages/homepage', $data);
     }
 
     public function loginSignup(){
-        $this->view('pages/loginSignup');
+
+        $loginClassNames = [
+            'email' => '',
+            'password' => ''
+        ];
+
+        $signupClassNames = [
+            'username' => '',
+            'email' => '',
+            'tel' => '',
+            'address' => '',
+            'password' => '',
+            'storeName' => ''
+        ];
+
+        $loginData = [
+            'email' => '',
+            'password' => ''
+        ];
+
+        $signupData = [
+            'username' => '',
+            'email' => '',
+            'tel' => '',
+            'address' => '',
+            'password' => '',
+            'storeName' => ''
+        ];
+
+        $data = [
+            'loginClassNames' => $loginClassNames,
+            'loginData' => $loginData,
+            'signupClassNames' => $signupClassNames,
+            'signupData' => $signupData
+        ];
+
+        $this->view('pages/loginSignup', $data);
     }
 }
 

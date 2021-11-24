@@ -30,13 +30,13 @@
 
                     <div class="signin-signup sign-in">
 
-                        <form class="sign-in-form" method="post" action="loginSignup.php">
+                        <form class="sign-in-form" method="post" action="">
 
                             <h2 class="title">Sign in</h2>
 
-                            <div class="input-field <?php echo $loginClassNames['email']; ?>">
+                            <div class="input-field <?php echo $data['loginClassNames']['email']; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($login_email);?>">
+                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($data['loginData']['email']);?>">
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <span class="tooltip-text"><?php echo $loginErrors['email']; ?></span>
                                 </i>
@@ -45,7 +45,7 @@
 
                             <div class="input-field <?php echo $loginClassNames['password']; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($login_password);?>">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($data['loginData']['password']);?>">
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -68,11 +68,11 @@
 
                     <div class="signin-signup sign-up">
 
-                        <form class="sign-up-form" method="post" action="loginSignup.php">
+                        <form class="sign-up-form" method="post" action="">
 
                             <h2 class="title">Sign up</h2>
 
-                            <div class="input-field <?php echo $signupClassNames['username']; ?>">
+                            <div class="input-field <?php echo $data['signupClassNames']['username'] ? isset($data['signupClassNames']['username']) : ''; ?>">
                                 <i class="fas fa-user"></i>
                                 <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($signup_username)?>">
                                 <i class="fas fa-exclamation-circle tooltip">
@@ -194,7 +194,7 @@
 
     </main>
 
-    <script src="../../../public/javascript/form.js"></script>
+    <script src="<?php echo URLROOT; ?>/public/javascript/form.js"></script>
 
 </body>
 

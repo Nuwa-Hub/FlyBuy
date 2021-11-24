@@ -25,7 +25,7 @@
 
     <ul>
       <li><a href="#" class="active">Home</a></li>
-      <li><a href="loginSignup.php">Login/Sign up</a></li>
+      <li><a href="PageController/loginSignup">Login/Sign up</a></li>
       <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"></span></i></a> </li>
     </ul>
 
@@ -43,26 +43,26 @@
 
     <div class="container">
 
-      <?php foreach ($products as $product) : ?>
+      <?php foreach ($data['products'] as $product) : ?>
         <div class="product">
 
           <div class="product-card">
-            <h3 class="name"><?php echo $product['itemName']; ?></h3>
-            <span class="price"><?php echo "Rs. " . $product['price']; ?></span>
+            <h3 class="name"><?php echo $product->itemName; ?></h3>
+            <span class="price"><?php echo "Rs. " . $product->price; ?></span>
             <a class="popup-btn">View item</a>
             <img src="<?php echo URLROOT; ?>/public/img/kottu_mee.png" class="product-img" alt="">
           </div>
 
           <div class="popup-view">
 
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form method="post" action="">
               <div class="popup-card">
                 <a><i class="fas fa-times close-btn"></i></a>
                 <div class="product-img">
-                  <img src="../images/kottu mee.png" alt="">
+                  <img src="<?php echo URLROOT; ?>/public/img/kottu_mee.png" alt="">
                 </div>
                 <div class="info">
-                  <h2><?php echo $product['itemName']; ?><br><span>Chandrasena stores</span></h2>
+                  <h2><?php echo $product->itemName; ?><br><span>Chandrasena stores</span></h2>
                   <h3>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -70,22 +70,23 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                   </h3>
-                  <p><?php echo $product['description']; ?></p>
-                  <span class="price"><?php echo "Rs. " . $product['price'] . "/unit"; ?></span>
+                  <p><?php echo $product->description; ?></p>
+                  <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['amount'] ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
 
-                  <input type="hidden" name="pid" class="pid" value="<?php echo $product['item_id'] ?>">
-                  <input type="hidden" name="pname" class="pname" value="<?php echo $product['itemName'] ?>">
-                  <input type="hidden" name="pprice" class="pprice" value="<?php echo $product['price'] ?>">
-                  <input type="hidden" name="pimage" class="pimage" value="<?php echo $product['item_image'] ?>">
-                  <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product['seller_id'] ?>">
-                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product['amount'] ?>">
-                  <input type="hidden" name="pdes" class="pdes" value="<?php echo $product['description'] ?>">
+                  <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
+                  <input type="hidden" name="pname" class="pname" value="<?php echo $product->itemName ?>">
+                  <input type="hidden" name="pprice" class="pprice" value="<?php echo $product->price ?>">
+                  <input type="hidden" name="pimage" class="pimage" value="<?php echo $product->item_image ?>">
+                  <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product->seller_id ?>">
+                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
+                  <input type="hidden" name="pdes" class="pdes" value="<?php echo $product->description ?>">
 
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart</button>
+                  <a class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
+                    </i>&nbsp;&nbsp;Add tocart
+                  </a>
                 </div>
               </div>
             </form>
