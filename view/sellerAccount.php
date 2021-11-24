@@ -144,8 +144,8 @@ else{
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </h3>
-                <a href='editSellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
-            </div>
+               <a href='editSellerAccount.php?seller_id=<?php echo $seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
+             </div>
             <div class="img-div">
                 <img src="../resources/user.png" alt="profile picture">
                 <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->

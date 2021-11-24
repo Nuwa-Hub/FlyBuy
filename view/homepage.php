@@ -106,7 +106,7 @@ if (isset($_POST['addTocart'])) {
                   <img src="../images/kottu mee.png" alt="">
                 </div>
                 <div class="info">
-                  <h2><?php echo $product['itemName']; ?><br><span><?php echo $product['storeName']; ?></span></h2>
+                <h2><?php echo $product['itemName']; ?><br><span></span></h2>
                   <h3><span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
