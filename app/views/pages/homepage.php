@@ -11,39 +11,50 @@
 </head>
 
 <body>
+
   <header id="header">
+
     <a href="#" class="logo">FlyBuy</a>
+
     <div class="search-box">
       <input class="search-txt" type="text" name="" placeholder="Search for products">
       <a class="search-btn" href="#">
         <i class="fas fa-search"></i>
       </a>
     </div>
+
     <ul>
       <li><a href="#" class="active">Home</a></li>
       <li><a href="loginSignup.php">Login/Sign up</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><!--<?php echo sizeof($_SESSION['cartarr']) ?> --></span></i></a> </li>
+      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"></span></i></a> </li>
     </ul>
+
   </header>
+
   <section>
     <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
     <img src="<?php echo URLROOT; ?>/public/img/item1.png" id="item1">
     <a href="#products" id='btn'>Explore</a>
-
     <img src="<?php echo URLROOT; ?>/public/img/item2.png" id="item2">
   </section>
+
   <div class="sec" id="products">
     <h2>Featured products</h2>
+
     <div class="container">
+
       <?php foreach ($products as $product) : ?>
         <div class="product">
+
           <div class="product-card">
             <h3 class="name"><?php echo $product['itemName']; ?></h3>
             <span class="price"><?php echo "Rs. " . $product['price']; ?></span>
             <a class="popup-btn">View item</a>
             <img src="<?php echo URLROOT; ?>/public/img/kottu_mee.png" class="product-img" alt="">
           </div>
+
           <div class="popup-view">
+
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
               <div class="popup-card">
                 <a><i class="fas fa-times close-btn"></i></a>
@@ -52,7 +63,8 @@
                 </div>
                 <div class="info">
                   <h2><?php echo $product['itemName']; ?><br><span>Chandrasena stores</span></h2>
-                  <h3><span class="fa fa-star checked"></span>
+                  <h3>
+                    <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -61,7 +73,7 @@
                   <p><?php echo $product['description']; ?></p>
                   <span class="price"><?php echo "Rs. " . $product['price'] . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['maxAmount'] ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product['amount'] ?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product['item_id'] ?>">
                   <input type="hidden" name="pname" class="pname" value="<?php echo $product['itemName'] ?>">
@@ -77,12 +89,16 @@
                 </div>
               </div>
             </form>
+
           </div>
+
         </div>
       <?php endforeach; ?>
 
     </div>
+
   </div>
+
   <script type="text/javascript">
     let text = document.getElementById('text');
     let btn = document.getElementById('btn');
@@ -127,6 +143,7 @@
       });
     });
   </script>
+
 </body>
 
 </html>
