@@ -57,7 +57,7 @@ else{
         
         //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme
         if($seller_id != 0){
-            $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
+            $sql = "INSERT INTO  products  (itemName, amount, price, description, seller_id) VALUES ('$add_itemName', '$add_amount', '$add_price', '$add_description', '$seller_id')";
         }        
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
