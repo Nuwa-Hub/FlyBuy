@@ -20,21 +20,20 @@ $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email 
 
 
 $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-<<<<<<< HEAD
+
 for($i = 0; $i < count($products); $i++){
  $seller_id = $products[$i]['seller_id'];
   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
  $products[$i]['seller'] = $seller;
  }
 }
-=======
-// for($i = 0; $i < count($products); $i++){
-//  $seller_id = $products[$i]['seller_id'];
-//   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-//  $products[$i]['seller'] = $seller;
-//  }
 
->>>>>>> bbc25a54dc20737ecc6d7e4b38c70fe764204dfc
+ for($i = 0; $i < count($products); $i++){
+  $seller_id = $products[$i]['seller_id'];
+   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
+  $products[$i]['seller'] = $seller;
+  }
+
 
 
 
@@ -72,12 +71,11 @@ if (isset($_POST['addTocart'])) {
         <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="loginSignup.php">Login/Sign up</a></li>
-<<<<<<< HEAD
+
             <li><a href="#" >About us</a></li>
         </ul>
-=======
              </ul>
->>>>>>> bbc25a54dc20737ecc6d7e4b38c70fe764204dfc
+
     </header>
     <section>
         <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
