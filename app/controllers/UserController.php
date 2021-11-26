@@ -41,15 +41,13 @@ class UserController extends Controller {
             if ($this->isValid){
                 //Register user from model function
                 if ($this->userModel->register($data)) {
-                    print("here");
                     //Redirect to the login page
-                    // header('location: ' . URLROOT . '/PageController/loginSignup');
+                    header('location: ' . URLROOT . '/PageController/loginSignup');
                 } else {
                     die('Something went wrong.');
                 }
             }
             else{
-                print("here in else");
                 $this->view('pages/loginSignup', $data);
             }
 
