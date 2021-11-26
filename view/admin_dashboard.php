@@ -14,7 +14,7 @@ if (isset($_POST['accept'])) {
     header("Refresh:0");
 }
 //when desline button click
-if (isset($_POST['desline'])) {
+if (isset($_POST['decline'])) {
     $pid = $_POST['pid'];
     //delete product from product table
 
@@ -176,8 +176,8 @@ if (isset($_POST['desline'])) {
                                     <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="accept">
                                         Accept
                                     </button>
-                                    <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="desline">
-                                        Desline
+                                    <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="decline">
+                                        Decline
                                     </button>
                                 </ul>
 
