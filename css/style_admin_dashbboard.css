@@ -164,6 +164,23 @@
                 transform: translateY(4px);
             }
             
+            .badge {
+                padding-left: 15px;
+                padding-right: 9px;
+                -webkit-border-radius: 9px;
+                -moz-border-radius: 9px;
+                border-radius: 9px;
+            }
+            
+            #cart-item {
+                font-size: 28px;
+                background: #ff0000;
+                color: #fff;
+                padding: 5px 10px;
+                vertical-align: top;
+                margin: 5px;
+            }
+            
             .search-container {
                 background: #fff;
                 height: 50px;

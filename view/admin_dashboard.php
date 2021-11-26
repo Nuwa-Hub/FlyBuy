@@ -88,7 +88,7 @@ if (isset($_POST['desline'])) {
         <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#">Sign out</a></li>
-            <li><a href="approve_product.php">New products</a></li>
+            <li><a href="approve_product.php">New products<span id="cart-item" class="badge badge-danger"><?php echo sizeof($products) ?></span></a></li>
 
         </ul>
     </header>
