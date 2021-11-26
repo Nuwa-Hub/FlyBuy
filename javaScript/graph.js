@@ -89,6 +89,6 @@ l1.responsive([{
     height: 250,
     options: { textSize: 10 },
     css: {
-        'margin': '50px 600px '
+
     }
 }, { maxWidth: 900, width: 400, height: 200, options: { textSize: 8 }, css: { 'float': 'none' } }]);
