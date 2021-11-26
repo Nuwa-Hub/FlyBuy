@@ -2,7 +2,6 @@
 
 class LoginValidator extends ValidateOperator implements IValidator{
 
-
     public function __construct($post_data, $users){
 
         $this->data = $post_data;
