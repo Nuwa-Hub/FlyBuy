@@ -17,43 +17,7 @@ class PageController extends Controller{
     }
 
     public function loginSignup(){
-
-        $loginClassNames = [
-            'email' => '',
-            'password' => ''
-        ];
-
-        $signupClassNames = [
-            'username' => '',
-            'email' => '',
-            'tel' => '',
-            'address' => '',
-            'password' => '',
-            'storeName' => ''
-        ];
-
-        $loginData = [
-            'email' => '',
-            'password' => ''
-        ];
-
-        $signupData = [
-            'username' => '',
-            'email' => '',
-            'tel' => '',
-            'address' => '',
-            'password' => '',
-            'storeName' => ''
-        ];
-
-        $data = [
-            'loginClassNames' => $loginClassNames,
-            'loginData' => $loginData,
-            'signupClassNames' => $signupClassNames,
-            'signupData' => $signupData
-        ];
-
-        $this->view('pages/loginSignup', $data);
+        $this->view('pages/loginSignup');
     }
 }
 

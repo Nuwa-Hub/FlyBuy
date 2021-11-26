@@ -9,11 +9,12 @@ class Core{
     public function __construct(){
         
         $url = $this->getUrl();
+        var_dump($url);
 
         //look in controllers for first value
         //ucwords will capitalize first letter
         if (isset($url[0])){
-            if(file_exists('../app/controllers' . ucwords($url[0]) . '.php')){
+            if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
 
                 //will set a new controller
                 $this->currentController = ucwords($url[0]);

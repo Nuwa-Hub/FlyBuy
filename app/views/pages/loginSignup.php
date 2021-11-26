@@ -30,26 +30,26 @@
 
                     <div class="signin-signup sign-in">
 
-                        <form class="sign-in-form" method="post" action="">
+                        <form class="sign-in-form" method="post" action="<?php echo URLROOT; ?>/UserController/login">
 
                             <h2 class="title">Sign in</h2>
 
-                            <div class="input-field <?php echo $data['loginClassNames']['email']; ?>">
+                            <div class="input-field <?php echo isset($data['loginClassNames']['email']) ? $data['loginClassNames']['email'] : ''; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo htmlspecialchars($data['loginData']['email']);?>">
+                                <input name="email" type="text" placeholder="Email" class="email" value="<?php echo isset($data['loginData']['email']) ? $data['loginData']['email'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text"><?php echo $loginErrors['email']; ?></span>
+                                    <span class="tooltip-text"><?php echo isset($data['loginErrors']['email']) ? $data['loginErrors']['email'] : ''; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $loginClassNames['password']; ?>">
+                            <div class="input-field <?php echo isset($data['loginClassNames']['password']) ? $data['loginClassNames']['password'] : ''; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($data['loginData']['password']);?>">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo isset($data['loginData']['password']) ? $data['loginData']['password'] : '';?>">
                                 <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <span class="tooltip-text"><?php echo $loginErrors['password']; ?></span>
+                                    <span class="tooltip-text"><?php echo isset($data['loginErrors']['password']) ? $data['loginErrors']['password'] : ''; ?></span>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -72,67 +72,67 @@
 
                             <h2 class="title">Sign up</h2>
 
-                            <div class="input-field <?php echo $data['signupClassNames']['username'] ? isset($data['signupClassNames']['username']) : ''; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['username']) ? $data['signupClassNames']['username'] : ''; ?>">
                                 <i class="fas fa-user"></i>
-                                <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($signup_username)?>">
+                                <input name="username" type="text" placeholder="Username" class="username" value="<?php echo isset($data['signupData']['username']) ? $data['signupData']['username'] : ''; ?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['username']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['username']) ? $data['signupErrors']['username'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $signupClassNames['email']; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['email']) ? $data['signupClassNames']['email'] : ''; ?>">
                                 <i class="fas fa-envelope"></i>
-                                <input name="email" type="email" placeholder="Email" class="email" value="<?php echo htmlspecialchars($signup_email)?>">
+                                <input name="email" type="email" placeholder="Email" class="email" value="<?php echo isset($data['signupData']['email']) ? $data['signupData']['email'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['email']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['email']) ? $data['signupErrors']['email'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $signupClassNames['telNo']; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['tel']) ? $data['signupClassNames']['tel'] : ''; ?>">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo htmlspecialchars($signup_telNo)?>">
+                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo isset($data['signupData']['tel']) ? $data['signupData']['tel'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['telNo']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['tel']) ? $data['signupErrors']['tel'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $signupClassNames['address']; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['address']) ? $data['signupClassNames']['address'] : ''; ?>">
                                 <i class="fas fa-map-marked-alt"></i>
-                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address" value="<?php echo htmlspecialchars($signup_address)?>">
+                                <input name="address" type="text" placeholder="Address Ex:- No.20,city,county" class="address" value="<?php echo isset($data['signupData']['address']) ? $data['signupData']['address'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['address']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['address']) ? $data['signupErrors']['address'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $signupClassNames['password']; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['password']) ? $data['signupClassNames']['password'] : ''; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($signup_password)?>">
+                                <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo isset($data['signupData']['password']) ? $data['signupData']['password'] : '';?>">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['password']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['password']) ? $data['signupErrors']['password'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo $signupClassNames['confirmPsw']; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['confirmPsw']) ? $data['signupClassNames']['confirmPsw'] : ''; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($signup_confirmPsw)?>">
+                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['confirmPsw']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['confirmPsw']) ? $data['signupErrors']['confirmPsw'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field store remove <?php echo $signupClassNames['storeName']; ?>">
+                            <div class="input-field store remove <?php echo isset($data['signupClassNames']['storeName']) ? $data['signupClassNames']['storeName'] : ''; ?>">
                                 <i class="fas fa-store"></i>
-                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo htmlspecialchars($signup_storeName)?>">
+                                <input name="storeName" type="text" placeholder="Store Name" class="store" value="<?php echo isset($data['signupData']['storeName']) ? $data['signupData']['storeName'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo $signupErrors['storeName']; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['storeName']) ? $data['signupErrors']['storeName'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>

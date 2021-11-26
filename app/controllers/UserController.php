@@ -1,8 +1,12 @@
 <?php
 class UserController extends Controller {
 
+    public function __construct(){
+
+    }
+
     public function register() {
-        $data = [
+        $signupData = [
             'username'              => '',
             'email'                 => '',
             'password'              => '',
@@ -10,10 +14,42 @@ class UserController extends Controller {
             'usernameError'         => '',
             'emailError'            => '',
             'passwordError'         => '',
-            'confirmPasswordError'  => ''
+            'confirmPasswordError'  => '',
+            'storeName'             => ''
         ];
 
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $signupClassNames = [
+            'username'              => '',
+            'email'                 => '',
+            'password'              => '',
+            'confirmPassword'       => '',
+            'usernameError'         => '',
+            'emailError'            => '',
+            'passwordError'         => '',
+            'confirmPasswordError'  => '',
+            'storeName'             => ''
+        ];
+
+        $signupErrors = [
+            'username'              => '',
+            'email'                 => '',
+            'password'              => '',
+            'confirmPassword'       => '',
+            'usernameError'         => '',
+            'emailError'            => '',
+            'passwordError'         => '',
+            'confirmPasswordError'  => '',
+            'storeName'             => ''
+        ];
+
+        $data = [
+            'signupData'        => $signupData,
+            'signupClassNames'  => $signupClassNames,
+            'signupErrors'      => $signupErrors
+        ];
+
+      if(isset($_POST['submitLoginBuyer'])){
+          print("here");
         // Process form
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -84,36 +120,49 @@ class UserController extends Controller {
                 }
             }
         }
-        $this->view('users/register', $data);
+        $this->view('pages/loginSignup');
     }
 
     public function login() {
+        $loginData = [
+            'email'     => '',
+            'password'  => ''
+        ];
+
+        $loginClassNames = [
+            'email'     => '',
+            'password'  => ''
+        ];
+
+        $loginErrors = [
+            'email'     => '',
+            'password'  => ''
+        ];
+
         $data = [
-            'email' => '',
-            'password' => '',
-            'emailError' => '',
-            'passwordError' => ''
+            'loginData'         => $loginData,
+            'loginClassNames'   => $loginClassNames,
+            'loginErrors'       => $loginErrors
         ];
 
         //Check for post
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if(isset($_POST['submitLogin'])) {
             //Sanitize post data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'emailError' => '',
-                'passwordError' => '',
-            ];
+            // $data = [
+            //     'email' => trim($_POST['email']),
+            //     'password' => trim($_POST['password']),
+            //     'emailError' => '',
+            //     'passwordError' => '',
+            // ];
 
-            $this->db->query("SELECT * FROM buyers");
-            $users = $this->db->resultSet();
+            // $this->db->query("SELECT * FROM buyers");
+            // $users = $this->db->resultSet();
 
-            $userValidator = new UserValidator(new LoginValidator($_POST, $users));
+            // $userValidator = new UserValidator(new LoginValidator($_POST, $users));
             //protected static methods in a non intantatable class
-            $returnData = $userValidator->validate();
-            print_r($returnData);
+            // $returnData = $userValidator->validate();
             // //Validate username
             // if (empty($data['username'])) {
             //     $data['usernameError'] = 'Please enter a username.';
@@ -137,15 +186,9 @@ class UserController extends Controller {
             //     }
             // }
 
-        } else {
-            $data = [
-                'username' => '',
-                'password' => '',
-                'usernameError' => '',
-                'passwordError' => ''
-            ];
         }
-        $this->view('users/login', $data);
+
+        $this->view('pages/loginSignup', $data);
     }
 
     public function createUserSession($user) {
