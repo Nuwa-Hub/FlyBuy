@@ -60,6 +60,14 @@ class Seller implements User{
             return false;
         }
     }
+
+    public function findAllUsers(){
+        $this->db->query('SELECT * FROM sellers');
+        
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
 }
 
 ?>

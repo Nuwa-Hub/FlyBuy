@@ -2,11 +2,12 @@
 
 class ValidateOperator{
 
-    private $data;
-    private $users;
-    private $errors;
-    private $return_data;
-    private $classNames;
+    protected $values;
+    protected $users;
+    protected $errors;
+    protected $classNames;
+    protected $data;
+    protected $userType;
 
     private function __construct(){}
 
@@ -14,7 +15,7 @@ class ValidateOperator{
 
     protected function validateNewUsername(){
 
-        $val = trim($this->data['username']);
+        $val = trim($this->values['username']);
 
         if (empty($val)) {
             $this->setError('username', 'username cannot be empty');
@@ -29,7 +30,7 @@ class ValidateOperator{
 
     protected function validateNewEmail(){
 
-        $val = trim($this->data['email']);
+        $val = trim($this->values['email']);
 
         if (empty($val)) {
             $this->setError('email', 'email cannot be empty');
@@ -45,16 +46,15 @@ class ValidateOperator{
 
                 foreach ($this->users as $user) {
 
-                    if ($user['email'] === $val) {
+                    if ($user->email === $val) {
                         $this->setError('email', 'email already exists');
                         break;
                     }
                 }
 
                 if ($this->errors['email'] === 'none') {
-
                     $vkey = md5(time() . $val);
-                    $this->return_data['vkey'] = $vkey;
+                    $this->data['vkey'] = $vkey;
                 }
             }
         }
@@ -62,7 +62,7 @@ class ValidateOperator{
 
     protected function validateNewTelNo(){
 
-        $val = trim($this->data['telNo']);
+        $val = trim($this->values['telNo']);
 
         if (empty($val)) {
             $this->setError('telNo', 'telephone number cannot be empty');
@@ -75,7 +75,6 @@ class ValidateOperator{
         }
     }
 
-
     protected function validateAddress(){
 
         #I require the text field should contains Alphabets in Upper and lower case, numbers, hyphen, fullstops 
@@ -83,7 +82,7 @@ class ValidateOperator{
 
         $RegEx = '/^[a-z0-9 ,#-\'\/.]{3,100}$/i';
 
-        $val = trim($this->data['address']);
+        $val = trim($this->values['address']);
 
         if (empty($val)) {
             $this->setError('address', 'Address cannot be empty');
@@ -98,7 +97,7 @@ class ValidateOperator{
 
     protected function validateNewStorename(){
 
-        $val = trim($this->data['storeName']);
+        $val = trim($this->values['storeName']);
 
         if (empty($val)) {
             $this->setError('storeName', 'storeName cannot be empty');
@@ -113,8 +112,8 @@ class ValidateOperator{
 
     protected function validateNewPassword(){
 
-        $val = $this->data['password'];
-        $confirm_val = $this->data['confirmPsw'];
+        $val = $this->values['password'];
+        $confirm_val = $this->values['confirmPsw'];
 
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
@@ -215,6 +214,8 @@ class ValidateOperator{
             $this->setError('password', 'Incorrect password');
         }
     }
+
+
 
     protected function setError($key, $val){
         $this->errors[$key] = $val;

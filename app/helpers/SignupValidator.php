@@ -1,34 +1,58 @@
 <?php
 
-class SignupValidator extends LoginValidator implements IValidator{
+require_once 'ValidateOperator.php';
 
-    public $userType;
-    private $data;
-    private $users;
-    private $errors;
-    private $return_data;
-    private $classNames;
+class SignupValidator extends ValidateOperator implements IValidator{
+
+    protected $values = [
+        'username'   => '',
+        'email'      => '',
+        'telNo'      => '',
+        'address'    => '',
+        'password'   => '',
+        'confirmPsw' => '',
+        'storeName'  => ''
+    ];
+
+    protected $classNames = [
+        'username'   => '',
+        'email'      => '',
+        'telNo'      => '',
+        'address'    => '',
+        'password'   => '',
+        'confirmPsw' => '',
+        'storeName'  => ''
+    ];
+
+    protected $errors = [
+        'username'   => '',
+        'email'      => '',
+        'telNo'      => '',
+        'address'    => '',
+        'password'   => '',
+        'confirmPsw' => '',
+        'storeName'  => 'none'
+    ];
 
 
     public function __construct($post_data, $users, $userType){
 
-        $this->data = $post_data;
+        $this->values['username'] = $post_data['username'];
+        $this->values['email'] = $post_data['email'];
+        $this->values['telNo'] = $post_data['telNo'];
+        $this->values['address'] = $post_data['address'];
+        $this->values['password'] = $post_data['password'];
+        $this->values['confirmPsw'] = $post_data['confirmPsw'];
+
+        if ($this->userType == "seller") {
+            $this->values['storeName'] = $post_data['storeName'];
+        }
+
         $this->users = $users;
         $this->userType = $userType;
-        $this->errors = [];
-        $this->classNames = [];
-        $this->return_data = ['errors' => [], 'classNames' => [], 'vkey' => ''];
     }
 
     public function validateForm(){
-
-        $this->errors = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => ''];
-        $this->classNames = ['username' => '', 'email' => '', 'telNo' => '', 'address' => '', 'password' =>  '', 'confirmPsw' => ''];
-
-        if ($this->userType == "seller") {
-            $this->errors += ['storeName' => ''];
-            $this->classNames += ['storeName' => ''];
-        }
 
         $this->validateNewUsername();
         $this->validateNewPassword();
@@ -42,12 +66,11 @@ class SignupValidator extends LoginValidator implements IValidator{
 
         $this->setClassNames();
 
-        $this->return_data['errors'] = $this->errors;
-        $this->return_data['classNames'] = $this->classNames;
+        $this->data['signupClassNames'] = $this->classNames;
+        $this->data['signupErrors'] = $this->errors;
+        $this->data['signupData'] = $this->values;
 
-        unset($this->return_data['vkey']);
-
-        return $this->return_data;
+        return $this->data;
     }
 }
 

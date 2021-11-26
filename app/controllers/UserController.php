@@ -1,126 +1,59 @@
 <?php
+
 class UserController extends Controller {
 
-    public function __construct(){
+    private $isValid = true;
 
+    public function __construct(){
+        
     }
 
     public function register() {
-        $signupData = [
-            'username'              => '',
-            'email'                 => '',
-            'password'              => '',
-            'confirmPassword'       => '',
-            'usernameError'         => '',
-            'emailError'            => '',
-            'passwordError'         => '',
-            'confirmPasswordError'  => '',
-            'storeName'             => ''
-        ];
+        
 
-        $signupClassNames = [
-            'username'              => '',
-            'email'                 => '',
-            'password'              => '',
-            'confirmPassword'       => '',
-            'usernameError'         => '',
-            'emailError'            => '',
-            'passwordError'         => '',
-            'confirmPasswordError'  => '',
-            'storeName'             => ''
-        ];
+        if(isset($_POST['submitSignup'])){
+            // Process form
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        $signupErrors = [
-            'username'              => '',
-            'email'                 => '',
-            'password'              => '',
-            'confirmPassword'       => '',
-            'usernameError'         => '',
-            'emailError'            => '',
-            'passwordError'         => '',
-            'confirmPasswordError'  => '',
-            'storeName'             => ''
-        ];
+            $userType = $_POST['userType'];
 
-        $data = [
-            'signupData'        => $signupData,
-            'signupClassNames'  => $signupClassNames,
-            'signupErrors'      => $signupErrors
-        ];
-
-      if(isset($_POST['submitLoginBuyer'])){
-          print("here");
-        // Process form
-        // Sanitize POST data
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-              $data = [
-                'username'              => trim($_POST['username']),
-                'email'                 => trim($_POST['email']),
-                'password'              => trim($_POST['password']),
-                'confirmPassword'       => trim($_POST['confirmPassword']),
-                'usernameError'         => '',
-                'emailError'            => '',
-                'passwordError'         => '',
-                'confirmPasswordError'  => ''
-            ];
-
-            $nameValidation = "/^[a-zA-Z0-9]*$/";
-            $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
-
-            //Validate username on letters/numbers
-            if (empty($data['username'])) {
-                $data['usernameError'] = 'Please enter username.';
-            } elseif (!preg_match($nameValidation, $data['username'])) {
-                $data['usernameError'] = 'Name can only contain letters and numbers.';
+            if ($userType == 'buyer'){
+                $this->userModel = $this->model('Buyer');
+            }
+            else{
+                $this->userModel = $this->model('Buyer');
             }
 
-            //Validate email
-            if (empty($data['email'])) {
-                $data['emailError'] = 'Please enter email address.';
-            } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['emailError'] = 'Please enter the correct format.';
-            } else {
-                //Check if email exists.
-                if ($this->userModel->findUserByEmail($data['email'])) {
-                $data['emailError'] = 'Email is already taken.';
+            $users = $this->userModel->findAllUsers();
+
+            $signupValidator = new SignupValidator($_POST, $users, $userType);
+
+            $data = $signupValidator->validateForm();
+
+            foreach ($data['signupErrors'] as $field => $errorValue) {
+                if ($errorValue != 'none'){
+                    $this->isValid = false;
+                    break;
                 }
             }
 
-           // Validate password on length, numeric values,
-            if(empty($data['password'])){
-              $data['passwordError'] = 'Please enter password.';
-            } elseif(strlen($data['password']) < 6){
-              $data['passwordError'] = 'Password must be at least 8 characters';
-            } elseif (preg_match($passwordValidation, $data['password'])) {
-              $data['passwordError'] = 'Password must be have at least one numeric value.';
-            }
-
-            //Validate confirm password
-             if (empty($data['confirmPassword'])) {
-                $data['confirmPasswordError'] = 'Please enter password.';
-            } else {
-                if ($data['password'] != $data['confirmPassword']) {
-                $data['confirmPasswordError'] = 'Passwords do not match, please try again.';
-                }
-            }
-
-            // Make sure that errors are empty
-            if (empty($data['usernameError']) && empty($data['emailError']) && empty($data['passwordError']) && empty($data['confirmPasswordError'])) {
-
-                // Hash password
-                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
+            if ($this->isValid){
                 //Register user from model function
                 if ($this->userModel->register($data)) {
                     //Redirect to the login page
-                    header('location: ' . URLROOT . '/users/login');
+                    header('location: ' . URLROOT . '/PageController/loginSignup');
                 } else {
                     die('Something went wrong.');
                 }
             }
+            else{
+                $this->view('pages/loginSignup', $data);
+            }
+
+
         }
-        $this->view('pages/loginSignup');
+
     }
 
     public function login() {

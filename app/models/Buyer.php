@@ -11,7 +11,7 @@ class Buyer implements User{
         $this->db = new Database;
     }
 
-    public function register($data) {
+    public function register($data, $userType) {
         $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
 
         //Bind values
@@ -59,6 +59,14 @@ class Buyer implements User{
         } else {
             return false;
         }
+    }
+
+    public function findAllUsers(){
+        $this->db->query('SELECT * FROM buyers');
+        
+        $results = $this->db->resultSet();
+
+        return $results;
     }
 }
 

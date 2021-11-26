@@ -68,7 +68,7 @@
 
                     <div class="signin-signup sign-up">
 
-                        <form class="sign-up-form" method="post" action="">
+                        <form class="sign-up-form" method="post" action="<?php echo URLROOT; ?>/UserController/register">
 
                             <h2 class="title">Sign up</h2>
 
@@ -90,11 +90,11 @@
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <div class="input-field <?php echo isset($data['signupClassNames']['tel']) ? $data['signupClassNames']['tel'] : ''; ?>">
+                            <div class="input-field <?php echo isset($data['signupClassNames']['telNo']) ? $data['signupClassNames']['telNo'] : ''; ?>">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input name="telNo" type="tel" placeholder="Phone Number" class="phone" value="<?php echo isset($data['signupData']['tel']) ? $data['signupData']['tel'] : '';?>">
+                                <input name="telNo" placeholder="Phone Number" class="phone" value="<?php echo isset($data['signupData']['telNo']) ? $data['signupData']['telNo'] : '';?>">
                                 <i class="fas fa-exclamation-circle tooltip">
-                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['tel']) ? $data['signupErrors']['tel'] : ''; ?></small>
+                                    <small class="tooltip-text"><?php echo isset($data['signupErrors']['telNo']) ? $data['signupErrors']['telNo'] : ''; ?></small>
                                 </i>
                                 <i class="fas fa-check-circle"></i>
                             </div>
@@ -148,7 +148,7 @@
                                 <i class="fas fa-check-circle"></i>
                             </div>
 
-                            <button class="btn solid signup" name="submitSignup">
+                            <button class="btn solid signup" name="submitSignup" value="submitSignup">
                                 <span class="buttonText">Sign Up</span>
                             </button>
 
