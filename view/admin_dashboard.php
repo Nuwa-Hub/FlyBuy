@@ -88,7 +88,7 @@ if (isset($_POST['desline'])) {
         <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#">Sign out</a></li>
-            <li><a href="approve_product.php">New products<span id="cart-item" class="badge badge-danger"><?php echo sizeof($products) ?></span></a></li>
+            <li onclick="currentSlide(5)"><a>New products<span id="cart-item" class="badge badge-danger"><?php echo sizeof($products) ?></span></a></li>
 
         </ul>
     </header>
@@ -113,11 +113,11 @@ if (isset($_POST['desline'])) {
     </div>
     <!-- slides menu -->
     <div class="slide-show">
-        <!--   <div class="page_container popup-menu0 slides">
-            graph
+        <div class="page_container popup-menu0 slides">
+            <!-- graph -->
             <canvas id="cvs" width="700" height="300">
-            [No canvas support]
-        </canvas>
+                [No canvas support]
+            </canvas>
         </div>
         <div class="page_container popup-menu1 slides">
             <h1>dfsfdgsfdg</h1>
@@ -158,7 +158,7 @@ if (isset($_POST['desline'])) {
                 <div class="item-container">
                 </div>
             </div>
-        </div>-->
+        </div>
         <div class="page_container popup-menu4 slides" id="s4">
 
             <div class="item-bar">
