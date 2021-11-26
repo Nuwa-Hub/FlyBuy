@@ -14,7 +14,7 @@ class Buyer implements User{
         
         $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
 
-        $this->db->query('INSERT INTO buyers (username, email, telNo, `address`, `password`, vkey) VALUES(:username, :email, :telNo, :`address`, :`password`, :vkey)');
+        $this->db->query('INSERT INTO buyers (username, email, telNo, address, password, vkey) VALUES(:username, :email, :telNo, :address, :password, :vkey)');
 
         //Bind values
         $this->db->bind(':username', $data['signupData']['username']);

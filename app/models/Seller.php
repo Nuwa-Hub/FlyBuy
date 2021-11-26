@@ -7,17 +7,23 @@ class Seller implements User{
     private $db;
 
     public function __construct(){
-        
         $this->db = new Database;
     }
 
     public function register($data) {
-        $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
+        
+        $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
+
+        $this->db->query('INSERT INTO sellers (username, email, telNo, address, password, storeName, vkey) VALUES(:username, :email, :telNo, :address, :password, :storeName, :vkey)');
 
         //Bind values
-        $this->db->bind(':username', $data['username']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':username', $data['signupData']['username']);
+        $this->db->bind(':email', $data['signupData']['email']);
+        $this->db->bind(':telNo', $data['signupData']['telNo']);
+        $this->db->bind(':address', $data['signupData']['address']);
+        $this->db->bind(':password', $data['signupData']['password']);
+        $this->db->bind(':storeName', $data['signupData']['storeName']);
+        $this->db->bind(':vkey', $data['vkey']);
 
         //Execute function
         if ($this->db->execute()) {

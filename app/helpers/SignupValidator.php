@@ -44,7 +44,7 @@ class SignupValidator extends ValidateOperator implements IValidator{
         $this->values['password'] = $post_data['password'];
         $this->values['confirmPsw'] = $post_data['confirmPsw'];
 
-        if ($this->userType == "seller") {
+        if ($userType == "seller") {
             $this->values['storeName'] = $post_data['storeName'];
         }
 
@@ -53,14 +53,13 @@ class SignupValidator extends ValidateOperator implements IValidator{
     }
 
     public function validateForm(){
-
         $this->validateNewUsername();
         $this->validateNewPassword();
         $this->validateNewEmail();
         $this->validateNewTelNo();
         $this->validateAddress();
 
-        if ($this->userType === "seller") {
+        if ($this->userType === "seller"){
             $this->validateNewStorename();
         }
 

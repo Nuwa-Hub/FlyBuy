@@ -96,9 +96,9 @@ class ValidateOperator{
     }
 
     protected function validateNewStorename(){
-
+        
         $val = trim($this->values['storeName']);
-
+        
         if (empty($val)) {
             $this->setError('storeName', 'storeName cannot be empty');
         }

@@ -15,14 +15,14 @@ class UserController extends Controller {
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            
             $userType = $_POST['userType'];
 
             if ($userType == 'buyer'){
                 $this->userModel = $this->model('Buyer');
             }
             else{
-                $this->userModel = $this->model('Buyer');
+                $this->userModel = $this->model('Seller');
             }
 
             $users = $this->userModel->findAllUsers();
@@ -41,6 +41,9 @@ class UserController extends Controller {
             if ($this->isValid){
                 //Register user from model function
                 if ($this->userModel->register($data)) {
+
+                    
+
                     //Redirect to the login page
                     header('location: ' . URLROOT . '/PageController/loginSignup');
                 } else {
