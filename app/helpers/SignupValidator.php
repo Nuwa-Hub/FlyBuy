@@ -31,7 +31,7 @@ class SignupValidator extends ValidateOperator implements IValidator{
         'address'    => '',
         'password'   => '',
         'confirmPsw' => '',
-        'storeName'  => 'none'
+        'storeName'  => ''
     ];
 
 
@@ -69,6 +69,8 @@ class SignupValidator extends ValidateOperator implements IValidator{
         $this->data['signupClassNames'] = $this->classNames;
         $this->data['signupErrors'] = $this->errors;
         $this->data['signupData'] = $this->values;
+
+        // vkey is set in validateNewEmail() method
 
         return $this->data;
     }

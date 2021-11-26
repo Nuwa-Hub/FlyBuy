@@ -7,17 +7,22 @@ class Buyer implements User{
     private $db;
 
     public function __construct(){
-        
         $this->db = new Database;
     }
 
-    public function register($data, $userType) {
-        $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
+    public function register($data) {
+        
+        $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
+
+        $this->db->query('INSERT INTO buyers (username, email, telNo, address, password, vkey) VALUES(:username, :email, :telNo, :address, :password, :vkey")');
 
         //Bind values
-        $this->db->bind(':username', $data['username']);
-        $this->db->bind(':email', $data['email']);
-        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':username', $data['signupData']['username']);
+        $this->db->bind(':email', $data['signupData']['email']);
+        $this->db->bind(':telNo', $data['signupData']['telNo']);
+        $this->db->bind(':address', $data['signupData']['address']);
+        $this->db->bind(':password', $data['signupData']['password']);
+        $this->db->bind(':vkey', $data['vkey']);
 
         //Execute function
         if ($this->db->execute()) {
