@@ -61,7 +61,7 @@ if(isset($_GET['vkey'])){
 
             <img class="mail-icon" src="../resources/envelope_user.png">
             
-            <h2>Hey Nigga</h2>
+            <h2>Hello!</h2>
             <h3>You&#8217;re almost ready to start enjoying <b>FlyBuy</b></h3>
             <h4>Go to your email and verify your email address</h4>
 
