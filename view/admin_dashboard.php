@@ -1,5 +1,9 @@
 <?php
 include '../database/db_connection.php';
+
+session_start();
+
+
 //fetch all products which not approved
 $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products WHERE approve=0"), MYSQLI_ASSOC);
 
@@ -10,6 +14,7 @@ if (isset($_POST['accept'])) {
     $sql = "UPDATE products SET approve=1 WHERE item_id=$pid";
 
     mysqli_query($conn, $sql);
+     $_SESSION['acbtnclick'] = "click";
     //refresh the page
     header("Refresh:0");
 }
@@ -22,7 +27,11 @@ if (isset($_POST['decline'])) {
     mysqli_query($conn, $sql);
     //refresh the page
     header("Refresh:0");
+     
+  
+ 
 }
+
 ?>
 
 
@@ -74,7 +83,7 @@ if (isset($_POST['decline'])) {
     <title>Admin Dashboard</title>
 </head>
 
-<body>
+<body onload="rederect()">
     <!-- header -->
     <header id="header">
         <a href="#" class="logo">FlyBuy</a>
@@ -173,10 +182,10 @@ if (isset($_POST['decline'])) {
                                 <h2 class="itemname"><?php echo $product['itemName'] ?></h2>
                                 <h2 class="item-price">Price : <?php echo $product['price'] ?>/=</h2>
                                 <ul>
-                                    <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="accept">
+                                    <button onclick="setbtnclick()" class="btn btn-info btn-block addItemBtn add-cart-btn" name="accept">
                                         Accept
                                     </button>
-                                    <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="decline">
+                                    <button onclick="setbtnclick()" class="btn btn-info btn-block addItemBtn add-cart-btn" name="decline">
                                         Decline
                                     </button>
                                 </ul>
@@ -193,7 +202,6 @@ if (isset($_POST['decline'])) {
 
     <!-- background animation 
     <section>
-
         </div>
         <div class=" leaf ">
             <div> <img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png " height="75px " width="75px "></img>
@@ -208,9 +216,7 @@ if (isset($_POST['decline'])) {
             </div>
             <div> <img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png " height="75px " width="75px "></div>
             <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png " height="75px " width="75px "></div>
-
         </div>
-
         <div class="leaf leaf1 ">
             <div> <img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png " height="75px " width="75px "></img>
             </div>
@@ -224,9 +230,7 @@ if (isset($_POST['decline'])) {
             </div>
             <div> <img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png " height="75px " width="75px "></div>
             <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png " height="75px " width="75px "></div>
-
         </div>
-
         <div class="leaf leaf2 ">
             <div> <img src="http://www.pngmart.com/files/1/Fall-Autumn-Leaves-Transparent-PNG.png " height="75px " width="75px "></img>
             </div>
@@ -236,12 +240,10 @@ if (isset($_POST['decline'])) {
             </div>
             <div><img src="http://www.pngmart.com/files/1/Green-Leaves-PNG-File.png " height="75px " width="75px "></img>
             </div>
-
             <div> <img src="http://www.pngmart.com/files/1/Transparent-Autumn-Leaves-Falling-PNG.png " height="75px " width="75px "></img>
             </div>
             <div> <img src="http://www.pngmart.com/files/1/Realistic-Autumn-Fall-Leaves-PNG.png " height="75px " width="75px "></div>
             <div><img src="http://cdn.clipart-db.ru/rastr/autumn_leaves_025.png " height="75px " width="75px "></div>
-
         </div>
     </section>
 -->
@@ -249,7 +251,5 @@ if (isset($_POST['decline'])) {
     <script src=" ../javaScript/graph.js "></script>
     <script src=" ../javaScript/admin_dashboard.js "></script>
 </body>
-
-</html>
 
 </html>

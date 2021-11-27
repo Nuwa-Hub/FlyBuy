@@ -22,7 +22,7 @@ function showSlides(n) {
 
         slides[slideIndex - 1].style.display = "";
         //myMove(slides[slideIndex - 1]);
-    }, 600);
+    }, 0);
 }
 // var id = null;
 
@@ -42,3 +42,28 @@ function showSlides(n) {
 //         }
 //     }
 // }
+var image = document.getElementsByClassName("item-img");
+var popuppage = document.getElementsByClassName("popup-page");
+
+$(document).ready(function() {
+
+    $("#item-img").hover(function() {
+
+        $("#popup-page").css("display", "flex");
+    }, function() {
+        $("#popup-page").css("display", "none");
+    });
+});
+
+function setbtnclick() {
+    sessionStorage.setItem("acbtnclick", "click");
+}
+
+function rederect() {
+    var lat = sessionStorage.getItem("acbtnclick");
+    if (lat == "click") {
+
+        currentSlide(5);
+        //sessionStorage.setItem("acbtnclick", "");
+    }
+}
