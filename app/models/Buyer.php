@@ -32,19 +32,37 @@ class Buyer implements User{
         }
     }
 
-    public function login($email, $password) {
+    public function login($data) {
+
+        $email = $data['loginData']['email'];
+        $password = $data['loginData']['password'];
 
         $this->db->query('SELECT * FROM buyers WHERE email = :email');
 
         //Bind value
         $this->db->bind(':email', $email);
 
-        $row = $this->db->single();
+        $id = $this->db->single()->buy_id;
+        return $id;
+        // $hashedPassword = $row->password;
 
-        $hashedPassword = $row->password;
+        // if (password_verify($password, $hashedPassword)) {
+        //     return $row;
+        // } else {
+        //     return false;
+        // }
+    }
 
-        if (password_verify($password, $hashedPassword)) {
-            return $row;
+    public function findUserById($id) {
+        //Prepared statement
+        $this->db->query('SELECT * FROM buyers WHERE buy_id = :id');
+
+        //Email param will be binded with the email variable
+        $this->db->bind(':id', $id);
+
+        //Check if email is already registered
+        if($this->db->rowCount() > 0) {
+            return true;
         } else {
             return false;
         }
@@ -69,6 +87,15 @@ class Buyer implements User{
     public function findAllUsers(){
         $this->db->query('SELECT * FROM buyers');
         
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    public function getAllProducts(){
+
+        $this->db->query("SELECT * FROM  products");
+
         $results = $this->db->resultSet();
 
         return $results;

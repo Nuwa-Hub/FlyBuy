@@ -4,29 +4,48 @@ require_once 'ValidateOperator.php';
 
 class LoginValidator extends ValidateOperator implements IValidator{
 
-    public function __construct($post_data, $users){
+    protected $values = [
+        'email'      => '',
+        'password'   => ''
+    ];
 
-        $this->data = $post_data;
+    protected $classNames = [
+        'email'      => '',
+        'password'   => ''
+    ];
+
+    protected $errors = [
+        'email'      => '',
+        'password'   => ''
+    ];
+
+
+    public function __construct($post_data, $users, $userType = null){
+
+        $this->values['email'] = $post_data['email'];
+        $this->values['password'] = $post_data['password'];
+
+        // if ($this->userType == "seller") {
+        //     $this->values['storeName'] = $post_data['storeName'];
+        // }
+
         $this->users = $users;
-        $this->errors = [];
-        $this->classNames = [];
-        $this->return_data = ['errors' => [], 'classNames' => []];
+        // $this->userType = $userType;
     }
 
     public function validateForm(){
 
-        $this->errors = ['email' => 'none', 'password' => ''];
-        $this->classNames = ['email' => '', 'password' => ''];
-
         $this->validateLoginEmail();
-        
 
         $this->setClassNames();
 
-        $this->return_data['errors'] = $this->errors;
-        $this->return_data['classNames'] = $this->classNames;
+        $this->data['loginClassNames'] = $this->classNames;
+        $this->data['loginErrors'] = $this->errors;
+        $this->data['loginData'] = $this->values;
 
-        return $this->return_data;
+        // vkey is set in validateNewEmail() method
+
+        return $this->data;
     }
 }
 

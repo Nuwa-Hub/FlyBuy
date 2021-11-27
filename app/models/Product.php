@@ -8,6 +8,7 @@ class Product{
     }
 
     public function findAllProducts(){
+        
         $this->db->query('SELECT * FROM  products');
 
         $results = $this->db->resultSet();

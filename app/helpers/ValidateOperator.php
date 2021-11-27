@@ -151,7 +151,7 @@ class ValidateOperator{
 
     protected function validateLoginEmail(){
 
-        $val = trim($this->data['email']);
+        $val = trim($this->values['email']);
 
         if (empty($val)) {
 
@@ -174,7 +174,7 @@ class ValidateOperator{
                 $curr_user = NULL;
 
                 foreach ($this->users as $user) {
-                    if ($user['email'] === $val) {
+                    if ($user->email === $val) {
                         $this->setError('email', 'none');
                         $curr_user = $user;
                         break;
@@ -187,7 +187,7 @@ class ValidateOperator{
                 }
                 else {
 
-                    if (!$curr_user['verified']) {
+                    if (!$curr_user->verified) {
                         $this->setError('email', 'email is not verified');
                     }
                     else {
@@ -202,12 +202,12 @@ class ValidateOperator{
 
     protected function validateLoginPassword($user){
 
-        $val = $this->data['password'];
+        $val = $this->values['password'];
 
         if (empty($val)) {
             $this->setError('password', 'password cannot be empty');
         }
-        else if (password_verify($val, $user['password'])) { //insert de-hashing
+        else if (password_verify($val, $user->password)) { //insert de-hashing
           $this->setError('password', 'none');
         }
         else {
