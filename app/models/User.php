@@ -6,9 +6,13 @@ interface User {
 
     public function login($username, $password);
 
-    public function findUserByEmail($email);
+    public function checkEmailExistence($email);
+
+    public function findUserByVKey($vkey);
 
     public function findAllUsers();
+
+    public function verifyUser($vkey);
     
 }
 

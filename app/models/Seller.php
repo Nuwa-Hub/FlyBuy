@@ -1,7 +1,5 @@
 <?php
 
-require_once 'User.php';
-
 class Seller implements User{
 
     private $db;
@@ -11,7 +9,7 @@ class Seller implements User{
     }
 
     public function register($data) {
-        
+
         $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
 
         $this->db->query('INSERT INTO sellers (username, email, telNo, address, password, storeName, vkey) VALUES(:username, :email, :telNo, :address, :password, :storeName, :vkey)');
@@ -51,20 +49,32 @@ class Seller implements User{
         }
     }
 
-    //Find user by email. Email is passed in by the Controller.
-    public function findUserByEmail($email) {
+    public function checkEmailExistence($email) {
         //Prepared statement
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM sellers WHERE email = :email');
 
         //Email param will be binded with the email variable
         $this->db->bind(':email', $email);
 
+        $resultSet = $this->db->resultSet();
+
         //Check if email is already registered
-        if($this->db->rowCount() > 0) {
+        if(count($resultSet) > 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function findUserByVKey($vkey){
+        //Prepared statement
+        $this->db->query('SELECT * FROM sellers WHERE vkey = :vkey');
+
+        $this->db->bind(':vkey', $vkey);
+
+        $user = $this->db->single();
+
+        return $user;
     }
 
     public function findAllUsers(){
@@ -73,6 +83,19 @@ class Seller implements User{
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function verifyUser($vkey){
+        $this->db->query('UPDATE sellers SET verified = :verified WHERE vkey = :vkey');
+
+        $this->db->bind(':verified', 1);
+        $this->db->bind(':vkey', $vkey);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

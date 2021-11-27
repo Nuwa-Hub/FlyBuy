@@ -3,7 +3,7 @@
 class ValidateOperator{
 
     protected $values;
-    protected $users;
+    protected $emailExists;
     protected $errors;
     protected $classNames;
     protected $data;
@@ -44,12 +44,8 @@ class ValidateOperator{
 
                 $this->setError('email', 'none');
 
-                foreach ($this->users as $user) {
-
-                    if ($user->email === $val) {
-                        $this->setError('email', 'email already exists');
-                        break;
-                    }
+                if ($this->emailExists){
+                    $this->setError('email', 'email already exists');
                 }
 
                 if ($this->errors['email'] === 'none') {

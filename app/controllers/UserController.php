@@ -25,9 +25,9 @@ class UserController extends Controller {
                 $this->userModel = $this->model('Seller');
             }
 
-            $users = $this->userModel->findAllUsers();
+            $emailExists = $this->userModel->checkEmailExistence($_POST['email']);
 
-            $signupValidator = new SignupValidator($_POST, $users, $userType);
+            $signupValidator = new SignupValidator($_POST, $emailExists, $userType);
 
             $data = $signupValidator->validateForm();
 
@@ -42,10 +42,14 @@ class UserController extends Controller {
                 //Register user from model function
                 if ($this->userModel->register($data)) {
 
-                    
+                    $additionalData  = ['vkey' => $data['vkey'], 'table' => $userType];
+                    $email = $_POST['email'];
+
+                    $path_akash = URLROOT . '/PageController/emailVerified';
+                    sendMail($email, 'signup', $additionalData, $path_akash);
 
                     //Redirect to the login page
-                    header('location: ' . URLROOT . '/PageController/loginSignup');
+                    header('location: ' . URLROOT . '/PageController/verifyEmail/' . $userType . '/' . $data['vkey']);
                 } else {
                     die('Something went wrong.');
                 }

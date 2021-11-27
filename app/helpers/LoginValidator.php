@@ -1,7 +1,5 @@
 <?php
 
-require_once 'ValidateOperator.php';
-
 class LoginValidator extends ValidateOperator implements IValidator{
 
     public function __construct($post_data, $users){

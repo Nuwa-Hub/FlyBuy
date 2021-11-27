@@ -75,7 +75,7 @@ class Database{
         return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 
-    //gets the row count
+    //gets the lastely effected row count
     public function rowCount(){
         return $this->statement->rowCount();
     }

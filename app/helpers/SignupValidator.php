@@ -1,7 +1,5 @@
 <?php
 
-require_once 'ValidateOperator.php';
-
 class SignupValidator extends ValidateOperator implements IValidator{
 
     protected $values = [
@@ -35,7 +33,7 @@ class SignupValidator extends ValidateOperator implements IValidator{
     ];
 
 
-    public function __construct($post_data, $users, $userType){
+    public function __construct($post_data, $emailExists, $userType){
 
         $this->values['username'] = $post_data['username'];
         $this->values['email'] = $post_data['email'];
@@ -48,11 +46,12 @@ class SignupValidator extends ValidateOperator implements IValidator{
             $this->values['storeName'] = $post_data['storeName'];
         }
 
-        $this->users = $users;
+        $this->emailExists = $emailExists;
         $this->userType = $userType;
     }
 
     public function validateForm(){
+        
         $this->validateNewUsername();
         $this->validateNewPassword();
         $this->validateNewEmail();
