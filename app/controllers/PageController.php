@@ -24,9 +24,6 @@ class PageController extends Controller{
 
     public function verifyEmail($userType, $vkey){
 
-        // relevent paths for admins :)
-        $path_akash = URLROOT . "/PageController/emailVerified/";
-
         if ($userType == 'buyer'){
             $user = $this->buyerModel->findUserByVKey($vkey);
         }
@@ -37,8 +34,10 @@ class PageController extends Controller{
         if (isset($_POST['submitSendAgain'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $userType];
             $email = $user->email;
+            $path = URLROOT . "/PageController/emailVerified/";
+            $type = 'signup';
 
-            sendMail($email, 'signup', $additionalData, $path_akash);
+            sendMail($email, $type, $additionalData, $path);
             header('location: ' . URLROOT . '/PageController/verifyEmail/' . $userType . '/' . $vkey);
         }
 
@@ -55,6 +54,23 @@ class PageController extends Controller{
         }
 
         $this->view('pages/emailVerified');
+    }
+
+    public function forgotPassword(){
+
+        if (isset($_POST['submit'])){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $email = $_POST['email'];
+            $type = 'forgotPsw';
+
+            $additionalData = [];
+            $path = '';
+
+            sendMail($email, $type, $additionalData, $path);
+        }
+
+        $this->view('pages/forgotPsw');
     }
 }
 
