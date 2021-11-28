@@ -79,6 +79,10 @@ class Database{
     public function rowCount(){
         return $this->statement->rowCount();
     }
+
+    public function updateField(){
+        $this->execute();
+    }
 }
 
 ?>

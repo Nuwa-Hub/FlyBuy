@@ -1,26 +1,4 @@
-<?php
-include '../modules/sendMail.php';
-
-if (isset($_POST['submit'])){
-
-        $email=$_POST['email'];
-        $type='forgotPsw';
-    //    $validation = new UserValidator($_POST,"","");
-    //    $return_data = $validation->validateForm('changePsw');
-        sendMail($email,$type,"","");  
-        header("Location: loginSignup.php");
-
-}
-
-
-if (isset($_POST['cancel'])){
-    header("Location: loginSignup.php");
-
-}
-?>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,24 +34,24 @@ if (isset($_POST['cancel'])){
 
                     <img src="<?php echo URLROOT; ?>/public/img/password.png" alt="forgotPsw-image">
 
-                    <div class="input-field">
+                    <div class="input-field <?php echo isset($data['className']) ? $data['className'] : ''; ?>">
                         <i class="fas fa-envelope"></i>
-                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw" name="email">
+                        <input name="email" type="text" placeholder="Email" class="emailForgotPsw" name="email" value="<?php echo isset($data['value']) ? $data['value'] : ''; ?>">
                         <i class="fas fa-exclamation-circle tooltip">
-                            <small class="tooltip-text">Error Message</small>
+                            <small class="tooltip-text"><?php echo isset($data['errorMsg']) ? $data['errorMsg'] : ''; ?></small>
                         </i>
                         <i class="fas fa-check-circle"></i>
                     </div>
 
-              
+                    <small><?php echo isset($data['msg']) ? $data['msg'] : ''; ?></small>              
 
-                    <button class="btn solid forgotPsw" name="submit">
+                    <button class="btn solid forgotPsw" name="submitForgotPsw">
                         <span class="buttontext">Submit</span>
                     </button>
                 
-                    <button class="btn solid forgotPsw" name="cancel">
-                        <span class="buttontext">Cancel</span>
-                    </button>
+                    <!-- <button class="btn solid forgotPsw" name="login">
+                        <span class="buttontext">Login to your account</span>
+                    </button> -->
                     
                 </form>
 

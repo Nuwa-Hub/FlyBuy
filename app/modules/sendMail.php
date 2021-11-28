@@ -11,6 +11,7 @@ require 'vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
+$mail->SMTPDebug = 0;
 
 //system email credentials
 $address = 'cosmosflybuy@gmail.com';
@@ -46,14 +47,17 @@ try {
             $mail->Body    = "You have successfully created your Flybuy account. Click <a href='$path/$table/$vkey'>here</a> to verify your email";
         }
         else if($type== 'forgotPsw'){
+
             $mail->setFrom('cosmosflybuy@gmail.com', 'FlyBuy');
             $mail->addAddress($clientEmail);
 
-            //Content
-            $path = 'http://localhost/OOP%20project/FlyBuy/view/changePsw.php';
+            $vkeyBuyer = $additionalData['vkeyBuyer'];
+            $vkeySeller = $additionalData['vkeySeller'];
+            $msg = $additionalData['msg'];
+
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'FlyBuy - Change Password';
-            $mail->Body    ="Click <a href=$path>here</a> to change your password";
+            $mail->Body    ="$msg<br>Click <a href='$path/$vkeyBuyer/$vkeySeller'>here</a> to change your password";
         }
 
         $mail->send();

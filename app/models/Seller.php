@@ -77,6 +77,16 @@ class Seller implements User{
         return $user;
     }
 
+    public function findUserByEmail($email){
+        $this->db->query('SELECT * FROM sellers WHERE email = :email');
+
+        $this->db->bind(':email', $email);
+
+        $user = $this->db->single();
+
+        return $user;
+    }
+
     public function findAllUsers(){
         $this->db->query('SELECT * FROM sellers');
         
@@ -95,6 +105,43 @@ class Seller implements User{
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function updateUserData($data){
+
+        $vkey = $data['vkey'];
+        
+        if(isset($data['username']) and !empty($data['username'])){
+            
+            $this->db->query("UPDATE sellers SET username = :username WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':username', $data['username']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['password']) and !empty($data['password'])){
+            
+            $this->db->query("UPDATE sellers SET password = :password  WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':password', $data['password']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['address']) and !empty($data['address'])){
+            
+            $this->db->query("UPDATE sellers SET address = :address WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':address', $data['address']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['telNo']) and !empty($data['telNo'])){
+            
+            $this->db->query("UPDATE sellers SET telNo = :telNo WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':telNo', $data['telNo']);
+            $this->db->updateField();
         }
     }
 }

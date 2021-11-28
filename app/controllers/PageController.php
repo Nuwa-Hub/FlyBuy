@@ -58,19 +58,104 @@ class PageController extends Controller{
 
     public function forgotPassword(){
 
-        if (isset($_POST['submit'])){
+        $data = [
+            'className' => '',
+            'errorMsg'  => '',
+            'value'     => ''
+        ];
+
+        $vkeyBuyer = '';
+        $vkeySeller = '';
+
+        if (isset($_POST['submitForgotPsw'])){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $email = $_POST['email'];
-            $type = 'forgotPsw';
+            $data['value'] = $email;
 
-            $additionalData = [];
-            $path = '';
+            if($email){
+                $buyer = $this->buyerModel->findUserByEmail($email);
+                $seller = $this->sellerModel->findUserByEmail($email);
 
-            sendMail($email, $type, $additionalData, $path);
+                ($buyer) ? $vkeyBuyer = $buyer->vkey : $vkeyBuyer = '';
+                ($seller) ? $vkeySeller = $seller->vkey : $vkeySeller = '';
+
+                $type = 'forgotPsw';
+
+                $additionalData = [
+                    'vkeyBuyer'     => $vkeyBuyer,
+                    'vkeySeller'    => $vkeySeller,
+                    'msg'           => ''
+                ];
+
+                $path = URLROOT . "/PageController/changePassword";
+
+                $data['className'] = 'success';
+
+                if (empty($vkeyBuyer) and empty($vkeySeller)){
+                    $data['className'] = 'error';
+                    $data['errorMsg'] = 'Your email is not registered. Please check again';
+                }
+                else if (empty($vkeyBuyer)){
+                    $additionalData['msg'] = 'Your email is registered as a seller. Please check your inbox and verify it is you';
+                }
+                else if (empty($vkeySeller)){
+                    $additionalData['msg'] = 'Your email is registered as a buyer. Please check your inbox and verify it is you';
+                }
+                else{
+                    $additionalData['msg'] = 'Your email is registered as a buyer and a seller. Please check your inbox and verify it is you';
+                }
+
+                if ($data['className'] == 'success'){
+                    sendMail($email, $type, $additionalData, $path);
+                    header('location: ' . URLROOT . '/PageController/loginSignup');
+                }
+
+            }
+            else{
+                $data['className'] = 'error';
+                $data['errorMsg'] = 'email cannot be empty';
+            }
         }
 
-        $this->view('pages/forgotPsw');
+        $this->view('pages/forgotPsw', $data);
+    }
+
+    public function changePassword($vkeyBuyer, $vkeySeller){
+
+        $data = [
+            'vkeyBuyer' => $vkeyBuyer,
+            'vkeySeller' => $vkeySeller
+        ];
+
+        if (isset($_POST['submitChangePsw'])){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $password = $_POST['password'];
+            $confirmPsw = $_POST['confirmPsw'];
+
+            // need to validate passwords before updating
+            $changePswValidator = new changePswValidator($password, $confirmPsw, $vkeyBuyer, $vkeySeller);
+            $data = $changePswValidator->validateForm();
+
+            print_r($data);
+
+            if (! empty($vkeyBuyer)){
+                $dataToUpdate['password'] = $password;
+                $dataToUpdate['vkey'] = $vkeyBuyer;
+                $this->buyerModel->updateUserData($dataToUpdate);
+            }
+            if (! empty($vkeySeller)){
+                $dataToUpdate['password'] = $password;
+                $dataToUpdate['vkey'] = $vkeySeller;
+                $this->buyerModel->updateUserData($dataToUpdate);
+            }
+
+        }
+
+        $this->view('pages/changePsw', $data);
+
+        
     }
 }
 

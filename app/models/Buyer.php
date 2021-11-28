@@ -68,9 +68,19 @@ class Buyer implements User{
 
     public function findUserByVKey($vkey){
         //Prepared statement
-        $this->db->query('SELECT * FROM buyers WHERE vkey = :vkey');
+        $this->db->query('SELECT * FROM buyers WHERE vkey = :vkey LIMIT 1');
 
         $this->db->bind(':vkey', $vkey);
+
+        $user = $this->db->single();
+
+        return $user;
+    }
+
+    public function findUserByEmail($email){
+        $this->db->query('SELECT * FROM buyers WHERE email = :email LIMIT 1');
+
+        $this->db->bind(':email', $email);
 
         $user = $this->db->single();
 
@@ -95,6 +105,45 @@ class Buyer implements User{
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function updateUserData($data){
+
+        $vkey = $data['vkey'];
+        
+        if(isset($data['username']) and !empty($data['username'])){
+            
+            $this->db->query("UPDATE buyers SET username = :username WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':username', $data['username']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['password']) and !empty($data['password'])){
+
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            
+            $this->db->query("UPDATE buyers SET password = :password  WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':password', $data['password']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['address']) and !empty($data['address'])){
+            
+            $this->db->query("UPDATE buyers SET address = :address WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':address', $data['address']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['telNo']) and !empty($data['telNo'])){
+            
+            $this->db->query("UPDATE buyers SET telNo = :telNo WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':telNo', $data['telNo']);
+            $this->db->updateField();
         }
     }
 }

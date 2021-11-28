@@ -10,9 +10,13 @@ interface User {
 
     public function findUserByVKey($vkey);
 
+    public function findUserByEmail($email);
+
     public function findAllUsers();
 
     public function verifyUser($vkey);
+
+    public function updateUserData($data);
     
 }
 
