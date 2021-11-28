@@ -35,41 +35,26 @@ class Buyer implements User{
     public function login($data) {
 
         $email = $data['loginData']['email'];
-        $password = $data['loginData']['password'];
+        // $password = $data['loginData']['password'];
 
         $this->db->query('SELECT * FROM buyers WHERE email = :email');
-
-        //Bind value
         $this->db->bind(':email', $email);
-
         $id = $this->db->single()->buy_id;
-        return $id;
-        // $hashedPassword = $row->password;
 
-        // if (password_verify($password, $hashedPassword)) {
-        //     return $row;
-        // } else {
-        //     return false;
-        // }
+        return $id;
     }
 
     public function findUserById($id) {
-        //Prepared statement
+        
         $this->db->query('SELECT * FROM buyers WHERE buy_id = :id');
-
-        //Email param will be binded with the email variable
         $this->db->bind(':id', $id);
 
-        //Check if email is already registered
-        if($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->db->single();
     }
 
     //Find user by email. Email is passed in by the Controller.
     public function findUserByEmail($email) {
+
         //Prepared statement
         $this->db->query('SELECT * FROM users WHERE email = :email');
 
@@ -85,8 +70,8 @@ class Buyer implements User{
     }
 
     public function findAllUsers(){
+
         $this->db->query('SELECT * FROM buyers');
-        
         $results = $this->db->resultSet();
 
         return $results;
@@ -95,7 +80,6 @@ class Buyer implements User{
     public function getAllProducts(){
 
         $this->db->query("SELECT * FROM  products");
-
         $results = $this->db->resultSet();
 
         return $results;

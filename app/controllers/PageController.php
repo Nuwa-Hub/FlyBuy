@@ -30,8 +30,8 @@ class PageController extends Controller{
             'user' => $this->buyerModel->findUserById($id),
             'products' => $this->buyerModel->getAllProducts($id)
         ];
-        print_r($data);
-        // $this->view('pages/buyerAccount', $data);
+        
+        $this->view('pages/buyerAccount', $data);
     }
 
     public function sellerAccount($id){
@@ -41,8 +41,18 @@ class PageController extends Controller{
             'user' => $this->sellerModel->findUserById($id),
             'products' => $this->sellerModel->findAllSellerProducts($id)
         ];
-        print_r($data);
-        // $this->view('pages/sellerAccount', $data);
+        
+        $this->view('pages/sellerAccount', $data);
+    }
+
+    public function editSellerAccount($id){
+
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id)
+        ];
+        
+        $this->view('pages/editSellerAccount', $data);
     }
 }
 

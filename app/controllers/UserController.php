@@ -95,13 +95,19 @@ class UserController extends Controller {
                 }
             }
             else{
-                // print("here in else");
                 $this->view('pages/loginSignup', $data);
             }
         }
-
-        // $this->view('pages/loginSignup', $data);
     }
+
+    /*
+    create common edit method which takes usertype
+    create model according to type
+    call editProfile from model
+    check for seller_id and buyer_id
+    */
+
+
 
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;

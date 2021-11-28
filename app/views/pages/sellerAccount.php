@@ -120,8 +120,9 @@
         crossorigin="anonymous" 
     />
     
-    <link rel="stylesheet" href="../css/styles_sellerAccount.css">
-    <link rel="stylesheet" href="../css/styles_popup.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
+    
     <title>FlyBuy | Profile</title>
 </head>
 <body>
@@ -129,7 +130,7 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href='sellerAccount.php?seller_id=<?php echo $data['seller_id']; ?>' class="home">Home</a>
+            <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
@@ -144,10 +145,10 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </h3>
-                <a href='editSellerAccount.php?seller_id=<?php echo $data['seller_id']; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
+                <a href='<?php echo URLROOT ?>/pageController/editSellerAccount/<?php echo $data['user']->seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
-                <img src="../resources/user.png" alt="profile picture">
+                <img src="<?php echo URLROOT ?>/public/img/user.png" alt="profile picture">
                 <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
             </div>
             <div class="name"><?php echo $data['user']->username; ?>
@@ -180,7 +181,7 @@
             
             <?php foreach ($data['products'] as $product): ?>
                 <div class="item-details" id="<?php echo $product->item_id; ?>">
-                    <div class="item-img"><img src="../resources/sugar500g.jpg" alt="item"></div>
+                    <div class="item-img"><img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item"></div>
                     <div class="item-name">
                         <div><?php echo $product->itemName; ?></div>
                         <small><?php echo $product->description; ?></small>
@@ -215,7 +216,7 @@
 
             <h1 class="title">Add Item</h1>
 
-            <form class="item-form" id="item-form" method="POST">
+            <form class="item-form" id="item-form" method="POST" action="">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -249,7 +250,7 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input type="submit" class="add-item btn" name="submitAddItem" value="Add">
+                <button class="add-item btn" name="submitAddItem">Add</button>
 
             </form>
 
@@ -269,7 +270,7 @@
 
             <h1 class="title">Edit Item</h1>
 
-            <form class="item-form" id="item-form" method="POST">
+            <form class="item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -299,11 +300,12 @@
 
                 <div class="input-field editItem">
                     <i class="fas fa-file-alt"></i>
-                    <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product['description']); ?>">
+                    <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product->description); ?>">
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <input class="item-id" type="hidden" name="item_id">
+                <input class="item-id" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
 
                 <input type="submit" class="edit-item btn" name="submitEditItem" value="Edit">
 
@@ -325,7 +327,7 @@
 
             <h1 class="title">Do you want to logout?</h1>
 
-            <img src="../resources/warn.png" alt="warn.png" class="warn-img">
+            <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
 
             <form method="post" class="logoutForm">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
@@ -337,6 +339,6 @@
     
 </body>
 
-<script src="../javaScript/popupFormValidation.js"></script>
+<script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>

@@ -82,6 +82,11 @@ class Database{
     public function rowCount(){
         return $this->statement->rowCount();
     }
+
+    //updates a specific field
+    public function updateField(){
+        $this->execute();
+    }
 }
 
 ?>

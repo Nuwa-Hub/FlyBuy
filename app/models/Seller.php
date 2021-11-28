@@ -12,6 +12,7 @@ class Seller implements User{
     }
 
     public function register($data) {
+
         $this->db->query('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
 
         //Bind values
@@ -30,22 +31,15 @@ class Seller implements User{
     public function login($data) {
 
         $email = $data['loginData']['email'];
-        $password = $data['loginData']['password'];
+        // $password = $data['loginData']['password'];
 
         $this->db->query('SELECT * FROM sellers WHERE email = :email');
 
         //Bind value
         $this->db->bind(':email', $email);
-
         $id = $this->db->single()->seller_id;
-        return $id;
-        // $hashedPassword = $row->password;
 
-        // if (password_verify($password, $hashedPassword)) {
-        //     return $row;
-        // } else {
-        //     return false;
-        // }
+        return $id;
     }
 
     //Find user by email. Email is passed in by the Controller.
@@ -65,23 +59,16 @@ class Seller implements User{
     }
 
     public function findUserById($id) {
-        //Prepared statement
-        $this->db->query('SELECT * FROM sellers WHERE seller_id = :id');
 
-        //Email param will be binded with the email variable
+        $this->db->query('SELECT * FROM sellers WHERE seller_id = :id');
         $this->db->bind(':id', $id);
 
-        //Check if email is already registered
-        if($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->db->single();
     }
 
     public function findAllUsers(){
+
         $this->db->query('SELECT * FROM sellers');
-        
         $results = $this->db->resultSet();
 
         return $results;
@@ -90,7 +77,6 @@ class Seller implements User{
     public function findAllSellerProducts($seller_id){
 
         $this->db->query("SELECT * FROM  products WHERE seller_id = '$seller_id'");
-
         $results = $this->db->resultSet();
 
         return $results;
