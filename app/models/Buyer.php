@@ -1,7 +1,5 @@
 <?php
 
-require_once 'User.php';
-
 class Buyer implements User{
 
     private $db;
@@ -10,11 +8,11 @@ class Buyer implements User{
         $this->db = new Database;
     }
 
-    public function register($data) {
+    public function register($data){
         
         $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
 
-        $this->db->query('INSERT INTO buyers (username, email, telNo, address, password, vkey) VALUES(:username, :email, :telNo, :address, :password, :vkey")');
+        $this->db->query('INSERT INTO buyers (username, email, telNo, address, password, vkey) VALUES(:username, :email, :telNo, :address, :password, :vkey)');
 
         //Bind values
         $this->db->bind(':username', $data['signupData']['username']);
@@ -53,20 +51,42 @@ class Buyer implements User{
     }
 
     //Find user by email. Email is passed in by the Controller.
-    public function findUserByEmail($email) {
-
+    public function checkEmailExistence($email){
         //Prepared statement
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM buyers WHERE email = :email');
 
         //Email param will be binded with the email variable
         $this->db->bind(':email', $email);
 
+        $resultSet = $this->db->resultSet();
+
         //Check if email is already registered
-        if($this->db->rowCount() > 0) {
+        if(count($resultSet) > 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function findUserByVKey($vkey){
+        //Prepared statement
+        $this->db->query('SELECT * FROM buyers WHERE vkey = :vkey LIMIT 1');
+
+        $this->db->bind(':vkey', $vkey);
+
+        $user = $this->db->single();
+
+        return $user;
+    }
+
+    public function findUserByEmail($email){
+        $this->db->query('SELECT * FROM buyers WHERE email = :email LIMIT 1');
+
+        $this->db->bind(':email', $email);
+
+        $user = $this->db->single();
+
+        return $user;
     }
 
     public function findAllUsers(){
@@ -83,6 +103,58 @@ class Buyer implements User{
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function verifyUser($vkey){
+        $this->db->query('UPDATE buyers SET verified = :verified WHERE vkey = :vkey');
+
+        $this->db->bind(':verified', 1);
+        $this->db->bind(':vkey', $vkey);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateUserData($data){
+
+        $vkey = $data['vkey'];
+        
+        if(isset($data['username']) and !empty($data['username'])){
+            
+            $this->db->query("UPDATE buyers SET username = :username WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':username', $data['username']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['password']) and !empty($data['password'])){
+
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            
+            $this->db->query("UPDATE buyers SET password = :password  WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':password', $data['password']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['address']) and !empty($data['address'])){
+            
+            $this->db->query("UPDATE buyers SET address = :address WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':address', $data['address']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['telNo']) and !empty($data['telNo'])){
+            
+            $this->db->query("UPDATE buyers SET telNo = :telNo WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':telNo', $data['telNo']);
+            $this->db->updateField();
+        }
     }
 }
 

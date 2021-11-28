@@ -25,7 +25,7 @@ class Database{
         }
         catch (PDOException $e) {
 
-            $this->eroor = $e->getMessage();
+            $this->error = $e->getMessage();
             echo $this->error;
         }
         
@@ -78,7 +78,7 @@ class Database{
         return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 
-    //gets the row count
+    //gets the lastely effected row count
     public function rowCount(){
         return $this->statement->rowCount();
     }

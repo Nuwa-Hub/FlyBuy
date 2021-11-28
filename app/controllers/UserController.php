@@ -13,7 +13,7 @@ class UserController extends Controller {
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            
             $userType = $_POST['userType'];
 
             if ($userType == 'buyer'){
@@ -23,9 +23,9 @@ class UserController extends Controller {
                 $this->userModel = $this->model('Seller');
             }
 
-            $users = $this->userModel->findAllUsers();
+            $emailExists = $this->userModel->checkEmailExistence($_POST['email']);
 
-            $signupValidator = new SignupValidator($_POST, $users, $userType);
+            $signupValidator = new SignupValidator($_POST, $emailExists, $userType);
 
             $data = $signupValidator->validateForm();
 
@@ -39,16 +39,21 @@ class UserController extends Controller {
             if ($this->isValid){
                 //Register user from model function
                 if ($this->userModel->register($data)) {
-                    print("here");
+
+                    $additionalData  = ['vkey' => $data['vkey'], 'table' => $userType];
+                    $email = $_POST['email'];
+
+                    $path_akash = URLROOT . '/PageController/emailVerified';
+                    sendMail($email, 'signup', $additionalData, $path_akash);
+
                     //Redirect to the login page
-                    // header('location: ' . URLROOT . '/PageController/loginSignup');
+                    header('location: ' . URLROOT . '/PageController/verifyEmail/' . $userType . '/' . $data['vkey']);
                 } else {
                     die('Something went wrong.');
                 }
             }
             else{
-                print("here in else");
-                // $this->view('pages/loginSignup', $data);
+                $this->view('pages/loginSignup', $data);
             }
         }
     }

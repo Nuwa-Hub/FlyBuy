@@ -1,8 +1,5 @@
 <?php
 
-// $conn = mysqli_connect('127.0.0.1:3310', 'Kalana', '0000', 'flybuy');
-// define('URLROOT', '127.0.0.1/FlyBuy');
-
 //database params
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

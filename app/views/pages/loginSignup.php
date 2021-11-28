@@ -41,7 +41,7 @@
                             <div class="input-field <?php echo isset($data['loginClassNames']['password']) ? $data['loginClassNames']['password'] : ''; ?>">
                                 <i class="fas fa-lock"></i>
                                 <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo isset($data['loginData']['password']) ? $data['loginData']['password'] : '';?>">
-                                <a href="forgotPsw.php"><small class="forgotPsw">forgotten password?</small></a>
+                                <a href="<?php echo URLROOT; ?>/PageController/forgotPassword"><small class="forgotPsw">forgotten password?</small></a>
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <span class="tooltip-text"><?php echo isset($data['loginErrors']['password']) ? $data['loginErrors']['password'] : ''; ?></span>
