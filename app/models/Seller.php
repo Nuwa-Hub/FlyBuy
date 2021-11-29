@@ -133,6 +133,8 @@ class Seller implements User{
         }
 
         if(isset($data['password']) and !empty($data['password'])){
+
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
             $this->db->query("UPDATE sellers SET password = :password  WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
@@ -153,6 +155,14 @@ class Seller implements User{
             $this->db->query("UPDATE sellers SET telNo = :telNo WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':telNo', $data['telNo']);
+            $this->db->updateField();
+        }
+
+        if(isset($data['storeName']) and !empty($data['storeName'])){
+            
+            $this->db->query("UPDATE sellers SET storeName = :storeName WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':storeName', $data['storeName']);
             $this->db->updateField();
         }
     }

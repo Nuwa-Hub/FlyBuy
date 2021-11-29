@@ -181,71 +181,71 @@
         <section class="edit-section">
             <h1 class="title">Edit Account</h1>
     
-            <form class="edit-form" id="edit-form" method="POST">
+            <form class="edit-form" id="edit-form" method="POST" action="<?php echo URLROOT; ?>/UserController/editProfile">
                 <!-- <div class="input-field <?php echo $editProfileClassNames['username']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['username'])) ? $editProfileClassNames['username'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['username'])) ? $data['editProfileClassNames']['username'] : ""; ?>">
                     <i class="fas fa-user"></i>
-                    <input name="username" type="text" placeholder="Username" class="username" value="<?php echo htmlspecialchars($edit_username);?>">
+                    <input name="username" type="text" placeholder="Username" class="username" value="<?php echo (isset($data['editProfileData']['username'])) ? $data['editProfileData']['username'] : "";?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['username']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['username']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['storeName']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['storeName'])) ? $editProfileClassNames['storeName'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['storeName'])) ? $data['editProfileClassNames']['storeName'] : ""; ?>">
                     <i class="fas fa-store"></i>
-                    <input name="storeName" type="text" placeholder="Store name" class="storeName" value="<?php echo htmlspecialchars($edit_storeName);?>">
+                    <input name="storeName" type="text" placeholder="Store name" class="storeName" value="<?php echo (isset($data['editProfileData']['storeName'])) ? $data['editProfileData']['storeName'] : "";?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['storeName']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['storeName']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['telNo']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['telNo'])) ? $editProfileClassNames['telNo'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['telNo'])) ? $data['editProfileClassNames']['telNo'] : ""; ?>">
                     <i class="fas fa-mobile-alt"></i>
-                    <input name="telNo" type="text" placeholder="Telephone" class="telNo" value="<?php echo htmlspecialchars($edit_telNo);?>">
+                    <input name="telNo" type="text" placeholder="Telephone" class="telNo" value="<?php echo (isset($data['editProfileData']['telNo'])) ? $data['editProfileData']['telNo'] : "";?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['telNo']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['telNo']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['address']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['address'])) ? $editProfileClassNames['address'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['address'])) ? $data['editProfileClassNames']['address'] : ""; ?>">
                     <i class="fas fa-map-marked-alt"></i>
-                    <input name="address" type="text" placeholder="Address" class="address" value="<?php echo htmlspecialchars($edit_address);?>">
+                    <input name="address" type="text" placeholder="Address" class="address" value="<?php echo (isset($data['editProfileData']['address'])) ? $data['editProfileData']['address'] : "";?>">
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['address']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['address']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['password']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['password'])) ? $editProfileClassNames['password'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['password'])) ? $data['editProfileClassNames']['password'] : ""; ?>">
                     <i class="fas fa-lock"></i>
-                    <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo htmlspecialchars($edit_password);?>">
+                    <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo (isset($data['editProfileData']['password'])) ? $data['editProfileData']['password'] : "";?>">
                     <i class="fas fa-eye togglePassword"></i>
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['password']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['password']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <!-- <div class="input-field editAccount <?php echo $editProfileClassNames['confirmPsw']; ?>"> -->
-                <div class="input-field <?php echo (isset($editProfileClassNames['confirmPsw'])) ? $editProfileClassNames['confirmPsw'] : ""; ?>">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['confirmPsw'])) ? $data['editProfileClassNames']['confirmPsw'] : ""; ?>">
                     <i class="fas fa-lock"></i>
-                    <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo htmlspecialchars($edit_confirmPsw);?>">
+                    <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo (isset($data['editProfileData']['confirmPsw'])) ? $data['editProfileData']['confirmPsw'] : "";?>">
                     <i class="fas fa-eye togglePassword"></i>
                     <i class="fas fa-exclamation-circle tooltip">
-                        <small class="tooltip-text"><?php echo $editProfileErrors['confirmPsw']; ?></small>
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['confirmPsw']; ?></small>
                     </i>
                     <i class="fas fa-check-circle"></i>
                 </div>
 
                 <input class="item-id" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
-                
+
                 <input type="submit" class="edit btn" name="submitEditProfile" value="Edit">
 
             </form>
