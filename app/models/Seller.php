@@ -121,6 +121,8 @@ class Seller implements User{
         }
 
         if(isset($data['password']) and !empty($data['password'])){
+
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
             $this->db->query("UPDATE sellers SET password = :password  WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);

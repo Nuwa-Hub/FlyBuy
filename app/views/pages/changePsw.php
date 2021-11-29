@@ -1,4 +1,3 @@
-<?php echo isset($data['values']['confirmPsw']) ? $data['values']['confirmPsw'] : ''; ?>
 <html lang="en">
 
 <head>
