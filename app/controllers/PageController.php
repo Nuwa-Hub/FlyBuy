@@ -171,8 +171,6 @@ class PageController extends Controller{
             $changePswValidator = new changePswValidator($password, $confirmPsw, $vkeyBuyer, $vkeySeller);
             $data = $changePswValidator->validateForm();
 
-            print_r($data);
-
             if (! empty($vkeyBuyer)){
                 $dataToUpdate['password'] = $password;
                 $dataToUpdate['vkey'] = $vkeyBuyer;
