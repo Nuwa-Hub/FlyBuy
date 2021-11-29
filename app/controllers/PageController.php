@@ -64,7 +64,8 @@ class PageController extends Controller{
             $user = $this->sellerModel->findUserByVKey($vkey);
         }
 
-        if (isset($_POST['submitSendAgain'])){
+        if (isset($_POST['sendAgainLink'])){
+
             $additionalData  = ['vkey' => $vkey, 'table' => $userType];
             $email = $user->email;
             $path = URLROOT . "/PageController/emailVerified/";

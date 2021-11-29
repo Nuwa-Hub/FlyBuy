@@ -248,10 +248,13 @@ input {
     grid-column: 1/7;
     grid-row: 6/7;
     align-self: flex-start;
+    text-align: center;
+    padding-top: 5px;
 }
 
 .btn .buttonText{
     align-self: center;
+    justify-self: center;
 }
 
 .btn:hover {

@@ -54,9 +54,9 @@
                         <span class="buttontext">Submit</span>
                     </button>
 
-                    <button class="btn solid forgotPsw login" name="loginToYourAccout">
+                    <a href="<?php echo URLROOT; ?>/PageController/loginSignup" class="btn solid forgotPsw login" name="loginToYourAccout">
                         <span class="buttontext">Login to your account</span>
-                    </button>
+                    </a>
                     
                 </form>
 
