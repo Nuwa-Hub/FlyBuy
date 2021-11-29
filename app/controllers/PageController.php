@@ -31,7 +31,12 @@ class PageController extends Controller{
             'products' => $this->buyerModel->getAllProducts($id)
         ];
         
-        $this->view('pages/buyerAccount', $data);
+        if(!isset($_COOKIE['user_login'])){
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        }
+        else{
+            $this->view('pages/buyerAccount', $data);
+        }
     }
 
     public function sellerAccount($id){
@@ -42,7 +47,12 @@ class PageController extends Controller{
             'products' => $this->sellerModel->findAllSellerProducts($id)
         ];
         
-        $this->view('pages/sellerAccount', $data);
+        if(!isset($_COOKIE['user_login'])){
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        }
+        else{
+            $this->view('pages/sellerAccount', $data);
+        }
     }
 
     public function editSellerAccount($id){

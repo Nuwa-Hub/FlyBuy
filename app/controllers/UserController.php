@@ -90,6 +90,7 @@ class UserController extends Controller {
 
             if ($this->isValid){
                 
+                setcookie('user_login', $data['loginData']['email'], time() + 86400, "/");
                 $id = $this->userModel->login($data);
 
                 if($userType === 'buyer'){
@@ -111,8 +112,74 @@ class UserController extends Controller {
     call editProfile from model
     check for seller_id and buyer_id
     */
+    public function editProfile(){
+        
+        if(isset($_POST['seller_id'])){
+            $this->userModel = $this->model('Seller');
+            $id = $_POST['seller_id'];
+            $userType = 'seller';
+        }
+        else{
+            $this->userModel = $this->model('Buyer');
+            $id = $_POST['buyer_id'];
+            $userType = 'buyer';
+        }
 
+        $user = $this->userModel->findUserById($id);
 
+        $editProfileValidator = new EditProfileValidator($_POST, $userType);
+
+        $data = $editProfileValidator->validateForm();
+        $data['user'] = $user;
+        
+        foreach ($data['editProfileErrors'] as $field => $errorValue) {
+            if ($errorValue != 'none' and $errorValue != ''){
+                $this->isValid = false;
+                break;
+            }
+        }
+
+        if ($this->isValid){
+            
+            $data['editProfileData']['vkey'] = $user->vkey;
+            $this->userModel->updateUserData($data['editProfileData']);
+
+            if(!empty($data['editProfileData']['password'])){ // need to logout the user
+                $this->view('pages/loginSignup');
+            }
+            else if($userType === 'buyer'){
+                header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
+            }
+            else{
+                header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
+            }
+        }
+        else{
+
+            if($userType === 'buyer'){
+                // $data['buyer_id'] = $id;
+                // $this->view('pages/editBuyerAccount', $data);
+            }
+            else{
+                $data['seller_id'] = $id;
+                $this->view('pages/editSellerAccount', $data);
+            }
+        }
+    }
+
+    public function logout(){
+
+        if(isset($_POST['submitLogout'])){
+
+            if (isset($_COOKIE['user_login'])) {
+
+                unset($_COOKIE['user_login']); 
+                setcookie('user_login', null, -1, '/');
+            }
+            
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        }
+    }
 
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;
@@ -121,7 +188,7 @@ class UserController extends Controller {
         header('location:' . URLROOT . '/pages/index');
     }
 
-    public function logout() {
+    public function logout_temp() {
         unset($_SESSION['user_id']);
         unset($_SESSION['username']);
         unset($_SESSION['email']);
