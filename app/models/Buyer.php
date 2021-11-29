@@ -35,7 +35,7 @@ class Buyer implements User{
         $email = $data['loginData']['email'];
         // $password = $data['loginData']['password'];
 
-        $this->db->query('SELECT * FROM buyers WHERE email = :email');
+        $this->db->query('SELECT * FROM buyers WHERE email = :email LIMIT 1');
         $this->db->bind(':email', $email);
         $id = $this->db->single()->buy_id;
 

@@ -43,12 +43,11 @@ class UserController extends Controller {
                     $additionalData  = ['vkey' => $data['vkey'], 'table' => $userType];
                     $email = $_POST['email'];
 
-                    $path_akash = URLROOT . '/PageController/emailVerified';
-                    sendMail($email, 'signup', $additionalData, $path_akash);
-
-                    //Redirect to the login page
+                    $path = URLROOT . '/PageController/emailVerified';
+                    sendMail($email, 'signup', $additionalData, $path);
                     header('location: ' . URLROOT . '/PageController/verifyEmail/' . $userType . '/' . $data['vkey']);
-                } else {
+                } 
+                else {
                     die('Something went wrong.');
                 }
             }
@@ -79,7 +78,7 @@ class UserController extends Controller {
             
             $loginValidator = new LoginValidator($_POST, $users, $userType);
 
-            $data = $loginValidator->validateForm();
+            $data = $loginValidator->validateForm($userType);
 
             foreach ($data['loginErrors'] as $field => $errorValue) {
                 if ($errorValue != 'none' and $errorValue != ''){

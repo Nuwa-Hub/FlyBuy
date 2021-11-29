@@ -50,7 +50,7 @@ class SignupValidator extends ValidateOperator implements IValidator{
         $this->userType = $userType;
     }
 
-    public function validateForm(){
+    public function validateForm($userType=null){
         
         $this->validateNewUsername();
         $this->validateNewPassword();

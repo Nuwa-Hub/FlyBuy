@@ -30,7 +30,7 @@ class changePswValidator extends ValidateOperator implements IValidator{
         $this->data['vkeySeller'] = $vkeySeller;
     }
 
-    public function validateForm(){
+    public function validateForm($userType=null){
         
         $this->validateNewPassword();
 

@@ -23,17 +23,13 @@ class LoginValidator extends ValidateOperator implements IValidator{
         $this->values['email'] = $post_data['email'];
         $this->values['password'] = $post_data['password'];
 
-        // if ($this->userType == "seller") {
-        //     $this->values['storeName'] = $post_data['storeName'];
-        // }
-
         $this->users = $users;
-        // $this->userType = $userType;
+        $this->userType = $userType;
     }
 
-    public function validateForm(){
+    public function validateForm($userType=null){
 
-        $this->validateLoginEmail();
+        $this->validateLoginEmail($userType);
 
         $this->setClassNames();
 
@@ -41,7 +37,6 @@ class LoginValidator extends ValidateOperator implements IValidator{
         $this->data['loginErrors'] = $this->errors;
         $this->data['loginData'] = $this->values;
 
-        // vkey is set in validateNewEmail() method
 
         return $this->data;
     }

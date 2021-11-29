@@ -45,7 +45,7 @@ class EditProfileValidator extends ValidateOperator implements IValidator{
         // $this->userType = $userType;
     }
 
-    public function validateForm(){
+    public function validateForm($userType=null){
 
         $fields = array_keys($this->values);
         

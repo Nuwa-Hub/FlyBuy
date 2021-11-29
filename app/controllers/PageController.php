@@ -78,7 +78,7 @@ class PageController extends Controller{
 
             $additionalData  = ['vkey' => $vkey, 'table' => $userType];
             $email = $user->email;
-            $path = URLROOT . "/PageController/emailVerified/";
+            $path = URLROOT . "/PageController/verifyEmail/";
             $type = 'signup';
 
             sendMail($email, $type, $additionalData, $path);
