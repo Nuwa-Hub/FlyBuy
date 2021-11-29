@@ -30,22 +30,24 @@ class Buyer implements User{
         }
     }
 
-    public function login($email, $password){
+    public function login($data) {
+
+        $email = $data['loginData']['email'];
+        // $password = $data['loginData']['password'];
 
         $this->db->query('SELECT * FROM buyers WHERE email = :email');
-
-        //Bind value
         $this->db->bind(':email', $email);
+        $id = $this->db->single()->buy_id;
 
-        $row = $this->db->single();
+        return $id;
+    }
 
-        $hashedPassword = $row->password;
+    public function findUserById($id) {
+        
+        $this->db->query('SELECT * FROM buyers WHERE buy_id = :id');
+        $this->db->bind(':id', $id);
 
-        if (password_verify($password, $hashedPassword)) {
-            return $row;
-        } else {
-            return false;
-        }
+        return $this->db->single();
     }
 
     //Find user by email. Email is passed in by the Controller.
@@ -88,8 +90,16 @@ class Buyer implements User{
     }
 
     public function findAllUsers(){
+
         $this->db->query('SELECT * FROM buyers');
-        
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    public function getAllProducts(){
+
+        $this->db->query("SELECT * FROM  products");
         $results = $this->db->resultSet();
 
         return $results;

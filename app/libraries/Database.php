@@ -28,6 +28,9 @@ class Database{
             $this->error = $e->getMessage();
             echo $this->error;
         }
+        
+        //when using database search maybe helpful
+        // $this->dbHandler->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     //to write qeries
@@ -66,7 +69,7 @@ class Database{
     //return an array
     public function resultSet(){
         $this->execute();
-        return $this->statement->fetchAll(PDO::FETCH_OBJ);
+        return $this->statement->fetchAll(PDO::FETCH_OBJ); //FETCH_ASSOC 
     }
 
     //return a specific row as an object
@@ -80,6 +83,7 @@ class Database{
         return $this->statement->rowCount();
     }
 
+    //updates a specific field
     public function updateField(){
         $this->execute();
     }

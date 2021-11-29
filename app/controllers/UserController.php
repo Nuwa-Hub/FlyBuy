@@ -4,14 +4,12 @@ class UserController extends Controller {
 
     private $isValid = true;
 
-    public function __construct(){
-        
-    }
+    public function __construct(){}
 
     public function register() {
-        
 
         if(isset($_POST['submitSignup'])){
+
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -57,79 +55,64 @@ class UserController extends Controller {
             else{
                 $this->view('pages/loginSignup', $data);
             }
-
-
         }
-
     }
 
     public function login() {
-        $loginData = [
-            'email'     => '',
-            'password'  => ''
-        ];
+        
+        if(isset($_POST['submitLogin'])){
 
-        $loginClassNames = [
-            'email'     => '',
-            'password'  => ''
-        ];
-
-        $loginErrors = [
-            'email'     => '',
-            'password'  => ''
-        ];
-
-        $data = [
-            'loginData'         => $loginData,
-            'loginClassNames'   => $loginClassNames,
-            'loginErrors'       => $loginErrors
-        ];
-
-        //Check for post
-        if(isset($_POST['submitLogin'])) {
-            //Sanitize post data
+            // Process form
+            // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            // $data = [
-            //     'email' => trim($_POST['email']),
-            //     'password' => trim($_POST['password']),
-            //     'emailError' => '',
-            //     'passwordError' => '',
-            // ];
+            $userType = $_POST['submitLogin'];
+            
+            if ($userType == 'buyer'){
+                $this->userModel = $this->model('Buyer');
+            }
+            else{
+                $this->userModel = $this->model('Seller');
+            }
+            
+            $users = $this->userModel->findAllUsers();
+            
+            $loginValidator = new LoginValidator($_POST, $users, $userType);
 
-            // $this->db->query("SELECT * FROM buyers");
-            // $users = $this->db->resultSet();
+            $data = $loginValidator->validateForm();
 
-            // $userValidator = new UserValidator(new LoginValidator($_POST, $users));
-            //protected static methods in a non intantatable class
-            // $returnData = $userValidator->validate();
-            // //Validate username
-            // if (empty($data['username'])) {
-            //     $data['usernameError'] = 'Please enter a username.';
-            // }
+            foreach ($data['loginErrors'] as $field => $errorValue) {
+                if ($errorValue != 'none' and $errorValue != ''){
+                    $this->isValid = false;
+                    break;
+                }
+            }
 
-            // //Validate password
-            // if (empty($data['password'])) {
-            //     $data['passwordError'] = 'Please enter a password.';
-            // }
+            if ($this->isValid){
+                
+                $id = $this->userModel->login($data);
 
-            // //Check if all errors are empty
-            // if (empty($data['usernameError']) && empty($data['passwordError'])) {
-            //     $loggedInUser = $this->userModel->login($data['username'], $data['password']);
-
-            //     if ($loggedInUser) {
-            //         $this->createUserSession($loggedInUser);
-            //     } else {
-            //         $data['passwordError'] = 'Password or username is incorrect. Please try again.';
-
-            //         $this->view('users/login', $data);
-            //     }
-            // }
-
+                if($userType === 'buyer'){
+                    header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
+                }
+                else{
+                    header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
+                }
+            }
+            else{
+                $this->view('pages/loginSignup', $data);
+            }
         }
-
-        $this->view('pages/loginSignup', $data);
     }
+
+    /*
+    create common edit method which takes usertype
+    create model according to type
+    call editProfile from model
+    check for seller_id and buyer_id
+    */
+
+
 
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;

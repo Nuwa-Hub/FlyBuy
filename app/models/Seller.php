@@ -31,22 +31,18 @@ class Seller implements User{
         }
     }
 
-    public function login($email, $password) {
+    public function login($data) {
+
+        $email = $data['loginData']['email'];
+        // $password = $data['loginData']['password'];
 
         $this->db->query('SELECT * FROM sellers WHERE email = :email');
 
         //Bind value
         $this->db->bind(':email', $email);
+        $id = $this->db->single()->seller_id;
 
-        $row = $this->db->single();
-
-        $hashedPassword = $row->password;
-
-        if (password_verify($password, $hashedPassword)) {
-            return $row;
-        } else {
-            return false;
-        }
+        return $id;
     }
 
     public function checkEmailExistence($email) {
@@ -66,6 +62,14 @@ class Seller implements User{
         }
     }
 
+    public function findUserById($id) {
+
+        $this->db->query('SELECT * FROM sellers WHERE seller_id = :id');
+        $this->db->bind(':id', $id);
+
+        return $this->db->single();
+    }
+    
     public function findUserByVKey($vkey){
         //Prepared statement
         $this->db->query('SELECT * FROM sellers WHERE vkey = :vkey');
@@ -88,8 +92,16 @@ class Seller implements User{
     }
 
     public function findAllUsers(){
+
         $this->db->query('SELECT * FROM sellers');
-        
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
+    public function findAllSellerProducts($seller_id){
+
+        $this->db->query("SELECT * FROM  products WHERE seller_id = '$seller_id'");
         $results = $this->db->resultSet();
 
         return $results;

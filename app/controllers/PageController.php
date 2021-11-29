@@ -9,6 +9,7 @@ class PageController extends Controller{
     }
 
     public function index(){
+        
         $allProducts = $this->productModel->findAllProducts();
 
         $data = [
@@ -22,6 +23,38 @@ class PageController extends Controller{
         $this->view('pages/loginSignup');
     }
 
+    public function buyerAccount($id){
+
+        $data = [
+            'buyer_id' => $id,
+            'user' => $this->buyerModel->findUserById($id),
+            'products' => $this->buyerModel->getAllProducts($id)
+        ];
+        
+        $this->view('pages/buyerAccount', $data);
+    }
+
+    public function sellerAccount($id){
+
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id),
+            'products' => $this->sellerModel->findAllSellerProducts($id)
+        ];
+        
+        $this->view('pages/sellerAccount', $data);
+    }
+
+    public function editSellerAccount($id){
+
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id)
+        ];
+        
+        $this->view('pages/editSellerAccount', $data);
+    }
+    
     public function verifyEmail($userType, $vkey){
 
         if ($userType == 'buyer'){
