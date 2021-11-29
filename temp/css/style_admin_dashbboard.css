@@ -169,13 +169,11 @@ a {
 }
 
 .badge {
-    position: fixed;
-    top: 5px;
     padding-left: 15px;
     padding-right: 9px;
-    -webkit-border-radius: 19px;
-    -moz-border-radius: 19px;
-    border-radius: 19px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
 }
 
 #cart-item {
@@ -185,16 +183,6 @@ a {
     padding: 5px 10px;
     vertical-align: top;
     margin: 5px;
-    animation: shine 1s infinite;
-}
-
-@keyframes shine {
-    from {
-        box-shadow: 2px 2px 3px 7px #fc0505;
-    }
-    to {
-        box-shadow: 2px 2px 23px 7px #fc0505;
-    }
 }
 
 .search-container {
@@ -295,7 +283,7 @@ a {
     transform: translateY(4px);
 }
 
-.page_container .adminimg {
+.page_container div img {
     height: 170px;
     width: 170px;
     border-radius: 100%;
@@ -357,9 +345,6 @@ canvas {
 
 /*customer details papge*/
 
-
-/*customer details papge*/
-
 div.scrollmenu {
     background-color: rgb(222, 226, 168);
     overflow: auto;
@@ -368,102 +353,17 @@ div.scrollmenu {
     height: 650px;
 }
 
-div.scrollmenu .item-container {
-    overflow: hidden;
+div.scrollmenu div {
     height: 550px;
     width: 500px;
     display: inline-block;
     background-color: rgb(202, 211, 182);
     text-align: center;
-    padding: 0px;
+    padding: 104px;
     text-decoration: none;
     margin: 30px;
     border-radius: 25%;
-    box-shadow: 0px 0px 10px 7px #242121;
-}
-
-div.scrollmenu div:hover {
-    background-color: rgb(209, 233, 181);
-}
-
-
-/*seller details papge*/
-
-.user-img {
-    display: flex;
-    position: relative;
-    left: 510px;
-    bottom: 00px;
-    width: 100%;
-    height: 100%;
-    border-radius: 10%
-}
-
-.uemail {
-    max-width: 10px;
-    font-size: 30px;
-    position: relative;
-}
-
-.uaddress {
-    font-size: 30px;
-    position: relative;
-    top: 10px;
-}
-
-.utel {
-    font-size: 30px;
-    position: relative;
-    top: 10px;
-}
-
-.uname {
-    font-size: 50px;
-    position: relative;
-    top: 0px;
-    bottom: 900px;
-}
-
-.item-container {
-    position: relative;
-    width: 100%;
-}
-
-.uimage {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.overlay {
-    position: absolute;
-    padding: 15%;
-    bottom: 0;
-    left: 100%;
-    right: 0;
-    background-color: #56e41a;
-    overflow: hidden;
-    width: 0;
-    height: 100%;
-    text-align: center;
-    transition: .5s ease;
-}
-
-.item-container:hover .overlay {
-    width: 100%;
-    left: 0;
-}
-
-.text {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
+    box-shadow: 0px 0px 100px 7px #242121;
 }
 
 div.scrollmenu div:hover {
@@ -502,7 +402,6 @@ div.scrollmenu div:hover {
     z-index: 500;
     margin: 0;
     width: 100%;
-    border-radius: 100%;
     height: 100%;
 }
 
@@ -563,79 +462,15 @@ div.scrollmenu div:hover {
 
 /*style popup menu*/
 
-.popup-page1 {
+.popup-page {
     z-index: 1000;
     position: fixed;
-    top: 400px;
-    left: 1907px;
-    width: 700px;
-    height: 700px;
-    background-color: white;
-    border-radius: 15%;
-    box-shadow: 2px 2px 3px 7px #5e5252;
-    transform: skewY(10deg);
-    display: none;
-}
-
-.popup-page1 .pname {
-    font-size: 45px;
-    font-weight: 29px;
-    position: absolute;
-    left: 25px;
-}
-
-.popup-page1 .pdes {
-    font-size: 25px;
-    font-weight: 9px;
-    position: absolute;
-    left: 25px;
     top: 100px;
-    ;
-}
-
-.popup-page1 .pamount {
-    font-size: 35px;
-    font-weight: 9px;
-    position: absolute;
-    left: 25px;
-    top: 300px;
-}
-
-.popup-page1 .pprice {
-    font-size: 35px;
-    font-weight: 9px;
-    position: absolute;
-    left: 255px;
-    top: 300px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.popup-page1 .pstore {
-    font-size: 25px;
-    font-weight: 9px;
-    position: absolute;
-    left: 25px;
-    top: 400px;
-}
-
-.popup-page2 {
-    z-index: 1000;
-    position: fixed;
-    top: 400px;
-    left: 1400px;
-    width: 500px;
-    height: 500px;
+    left: 1100px;
+    width: 600px;
+    height: 900px;
     background-color: white;
     border-radius: 15%;
     box-shadow: 2px 2px 3px 7px #5e5252;
-    transform: skewY(-7deg);
-    display: none;
-}
-
-.popup-page2 img {
-    position: absolute;
-    height: 470px;
-    width: 470px;
-    margin: 6% 6%;
-    border-radius: 15%;
+    display: "flex";
 }

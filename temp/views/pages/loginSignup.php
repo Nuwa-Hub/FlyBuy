@@ -1,10 +1,10 @@
 <?php
 
-include '../models/buyer.php';
-include '../models/seller.php';
-include '../database/db_connection.php';
+// include '../models/buyer.php';
+// include '../models/seller.php';
+// include '../database/db_connection.php';
 
-require('../validators/user_validator.php');
+// require('../validators/user_validator.php');
 
 // relevent paths for admins :)
 $path_akash     = 'http://127.0.0.1/Project/FlyBuy/view/emailVerified.php';

@@ -43,30 +43,17 @@ function showSlides(n) {
 //     }
 // }
 var image = document.getElementsByClassName("item-img");
+var popuppage = document.getElementsByClassName("popup-page");
 
+$(document).ready(function() {
 
-// $(document).ready(function() {
+    $("#item-img").hover(function() {
 
-//     $("#item-img").hover(function() {
-
-//         $("#popup-page").css("display", "flex");
-//     }, function() {
-//         $("#popup-page").css("display", "none");
-//     });
-// });
-
-function popupmsg(elem) {
-    //  alert(elem.nextSibling.nextSibling.nodeName);
-    elem.nextElementSibling.style.display = "flex";
-    elem.nextElementSibling.nextElementSibling.style.display = "flex";
-    //  elem.nextSibling.nextSibling.nextSibling.style.display = "flex";
-
-}
-
-function clearpopup(elem) {
-    elem.nextElementSibling.style.display = "none";
-    elem.nextElementSibling.nextElementSibling.style.display = "none";
-}
+        $("#popup-page").css("display", "flex");
+    }, function() {
+        $("#popup-page").css("display", "none");
+    });
+});
 
 function setbtnclick() {
     sessionStorage.setItem("acbtnclick", "click");
