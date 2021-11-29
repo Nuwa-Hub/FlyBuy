@@ -242,7 +242,6 @@ input {
     position: relative;
     text-decoration: none;
     justify-content: center;
-    display: flex;
 }
 
 .btn .buttonText{
