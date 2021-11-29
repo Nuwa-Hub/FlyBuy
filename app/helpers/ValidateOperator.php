@@ -181,7 +181,7 @@ class ValidateOperator{
                         $vkey = $curr_user->vkey;
                         $path = URLROOT . "/PageController/verifyEmail";
 
-                        print($path);
+                        // print($path);
 
                         $this->setError('email', "email is not verified. <a href='$path/$userType/$vkey'>here</a>");
                     }
