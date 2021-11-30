@@ -8,6 +8,7 @@ class ValidateOperator{
     protected $classNames;
     protected $data;
     protected $userType;
+    protected $users;
 
     private function __construct(){}
 
@@ -145,7 +146,7 @@ class ValidateOperator{
 
     //login data validation
 
-    protected function validateLoginEmail(){
+    protected function validateLoginEmail($userType){
 
         $val = trim($this->values['email']);
 
@@ -153,12 +154,6 @@ class ValidateOperator{
 
             $this->setError('email', 'email cannot be empty');
 
-            // if(empty($this->data['password'])){
-            //     $this->setError('password', 'password cannot be empty');
-            // }
-            // else{
-            //     $this->setError('password', 'account not found');
-            // }
         }
         else {
 
@@ -179,17 +174,20 @@ class ValidateOperator{
 
                 if ($curr_user == NULL) {
                     $this->setError('email', 'email is not registered');
-                    // $this->setError('password', 'incorrect password');
                 }
                 else {
 
                     if (!$curr_user->verified) {
-                        $this->setError('email', 'email is not verified');
+                        $vkey = $curr_user->vkey;
+                        $path = URLROOT . "/PageController/verifyEmail";
+
+                        // print($path);
+
+                        $this->setError('email', "email is not verified. <a href='$path/$userType/$vkey'>here</a>");
                     }
                     else {
                         $this->setError('email', 'none');
                     }
-                    // $this->setError('email', 'none');
                     $this->validateLoginPassword($curr_user);
                 }
             }

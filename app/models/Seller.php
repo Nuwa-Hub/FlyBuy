@@ -157,6 +157,14 @@ class Seller implements User{
             $this->db->bind(':telNo', $data['telNo']);
             $this->db->updateField();
         }
+
+        if(isset($data['storeName']) and !empty($data['storeName'])){
+            
+            $this->db->query("UPDATE sellers SET storeName = :storeName WHERE vkey = :vkey");
+            $this->db->bind(':vkey', $vkey);
+            $this->db->bind(':storeName', $data['storeName']);
+            $this->db->updateField();
+        }
     }
 }
 

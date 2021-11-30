@@ -31,7 +31,12 @@ class PageController extends Controller{
             'products' => $this->buyerModel->getAllProducts($id)
         ];
         
-        $this->view('pages/buyerAccount', $data);
+        if(!isset($_COOKIE['user_login'])){
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        }
+        else{
+            $this->view('pages/buyerAccount', $data);
+        }
     }
 
     public function sellerAccount($id){
@@ -42,7 +47,12 @@ class PageController extends Controller{
             'products' => $this->sellerModel->findAllSellerProducts($id)
         ];
         
-        $this->view('pages/sellerAccount', $data);
+        if(!isset($_COOKIE['user_login'])){
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        }
+        else{
+            $this->view('pages/sellerAccount', $data);
+        }
     }
 
     public function editSellerAccount($id){
@@ -64,10 +74,11 @@ class PageController extends Controller{
             $user = $this->sellerModel->findUserByVKey($vkey);
         }
 
-        if (isset($_POST['submitSendAgain'])){
+        if (isset($_POST['sendAgainLink'])){
+
             $additionalData  = ['vkey' => $vkey, 'table' => $userType];
             $email = $user->email;
-            $path = URLROOT . "/PageController/emailVerified/";
+            $path = URLROOT . "/PageController/emailVerified";
             $type = 'signup';
 
             sendMail($email, $type, $additionalData, $path);
@@ -170,8 +181,6 @@ class PageController extends Controller{
             // need to validate passwords before updating
             $changePswValidator = new changePswValidator($password, $confirmPsw, $vkeyBuyer, $vkeySeller);
             $data = $changePswValidator->validateForm();
-
-            print_r($data);
 
             if (! empty($vkeyBuyer)){
                 $dataToUpdate['password'] = $password;

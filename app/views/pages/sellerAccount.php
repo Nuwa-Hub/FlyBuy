@@ -130,7 +130,7 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
+            <a href='<?php echo URLROOT ?>/PageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
             <a href="#" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
@@ -145,7 +145,7 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                 </h3>
-                <a href='<?php echo URLROOT ?>/pageController/editSellerAccount/<?php echo $data['user']->seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
+                <a href='<?php echo URLROOT ?>/PageController/editSellerAccount/<?php echo $data['user']->seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
             </div>
             <div class="img-div">
                 <img src="<?php echo URLROOT ?>/public/img/user.png" alt="profile picture">
@@ -329,7 +329,7 @@
 
             <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
 
-            <form method="post" class="logoutForm">
+            <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
             </form>
 

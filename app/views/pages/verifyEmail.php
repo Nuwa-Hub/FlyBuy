@@ -20,8 +20,8 @@
         
                     <span class="resend-hint">Haven't Received Your Email Yet?</span>
         
-                    <form method="post" class="sendAgainForm">
-                        <button class="sendAgainLink">
+                    <form method="post" class="sendAgainForm" action="">
+                        <button class="sendAgainLink" name="sendAgainLink">
                             <div class="buttonText">Click Here to Re-send</div>
                         </button>
                     </form>

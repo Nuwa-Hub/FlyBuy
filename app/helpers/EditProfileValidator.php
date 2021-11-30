@@ -1,10 +1,9 @@
 <?php
 
-class SignupValidator extends ValidateOperator implements IValidator{
+class EditProfileValidator extends ValidateOperator implements IValidator{
 
     protected $values = [
         'username'   => '',
-        'email'      => '',
         'telNo'      => '',
         'address'    => '',
         'password'   => '',
@@ -14,7 +13,6 @@ class SignupValidator extends ValidateOperator implements IValidator{
 
     protected $classNames = [
         'username'   => '',
-        'email'      => '',
         'telNo'      => '',
         'address'    => '',
         'password'   => '',
@@ -24,7 +22,6 @@ class SignupValidator extends ValidateOperator implements IValidator{
 
     protected $errors = [
         'username'   => '',
-        'email'      => '',
         'telNo'      => '',
         'address'    => '',
         'password'   => '',
@@ -33,10 +30,9 @@ class SignupValidator extends ValidateOperator implements IValidator{
     ];
 
 
-    public function __construct($post_data, $emailExists, $userType){
+    public function __construct($post_data, $userType){
 
         $this->values['username'] = $post_data['username'];
-        $this->values['email'] = $post_data['email'];
         $this->values['telNo'] = $post_data['telNo'];
         $this->values['address'] = $post_data['address'];
         $this->values['password'] = $post_data['password'];
@@ -46,27 +42,40 @@ class SignupValidator extends ValidateOperator implements IValidator{
             $this->values['storeName'] = $post_data['storeName'];
         }
 
-        $this->emailExists = $emailExists;
-        $this->userType = $userType;
+        // $this->userType = $userType;
     }
 
     public function validateForm($userType=null){
+
+        $fields = array_keys($this->values);
         
-        $this->validateNewUsername();
-        $this->validateNewPassword();
-        $this->validateNewEmail();
-        $this->validateNewTelNo();
-        $this->validateAddress();
+        foreach($fields as $field){
+            
+            if(!empty($this->values[$field])){
 
-        if ($this->userType === "seller"){
-            $this->validateNewStorename();
+                if($field === 'username'){
+                    $this->validateNewUsername();
+                }
+                else if($field === 'storeName'){
+                    $this->validateNewStorename();
+                }
+                else if($field === 'telNo'){
+                    $this->validateNewTelNo();
+                }
+                else if($field === 'address'){
+                    $this->validateAddress();
+                }
+                else if($field === 'password'){
+                    $this->validateNewPassword();
+                }
+            }
         }
-
+        
         $this->setClassNames();
 
-        $this->data['signupClassNames'] = $this->classNames;
-        $this->data['signupErrors'] = $this->errors;
-        $this->data['signupData'] = $this->values;
+        $this->data['editProfileClassNames'] = $this->classNames;
+        $this->data['editProfileErrors'] = $this->errors;
+        $this->data['editProfileData'] = $this->values;
 
         // vkey is set in validateNewEmail() method
 

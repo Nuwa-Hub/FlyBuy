@@ -60,132 +60,161 @@
 <!DOCTYPE html5>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Project cosmos</title>
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_buyerAccount.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project cosmos</title>
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_buyerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  </head>
 
-<body>
-  <header id="header">
-    <a href="#" class="logo">FlyBuy</a>
-    <div class="search-box">
-      <input class="search-txt" type="text" name="" placeholder="Search for products">
-      <a class="search-btn" href="#">
-        <i class="fas fa-search"></i>
-      </a>
-    </div>
-    <ul>
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="loginSignup.php">Login/Sign up</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a> </li>
-    </ul>
-  </header>
-  <section>
-    <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
-    <img src="<?php echo URLROOT ?>/public/img/item1.png" id="item1">
-    <a href="#products" id='btn'>Explore</a>
+  <body>
 
-    <img src="<?php echo URLROOT ?>/public/img/item2.png" id="item2">
-  </section>
-  <div class="sec" id="products">
-    <h2>Featured products</h2>
-    <div class="container">
-      <?php foreach ($data['products'] as $product) : ?>
-        <div class="product">
-          <div class="product-card">
-            <h3 class="name"><?php echo $product->itemName; ?></h3>
-            <span class="price"><?php echo "Rs. " . $product->price; ?></span>
-            <a class="popup-btn">View item</a>
-            <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" class="product-img" alt="">
-          </div>
-          <div class="popup-view">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-              <div class="popup-card">
-                <a><i class="fas fa-times close-btn"></i></a>
-                <div class="product-img">
-                  <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
+    <header id="header">
+      <a href="#" class="logo">FlyBuy</a>
+      <div class="search-box">
+        <input class="search-txt" type="text" name="" placeholder="Search for products">
+        <a class="search-btn" href="#">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
+      </ul>
+    </header>
+
+    <section>
+      <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
+      <img src="<?php echo URLROOT ?>/public/img/item1.png" id="item1">
+      <a href="#products" id='btn'>Explore</a>
+
+      <img src="<?php echo URLROOT ?>/public/img/item2.png" id="item2">
+    </section>
+
+    <div class="sec" id="products">
+      <h2>Featured products</h2>
+      <div class="container">
+        <?php foreach ($data['products'] as $product) : ?>
+          <div class="product">
+            <div class="product-card">
+              <h3 class="name"><?php echo $product->itemName; ?></h3>
+              <span class="price"><?php echo "Rs. " . $product->price; ?></span>
+              <a class="popup-btn">View item</a>
+              <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" class="product-img" alt="">
+            </div>
+            <div class="popup-view">
+              <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <div class="popup-card">
+                  <a><i class="fas fa-times close-btn"></i></a>
+                  <div class="product-img">
+                    <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
+                  </div>
+                  <div class="info">
+                    <h2><?php echo $product->itemName; ?><br><span>Chandrasena stores</span></h2>
+                    <h3><span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                    </h3>
+                    <p><?php echo $product->description; ?></p>
+                    <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
+                    <span class="quantity">Quantity :</span>
+                    <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->maxAmount ?>">
+
+                    <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
+                    <input type="hidden" name="pname" class="pname" value="<?php echo $product->itemName ?>">
+                    <input type="hidden" name="pprice" class="pprice" value="<?php echo $product->price ?>">
+                    <input type="hidden" name="pimage" class="pimage" value="<?php echo $product->item_image ?>">
+                    <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product->seller_id ?>">
+                    <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
+                    <input type="hidden" name="pdes" class="pdes" value="<?php echo $product->description ?>">
+
+                    <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
+                    <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
+                      </i>&nbsp;&nbsp;Add tocart</button>
+                  </div>
                 </div>
-                <div class="info">
-                  <h2><?php echo $product->itemName; ?><br><span>Chandrasena stores</span></h2>
-                  <h3><span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                  </h3>
-                  <p><?php echo $product->description; ?></p>
-                  <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
-                  <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->maxAmount ?>">
-
-                  <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
-                  <input type="hidden" name="pname" class="pname" value="<?php echo $product->itemName ?>">
-                  <input type="hidden" name="pprice" class="pprice" value="<?php echo $product->price ?>">
-                  <input type="hidden" name="pimage" class="pimage" value="<?php echo $product->item_image ?>">
-                  <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product->seller_id ?>">
-                  <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
-                  <input type="hidden" name="pdes" class="pdes" value="<?php echo $product->description ?>">
-
-                  <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart</button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+
+      </div>
+    </div>
+
+    <!-- -----------------------------Popup window to confirm logout--------------------------------------- -->
+
+    <div class="popup-window logout">
+
+      <div class="overlay"></div>
+
+      <div class="content">
+
+          <div class="closeBtn" onclick="toggleLogout()">&times;</div>
+
+          <h1 class="title">Do you want to logout?</h1>
+
+          <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+
+          <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
+              <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
+          </form>
+
+      </div>
 
     </div>
-  </div>
+
+  </body>
+
   <script type="text/javascript">
-    let text = document.getElementById('text');
-    let btn = document.getElementById('btn');
-    let item2 = document.getElementById('item2');
-    let item1 = document.getElementById('item1');
-    window.addEventListener('scroll', function() {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky", window.scrollY > 0);
+      let text = document.getElementById('text');
+      let btn = document.getElementById('btn');
+      let item2 = document.getElementById('item2');
+      let item1 = document.getElementById('item1');
+      window.addEventListener('scroll', function() {
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
 
-      let value = window.scrollY;
-      text.style.top = 50 + value * -0.5 + '%';
-      btn.style.marginTop = value * 1.5 + 'px';
-      item2.style.top = value * -0.12 + 'px';
-      item1.style.top = value * 0.25 + 'px';
-    });
-
-    var popupViews = document.querySelectorAll('.popup-view');
-    var popupBtns = document.querySelectorAll('.popup-btn');
-    var closeBtns = document.querySelectorAll('.close-btn');
-
-
-    var popup = function(popupClick) {
-      popupViews[popupClick].classList.add('active');
-
-      document.body.style.overflowY = 'hidden';
-    }
-
-    popupBtns.forEach((popupBtn, i) => {
-      popupBtn.addEventListener("click", () => {
-        popup(i)
-
+        let value = window.scrollY;
+        text.style.top = 50 + value * -0.5 + '%';
+        btn.style.marginTop = value * 1.5 + 'px';
+        item2.style.top = value * -0.12 + 'px';
+        item1.style.top = value * 0.25 + 'px';
       });
-    });
 
-    closeBtns.forEach((closeBtn) => {
-      closeBtn.addEventListener("click", () => {
-        popupViews.forEach((popupView) => {
-          popupView.classList.remove('active');
+      var popupViews = document.querySelectorAll('.popup-view');
+      var popupBtns = document.querySelectorAll('.popup-btn');
+      var closeBtns = document.querySelectorAll('.close-btn');
 
-          document.body.style.overflowY = '';
+
+      var popup = function(popupClick) {
+        popupViews[popupClick].classList.add('active');
+
+        document.body.style.overflowY = 'hidden';
+      }
+
+      popupBtns.forEach((popupBtn, i) => {
+        popupBtn.addEventListener("click", () => {
+          popup(i)
+
         });
       });
-    });
+
+      closeBtns.forEach((closeBtn) => {
+        closeBtn.addEventListener("click", () => {
+          popupViews.forEach((popupView) => {
+            popupView.classList.remove('active');
+
+            document.body.style.overflowY = '';
+          });
+        });
+      });
   </script>
-</body>
+
+  <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>
