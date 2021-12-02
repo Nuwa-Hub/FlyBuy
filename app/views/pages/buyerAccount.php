@@ -165,7 +165,7 @@
     </div>
   </div>
 
-  <!-- -----------------------------Popup window to confirm logout--------------------------------------- -->
+  <!-- Popup window to confirm logout -->
 
   <div class="popup-window logout">
 
@@ -234,6 +234,6 @@
   });
 </script>
 
-<script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
+ <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>
