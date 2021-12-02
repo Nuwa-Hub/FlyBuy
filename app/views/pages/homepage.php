@@ -26,7 +26,7 @@
     <ul>
       <li><a href="#" class="active">Home</a></li>
       <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"></span></i></a> </li>
+      <li><a href="#">About us</a></li>
     </ul>
 
   </header>
@@ -72,8 +72,6 @@
                   </h3>
                   <p><?php echo $product->description; ?></p>
                   <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
-                  <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
                   <input type="hidden" name="pname" class="pname" value="<?php echo $product->itemName ?>">
@@ -83,10 +81,6 @@
                   <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
                   <input type="hidden" name="pdes" class="pdes" value="<?php echo $product->description ?>">
 
-                  <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <a class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart
-                  </a>
                 </div>
               </div>
             </form>

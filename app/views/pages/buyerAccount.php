@@ -83,6 +83,7 @@
       <ul>
         <li><a href="#" class="active">Home</a></li>
         <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
+        <li><a href="#">About us</a></li>
       </ul>
     </header>
 

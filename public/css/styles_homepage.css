@@ -247,12 +247,8 @@ section #text span {
 /*product codes start here */
 
 .container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 60vh;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 
 .product .product-card {
