@@ -96,10 +96,19 @@ html {
 
 #cart-item {
     font-size: 18px;
-    background: #ff0000;
+    background: #ff0101;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
+}
+
+@keyframes shine {
+    from {
+        box-shadow: 22px 2px 3px 7px #fc0505;
+    }
+    to {
+        box-shadow: 2px 2px 23px 7px #fc0505;
+    }
 }
 
 .search-box {

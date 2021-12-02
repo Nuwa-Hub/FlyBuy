@@ -1,11 +1,3 @@
-<?php
-include '../models/product.php';
-session_start();
-
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +5,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style_shoppingCart.css" />
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_shoppingCart.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -35,7 +27,7 @@ session_start();
             </div>
             <ul>
 
-                <li><a href="homepage.php">Home</a></li>
+                <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">Home</a></li>
                 <li><a href="loginSignup.php">Login/Sign up</a></li>
                 <li><a href="shopping_cart.php" class="active"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
@@ -55,12 +47,13 @@ session_start();
                 $total = 0;
 
                 foreach ($_SESSION['cartarr'] as $product) { ?>
-                    <li  id="pli" class="pli" value="<?php echo $product->itemName ?>">
-                        <article class="product">
+
+                    <li id="pli" class="pli" value="<?php echo $product->itemName ?>">
+                        <article class="product" id="product">
                             <header>
                                 <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
                                 <a class="remove">
-                                    <img src=<?php echo $product->image ?> alt="">
+                                    <img src="<?php echo URLROOT; ?>/public/img/kottu_mee.png" alt="">
                                     <h3>Remove product</h3>
                                 </a>
                             </header>
@@ -70,24 +63,24 @@ session_start();
                             </div>
                             <footer class="content">
                                 <span class="qt-minus">-</span>
-                                <span class="qt" value="<?= $product->amount ?>"><?php echo $product->amount ?></span>
+                                <span class="qt" value="<?= $product->amount[1] ?>"><?php echo $product->amount[1] ?></span>
                                 <span class="qt-plus">+</span>
                                 <h2 class="full-price">
-                                    <span><?php echo ($product->price) * ($product->amount) ?></span>/=
+                                    <span class="full-price"><?php echo ($product->price) * ($product->amount[1]) ?>&nbsp;/=</span>
                                 </h2>
                                 <h2 class="price">
-                                    <span><?php echo $product->price ?></span>/=
+                                    <span class="price"><?php echo $product->price ?>&nbsp;/=</span>
                                 </h2>
                                 <input type="hidden" name="pid" class="pid" value="<?php echo  $product->item_id ?>">
-                                <input type="hidden" name="pamount" class="pamount" value="<?php echo  $product->amount ?>">
+                                <input type="hidden" name="pamount" class="pamount" value="<?php echo  $product->amount[1] ?>">
                                 <input type="hidden" class="pprice" value="<?php echo  $product->price ?>">
                                 <input type="hidden" class="pimage" value="<?php echo  $product->image ?>">
-                                <input type="hidden" class="pmaxAmount" value="<?php echo  $product->maxAmount ?>">
+                                <input type="hidden" class="pmaxAmount" value="<?php echo  $product->amount[0] ?>">
                             </footer>
                         </article>
                     </li>
                 <?php
-                    $total += ($product->price) * ($product->amount);
+                    $total += ($product->price) * ($product->amount[1]);
                 }
                 ?>
             </ul>
@@ -109,7 +102,9 @@ session_start();
             </div>
         </div>
     </footer>
-    <script src="../javaScript/shoppingCart.js"></script>
+    <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 </body>
 
 </html>

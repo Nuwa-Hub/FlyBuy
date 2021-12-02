@@ -26,7 +26,7 @@
     <ul>
       <li><a href="#" class="active">Home</a></li>
       <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"></span></i></a> </li>
+      <li><a href="<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buyer_id; ?>"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger">0</span></i></a> </li>
     </ul>
 
   </header>
@@ -55,7 +55,7 @@
 
           <div class="popup-view">
 
-            <form method="post" action="">
+            <form method="post" action="<?php echo URLROOT; ?>/ProductController/addToCart">
               <div class="popup-card">
                 <a><i class="fas fa-times close-btn"></i></a>
                 <div class="product-img">

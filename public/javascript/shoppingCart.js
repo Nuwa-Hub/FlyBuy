@@ -1,26 +1,30 @@
 var check = false;
 
+//change the sub totals of each items
+
 function changeVal(el) {
+
     var qt = parseFloat(el.parent().children(".qt").html());
-    var price = parseFloat(el.parent().children(".price").html());
+    var price = parseFloat(el.parent().children(".price").children(".price").html());
     var eq = Math.round(price * qt * 100) / 100;
 
     el.parent().children(".full-price").html(eq + "/=");
 
-    changeTotal();
+    changeTotal(el);
 }
+// change grand total and sub total
 
-function changeTotal() {
-
+function changeTotal(el) {
     var price = 0;
 
-    $(".full-price").each(function(index) {
-        price += parseFloat($(".full-price").eq(index).html());
+    el.parent().children(".full-price").each(function(index) {
+        price += parseFloat(el.parent().children(".full-price").eq(index).html());
     });
 
     price = Math.round(price * 100) / 100;
     // var tax = Math.round(price * 0.05 * 100) /
     //100;
+
     var shipping = parseFloat($(".shipping span").html());
     var fullPrice = Math.round((price + shipping) * 100) / 100;
 
@@ -33,10 +37,14 @@ function changeTotal() {
     $(".total span").html(fullPrice);
 }
 
+//for remove item when the remove button click
 $(document).ready(function() {
+
     $(".remove").click(function() {
         var el = $(this);
         el.parent().parent().addClass("removed");
+
+
         /*   window.setTimeout(
 
             function() {
@@ -54,14 +62,17 @@ $(document).ready(function() {
                 });
             }, 300);*/
 
+
         setTimeout(function() {
             location.reload(true);
 
             var $elid = el.closest('header');
             ppid = $elid.find(".pid").val();
+
+            // ajex request for remove the relevent item from SESSION store
             $.ajax({
-                url: 'action.php',
-                method: 'post',
+                url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+                method: 'POST',
                 cache: false,
                 data: {
                     ppid: ppid,
@@ -70,20 +81,22 @@ $(document).ready(function() {
                     console.log(response);
                 }
             });
-        }, 600);
+        }, 470);
 
-        load_cart_item_number();
+
     });
+
+
     //to make the quantity increase when qt-minus button click
     $(".qt-plus").click(function() {
 
         child = $(this).parent().children(".qt");
-        location.reload(true);
+        //  location.reload(true);
 
         var $el = child.closest('footer');
 
         pid = $el.find(".pid").val();
-        pamount = Number($el.find(".pamount").val());
+        pamount = parseInt($(this).parent().children(".qt").html());
         pmaxAmount = Number($el.find(".pmaxAmount").val());
 
         if (pmaxAmount > pamount) {
@@ -96,10 +109,12 @@ $(document).ready(function() {
                 el.parent().children(".full-price").removeClass("added");
                 changeVal(el);
             }, 150);
-            pamount = pamount + 1;
+            pamount = parseInt($(this).parent().children(".qt").html());
 
             //var pamount = $el.find(".pamount").val() + 1;
             //  location.reload(true);
+
+            //call fuction (http request)
             changeAmount(pid, pamount);
         }
 
@@ -115,9 +130,11 @@ $(document).ready(function() {
             var $el = child.closest('footer');
 
             var pid = $el.find(".pid").val();
-            var pamount = $el.find(".pamount").val() - 1;
+            var pamount = parseInt(child.html());
             //  alert(typeof pamount);
-            location.reload(true);
+            //  location.reload(true);
+
+            //call fuction (http request)
             changeAmount(pid, pamount);
         }
 
@@ -135,10 +152,10 @@ $(document).ready(function() {
 
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
 
-    $(".btn").click(function() {
-        check = true;
-        $(".remove").click();
-    });
+    // $(".btn").click(function() {
+    //     check = true;
+    //     $(".remove").click();
+    // });
 
 
 });
@@ -152,7 +169,7 @@ function changeTot() {
 
 function changeAmount(pid, pamount) {
     $.ajax({
-        url: 'action.php',
+        url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
         method: 'post',
         cache: false,
         data: {
@@ -161,10 +178,23 @@ function changeAmount(pid, pamount) {
         },
         success: function(response) {
             console.log(response);
+
         }
     });
 
 }
+
+
+
+
+$(window).on('unload', function() {
+    $(window).scrollTop(0);
+});
+
+
+
+
+//for search button
 
 function searchFunction() {
     var input, filter, ul, li, a, i, txtValue;
@@ -184,3 +214,42 @@ function searchFunction() {
         }
     }
 }
+
+//Find scroll percentage on scroll(using cross - browser properties), and offset dash same amount as percentage scrolled /
+window.addEventListener("scroll", changeItem);
+
+function changeItem() {
+
+    var ele = document.getElementsByTagName("article");
+    for (i = 0; i < ele.length; i++) {
+
+        ele[i].style.transform = "skewX(-17deg)";
+    }
+    window.setTimeout(function() {
+        var ele = document.getElementsByTagName("article");
+        for (i = 0; i < ele.length; i++) {
+            ele[i].style.transform = "skewX(0deg)";
+        }
+    }, 445);
+    //  location.reload(true);
+    //  ele.style.transform = "skewX(-7deg)";
+}
+
+
+// When document is ready...
+$(document).ready(function() {
+
+    // If cookie is set, scroll to the position saved in the cookie.
+    if ($.cookie("scroll") !== null) {
+        $(document).scrollTop($.cookie("scroll"));
+    }
+
+    // When scrolling happens....
+    $(window).on("scroll", function() {
+
+        // Set a cookie that holds the scroll position.
+        $.cookie("scroll", $(document).scrollTop());
+
+    });
+
+});
