@@ -1,66 +1,7 @@
-<?php
-
-// include '../models/buyer.php';
-// include '../models/seller.php';
-// include '../models/product.php';
-// include '../database/db_connection.php';
-
-// require('../validators/user_validator.php');
-
-
-// // if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-// //  header('Location: loginSignup.php');
-// //} else {
-// session_start();
-
-// if (!isset($_SESSION['cartarr'])) {
-//   $_SESSION['cartarr'] = array();
-// }
-// //$curr_email = $_COOKIE['user_login'];  //logged in user email
-// //$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
-
-
-
-// $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-// //for($i = 0; $i < count($products); $i++){
-// // $seller_id = $products[$i]['seller_id'];
-// //  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-// // $products[$i]['seller'] = $seller;
-// // }
-// //}
-
-
-
-// if (isset($_POST['addTocart'])) {
-//   $item = true;
-//   $pid = $_POST['pid'];
-//   $pname = $_POST['pname'];
-//   $pprice = $_POST['pprice'];
-//   $pimage = $_POST['pimage'];
-//   $pdes = $_POST['pdes'];
-//   $pqty = $_POST['pqty'];
-//   $pseller_id = $_POST['pseller_id'];
-//   $pmaxAmount = $_POST['pmaxAmount'];
-
-//   foreach ($_SESSION['cartarr'] as $product) {
-//     if ($product->item_id == $pid) {
-//       $item = false;
-//     }
-//   }
-//   if ($item) {
-//     array_push($_SESSION['cartarr'], new Product($pname, $pqty, $pprice,  $pdes,  $pseller_id, $pimage, $pmaxAmount, $pid));
-//   } else {
-//     print_r("Already added");
-//   }
-// }
-
-
-?>
 
 <!DOCTYPE html5>
 <html lang="en">
 
-<<<<<<< HEAD
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,6 +24,7 @@
       </div>
       <ul>
         <li><a href="#" class="active">Home</a></li>
+        <li><a href="<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buyer_id; ?>"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger">0</span></i></a> </li>
         <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
         <li><a href="#">About us</a></li>
       </ul>
@@ -139,7 +81,7 @@
                     <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
                       </i>&nbsp;&nbsp;Add tocart</button>
                   </div>
-=======
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -213,7 +155,6 @@
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
                   <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
                     </i>&nbsp;&nbsp;Add tocart</button>
->>>>>>> e1f5330f950fec525b26feac29c8122af8709664
                 </div>
               </div>
             </form>

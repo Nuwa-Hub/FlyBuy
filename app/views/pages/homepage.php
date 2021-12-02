@@ -26,12 +26,9 @@
     <ul>
       <li><a href="#" class="active">Home</a></li>
       <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-<<<<<<< HEAD
       <li><a href="#">About us</a></li>
-=======
-      <li><a href="<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buyer_id; ?>"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger">0</span></i></a> </li>
->>>>>>> e1f5330f950fec525b26feac29c8122af8709664
-    </ul>
+
+</ul>
 
   </header>
 
