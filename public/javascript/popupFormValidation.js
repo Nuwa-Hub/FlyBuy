@@ -14,7 +14,7 @@ let correct = true;
 if (form){
 
     addItemBtn.addEventListener('click', e => {
-        
+        e.preventDefault();
 
         correct = true
         

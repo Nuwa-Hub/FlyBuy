@@ -216,7 +216,7 @@
 
             <h1 class="title">Add Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
+            <form class="item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -271,7 +271,7 @@
 
             <h1 class="title">Edit Item</h1>
 
-            <form class="edit item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
+            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
