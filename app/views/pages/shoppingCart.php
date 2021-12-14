@@ -66,7 +66,7 @@
                                 <span class="qt" value="<?= $product->amount[1] ?>"><?php echo $product->amount[1] ?></span>
                                 <span class="qt-plus">+</span>
                                 <h2 class="full-price">
-                                    <span class="full-price"><?php echo ($product->price) * ($product->amount[1]) ?>&nbsp;/=</span>
+                                  <?php echo ($product->price) * ($product->amount[1]) ?>
                                 </h2>
                                 <h2 class="price">
                                     <span class="price"><?php echo $product->price ?>&nbsp;/=</span>

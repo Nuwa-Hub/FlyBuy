@@ -8,7 +8,7 @@ function changeVal(el) {
     var price = parseFloat(el.parent().children(".price").children(".price").html());
     var eq = Math.round(price * qt * 100) / 100;
 
-    el.parent().children(".full-price").html(eq + "/=");
+    el.parent().children(".full-price").html(eq);
 
     changeTotal(el);
 }
@@ -16,10 +16,14 @@ function changeVal(el) {
 
 function changeTotal(el) {
     var price = 0;
-
-    el.parent().children(".full-price").each(function(index) {
-        price += parseFloat(el.parent().children(".full-price").eq(index).html());
-    });
+    var ele = document.getElementsByClassName("full-price");
+    //   alert(parseFloat(ele[0].textContent) + 1);
+    // ele.each(function(index) {
+    //     price += parseFloat(ele[index].textContent);
+    // });
+    for (var i = 0; i < ele.length; i++) {
+        price += parseFloat(ele[i].textContent);
+    }
 
     price = Math.round(price * 100) / 100;
     // var tax = Math.round(price * 0.05 * 100) /
@@ -41,26 +45,27 @@ function changeTotal(el) {
 $(document).ready(function() {
 
     $(".remove").click(function() {
+        //  alert(this.length);
         var el = $(this);
         el.parent().parent().addClass("removed");
 
 
-        /*   window.setTimeout(
+        // window.setTimeout(
 
-            function() {
-                el.parent().parent().slideUp('fast', function() {
-                    el.parent().parent().remove();
-                    if ($(".product").length == 0) {
-                        if (check) {
-                            // $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
-                        } else {
-                            $("#cart").html("<h1>No products!</h1>");
-                        }
-                    }
+        //     function() {
+        //         el.parent().parent().slideUp('fast', function() {
+        //             el.parent().parent().remove();
+        //             if ($(".product").length == 0) {
+        //                 if (check) {
+        //                     $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
+        //                 } else {
+        //                     $("#cart").html("<h1>No products!</h1>");
+        //                 }
+        //             }
 
-                    changeTotal();
-                });
-            }, 300);*/
+        //             changeTotal();
+        //         });
+        //     }, 300);
 
 
         setTimeout(function() {
@@ -152,11 +157,60 @@ $(document).ready(function() {
 
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
 
+
+    //checkout button
+    //     $(".btn").click(
+    //         // function() {
+    //         //     var ele = document.getElementsByClassName("remove");
+    //         //     var n = ele.length;
+    //         //     //  alert(ele.length);
+    //         //     for (var i = 0; i < n; i++) {
+    //         //         var el = ele[i];
+    //         //         //alert(i);
+    //         //         ele[i].parent().parent().addClass("removed");
+    //         //     }
+
+    //         // }
+    //         function() {
+    //             el.parent().parent().slideUp('fast', function() {
+    //                 el.parent().parent().remove();
+    //                 if ($(".product").length == 0) {
+    //                     if (check) {
+    //                         // $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
+    //                     } else {
+    //                         $("#cart").html("<h1>No products!</h1>");
+    //                     }
+    //                 }
+
+    //                 changeTotal();
+    //             });
+
+    // //         });
     // $(".btn").click(function() {
     //     check = true;
-    //     $(".remove").click();
-    // });
+    //     //   $(".remove").click();
 
+
+    //     window.setTimeout(function() {
+    //         // location.reload(true);
+    //         //  alert("sdf");
+    //         var $elid = el.closest('header');
+    //         ppid = $elid.find(".pid").val();
+
+    //         // ajex request for remove the relevent item from SESSION store
+    //         $.ajax({
+    //             url: 'http://localhost/OOP%20project/FlyBuy/PdfController/page',
+    //             method: 'POST',
+    //             cache: false,
+
+    //             success: function(response) {
+    //                 // console.log(response);
+    //                 alert("df");
+
+    //             }
+    //         });
+    //     }, 470);
+    // });
 
 });
 

@@ -352,6 +352,10 @@
         cursor: pointer;
     }
     
+    .product {
+        box-shadow: 5px 5px 5px 9px #999;
+    }
+    
     .product .content {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
