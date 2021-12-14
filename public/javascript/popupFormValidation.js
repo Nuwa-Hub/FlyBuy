@@ -18,7 +18,6 @@ if (form){
         
         for (let i = 0; i < inputField.length-1; i++){
             if (inputField[i].querySelector('input').value == ''){
-                console.log(inputField[i]);
                 setError(inputField[i], 'Cannot be blank');
                 correct = false;
             }
@@ -27,44 +26,9 @@ if (form){
                 setSuccess(inputField[i]);
             }
         }
-
-        // console.log(correct);
         
         if (correct){
-            
-            const formData = new FormData(form);
-            
-            // fetch('../../app/ProductController.php', {
-            //     method: 'post',
-            //     body: formData
-            // }).then(res => {
-            //     return res.text();
-            // }).then(text => {
-            //     console.log(text);
-            // }).catch(err => {
-            //     console.error(err);
-            // })
-
-            fetch('http://localhost/Project/FlyBuy/ProductController/addItem', {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "same-origin", // no-cors, *cors, same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: "same-origin", // include, *same-origin, omit
-                headers: {
-                    "Content-Type": "application/json",  // sent request
-                    "Accept":       "application/json"   // expected data sent back
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify( formData ), // body data type must match "Content-Type" header
-            }).then(res => {
-                return res.text();
-            }).then(text => {
-                console.log(text);
-            }).catch(err => {
-                console.error(err);
-            })
-
+            form.submit();
         }
         else{
             e.preventDefault();

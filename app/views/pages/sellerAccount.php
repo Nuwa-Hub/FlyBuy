@@ -216,7 +216,7 @@
 
             <h1 class="title">Add Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="">
+            <form class="item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
