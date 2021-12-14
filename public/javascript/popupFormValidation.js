@@ -30,26 +30,7 @@ if (form){
         }
         
         if (correct){
-            
-            const formData = new FormData(form);
-            // console.log(formData);
-
-            // $.post("test.php", data);
-
-            fetch('http://localhost/Project/FlyBuy/ProductController/addItem', {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => {
-                form.submit();
-                return res.text();
-            })
-            .then(text => {
-                console.log(text);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            form.submit();
         }
         else{
             e.preventDefault();

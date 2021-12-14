@@ -29,7 +29,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10000;
+    z-index: 15;
 }
 
 #header .logo {
@@ -60,7 +60,7 @@ html {
     padding: 6px 15px;
     color: blue;
     border-radius: 40px;
-    /* cursor: pointer; */
+    cursor: pointer;
 }
 
 #header ul li a:hover,
