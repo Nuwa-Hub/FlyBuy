@@ -83,7 +83,7 @@
       <ul>
         <li><a href="#" class="active">Home</a></li>
         <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
-        <!-- <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a> </li> -->
+        <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a> </li>
       </ul>
     </header>
 

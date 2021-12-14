@@ -26,7 +26,6 @@
     <ul>
       <li><a href="#" class="active">Home</a></li>
       <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-      <li><a href="shopping_cart.php"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"></span></i></a> </li>
     </ul>
 
   </header>

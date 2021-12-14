@@ -216,7 +216,7 @@
 
             <h1 class="title">Add Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="">
+            <form class="add item-form" id="item-form" method="POST" action="">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -251,6 +251,7 @@
                 </div>
 
                 <button class="add-item btn" name="submitAddItem">Add</button>
+                <!-- <input type="submit" class="add-item btn" name="submitAddItem" value="Add"> -->
 
             </form>
 
@@ -270,7 +271,7 @@
 
             <h1 class="title">Edit Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
+            <form class="edit item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -339,6 +340,7 @@
     
 </body>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>
