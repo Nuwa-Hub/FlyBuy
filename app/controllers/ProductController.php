@@ -65,6 +65,7 @@ class ProductController extends Controller
             $pid = $_POST['pid'];
             $pqty = $_POST['pqty'];
             $buyer_id = $_POST['buyer_id'];
+            
             foreach ($_SESSION['cartarr'] as $product) {
 
                 if ($product->item_id == $pid) {

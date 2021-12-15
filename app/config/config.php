@@ -11,8 +11,8 @@ define('APPROOT', dirname(dirname(__FILE__)));
 
 // URL ROOT - https can be removed (Dynamic links)
 //define('URLROOT', 'http://localhost/Project/FlyBuy');
-define('URLROOT', 'http://localhost/Project/FlyBuy');
-
+//define('URLROOT', 'http://localhost/Project/FlyBuy');
+define('URLROOT', 'http://localhost/OOP%20project/FlyBuy');
 //site name
 define('SITENAME', 'COSMOS-FLYBUY');
 
