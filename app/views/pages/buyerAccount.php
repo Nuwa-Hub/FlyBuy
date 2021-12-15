@@ -82,6 +82,7 @@
       </div>
       <ul>
         <li><a href="#" class="active">Home</a></li>
+        <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
         <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
       </ul>
     </header>
@@ -106,14 +107,14 @@
               <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" class="product-img" alt="">
             </div>
             <div class="popup-view">
-              <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+              <form method="post" action="<?php echo URLROOT; ?>/ProductController/addToCart">
                 <div class="popup-card">
                   <a><i class="fas fa-times close-btn"></i></a>
                   <div class="product-img">
                     <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
                   </div>
                   <div class="info">
-                    <h2><?php echo $product->itemName; ?><br><span>Chandrasena stores</span></h2>
+                    <h2><?php echo $data['user']->buy_id; ?><br><span>Chandrasena stores</span></h2>
                     <h3><span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
@@ -123,15 +124,11 @@
                     <p><?php echo $product->description; ?></p>
                     <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                     <span class="quantity">Quantity :</span>
-                    <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->maxAmount ?>">
+                    <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
 
                     <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
-                    <input type="hidden" name="pname" class="pname" value="<?php echo $product->itemName ?>">
-                    <input type="hidden" name="pprice" class="pprice" value="<?php echo $product->price ?>">
-                    <input type="hidden" name="pimage" class="pimage" value="<?php echo $product->item_image ?>">
-                    <input type="hidden" name="pseller_id" class="pseler_id" value="<?php echo $product->seller_id ?>">
+                    <input type="hidden" name="buyer_id" class="buyer_id" value="<?php echo $data['buyer_id']; ?>">
                     <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
-                    <input type="hidden" name="pdes" class="pdes" value="<?php echo $product->description ?>">
 
                     <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
                     <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
@@ -154,15 +151,15 @@
 
       <div class="content">
 
-          <div class="closeBtn" onclick="toggleLogout()">&times;</div>
+        <div class="closeBtn" onclick="toggleLogout()">&times;</div>
 
-          <h1 class="title">Do you want to logout?</h1>
+        <h1 class="title">Do you want to logout?</h1>
 
-          <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+        <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
 
-          <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
-              <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
-          </form>
+        <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
+          <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
+        </form>
 
       </div>
 
@@ -171,48 +168,48 @@
   </body>
 
   <script type="text/javascript">
-      let text = document.getElementById('text');
-      let btn = document.getElementById('btn');
-      let item2 = document.getElementById('item2');
-      let item1 = document.getElementById('item1');
-      window.addEventListener('scroll', function() {
-        var header = document.querySelector("header");
-        header.classList.toggle("sticky", window.scrollY > 0);
+    let text = document.getElementById('text');
+    let btn = document.getElementById('btn');
+    let item2 = document.getElementById('item2');
+    let item1 = document.getElementById('item1');
+    window.addEventListener('scroll', function() {
+      var header = document.querySelector("header");
+      header.classList.toggle("sticky", window.scrollY > 0);
 
-        let value = window.scrollY;
-        text.style.top = 50 + value * -0.5 + '%';
-        btn.style.marginTop = value * 1.5 + 'px';
-        item2.style.top = value * -0.12 + 'px';
-        item1.style.top = value * 0.25 + 'px';
+      let value = window.scrollY;
+      text.style.top = 50 + value * -0.5 + '%';
+      btn.style.marginTop = value * 1.5 + 'px';
+      item2.style.top = value * -0.12 + 'px';
+      item1.style.top = value * 0.25 + 'px';
+    });
+
+    var popupViews = document.querySelectorAll('.popup-view');
+    var popupBtns = document.querySelectorAll('.popup-btn');
+    var closeBtns = document.querySelectorAll('.close-btn');
+
+
+    var popup = function(popupClick) {
+      popupViews[popupClick].classList.add('active');
+
+      document.body.style.overflowY = 'hidden';
+    }
+
+    popupBtns.forEach((popupBtn, i) => {
+      popupBtn.addEventListener("click", () => {
+        popup(i)
+
       });
+    });
 
-      var popupViews = document.querySelectorAll('.popup-view');
-      var popupBtns = document.querySelectorAll('.popup-btn');
-      var closeBtns = document.querySelectorAll('.close-btn');
+    closeBtns.forEach((closeBtn) => {
+      closeBtn.addEventListener("click", () => {
+        popupViews.forEach((popupView) => {
+          popupView.classList.remove('active');
 
-
-      var popup = function(popupClick) {
-        popupViews[popupClick].classList.add('active');
-
-        document.body.style.overflowY = 'hidden';
-      }
-
-      popupBtns.forEach((popupBtn, i) => {
-        popupBtn.addEventListener("click", () => {
-          popup(i)
-
+          document.body.style.overflowY = '';
         });
       });
-
-      closeBtns.forEach((closeBtn) => {
-        closeBtn.addEventListener("click", () => {
-          popupViews.forEach((popupView) => {
-            popupView.classList.remove('active');
-
-            document.body.style.overflowY = '';
-          });
-        });
-      });
+    });
   </script>
 
   <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>

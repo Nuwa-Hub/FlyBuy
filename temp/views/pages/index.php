@@ -1,11 +1,11 @@
 <?php
 
-include '../models/buyer.php';
-include '../models/seller.php';
-include '../models/product.php';
-include '../database/db_connection.php';
+// include '../models/buyer.php';
+// include '../models/seller.php';
+// include '../models/product.php';
+// include '../database/db_connection.php';
 
-require('../validators/user_validator.php');
+// require('../validators/user_validator.php');
 
 
 // if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
@@ -19,7 +19,7 @@ require('../validators/user_validator.php');
 
 
 
-$products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+// $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
 // for($i = 0; $i < count($products); $i++){
 //  $seller_id = $products[$i]['seller_id'];
 //   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
@@ -29,12 +29,12 @@ $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYS
 
 
 
-if (isset($_POST['addTocart'])) {
+// if (isset($_POST['addTocart'])) {
 
-    if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-        header('Location: loginSignup.php');
-    }
-}
+//     if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+//         header('Location: loginSignup.php');
+//     }
+// }
 
 
 ?>

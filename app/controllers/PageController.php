@@ -1,15 +1,18 @@
 <?php
 
-class PageController extends Controller{
+class PageController extends Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->productModel = $this->model('Product');
         $this->buyerModel = $this->model('Buyer');
         $this->sellerModel = $this->model('Seller');
     }
 
-    public function index(){
-        
+    public function index()
+    {
+
         $allProducts = $this->productModel->findAllProducts();
 
         $data = [
@@ -19,11 +22,17 @@ class PageController extends Controller{
         $this->view('pages/homepage', $data);
     }
 
-    public function loginSignup(){
+    public function loginSignup()
+    {
         $this->view('pages/loginSignup');
     }
 
-    public function buyerAccount($id){
+    public function buyerAccount($id)
+    {
+
+        if (!isset($_SESSION['cartarr'])) {
+            $_SESSION['cartarr'] = array();
+        }
 
         $products = $this->castToArray($this->productModel->findAllProducts());
 
@@ -42,16 +51,16 @@ class PageController extends Controller{
             'user' => $this->buyerModel->findUserById($id),
             'products' => $products
         ];
-        
-        if(!isset($_COOKIE['user_login'])){
+
+        if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
-        }
-        else{
+        } else {
             $this->view('pages/buyerAccount', $data);
         }
     }
 
-    public function sellerAccount($id){
+    public function sellerAccount($id)
+    {
 
         $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
 
@@ -70,35 +79,35 @@ class PageController extends Controller{
             'user' => $this->sellerModel->findUserById($id),
             'products' => $products
         ];
-        
-        if(!isset($_COOKIE['user_login'])){
+
+        if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
-        }
-        else{
+        } else {
             $this->view('pages/sellerAccount', $data);
         }
     }
 
-    public function editSellerAccount($id){
+    public function editSellerAccount($id)
+    {
 
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id)
         ];
-        
+
         $this->view('pages/editSellerAccount', $data);
     }
-    
-    public function verifyEmail($userType, $vkey){
 
-        if ($userType == 'buyer'){
+    public function verifyEmail($userType, $vkey)
+    {
+
+        if ($userType == 'buyer') {
             $user = $this->buyerModel->findUserByVKey($vkey);
-        }
-        else{
+        } else {
             $user = $this->sellerModel->findUserByVKey($vkey);
         }
 
-        if (isset($_POST['sendAgainLink'])){
+        if (isset($_POST['sendAgainLink'])) {
 
             $additionalData  = ['vkey' => $vkey, 'table' => $userType];
             $email = $user->email;
@@ -112,19 +121,20 @@ class PageController extends Controller{
         $this->view('pages/verifyEmail');
     }
 
-    public function emailVerified($userType, $vkey){
+    public function emailVerified($userType, $vkey)
+    {
 
-        if ($userType == 'buyer'){
+        if ($userType == 'buyer') {
             $this->buyerModel->verifyUser($vkey);
-        }
-        else{
+        } else {
             $this->sellerModel->verifyUser($vkey);
         }
 
         $this->view('pages/emailVerified');
     }
 
-    public function forgotPassword(){
+    public function forgotPassword()
+    {
 
         $data = [
             'className' => '',
@@ -135,13 +145,13 @@ class PageController extends Controller{
         $vkeyBuyer = '';
         $vkeySeller = '';
 
-        if (isset($_POST['submitForgotPsw'])){
+        if (isset($_POST['submitForgotPsw'])) {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $email = $_POST['email'];
             $data['value'] = $email;
 
-            if($email){
+            if ($email) {
                 $buyer = $this->buyerModel->findUserByEmail($email);
                 $seller = $this->sellerModel->findUserByEmail($email);
 
@@ -160,27 +170,22 @@ class PageController extends Controller{
 
                 $data['className'] = 'success';
 
-                if (empty($vkeyBuyer) and empty($vkeySeller)){
+                if (empty($vkeyBuyer) and empty($vkeySeller)) {
                     $data['className'] = 'error';
                     $data['errorMsg'] = 'Your email is not registered. Please check again';
-                }
-                else if (empty($vkeyBuyer)){
+                } else if (empty($vkeyBuyer)) {
                     $additionalData['msg'] = 'Your email is registered as a seller. Please check your inbox and verify it is you';
-                }
-                else if (empty($vkeySeller)){
+                } else if (empty($vkeySeller)) {
                     $additionalData['msg'] = 'Your email is registered as a buyer. Please check your inbox and verify it is you';
-                }
-                else{
+                } else {
                     $additionalData['msg'] = 'Your email is registered as a buyer and a seller. Please check your inbox and verify it is you';
                 }
 
-                if ($data['className'] == 'success'){
+                if ($data['className'] == 'success') {
                     sendMail($email, $type, $additionalData, $path);
                     header('location: ' . URLROOT . '/PageController/loginSignup');
                 }
-
-            }
-            else{
+            } else {
                 $data['className'] = 'error';
                 $data['errorMsg'] = 'email cannot be empty';
             }
@@ -189,14 +194,15 @@ class PageController extends Controller{
         $this->view('pages/forgotPsw', $data);
     }
 
-    public function changePassword($vkeyBuyer, $vkeySeller){
+    public function changePassword($vkeyBuyer, $vkeySeller)
+    {
 
         $data = [
             'vkeyBuyer' => $vkeyBuyer,
             'vkeySeller' => $vkeySeller
         ];
 
-        if (isset($_POST['submitChangePsw'])){
+        if (isset($_POST['submitChangePsw'])) {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $password = $_POST['password'];
@@ -206,22 +212,26 @@ class PageController extends Controller{
             $changePswValidator = new changePswValidator($password, $confirmPsw, $vkeyBuyer, $vkeySeller);
             $data = $changePswValidator->validateForm();
 
-            if (! empty($vkeyBuyer)){
+            if (!empty($vkeyBuyer)) {
                 $dataToUpdate['password'] = $password;
                 $dataToUpdate['vkey'] = $vkeyBuyer;
                 $this->buyerModel->updateUserData($dataToUpdate);
             }
-            if (! empty($vkeySeller)){
+            if (!empty($vkeySeller)) {
                 $dataToUpdate['password'] = $password;
                 $dataToUpdate['vkey'] = $vkeySeller;
                 $this->buyerModel->updateUserData($dataToUpdate);
             }
-
         }
 
         $this->view('pages/changePsw', $data);
-
-        
+    }
+    public function shoppingCart($id)
+    {
+       $data = [
+            'buyer_id' => $id,
+        ];
+         $this->view('pages/shoppingCart', $data);
     }
 
     public function castToArray($arr){
@@ -246,5 +256,3 @@ class PageController extends Controller{
         return $casted_arr;
     }
 }
-
-?>
