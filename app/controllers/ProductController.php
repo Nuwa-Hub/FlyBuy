@@ -1,15 +1,12 @@
 <?php
 
-class ProductController extends Controller
-{
+class ProductController extends Controller{
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->productmodel = $this->model('Product');
     }
 
-    public function addItem()
-    {
+    public function addItem(){
 
         if(isset($_POST['submitAddItem'])){
 
@@ -22,8 +19,7 @@ class ProductController extends Controller
         }
     }
 
-    public function editItem()
-    {
+    public function editItem(){
 
         if (isset($_POST['submitEditItem'])) {
 
@@ -35,8 +31,8 @@ class ProductController extends Controller
             header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
         }
     }
-    public function addToCart()
-    {
+
+    public function addToCart(){
 
         if (isset($_POST['addTocart'])) {
             $item = true;
@@ -50,6 +46,7 @@ class ProductController extends Controller
                     $item = false;
                 }
             }
+            
             if ($item) {
                 $item = $this->productmodel->findProductById($pid);
                 $ar=array( $item->amount,$pqty);
@@ -62,8 +59,9 @@ class ProductController extends Controller
             }
         }
     }
-    public function removeFromCart()
-    {
+
+    public function removeFromCart(){
+        
         if (isset($_POST['pamount'])) {
 
             $pid = $_POST['pid'];
