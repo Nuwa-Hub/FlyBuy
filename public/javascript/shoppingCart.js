@@ -80,7 +80,7 @@ $(document).ready(function() {
 
     //to make the quantity increase when qt-minus button click
     $(".qt-plus").click(function() {
-
+        alert("fdgdg");
         child = $(this).parent().children(".qt");
         //  location.reload(true);
 
