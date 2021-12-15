@@ -7,7 +7,8 @@ require_once 'libraries/Database.php';
 require_once 'models/User.php';
 
 require_once 'modules/sendMail.php';
-
+require "modules/pdfMaker/vendor/autoload.php";
+require "modules/pdfMaker/customPdfGenerator.php";
 
 
 
