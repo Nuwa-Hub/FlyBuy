@@ -50,43 +50,29 @@ $(document).ready(function() {
         el.parent().parent().addClass("removed");
 
 
-        // window.setTimeout(
+        if (check == false) {
+            setTimeout(function() {
+                location.reload(true);
 
-        //     function() {
-        //         el.parent().parent().slideUp('fast', function() {
-        //             el.parent().parent().remove();
-        //             if ($(".product").length == 0) {
-        //                 if (check) {
-        //                     $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
-        //                 } else {
-        //                     $("#cart").html("<h1>No products!</h1>");
-        //                 }
-        //             }
+                var $elid = el.closest('header');
+                ppid = $elid.find(".pid").val();
 
-        //             changeTotal();
-        //         });
-        //     }, 300);
+                // ajex request for remove the relevent item from SESSION store
+                $.ajax({
+                    url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+                    method: 'POST',
+                    cache: false,
+                    data: {
+                        ppid: ppid,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            }, 470);
+        }
 
 
-        setTimeout(function() {
-            location.reload(true);
-
-            var $elid = el.closest('header');
-            ppid = $elid.find(".pid").val();
-
-            // ajex request for remove the relevent item from SESSION store
-            $.ajax({
-                url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
-                method: 'POST',
-                cache: false,
-                data: {
-                    ppid: ppid,
-                },
-                success: function(response) {
-                    console.log(response);
-                }
-            });
-        }, 470);
 
 
     });
@@ -159,60 +145,44 @@ $(document).ready(function() {
 
 
     //checkout button
-    //     $(".btn").click(
-    //         // function() {
-    //         //     var ele = document.getElementsByClassName("remove");
-    //         //     var n = ele.length;
-    //         //     //  alert(ele.length);
-    //         //     for (var i = 0; i < n; i++) {
-    //         //         var el = ele[i];
-    //         //         //alert(i);
-    //         //         ele[i].parent().parent().addClass("removed");
-    //         //     }
+    $(".btn").click(function() {
+        check = true;
+        $(".remove").click();
 
-    //         // }
-    //         function() {
-    //             el.parent().parent().slideUp('fast', function() {
-    //                 el.parent().parent().remove();
-    //                 if ($(".product").length == 0) {
-    //                     if (check) {
-    //                         // $("#cart").html("<h1>The shop does not function, yet!</h / 1 > < p > If you liked my shopping < > < /a>. Thank you!</p > ");
-    //                     } else {
-    //                         $("#cart").html("<h1>No products!</h1>");
-    //                     }
-    //                 }
+        document.getElementById("site-header").style.opacity = "0";
+        document.getElementById("site-footer").style.opacity = "0";
+        document.getElementById("popup-form").style.opacity = "1";
 
-    //                 changeTotal();
-    //             });
+        lorryMove();
 
-    // //         });
-    // $(".btn").click(function() {
-    //     check = true;
-    //     //   $(".remove").click();
+    });
 
 
-    //     window.setTimeout(function() {
-    //         // location.reload(true);
-    //         //  alert("sdf");
-    //         var $elid = el.closest('header');
-    //         ppid = $elid.find(".pid").val();
 
-    //         // ajex request for remove the relevent item from SESSION store
-    //         $.ajax({
-    //             url: 'http://localhost/OOP%20project/FlyBuy/PdfController/page',
-    //             method: 'POST',
-    //             cache: false,
-
-    //             success: function(response) {
-    //                 // console.log(response);
-    //                 alert("df");
-
-    //             }
-    //         });
-    //     }, 470);
-    // });
 
 });
+
+
+function lorryMove() {
+    var id = null;
+    var ele = document.getElementById("lorry");
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 5);
+
+
+    function frame() {
+        if (pos == 650) {
+            clearInterval(id);
+            ele.style.left = '20px';
+        } else {
+            pos++;
+            //  elem.style.top = pos + 'px';
+            ele.style.left = pos + 'px';
+        }
+    }
+
+}
 
 function changeTot() {
     var el = $(this);
