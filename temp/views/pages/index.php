@@ -1,48 +1,40 @@
 <?php
 
-include '../models/buyer.php';
-include '../models/seller.php';
-include '../models/product.php';
-include '../database/db_connection.php';
+// include '../models/buyer.php';
+// include '../models/seller.php';
+// include '../models/product.php';
+// include '../database/db_connection.php';
 
-require('../validators/user_validator.php');
-
-
- if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-  header('Location: loginSignup.php');
-} else {
+// require('../validators/user_validator.php');
 
 
-
-$curr_email = $_COOKIE['user_login'];  //logged in user email
-$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
+// if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+//  header('Location: loginSignup.php');
+//} else {
 
 
 
-$products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+//$curr_email = $_COOKIE['user_login'];  //logged in user email
+//$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
 
-for($i = 0; $i < count($products); $i++){
- $seller_id = $products[$i]['seller_id'];
-  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
- $products[$i]['seller'] = $seller;
- }
-}
 
- for($i = 0; $i < count($products); $i++){
-  $seller_id = $products[$i]['seller_id'];
-   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-  $products[$i]['seller'] = $seller;
-  }
+
+// $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
+// for($i = 0; $i < count($products); $i++){
+//  $seller_id = $products[$i]['seller_id'];
+//   $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
+//  $products[$i]['seller'] = $seller;
+//  }
 
 
 
 
-if (isset($_POST['addTocart'])) {
+// if (isset($_POST['addTocart'])) {
 
-         //if the cookie is not set redirect -> loginSignup
-        header('Location: loginSignup.php');
-    
-}
+//     if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
+//         header('Location: loginSignup.php');
+//     }
+// }
 
 
 ?>
@@ -71,11 +63,7 @@ if (isset($_POST['addTocart'])) {
         <ul>
             <li><a href="#" class="active">Home</a></li>
             <li><a href="loginSignup.php">Login/Sign up</a></li>
-
-            <li><a href="#" >About us</a></li>
-        </ul>
              </ul>
-
     </header>
     <section>
         <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>

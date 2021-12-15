@@ -1,108 +1,5 @@
 <?php 
 
-// include '../models/buyer.php';
-// include '../models/seller.php';
-// include '../database/db_connection.php';
-
-// require('../validators/product_validator.php');
-
-// if(strpos($_SERVER['HTTP_USER_AGENT'],'Mediapartners-Google') !== false) {
-//     exit();
-// }
-
-// $seller_id = $_GET['seller_id'];
-
-// function checknone($arr){
-
-//     foreach ($arr as $ele) {
-//         if ($ele != 'none') {
-//             return false;
-//         }
-//     }
-//     return true;
-// }
-
-// if(isset($_POST['submitLogout'])){
-
-//     if (isset($_COOKIE['user_login'])) {
-
-//         unset($_COOKIE['user_login']); 
-//         setcookie('user_login', null, -1, '/');
-//     }
-    
-//     header('Location: loginSignup.php');
-// }
-
-// if(!isset($_COOKIE['user_login'])){
-//     header('Location: loginSignup.php');
-// }
-// else{
-
-//     $curr_email = $_COOKIE['user_login'];  //logged in user email
-    
-//     $user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
-//     $products = mysqli_fetch_all( mysqli_query($conn, "SELECT * FROM  products WHERE seller_id = '$seller_id'"), MYSQLI_ASSOC);
-    
-//     $add_itemName = '';
-//     $add_amount = '';
-//     $add_price = '';
-//     $add_description = '';
-    
-//     if (count($_POST) > 0 && isset($_POST['submitAddItem'])){
-        
-//         $add_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
-//         $add_amount = mysqli_real_escape_string($conn, $_POST['amount']);
-//         $add_price = mysqli_real_escape_string($conn, $_POST['price']);
-//         $add_description = mysqli_real_escape_string($conn, $_POST['description']);
-        
-//         //if eka nattan seller_id = 0 una duplicate item ekak add wenw.ekai if ek damme
-//         if($seller_id != 0){
-//             $sql = "INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES ('$add_itemName','$add_amount','$add_price','$add_description', '$seller_id')";
-//         }        
-//         if ($conn->query($sql) === TRUE) {
-//             echo "New record created successfully";
-//             header('Location: sellerAccount.php?seller_id='.$seller_id);
-//         }
-//         else {
-//             echo "Error: " . $sql . "<br>" . $conn->error;
-//         }
-//     }
-
-//     $edit_itemName = '';
-//     $edit_amount = '';
-//     $edit_price = '';
-//     $edit_description = '';
-
-//     if(isset($_POST['submitEditItem'])){
-
-//         $edit_itemName = mysqli_real_escape_string($conn, $_POST['itemName']);
-//         $edit_amount = mysqli_real_escape_string($conn, $_POST['amount']);
-//         $edit_price = mysqli_real_escape_string($conn, $_POST['price']);
-//         $edit_description = mysqli_real_escape_string($conn, $_POST['description']);
-
-//         $item_id = $_POST['item_id'];
-        
-//         try {
-
-//             if(!empty($edit_itemName)){
-//                 $update = $conn->query("UPDATE products SET itemName = '$edit_itemName' WHERE item_id = $item_id");
-//             }
-//             if(!empty($edit_amount)){
-//                 $update = $conn->query("UPDATE products SET amount = '$edit_amount' WHERE item_id = $item_id");
-//             }
-//             if(!empty($edit_price)){
-//                 $update = $conn->query("UPDATE products SET price = '$edit_price' WHERE item_id = $item_id");
-//             }
-//             $update = $conn->query("UPDATE products SET description = '$edit_description' WHERE item_id = $item_id");
-//         }
-//         catch (Exception $e) {
-//             echo "Data could not be change";
-//         }
-
-//         header('Location: sellerAccount.php?seller_id='.$seller_id);
-//     }
-// }
-
 ?>
 
 
@@ -216,7 +113,7 @@
 
             <h1 class="title">Add Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="">
+            <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -250,6 +147,8 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
+                <input class="item-id" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+
                 <button class="add-item btn" name="submitAddItem">Add</button>
 
             </form>
@@ -270,7 +169,7 @@
 
             <h1 class="title">Edit Item</h1>
 
-            <form class="item-form" id="item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
+            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -339,6 +238,7 @@
     
 </body>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>
