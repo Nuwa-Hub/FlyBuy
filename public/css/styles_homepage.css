@@ -125,7 +125,7 @@ html {
 }
 
 .search-box{
-    position: relative;
+    position: absolute;
     background: #333;
     height: 2.6em;
     width: fit-content;
