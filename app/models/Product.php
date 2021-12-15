@@ -17,6 +17,25 @@ class Product{
         return $results;
     }
 
+    public function addProduct($data){
+
+        $this->db->query('INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES (:itemName, :amount, :price, :description, :seller_id)');
+
+        //Bind values
+        $this->db->bind(':itemName', $data['itemName']);
+        $this->db->bind(':amount', $data['amount']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':seller_id', $data['seller_id']);
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function updateEachFeild($data){
 
         $item_id = $data['item_id'];

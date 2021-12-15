@@ -97,14 +97,6 @@ class Buyer implements User{
         return $results;
     }
 
-    public function getAllProducts(){
-
-        $this->db->query("SELECT * FROM  products");
-        $results = $this->db->resultSet();
-
-        return $results;
-    }
-
     public function verifyUser($vkey){
         $this->db->query('UPDATE buyers SET verified = :verified WHERE vkey = :vkey');
 

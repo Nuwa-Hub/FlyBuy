@@ -13,8 +13,7 @@ let correct = true;
 // add item form
 if (form){
 
-    addItemBtn.addEventListener('click', e => {
-        e.preventDefault();
+    addItemBtn.addEventListener('click', (e) => {
 
         correct = true
         

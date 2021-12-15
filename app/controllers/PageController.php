@@ -25,10 +25,22 @@ class PageController extends Controller{
 
     public function buyerAccount($id){
 
+        $products = $this->castToArray($this->productModel->findAllProducts());
+
+        usort($products, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        $products = $this->castToObj($products);
+
         $data = [
             'buyer_id' => $id,
             'user' => $this->buyerModel->findUserById($id),
-            'products' => $this->buyerModel->getAllProducts($id)
+            'products' => $products
         ];
         
         if(!isset($_COOKIE['user_login'])){
@@ -41,10 +53,22 @@ class PageController extends Controller{
 
     public function sellerAccount($id){
 
+        $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
+
+        usort($products, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        $products = $this->castToObj($products);
+
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'products' => $this->sellerModel->findAllSellerProducts($id)
+            'products' => $products
         ];
         
         if(!isset($_COOKIE['user_login'])){
@@ -198,6 +222,28 @@ class PageController extends Controller{
         $this->view('pages/changePsw', $data);
 
         
+    }
+
+    public function castToArray($arr){
+
+        $casted_arr = [];
+
+        foreach ($arr as $i => $obj) {
+            $casted_arr[$i] = (array)$obj;
+        }
+
+        return $casted_arr;
+    }
+
+    public function castToObj($arr){
+
+        $casted_arr = [];
+
+        foreach ($arr as $i => $obj) {
+            $casted_arr[$i] = (object)$obj;
+        }
+
+        return $casted_arr;
     }
 }
 
