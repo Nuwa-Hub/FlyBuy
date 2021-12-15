@@ -11,10 +11,24 @@ class PageController extends Controller{
 
     public function index(){
 
-        $allProducts = $this->productModel->findAllProducts();
+        $products = $this->castToArray($this->productModel->findAllProducts());
+
+        usort($products, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        for($i = 0; $i < count($products); $i++){
+            $products[$i]['seller'] = $this->sellerModel->findUserById($products[$i]['seller_id']);
+        }
+
+        $products = $this->castToObj($products);
 
         $data = [
-            'products' => $allProducts
+            'products' => $products
         ];
 
         $this->view('pages/homepage', $data);
@@ -39,6 +53,10 @@ class PageController extends Controller{
             
             return $t2 - $t1;
         });
+
+        for($i = 0; $i < count($products); $i++){
+            $products[$i]['seller'] = $this->sellerModel->findUserById($products[$i]['seller_id']);
+        }
 
         $products = $this->castToObj($products);
 

@@ -58,7 +58,7 @@ $(document).ready(function() {
 
                 // ajex request for remove the relevent item from SESSION store
                 $.ajax({
-                    url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+                    url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
                     method: 'POST',
                     cache: false,
                     data: {
@@ -193,7 +193,7 @@ function changeTot() {
 
 function changeAmount(pid, pamount) {
     $.ajax({
-        url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+        url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
         method: 'post',
         cache: false,
         data: {
