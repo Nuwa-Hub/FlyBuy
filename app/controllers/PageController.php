@@ -45,12 +45,7 @@ class PageController extends Controller{
         $data = [
             'buyer_id' => $id,
             'user' => $this->buyerModel->findUserById($id),
-<<<<<<< HEAD
-            'products' => $this->buyerModel->getAllProducts($id),
-
-=======
             'products' => $products
->>>>>>> e2e2023e9fff6e67da24aee879e8f0e6eab03141
         ];
 
         if (!isset($_COOKIE['user_login'])) {

@@ -52,7 +52,6 @@ $(document).ready(function() {
 
         if (check == false) {
             setTimeout(function() {
-                location.reload(true);
 
                 var $elid = el.closest('header');
                 ppid = $elid.find(".pid").val();
@@ -66,6 +65,7 @@ $(document).ready(function() {
                         ppid: ppid,
                     },
                     success: function(response) {
+                        location.reload(true);
                         console.log(response);
                     }
                 });
