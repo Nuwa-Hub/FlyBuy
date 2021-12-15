@@ -1,64 +1,38 @@
 <?php
 
-class ProductController extends Controller
-{
+class ProductController extends Controller{
 
-
-    public function __construct()
-    {
+    public function __construct(){
         $this->productmodel = $this->model('Product');
     }
 
-    public function addItem()
-    {
-        // print_r($_POST);
+    public function addItem(){
 
-        $contentType = trim($_SERVER["CONTENT_TYPE"] ?? '');
+        if(isset($_POST['submitAddItem'])){
 
-        if ($contentType !== "application/json") {
-            die(json_encode([
-                'value' => 0,
-                'error' => 'Content-Type is not set as "application/json"',
-                'data' => null,
-            ]));
+            $this->product = $this->model('Product');
+            $this->product->addProduct($_POST);
+
+            $id = $_POST['seller_id'];
+            
+            header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
         }
-
-        $content = trim(file_get_contents("php://input"));
-
-        $data = json_decode($content, true);
-
-        if (!is_array($data)) {
-            die(json_encode([
-                'value' => 0,
-                'error' => 'Received JSON is improperly formatted',
-                'data' => null,
-            ]));
-        }
-
-        print_r($data);
-
-        // die(json_encode([
-        //     'value' => 1,
-        //     'error' => null,
-        //     'data' => null,
-        // ]));
     }
 
-    public function editItem()
-    {
+    public function editItem(){
 
         if (isset($_POST['submitEditItem'])) {
 
-            $this->seller = $this->model('Product');
-            $this->seller->updateEachFeild($_POST);
+            $this->product = $this->model('Product');
+            $this->product->updateEachFeild($_POST);
 
             $id = $_POST['seller_id'];
 
             header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
         }
     }
-    public function addToCart()
-    {
+
+    public function addToCart(){
 
         if (isset($_POST['addTocart'])) {
             $item = true;
@@ -72,6 +46,7 @@ class ProductController extends Controller
                     $item = false;
                 }
             }
+            
             if ($item) {
                 $item = $this->productmodel->findProductById($pid);
                 $ar=array( $item->amount,$pqty);
@@ -84,8 +59,9 @@ class ProductController extends Controller
             }
         }
     }
-    public function removeFromCart()
-    {
+
+    public function removeFromCart(){
+        
         if (isset($_POST['pamount'])) {
 
             $pid = $_POST['pid'];

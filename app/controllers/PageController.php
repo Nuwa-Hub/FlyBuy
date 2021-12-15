@@ -1,17 +1,15 @@
 <?php
 
-class PageController extends Controller
-{
+class PageController extends Controller{
 
-    public function __construct()
-    {
+    public function __construct(){
+
         $this->productModel = $this->model('Product');
         $this->buyerModel = $this->model('Buyer');
         $this->sellerModel = $this->model('Seller');
     }
 
-    public function index()
-    {
+    public function index(){
 
         $allProducts = $this->productModel->findAllProducts();
 
@@ -22,50 +20,71 @@ class PageController extends Controller
         $this->view('pages/homepage', $data);
     }
 
-    public function loginSignup()
-    {
+    public function loginSignup(){
         $this->view('pages/loginSignup');
     }
 
-    public function buyerAccount($id)
-    {
+    public function buyerAccount($id){
 
         if (!isset($_SESSION['cartarr'])) {
             $_SESSION['cartarr'] = array();
         }
 
+        $products = $this->castToArray($this->productModel->findAllProducts());
+
+        usort($products, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        $products = $this->castToObj($products);
+
         $data = [
             'buyer_id' => $id,
             'user' => $this->buyerModel->findUserById($id),
-            'products' => $this->buyerModel->getAllProducts($id),
-            
+            'products' => $products
         ];
 
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
-        } else {
+        }
+        else {
             $this->view('pages/buyerAccount', $data);
         }
     }
 
-    public function sellerAccount($id)
-    {
+    public function sellerAccount($id){
+
+        $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
+
+        usort($products, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        $products = $this->castToObj($products);
 
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'products' => $this->sellerModel->findAllSellerProducts($id)
+            'products' => $products
         ];
 
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
-        } else {
+        }
+        else {
             $this->view('pages/sellerAccount', $data);
         }
     }
 
-    public function editSellerAccount($id)
-    {
+    public function editSellerAccount($id){
 
         $data = [
             'seller_id' => $id,
@@ -75,12 +94,12 @@ class PageController extends Controller
         $this->view('pages/editSellerAccount', $data);
     }
 
-    public function verifyEmail($userType, $vkey)
-    {
+    public function verifyEmail($userType, $vkey){
 
         if ($userType == 'buyer') {
             $user = $this->buyerModel->findUserByVKey($vkey);
-        } else {
+        } 
+        else {
             $user = $this->sellerModel->findUserByVKey($vkey);
         }
 
@@ -98,20 +117,19 @@ class PageController extends Controller
         $this->view('pages/verifyEmail');
     }
 
-    public function emailVerified($userType, $vkey)
-    {
+    public function emailVerified($userType, $vkey){
 
         if ($userType == 'buyer') {
             $this->buyerModel->verifyUser($vkey);
-        } else {
+        }
+        else {
             $this->sellerModel->verifyUser($vkey);
         }
 
         $this->view('pages/emailVerified');
     }
 
-    public function forgotPassword()
-    {
+    public function forgotPassword(){
 
         $data = [
             'className' => '',
@@ -171,8 +189,7 @@ class PageController extends Controller
         $this->view('pages/forgotPsw', $data);
     }
 
-    public function changePassword($vkeyBuyer, $vkeySeller)
-    {
+    public function changePassword($vkeyBuyer, $vkeySeller){
 
         $data = [
             'vkeyBuyer' => $vkeyBuyer,
@@ -194,6 +211,7 @@ class PageController extends Controller
                 $dataToUpdate['vkey'] = $vkeyBuyer;
                 $this->buyerModel->updateUserData($dataToUpdate);
             }
+
             if (!empty($vkeySeller)) {
                 $dataToUpdate['password'] = $password;
                 $dataToUpdate['vkey'] = $vkeySeller;
@@ -203,11 +221,34 @@ class PageController extends Controller
 
         $this->view('pages/changePsw', $data);
     }
-    public function shoppingCart($id)
-    {
+
+    public function shoppingCart($id){
+
        $data = [
             'buyer_id' => $id,
         ];
          $this->view('pages/shoppingCart', $data);
+    }
+
+    public function castToArray($arr){
+
+        $casted_arr = [];
+
+        foreach ($arr as $i => $obj) {
+            $casted_arr[$i] = (array)$obj;
+        }
+
+        return $casted_arr;
+    }
+
+    public function castToObj($arr){
+
+        $casted_arr = [];
+
+        foreach ($arr as $i => $obj) {
+            $casted_arr[$i] = (object)$obj;
+        }
+
+        return $casted_arr;
     }
 }
