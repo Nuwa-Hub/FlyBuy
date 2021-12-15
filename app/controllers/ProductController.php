@@ -32,6 +32,21 @@ class ProductController extends Controller{
         }
     }
 
+    public function deleteItem(){
+
+        if (isset($_POST['submitDeleteItem'])) {
+
+            $item_id = $_POST['item_id'];
+
+            $this->product = $this->model('Product');
+            $this->product->deleteItemById($item_id);
+
+            $id = $_POST['seller_id'];
+
+            header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
+        }
+    }
+
     public function addToCart(){
 
         if (isset($_POST['addTocart'])) {

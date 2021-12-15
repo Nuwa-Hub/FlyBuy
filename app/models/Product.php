@@ -37,7 +37,7 @@ class Product
         }
     }
 
-   public function findProductById($id) {
+    public function findProductById($id) {
         
         $this->db->query('SELECT * FROM products WHERE item_id = :id');
         $this->db->bind(':id', $id);
@@ -77,5 +77,19 @@ class Product
         $this->db->bind(':item_id', $item_id);
         $this->db->bind(':description', $data['description']);
         $this->db->updateField();
+    }
+
+    public function deleteItemById($id){
+
+        $this->db->query('DELETE FROM products WHERE item_id = :id');
+        $this->db->bind(':id', $id);
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
