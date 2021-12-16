@@ -166,6 +166,19 @@ class UserController extends Controller {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function logout(){
 
         if(isset($_POST['submitLogout'])){

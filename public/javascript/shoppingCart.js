@@ -49,19 +49,14 @@ $(document).ready(function() {
         var el = $(this);
         el.parent().parent().addClass("removed");
 
-
-
-
-
         setTimeout(function() {
-
 
             var $elid = el.closest('header');
             ppid = $elid.find(".pid").val();
 
             // ajex request for remove the relevent item from SESSION store
             $.ajax({
-                url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+                url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
                 method: 'POST',
                 cache: false,
                 data: {
@@ -172,33 +167,71 @@ $(document).ready(function() {
     //             });
 
     // //         });
-    // $(".btn").click(function() {
-    //     check = true;
-    //     //   $(".remove").click();
+    $(".btn").click(function() {
+
+        check = true;
+        //   $(".remove").click();
+
+        document.getElementById("site-header").style.opacity = "0";
+        document.getElementById("site-footer").style.opacity = "0";
+        document.getElementById("popup-form").style.opacity = "1";
+
+        lorryMove();
 
 
-    //     window.setTimeout(function() {
-    //         // location.reload(true);
-    //         //  alert("sdf");
-    //         var $elid = el.closest('header');
-    //         ppid = $elid.find(".pid").val();
 
-    //         // ajex request for remove the relevent item from SESSION store
-    //         $.ajax({
-    //             url: 'http://localhost/OOP%20project/FlyBuy/PdfController/page',
-    //             method: 'POST',
-    //             cache: false,
+        var buy_id = document.getElementsByClassName("buy_id")[0].value;
+        alert(buy_id);
+        window.setTimeout(function() {
+                // location.reload(true);
 
-    //             success: function(response) {
-    //                 // console.log(response);
-    //                 alert("df");
+                //    alert("fghf");
 
-    //             }
-    //         });
-    //     }, 470);
-    // });
+                // ajex request for remove the relevent item from SESSION store
+                $.ajax({
+                    url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+                    method: 'POST',
+                    cache: false,
+                    data: {
+                        buy_id: buy_id,
+                    },
+                    success: function(response) {
+                        // console.log(response);
+                        alert("df");
+
+                    }
+                });
+            },
+            470);
+    });
 
 });
+
+//animation
+
+function lorryMove() {
+    var id = null;
+    var ele = document.getElementById("lorry");
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 5);
+
+
+    function frame() {
+        if (pos == 650) {
+            clearInterval(id);
+            ele.style.left = '20px';
+            document.getElementById("lorry").style.opacity = "0";
+
+        } else {
+            pos++;
+            //  elem.style.top = pos + 'px';
+            ele.style.left = pos + 'px';
+        }
+    }
+
+}
+
 
 function changeTot() {
     var el = $(this);
@@ -209,7 +242,7 @@ function changeTot() {
 
 function changeAmount(pid, pamount) {
     $.ajax({
-        url: 'http://localhost/OOP%20project/FlyBuy/ProductController/removeFromCart',
+        url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
         method: 'post',
         cache: false,
         data: {
