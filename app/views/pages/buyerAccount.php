@@ -56,11 +56,9 @@
                   </div>
                   <div class="info">
                   <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
-                    <h3><span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
+                    <h3>
+                    <span class="stars"><?php echo $product->seller->rating; ?></span>
+									  <span><?php echo $product->seller->rating; ?></span>
                     </h3>
                     <p><?php echo $product->description; ?></p>
                     <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
@@ -111,5 +109,8 @@
   <script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 
   <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
+
+  <script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 </html>
