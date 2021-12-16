@@ -28,7 +28,6 @@
             <ul>
 
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">Home</a></li>
-                <li><a href="loginSignup.php">Login/Sign up</a></li>
                 <li><a href="shopping_cart.php" class="active"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
             </ul>
