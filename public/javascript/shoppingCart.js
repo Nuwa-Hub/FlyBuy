@@ -172,6 +172,7 @@ $(document).ready(function() {
         check = true;
         //   $(".remove").click();
 
+
         document.getElementById("site-header").style.opacity = "0";
         document.getElementById("site-footer").style.opacity = "0";
         document.getElementById("popup-form").style.opacity = "1";
@@ -181,7 +182,10 @@ $(document).ready(function() {
 
 
         var buy_id = document.getElementsByClassName("buy_id")[0].value;
-        alert(buy_id);
+
+
+        var buy_id = document.getElementsByClassName("buy_id")[0].value;
+
         window.setTimeout(function() {
                 // location.reload(true);
 
@@ -197,7 +201,7 @@ $(document).ready(function() {
                     },
                     success: function(response) {
                         // console.log(response);
-                        alert("df");
+                        // alert("df");
 
                     }
                 });

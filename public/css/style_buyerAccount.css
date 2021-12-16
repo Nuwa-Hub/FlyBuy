@@ -24,7 +24,7 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,43 +48,41 @@ html {
 #header ul li {
     position: relative;
     list-style: none;
-    margin-left: 20px;
+    margin: 0 20px;
+    padding: 0;
 }
 
 #header ul li a {
     position: relative;
-    font-size: 20px;
-    font-family: 'Kanit', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
     text-decoration: none;
     padding: 6px 15px;
-    color: blue;
+    color: #444;
     border-radius: 40px;
+    transition: 0.6s;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     cursor: pointer;
 }
 
-#header ul li a:hover,
-#header ul li a.active {
-    background: blue;
-    color: white;
-    transition: 0.6s;
+#header ul li a:hover{
+    transform: scale(1.1);
+    color: #777;
 }
 
 #header.sticky {
     padding: 5px 50px;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.71) 100%, rgba(3, 0, 255, 0.79) 100%, rgba(12, 25, 247, 0.09) 100%);
+    background-image: linear-gradient(to right, #434343 20%, black 80%);
     transition: 0.6s;
 }
 
-#header.sticky .logo,
 #header.sticky ul li a {
-    color: white;
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 
-#header.sticky ul li a.active,
-#header.sticky ul li a:hover {
-    color: black;
-    background: #7FFF00;
+#header.sticky .logo{
+    color: #ddd;
 }
 
 .badge {
@@ -112,67 +110,60 @@ html {
     }
 }
 
-.search-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #101010;
-    height: 40px;
-    border-radius: 40px;
-}
-
 #header.sticky .search-box:hover>.search-txt {
     width: 300px;
     padding: 0 7px;
     color: black;
 }
 
-#header.sticky .search-box:hover>.search-btn {
-    background: #7FFF00;
-    color: white;
+.search-box{
+    position: relative;
+    background: #333;
+    height: 2.6em;
+    width: fit-content;
+    border-radius: 2.1em;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-#header.sticky .search-box:hover {
-    background: white;
+.search-box a{
+    text-decoration: none;
 }
 
-.search-box:hover>.search-txt {
-    width: 300px;
-    padding: 0 7px;
-    color: white;
-}
-
-.search-box:hover>.search-btn {
-    background: red;
-    color: white;
-}
-
-.search-btn {
-    color: white;
-    float: right;
-    width: 40px;
-    height: 40px;
+.search-btn{
+    color: #666;
+    width: 2.1em;
+    height: 2.1em;
     border-radius: 50%;
-    background: red;
-    font-size: 20px;
-    padding: 10px 10px;
+    background: #fff;
+    display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
 }
 
-.search-txt {
+.search-txt{
     border: none;
     background: none;
     outline: none;
     float: left;
-    color: white;
     padding: 0;
-    font-size: 16px;
+    color: #fff;
+    font-size: 1em;
     transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
+    width: 300px;
+}
+
+.search-box:hover > .search-btn{
+    color: #000;
+}
+
+#header.sticky .search-box {
+    background: #888;
+}
+#header.sticky .search-txt::placeholder{
+    color: #222;
 }
 
 section {
@@ -191,7 +182,6 @@ section::before {
     left: 0;
     width: 100%;
     height: 100px;
-    background: linear-gradient(to top, blue, transparent);
     z-index: 10;
 }
 
@@ -207,12 +197,12 @@ section img {
 
 section #text {
     position: absolute;
-    color: white;
+    color: #333;
     font-size: 10vw;
     text-align: center;
     line-height: 0.55em;
-    font-family: 'Rancho', cursive;
-    transform: translateY(-50%);
+    font-family: 'Poppins', sans-serif;
+    transform: translateY(-130%);
 }
 
 section #text span {
@@ -220,6 +210,7 @@ section #text span {
     letter-spacing: 2px;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
+    color: #555;
 }
 
 #btn {
@@ -227,7 +218,7 @@ section #text span {
     font-family: 'Poppins', sans-serif;
     display: inline-block;
     padding: 8px 30px;
-    background: yellow;
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
     color: #000080;
     font-size: 1.2em;
     font-weight: 500;
@@ -442,12 +433,12 @@ section #text span {
 .product .popup-card .info .add-cart-btn {
     color: whitesmoke;
     background: turquoise;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 10px 50px;
+    padding: 10px;
     border-radius: 20px;
     margin-top: 50%;
     margin-left: 23%;

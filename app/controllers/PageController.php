@@ -345,4 +345,13 @@ class PageController extends Controller{
 
         return $casted_arr;
     }
+
+    public function viewNotification($id){
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id)
+        ];
+
+        $this->view('pages/notification', $data);
+    }
 }

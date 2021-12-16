@@ -73,13 +73,16 @@ html {
 
 #header.sticky {
     padding: 5px 50px;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.7) 100%, rgba(3, 0, 255, 0.7) 100%, rgba(12, 25, 247, 0.09877454399728647) 100%);
+    background-image: linear-gradient(to right, #434343 20%, black 80%);
     transition: 0.6s;
 }
 
-#header.sticky .logo,
 #header.sticky ul li a {
-    color: white;
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+#header.sticky .logo{
+    color: #ddd;
 }
 
 .badge {
@@ -107,25 +110,14 @@ html {
     }
 }
 
-.search-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #101010;
-    height: 40px;
-    border-radius: 40px;
-}
-
 #header.sticky .search-box:hover>.search-txt {
     width: 300px;
     padding: 0 7px;
     color: black;
-    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 
 .search-box{
-    position: absolute;
+    position: relative;
     background: #333;
     height: 2.6em;
     width: fit-content;

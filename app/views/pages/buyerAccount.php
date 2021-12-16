@@ -1,69 +1,10 @@
-<?php
-
-// include '../models/buyer.php';
-// include '../models/seller.php';
-// include '../models/product.php';
-// include '../database/db_connection.php';
-
-// require('../validators/user_validator.php');
-
-
-// // if (!isset($_COOKIE['user_login'])) {      //if the cookie is not set redirect -> loginSignup
-// //  header('Location: loginSignup.php');
-// //} else {
-// session_start();
-
-// if (!isset($_SESSION['cartarr'])) {
-//   $_SESSION['cartarr'] = array();
-// }
-// //$curr_email = $_COOKIE['user_login'];  //logged in user email
-// //$user  = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM buyers WHERE email = '$curr_email' LIMIT 1"), MYSQLI_ASSOC)[0];
-
-
-
-// $products = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM  products"), MYSQLI_ASSOC);
-// //for($i = 0; $i < count($products); $i++){
-// // $seller_id = $products[$i]['seller_id'];
-// //  $seller = mysqli_fetch_all(mysqli_query($conn, "SELECT * FROM sellers WHERE seller_id = '$seller_id' LIMIT 1"), MYSQLI_ASSOC)[0];
-// // $products[$i]['seller'] = $seller;
-// // }
-// //}
-
-
-
-// if (isset($_POST['addTocart'])) {
-//   $item = true;
-//   $pid = $_POST['pid'];
-//   $pname = $_POST['pname'];
-//   $pprice = $_POST['pprice'];
-//   $pimage = $_POST['pimage'];
-//   $pdes = $_POST['pdes'];
-//   $pqty = $_POST['pqty'];
-//   $pseller_id = $_POST['pseller_id'];
-//   $pmaxAmount = $_POST['pmaxAmount'];
-
-//   foreach ($_SESSION['cartarr'] as $product) {
-//     if ($product->item_id == $pid) {
-//       $item = false;
-//     }
-//   }
-//   if ($item) {
-//     array_push($_SESSION['cartarr'], new Product($pname, $pqty, $pprice,  $pdes,  $pseller_id, $pimage, $pmaxAmount, $pid));
-//   } else {
-//     print_r("Already added");
-//   }
-// }
-
-
-?>
-
 <!DOCTYPE html5>
 <html lang="en">
 
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project cosmos</title>
+    <title>FlyBuy | Home</title>
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_buyerAccount.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -114,7 +55,7 @@
                     <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
                   </div>
                   <div class="info">
-                    <h2><?php echo $data['user']->buy_id; ?><br><span>Chandrasena stores</span></h2>
+                  <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
                     <h3><span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
@@ -167,50 +108,7 @@
 
   </body>
 
-  <script type="text/javascript">
-    let text = document.getElementById('text');
-    let btn = document.getElementById('btn');
-    let item2 = document.getElementById('item2');
-    let item1 = document.getElementById('item1');
-    window.addEventListener('scroll', function() {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky", window.scrollY > 0);
-
-      let value = window.scrollY;
-      text.style.top = 50 + value * -0.5 + '%';
-      btn.style.marginTop = value * 1.5 + 'px';
-      item2.style.top = value * -0.12 + 'px';
-      item1.style.top = value * 0.25 + 'px';
-    });
-
-    var popupViews = document.querySelectorAll('.popup-view');
-    var popupBtns = document.querySelectorAll('.popup-btn');
-    var closeBtns = document.querySelectorAll('.close-btn');
-
-
-    var popup = function(popupClick) {
-      popupViews[popupClick].classList.add('active');
-
-      document.body.style.overflowY = 'hidden';
-    }
-
-    popupBtns.forEach((popupBtn, i) => {
-      popupBtn.addEventListener("click", () => {
-        popup(i)
-
-      });
-    });
-
-    closeBtns.forEach((closeBtn) => {
-      closeBtn.addEventListener("click", () => {
-        popupViews.forEach((popupView) => {
-          popupView.classList.remove('active');
-
-          document.body.style.overflowY = '';
-        });
-      });
-    });
-  </script>
+  <script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 
   <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 

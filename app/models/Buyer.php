@@ -98,6 +98,7 @@ class Buyer implements User{
     }
 
     public function verifyUser($vkey){
+
         $this->db->query('UPDATE buyers SET verified = :verified WHERE vkey = :vkey');
 
         $this->db->bind(':verified', 1);
@@ -146,6 +147,24 @@ class Buyer implements User{
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':telNo', $data['telNo']);
             $this->db->updateField();
+        }
+    }
+
+    public function saveCart($id, $data){
+
+        $selrialized = serialize($data);
+
+        $this->db->query('INSERT INTO carts (buy_id, cart) VALUES(:buy_id, :cart)');
+
+        //Bind values
+        $this->db->bind(':buy_id', $id);
+        $this->db->bind(':cart', $selrialized);
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
