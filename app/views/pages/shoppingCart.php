@@ -65,7 +65,7 @@
                                 <span class="qt" value="<?= $product->amount[1] ?>"><?php echo $product->amount[1] ?></span>
                                 <span class="qt-plus">+</span>
                                 <h2 class="full-price">
-                                    <?php echo ($product->price) * ($product->amount[1]) ?>
+                                  <?php echo ($product->price) * ($product->amount[1]) ?>
                                 </h2>
                                 <h2 class="price">
                                     <span class="price"><?php echo $product->price ?>&nbsp;/=</span>
@@ -101,12 +101,6 @@
             </div>
         </div>
     </footer>
-    <!-- popup form -->
-    <div class="popup-form" id="popup-form">
-        <button class="submit" id="submit">
-            <img id="lorry" src="../../public/img/lorry.jpg" alt=" ">
-        </button>
-    </div>
     <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>

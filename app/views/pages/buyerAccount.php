@@ -114,7 +114,7 @@
                     <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
                   </div>
                   <div class="info">
-                  <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
+                    <h2><?php echo $data['user']->buy_id; ?><br><span>Chandrasena stores</span></h2>
                     <h3><span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
                       <span class="fa fa-star checked"></span>
@@ -124,7 +124,7 @@
                     <p><?php echo $product->description; ?></p>
                     <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                     <span class="quantity">Quantity :</span>
-                    <input type="number" name="pqty" class="pqty" value="<?php echo $product->amount ?>" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
+                    <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
 
                     <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
                     <input type="hidden" name="buyer_id" class="buyer_id" value="<?php echo $data['buyer_id']; ?>">
