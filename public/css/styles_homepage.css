@@ -73,7 +73,7 @@ html {
 
 #header.sticky {
     padding: 5px 50px;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.7) 100%, rgba(3, 0, 255, 0.7) 100%, rgba(12, 25, 247, 0.09877454399728647) 100%);
+    background-image: linear-gradient(to right, #434343 20%, black 80%);
     transition: 0.6s;
 }
 
