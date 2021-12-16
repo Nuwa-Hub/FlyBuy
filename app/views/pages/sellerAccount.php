@@ -28,7 +28,7 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <a href='<?php echo URLROOT ?>/PageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="#" class="notification">Notification</a>
+            <a href="#" class="notification">Notification<span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
