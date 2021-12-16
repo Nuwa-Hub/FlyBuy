@@ -29,6 +29,7 @@
         background: rgb(210, 224, 213);
         border-radius: 15px;
         width: 100%;
+        opacity: 1;
     }
     
     #site-header {
@@ -559,4 +560,35 @@
     
     .added {
         margin: 0 -50px 0 0 !important;
+    }
+    
+    .popup-form {
+        opacity: 0;
+        z-index: 1000;
+        position: fixed;
+        background-color: rgb(255, 255, 255);
+        width: 600px;
+        height: 400px;
+        top: 30%;
+        left: 30%;
+        border: #7fb553;
+        overflow: hidden;
+        ;
+    }
+    
+    .submit {
+        background-color: rgb(255, 255, 255);
+        position: absolute;
+        top: 30%;
+        padding: 0px;
+        width: 100%;
+        height: 100px;
+        border: none;
+    }
+    
+    .submit img {
+        width: 250px;
+        position: absolute;
+        top: 0%;
+        left: 30%;
     }

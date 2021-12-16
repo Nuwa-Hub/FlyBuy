@@ -68,11 +68,11 @@ function toggleLogout(){
 }
 
 function toggleEdit(element){
+
     let edit = document.querySelector('.popup-window.editItem');
     edit.classList.toggle('active');
 
     if (element != null){
-        // console.log(element.parentElement.parentElement.getAttribute('id'));
 
         const itemDetails = element.parentElement.parentElement;
         const itemId = itemDetails.getAttribute('id');
@@ -91,6 +91,20 @@ function toggleEdit(element){
 
     }
 
+}
+
+function toggleDelete(element){
+    
+    let deleteItem = document.querySelector('.popup-window.delete-item');
+    deleteItem.classList.toggle('active');
+
+    if (element != null){
+
+        const itemDetails = element.parentElement.parentElement;
+        const itemId = itemDetails.getAttribute('id');
+
+        deleteItem.querySelector('.item-id').value = itemId;
+    }
 }
 
 // toggle password view---------------------------------------------------------------

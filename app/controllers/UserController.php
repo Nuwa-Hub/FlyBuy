@@ -166,6 +166,28 @@ class UserController extends Controller {
         }
     }
 
+    public function checkout(){
+
+        $buyer_id = $_POST['buy_id'];
+        $cart = [];
+        $order = [];
+
+        foreach ($_SESSION['cartarr'] as $product) {
+
+            $seller_id = $product->seller_id;
+            $cart[$seller_id][$product->item_id] = $product->amount[1];
+        }
+
+        $this->buyerModel = $this->model('Buyer');
+        $this->sellerModel = $this->model('Seller');
+
+        $this->buyerModel->saveCart($buyer_id, $cart);
+
+        foreach ($cart as $seller_id => $order) {
+            $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
+        }
+    }
+
     public function logout(){
 
         if(isset($_POST['submitLogout'])){

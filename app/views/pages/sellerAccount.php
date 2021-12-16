@@ -89,7 +89,7 @@
                         <button class="item-edit-btn" onclick="toggleEdit(this)">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="item-delete-btn">
+                        <button class="item-delete-btn" onclick="toggleDelete(this)">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -214,6 +214,35 @@
 
     </div>
 
+    <!-- -----------------------------Popup window to confirm delete item--------------------------------------- -->
+
+    <div class="popup-window delete-item">
+
+        <div class="overlay"></div>
+
+            <div class="content">
+
+                <div class="closeBtn" onclick="toggleDelete(null)">&times;</div>
+
+                <h1 class="title">delete?</h1>
+
+                <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+
+                <form method="post" class="delete-itemForm" action="<?php echo URLROOT; ?>/ProductController/deleteItem">
+
+                    <input class="item-id" type="hidden" name="item_id">
+                    <input class="item-id" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+
+                    <input type="submit" class="delete-item btn" name="submitDeleteItem" value="Delete">
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </body>
+
     <!-- -----------------------------Popup window to confirm logout--------------------------------------- -->
 
     <div class="popup-window logout">
@@ -238,7 +267,6 @@
     
 </body>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 </html>
