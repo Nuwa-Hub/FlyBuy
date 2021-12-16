@@ -22,28 +22,26 @@ nav{
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1/13;
     grid-row: 1/2;
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    background-image: linear-gradient(to right, #434343 20%, black 80%);
     padding: 5px;
 }
 
 nav a{
-    margin: 5px 10px;
-    padding: 10px;
-    padding-bottom: 2px;
-    background: transparent;
+    margin: auto 20px;
+    padding: 5px 10px;
     text-decoration: none;
     color: #999;
     font-size: 1.1rem;
-    font-weight: 700;
     cursor: pointer;
-    border-bottom: 3px solid rgba(255, 255, 255, 0);
+    border-radius: 40px;
     transition: 0.4s;
 }
 
-nav a:hover{
-    border-bottom: 3px solid #888;
-    transform: scale(1.01);
-    border-bottom: 3px solid rgba(255, 255, 255, 1);
+nav .notification:hover,
+nav .logout:hover,
+nav .home:hover{
+    transform: scale(1.1);
+
 }
 
 nav a:active{
@@ -52,11 +50,11 @@ nav a:active{
 
 nav .logo{
     grid-column: 1/4;
-    color: #444;
-    font-size: 1.5em;
-    border: none !important;
-    text-align: left;
-    padding: 10px;
+    font-size: 2.7em;
+    color: #ddd;
+    font-weight: 700;
+    padding: 0;
+    background: transparent;
 }
 
 nav .home{

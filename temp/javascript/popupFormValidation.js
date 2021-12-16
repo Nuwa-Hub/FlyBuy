@@ -28,7 +28,7 @@ if (form){
             }
         }
 
-        console.log(correct);
+        // console.log(correct);
 
         if (correct){
             

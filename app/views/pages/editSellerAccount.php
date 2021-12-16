@@ -1,8 +1,3 @@
-<?php 
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +22,7 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="#" class="notification">Notification</a>
+            <a href="<?php echo URLROOT ?>/pageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification</a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 

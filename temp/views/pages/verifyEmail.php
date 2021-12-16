@@ -29,7 +29,7 @@ if(isset($_GET['vkey'])){
             $additionalData  = ['vkey' => $vkey, 'table' => $table];
             $email = $user['email'];
 
-            sendMail($email, 'signup', $additionalData, $path_kalana);
+            sendMail($email, 'signup', $additionalData, $path_akash);
             header('location:verifyEmail.php?vkey='.$vkey.'&table='.$table);
         }
     }
