@@ -166,6 +166,25 @@ class Seller implements User{
             $this->db->updateField();
         }
     }
+
+    public function saveNotification($buyer_id, $seller_id, $data){
+
+        $selrialized = serialize($data);
+
+        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification) VALUES(:seller_id, :buy_id, :notification)');
+
+        //Bind values
+        $this->db->bind(':seller_id', $seller_id);
+        $this->db->bind(':buy_id', $buyer_id);
+        $this->db->bind(':notification', $selrialized);
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
