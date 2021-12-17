@@ -116,7 +116,7 @@
 
         <input type="hidden" class="buy_id" value="<?php echo $data['buyer_id']; ?>">
         <a class="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
-
+        <a class="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>'>Submit</a>
 
 
         <!-- 
