@@ -190,6 +190,20 @@ class UserController extends Controller {
         $_SESSION['cartarr'] = [];
     }
 
+    public function getNotificationCount(){
+
+        $id = $_POST['seller_id'];
+        $this->sellerModel = $this->model('Seller');
+
+        $rowCount =  $this->sellerModel->notificationCount($id);
+
+        $data = [
+            'rowCount' => $rowCount
+        ];
+
+        echo json_encode($data);
+    }
+
     public function logout(){
 
         if(isset($_POST['submitLogout'])){

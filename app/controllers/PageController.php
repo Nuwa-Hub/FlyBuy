@@ -244,14 +244,12 @@ class PageController extends Controller{
         $data = [
             'buyer_id' => $id,
         ];
+        
         $this->view('pages/shoppingCart', $data);
-     }
+    }
 
-
-
-     
-     public function downloadPdf()
-     {
+    public function downloadPdf()
+    {
       
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -263,9 +261,8 @@ class PageController extends Controller{
 
         // start a new page
         $pdf->AddPage();
-        $pdf->writeHTML('
-<img src="logo.png" width=10px hieght=10px>
-');
+        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+        
         // date and invoice no
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
         $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
@@ -347,9 +344,44 @@ class PageController extends Controller{
     }
 
     public function viewNotification($id){
+
+        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
+
+        // can be used to sort according to the timestamp
+        usort($notifications, function($a, $b){
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+            
+            return $t2 - $t1;
+        });
+
+        $notifications = $this->castToObj($notifications);
+
+        //find and add for each notification
+        foreach ($notifications as $key => $note) {
+
+            $temp_notification_arr = unserialize($notifications[$key]->notification);
+            $notifications[$key]->notification = array();
+
+            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
+
+            //find the products related to this notification
+            foreach ($temp_notification_arr as $item_id => $qtt) {
+
+                $item = $this->productModel->findProductById($item_id);
+
+                $item_arr['item'] = $item;
+                $item_arr['quatity'] = $qtt;
+
+                array_push($notifications[$key]->notification, $item_arr);
+            }
+        }
+
         $data = [
             'seller_id' => $id,
-            'user' => $this->sellerModel->findUserById($id)
+            'user' => $this->sellerModel->findUserById($id),
+            'notifications' => $notifications
         ];
 
         $this->view('pages/notification', $data);
