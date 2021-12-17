@@ -24,6 +24,7 @@
       <ul>
         <li><a href="#" class="active">Home</a></li>
         <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
+        <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
         <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
       </ul>
     </header>
@@ -56,11 +57,9 @@
                   </div>
                   <div class="info">
                   <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
-                    <h3><span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
+                    <h3>
+                    <span class="stars"><?php echo $product->seller->rating; ?></span>
+									  <span><?php echo $product->seller->rating; ?></span>
                     </h3>
                     <p><?php echo $product->description; ?></p>
                     <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
@@ -111,5 +110,8 @@
   <script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 
   <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
+
+  <script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 </html>

@@ -186,6 +186,8 @@ class UserController extends Controller {
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
         }
+
+        $_SESSION['cartarr'] = [];
     }
 
     public function logout(){

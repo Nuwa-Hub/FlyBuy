@@ -1,25 +1,29 @@
 <?php
 
-class ProductController extends Controller{
+class ProductController extends Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->productmodel = $this->model('Product');
     }
 
-    public function addItem(){
+    public function addItem()
+    {
 
-        if(isset($_POST['submitAddItem'])){
+        if (isset($_POST['submitAddItem'])) {
 
             $this->product = $this->model('Product');
             $this->product->addProduct($_POST);
 
             $id = $_POST['seller_id'];
-            
+
             header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
         }
     }
 
-    public function editItem(){
+    public function editItem()
+    {
 
         if (isset($_POST['submitEditItem'])) {
 
@@ -32,7 +36,8 @@ class ProductController extends Controller{
         }
     }
 
-    public function deleteItem(){
+    public function deleteItem()
+    {
 
         if (isset($_POST['submitDeleteItem'])) {
 
@@ -47,24 +52,25 @@ class ProductController extends Controller{
         }
     }
 
-    public function addToCart(){
+    public function addToCart()
+    {
 
         if (isset($_POST['addTocart'])) {
             $item = true;
             $pid = $_POST['pid'];
             $pqty = $_POST['pqty'];
             $buyer_id = $_POST['buyer_id'];
-            
+
             foreach ($_SESSION['cartarr'] as $product) {
 
                 if ($product->item_id == $pid) {
                     $item = false;
                 }
             }
-            
+
             if ($item) {
                 $item = $this->productmodel->findProductById($pid);
-                $ar=array( $item->amount,$pqty);
+                $ar = array($item->amount, $pqty);
                 $item->amount = $ar;
                 array_push($_SESSION['cartarr'], $item);
                 header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
@@ -75,9 +81,13 @@ class ProductController extends Controller{
         }
     }
 
-    public function removeFromCart(){
-        
+    public function removeFromCart()
+    {
+
         if (isset($_POST['pamount'])) {
+            
+            echo'console.log("dfsdf")';
+            
 
             $pid = $_POST['pid'];
             $pamount = $_POST['pamount'];

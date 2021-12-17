@@ -19,6 +19,8 @@
 	<header id="header">
 
 	<a href="#" class="logo">FlyBuy</a>
+	<img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
+	
 
 	<div class="search-box">
 		<input class="search-txt" type="text" name="" placeholder="Search for products">
@@ -30,9 +32,11 @@
 	<ul>
 		<li><a href="#" class="active">Home</a></li>
 		<li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
+		<li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
 	</ul>
 
 	</header>
+	<div class="snowfall" id="snow">
 
 	<section>
 		<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
@@ -67,11 +71,8 @@
 								<div class="info">
 									<h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
 									<h3>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
+									<span class="stars"><?php echo $product->seller->rating; ?></span>
+									<span><?php echo $product->seller->rating; ?></span>
 									</h3>
 									<p><?php echo $product->description; ?></p>
 									<span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
@@ -87,8 +88,14 @@
 		</div>
 
 	</div>
+	</div>
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
+
+	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/app.js"></script>
 
 </body>
 

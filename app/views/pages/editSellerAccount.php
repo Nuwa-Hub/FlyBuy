@@ -22,7 +22,7 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/pageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification</a>
+            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"><?php  ?></a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -146,7 +146,7 @@
 
             <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
 
-            <form method="post" class="logoutForm">
+            <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
             </form>
 

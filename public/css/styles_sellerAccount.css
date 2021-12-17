@@ -63,6 +63,21 @@ nav .home{
 nav .notification{
     grid-column: 11/12;
 }
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+#cart-item {
+    font-size: 18px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+}
 nav .logout{
     grid-column: 12/13;
 }
