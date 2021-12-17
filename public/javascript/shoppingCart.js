@@ -137,50 +137,18 @@ $(document).ready(function() {
     });
 
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
-
-
     //checkout button
-
     $(".btn").click(function() {
 
         check = true;
         $(".remove").click();
-
-
         document.getElementById("site-header").style.opacity = "0";
         document.getElementById("site-footer").style.opacity = "0";
         document.getElementById("popup-form").style.opacity = "1";
 
         //lorryMove();
-
-
-
-
     });
-    // $(".pbtn").click(function() {
-    //     //location.reload(true);
-    //     var buy_id = document.getElementsByClassName("buy_id")[0].value;
 
-    //     window.setTimeout(function() {
-
-    //             // ajex request for remove the relevent item from SESSION store
-    //             $.ajax({
-    //                 url: 'http://localhost/Project/FlyBuy/PageController/downloadPdf',
-    //                 method: 'POST',
-    //                 cache: false,
-    //                 data: {
-    //                     buy_id: buy_id,
-    //                 },
-    //                 success: function(response) {
-    //                     console.log(typeof(response));
-
-    //                     //  
-
-    //                 }
-    //             });
-    //         },
-    //         470);
-    // });
 });
 
 //animation
