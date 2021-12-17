@@ -185,6 +185,23 @@ class Seller implements User{
             return false;
         }
     }
+
+    public function notificationCount($id){
+
+        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND isRead = 0");
+        $results = $this->db->resultSet();
+        $count = count($results);
+
+        return $count;
+    }
+
+    public function getAllNotificationsById($id){
+
+        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id'");
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
 }
 
 ?>

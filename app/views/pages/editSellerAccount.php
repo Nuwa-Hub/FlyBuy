@@ -22,7 +22,7 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"><?php  ?></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></a>
             <a onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -122,7 +122,7 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <input class="item-id" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+                <input class="seller-id notify" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
 
                 <input type="submit" class="edit btn" name="submitEditProfile" value="Edit">
 
@@ -157,5 +157,8 @@
 </body>
 
 <script src="<?php echo URLROOT; ?>/public/javaScript/popupFormValidation.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
 
 </html>
