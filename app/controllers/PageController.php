@@ -259,8 +259,6 @@ class PageController extends Controller
 
     public function downloadPdf($id)
     {
-        
-      
             $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
             $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
             $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -316,7 +314,7 @@ class PageController extends Controller
             ob_end_clean();
             $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
             // echo 'location.reload(true)';
-           
+           $this->buyerAccount($id);
     }
 
     public function castToArray($arr)
