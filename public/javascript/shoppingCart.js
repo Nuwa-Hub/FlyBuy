@@ -149,7 +149,10 @@ $(document).ready(function() {
         //lorryMove();
     });
 
+
 });
+
+
 
 //animation
 
