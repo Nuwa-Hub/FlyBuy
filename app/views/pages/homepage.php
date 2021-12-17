@@ -19,6 +19,8 @@
 	<header id="header">
 
 	<a href="#" class="logo">FlyBuy</a>
+	<img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
+	
 
 	<div class="search-box">
 		<input class="search-txt" type="text" name="" placeholder="Search for products">
