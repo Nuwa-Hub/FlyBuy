@@ -30,9 +30,11 @@
 	<ul>
 		<li><a href="#" class="active">Home</a></li>
 		<li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
+		<li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
 	</ul>
 
 	</header>
+	<div class="snowfall" id="snow">
 
 	<section>
 		<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
@@ -84,10 +86,14 @@
 		</div>
 
 	</div>
+	</div>
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
+
+	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
+	<script src="<?php echo URLROOT; ?>/public/javascript/app.js"></script>
 
 </body>
 

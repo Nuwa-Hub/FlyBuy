@@ -11,7 +11,6 @@
 
 body {
     overflow-x: hidden;
-    background-image: url("../img/background-home.jpg");
     background-size: cover;
     height: 100vh;
 }
@@ -165,7 +164,7 @@ html {
 }
 
 section {
-    position: relative;
+    position: absolute;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -226,7 +225,7 @@ section #text span {
 }
 
 .sec {
-    position: relative;
+    position: absolute;
     padding: 100px;
     background: white;
 }
@@ -246,6 +245,7 @@ section #text span {
 /*product codes start here */
 
 .container {
+    position: absolute;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 }
@@ -254,7 +254,7 @@ section #text span {
     z-index: 1;
     background: rgb(255, 255, 255);
     box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.71);
-    position: relative;
+    position: absolute;
     width: 300px;
     height: 400px;
     margin: 40px;
@@ -475,4 +475,8 @@ span.stars, span.stars span {
 span.stars span {
     background-position: 0 0;
     background-image: url(../img/yellow-star.svg);
+  }
+
+  .snowfall{
+      position: absolute;
   }
