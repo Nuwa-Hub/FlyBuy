@@ -563,20 +563,22 @@
     }
     
     .popup-form {
-        opacity: 0;
+        opacity: 1;
         z-index: 1000;
         position: fixed;
-        background-color: rgb(255, 255, 255);
-        width: 600px;
-        height: 400px;
+        width: 300px;
+        height: 200px;
         top: 30%;
-        left: 30%;
+        left: 40%;
         border: #7fb553;
-        overflow: hidden;
+        border-radius: 25px;
+        background-color: rgb(0, 0, 0);
+        color: white;
         ;
     }
     
     .submit {
+        opacity: 1;
         background-color: rgb(255, 255, 255);
         position: absolute;
         top: 30%;
@@ -591,4 +593,38 @@
         position: absolute;
         top: 0%;
         left: 30%;
+    }
+    
+    .pdf-dn {
+        position: absolute;
+        top: 30%;
+        padding: 10px;
+        width: 100%;
+        height: 100px;
+    }
+    
+    svg {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        left: 35%;
+        top: 10%;
+        ;
+    }
+    
+    .pdf {
+        width: 40px;
+        height: 40px;
+        ;
+    }
+    
+    .pbtn {
+        color: gray !important;
+        position: absolute;
+        top: 70%;
+        left: 35%;
+    }
+    
+    .pbtn:hover {
+        color: rgb(33, 42, 175) !important;
     }
