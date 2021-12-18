@@ -66,7 +66,7 @@ html {
     cursor: pointer;
 }
 
-#header ul li a:hover{
+#header ul li a:hover {
     transform: scale(1.1);
     color: #777;
 }
@@ -81,7 +81,7 @@ html {
     background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 
-#header.sticky .logo{
+#header.sticky .logo {
     color: #ddd;
 }
 
@@ -116,7 +116,7 @@ html {
     color: black;
 }
 
-.search-box{
+.search-box {
     position: relative;
     background: #333;
     height: 2.6em;
@@ -128,11 +128,11 @@ html {
     align-items: center;
 }
 
-.search-box a{
+.search-box a {
     text-decoration: none;
 }
 
-.search-btn{
+.search-btn {
     color: #666;
     width: 2.1em;
     height: 2.1em;
@@ -143,7 +143,7 @@ html {
     align-items: center;
 }
 
-.search-txt{
+.search-txt {
     border: none;
     background: none;
     outline: none;
@@ -155,14 +155,15 @@ html {
     width: 300px;
 }
 
-.search-box:hover > .search-btn{
+.search-box:hover>.search-btn {
     color: #000;
 }
 
 #header.sticky .search-box {
     background: #888;
 }
-#header.sticky .search-txt::placeholder{
+
+#header.sticky .search-txt::placeholder {
     color: #222;
 }
 
@@ -231,6 +232,8 @@ section #text span {
     position: relative;
     padding: 100px;
     background: white;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
 
 .sec h2 {
@@ -248,8 +251,8 @@ section #text span {
 /*product codes start here */
 
 .container {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 
 .product .product-card {
@@ -466,20 +469,24 @@ input[type=number] {
     position: absolute;
 }
 
+
 /*star ratings*/
-span.stars, span.stars span {
+
+span.stars,
+span.stars span {
     display: block;
     background: url(../img/white-star.svg) 0 0 repeat-x;
-    width: 100px; /* width of a star multiplied by 5 */
-    height: 20px; /* the height of the star */
+    width: 100px;
+    /* width of a star multiplied by 5 */
+    height: 20px;
+    /* the height of the star */
     background-size: 20px 20px;
-  }
-  
+}
+
 span.stars span {
     background-position: 0 0;
     background-image: url(../img/yellow-star.svg);
-  }
-
+}
 #snow {
     position: fixed;
     top: 0;
@@ -489,3 +496,4 @@ span.stars span {
     pointer-events: none;
     z-index: 1000;
 }
+
