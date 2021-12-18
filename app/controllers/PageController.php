@@ -260,8 +260,6 @@ class PageController extends Controller
 
     public function downloadPdf($id)
     {
-
-
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -276,22 +274,27 @@ class PageController extends Controller
 <img src="logo.png" width=10px hieght=10px>
 ');
         // date and invoice no
+        $dt = new DateTime();
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
-        $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
+        $pdf->writeHTML($dt->format('Y-m-d'));
         $pdf->writeHTML("<b>INVOICE#</b>12");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // address
-        $pdf->writeHTML("84 Norton Street,");
+
+        //  $pdf->writeHTML($addr);
         $pdf->writeHTML("NORMANHURST,");
         $pdf->writeHTML("New South Wales, 2076");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // bill to
+        $userAdd = $this->buyerModel->findUserById($id);
+        $addr = $userAdd->address;
+        $iparr = explode(",", $addr);
         $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
-        $pdf->writeHTML("22 South Molle Boulevard,", true, false, false, false, 'R');
-        $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
-        $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[0], true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[1], true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[2], true, false, false, false, 'R');
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // invoice table starts here
