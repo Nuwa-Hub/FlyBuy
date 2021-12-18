@@ -83,10 +83,6 @@
 			</div>
 
 		</div>
-<<<<<<< HEAD
-	
-=======
->>>>>>> 4dca6102ce341d7ecda0778ad142a85303c5bb77
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>

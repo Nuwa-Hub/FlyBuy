@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
   <header id="header">
     <a href="#" class="logo">FlyBuy</a>
     <div class="search-box">
@@ -30,6 +29,7 @@
   </header>
 
   <section>
+  <div id="snow"></div>
     <h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
     <img src="<?php echo URLROOT ?>/public/img/item1.png" id="item1">
     <a href="#products" id='btn'>Explore</a>
@@ -115,5 +115,8 @@
 <script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
+<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
 
 </html>
