@@ -42,9 +42,12 @@ class PageController extends Controller
         $this->view('pages/loginSignup');
     }
 
-    public function buyerAccount($id)
+    public function buyerAccount($id, $type = "")
     {
 
+        if ($type == "submit") {
+            $_SESSION['cartarr'] = array();
+        }
         if (!isset($_SESSION['cartarr'])) {
             $_SESSION['cartarr'] = array();
         }
@@ -251,14 +254,14 @@ class PageController extends Controller
         $data = [
             'buyer_id' => $id,
         ];
-        
+
         $this->view('pages/shoppingCart', $data);
     }
 
     public function downloadPdf($id)
     {
 
-        
+
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -340,16 +343,17 @@ class PageController extends Controller
         return $casted_arr;
     }
 
-    public function viewNotification($id){
+    public function viewNotification($id)
+    {
 
         $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
 
         // can be used to sort according to the timestamp
-        usort($notifications, function($a, $b){
+        usort($notifications, function ($a, $b) {
 
             $t1 = strtotime($a['created_at']);
             $t2 = strtotime($b['created_at']);
-            
+
             return $t2 - $t1;
         });
 

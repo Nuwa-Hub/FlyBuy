@@ -17,10 +17,7 @@ function changeVal(el) {
 function changeTotal(el) {
     var price = 0;
     var ele = document.getElementsByClassName("full-price");
-    //   alert(parseFloat(ele[0].textContent) + 1);
-    // ele.each(function(index) {
-    //     price += parseFloat(ele[index].textContent);
-    // });
+
     for (var i = 0; i < ele.length; i++) {
         price += parseFloat(ele[i].textContent);
     }
@@ -97,10 +94,6 @@ $(document).ready(function() {
             }, 150);
             pamount = parseInt($(this).parent().children(".qt").html());
 
-            //var pamount = $el.find(".pamount").val() + 1;
-            //  location.reload(true);
-
-            //call fuction (http request)
             changeAmount(pid, pamount);
         }
 
@@ -145,11 +138,16 @@ $(document).ready(function() {
         document.getElementById("site-header").style.opacity = "0";
         document.getElementById("site-footer").style.opacity = "0";
         document.getElementById("popup-form").style.opacity = "1";
-
-        //lorryMove();
+        document.getElementById("popup-form").style.zIndex = "1001";
     });
+    $(".pbtn").click(function() {
 
-
+        document.getElementById("pdf").style.opacity = "0";
+        document.getElementById("pbtn").style.opacity = "0";
+        document.getElementById("psub").style.opacity = "1";
+        document.getElementById("box").style.opacity = "1";
+        document.getElementById("psub").style.zIndex = "1001";
+    });
 });
 
 
