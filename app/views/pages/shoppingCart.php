@@ -120,7 +120,7 @@
         </div>
         <input type="hidden" class="buy_id" value="<?php echo $data['buyer_id']; ?>">
         <a class="pbtn" id="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
-        <a class="psub" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>'>Submit</a>
+        <a class="psub" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit";?> '>Submit</a>
 
 
         <!-- 
