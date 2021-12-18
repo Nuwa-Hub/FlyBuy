@@ -31,10 +31,9 @@
 			<li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
 		</ul>
 
-	</header>	
-
-
-		<section >
+	</header>
+		<section>
+			<div id="snow"></div>
 			<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
 			<img src="<?php echo URLROOT; ?>/public/img/item1.png" id="item1">
 			<a href="#products" id='btn'>Explore</a>
@@ -84,7 +83,10 @@
 			</div>
 
 		</div>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 4dca6102ce341d7ecda0778ad142a85303c5bb77
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
@@ -92,6 +94,8 @@
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/app.js"></script>
+
+	<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
 
 </body>
 
