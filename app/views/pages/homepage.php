@@ -32,9 +32,8 @@
 		</ul>
 
 	</header>
-	<div class="snowfall" id="snow">
-
 		<section>
+			<div id="snow"></div>
 			<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
 			<img src="<?php echo URLROOT; ?>/public/img/item1.png" id="item1">
 			<a href="#products" id='btn'>Explore</a>
@@ -84,7 +83,6 @@
 			</div>
 
 		</div>
-	</div>
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
@@ -92,6 +90,8 @@
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/app.js"></script>
+
+	<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
 
 </body>
 
