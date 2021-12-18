@@ -31,10 +31,10 @@
 			<li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
 		</ul>
 
-	</header>
-	<div class="snowfall" id="snow">
+	</header>	
 
-		<section>
+
+		<section >
 			<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
 			<img src="<?php echo URLROOT; ?>/public/img/item1.png" id="item1">
 			<a href="#products" id='btn'>Explore</a>
@@ -44,7 +44,7 @@
 		<div class="sec" id="products">
 			<h2>See what we have for you</h2>
 
-			<div class="container">
+			<div class="container" >
 
 				<?php foreach ($data['products'] as $product) : ?>
 					<div class="product">
@@ -84,7 +84,7 @@
 			</div>
 
 		</div>
-	</div>
+	
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
