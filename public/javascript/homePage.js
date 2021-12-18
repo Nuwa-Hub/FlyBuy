@@ -40,15 +40,13 @@ closeBtns.forEach((closeBtn) => {
         });
     });
 });
-//Find scroll percentage on scroll(using cross - browser properties), and offset dash same amount as percentage scrolled /
-window.addEventListener("scroll", changeItem);
 
 
 
 
 // When document is ready...
 $(document).ready(function() {
-
+    alert("df");
     // If cookie is set, scroll to the position saved in the cookie.
     if ($.cookie("scroll") !== null) {
         $(document).scrollTop($.cookie("scroll"));
