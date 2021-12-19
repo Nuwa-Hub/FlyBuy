@@ -593,4 +593,13 @@ span.stars span {
   background: rgb(2, 0, 36);
 }
 /*auto navi end*/
+/*slide words start*/
+.slidewords{
+    position:absolute;
+    left: 72%;
+    top: 15%;
+    color: #ffff99;
+    font-size: 50px;
+}
+/*slide words end*/
 /*slider end*/

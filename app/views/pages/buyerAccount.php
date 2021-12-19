@@ -82,6 +82,12 @@
       <!-- manual navigation end -->
     </div>
     <!-- slideshow end -->
+    <div class="slidewords">
+			<h2 id="txt"><span style="font-family:Segoe UI;text-shadow: 0 0 3px black, 0 0 10px #ffff00;">SHOP</span></h2>
+			<h2 id="txt"><span style="font-family:Segoe UI;text-shadow: 0 0 3px black, 0 0 10px #ffff00;">FOR</span></h2>
+			<h2 id="txt"><span style="font-family:Segoe UI;text-shadow: 0 0 3px black, 0 0 10px #ffff00;">YOUR</span></h2>
+			<h2 id="txt"><span style="font-family:Segoe UI;text-shadow: 0 0 3px black, 0 0 10px #ffff00;">GROCERIES</span></h2>
+			</div>
   </div>
 
   <div class="sec" id="products">
