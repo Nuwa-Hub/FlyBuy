@@ -65,18 +65,20 @@
     }
     
     #site-header ul {
-        position: relative;
+        position: fixed;
         display: flex;
         justify-content: right;
         align-items: center;
         margin: 1px;
         padding: 1px 0px 2px 0px;
+        left: 1000px;
+        top: 45px;
     }
     
     #site-header ul li {
         position: relative;
         list-style: none;
-        margin-left: 20px;
+        margin-left: 30px;
     }
     
     .badge {
@@ -100,9 +102,10 @@
         font-size: 20px;
         font-family: 'Kanit', sans-serif;
         text-decoration: none;
-        padding: 6px 15px;
+        padding: 10px 19px;
         color: blue;
         border-radius: 40px;
+        background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     }
     
     #site-header ul li a:hover,
@@ -354,7 +357,7 @@
     }
     
     .product {
-        box-shadow: 5px 5px 5px 9px #999;
+        box-shadow: 5px 5px 5px 1px #999;
     }
     
     .product .content {
@@ -572,7 +575,7 @@
         left: 40%;
         border: 1px solid #ccc;
         border-radius: 25px;
-        background-color: rgb(108, 159, 236);
+        background-color: rgb(0, 0, 0);
         color: white;
         ;
     }
@@ -625,24 +628,57 @@
     }
     
     .pbtn {
-        opacity: 1;
-        font-size: 50px;
-        color: gray !important;
-        position: absolute;
-        top: 60%;
-        left: 15%;
+        opacity: 0;
+        z-index: -10;
+        background: #53b5aa;
+        border: 1px solid #999;
+        border-style: none none solid none;
+        cursor: pointer;
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 300;
+        padding: 16px 0;
+        width: 290px;
+        text-align: center;
+        -webkit-transition: all .2s linear;
+        -moz-transition: all .2s linear;
+        -ms-transition: all .2s linear;
+        -o-transition: all .2s linear;
+        transition: all .2s linear;
+        position: fixed;
+        bottom: 10px;
     }
     
     .psub {
         opacity: 0;
         z-index: -10;
-        font-size: 50px;
-        color: gray !important;
-        position: absolute;
-        top: 60%;
-        left: 25%;
+        background: #53b5aa;
+        border: 1px solid #999;
+        border-style: none none solid none;
+        cursor: pointer;
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 300;
+        padding: 16px 0;
+        width: 290px;
+        text-align: center;
+        -webkit-transition: all .2s linear;
+        -moz-transition: all .2s linear;
+        -ms-transition: all .2s linear;
+        -o-transition: all .2s linear;
+        transition: all .2s linear;
+        position: fixed;
+        bottom: 10px;
     }
     
     .pbtn:hover {
-        color: rgb(33, 42, 175) !important;
+        color: #fff;
+        background: #24d1bd;
+    }
+    
+    .psub:hover {
+        color: #fff;
+        background: #24d1bd;
     }
