@@ -204,6 +204,14 @@ class UserController extends Controller {
         echo json_encode($data);
     }
 
+    public function markNotficationAsRead(){
+
+        $id = $_POST['notify_id'];
+        $this->sellerModel = $this->model('Seller');
+        
+        $this->sellerModel->markAsReadById($id);
+    }
+
     public function logout(){
 
         if(isset($_POST['submitLogout'])){

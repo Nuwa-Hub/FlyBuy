@@ -1,7 +1,6 @@
 <?php
 
-class PageController extends Controller
-{
+class PageController extends Controller{
 
     public function __construct()
     {
