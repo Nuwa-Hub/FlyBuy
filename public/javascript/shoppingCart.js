@@ -17,10 +17,7 @@ function changeVal(el) {
 function changeTotal(el) {
     var price = 0;
     var ele = document.getElementsByClassName("full-price");
-    //   alert(parseFloat(ele[0].textContent) + 1);
-    // ele.each(function(index) {
-    //     price += parseFloat(ele[index].textContent);
-    // });
+
     for (var i = 0; i < ele.length; i++) {
         price += parseFloat(ele[i].textContent);
     }
@@ -97,10 +94,6 @@ $(document).ready(function() {
             }, 150);
             pamount = parseInt($(this).parent().children(".qt").html());
 
-            //var pamount = $el.find(".pamount").val() + 1;
-            //  location.reload(true);
-
-            //call fuction (http request)
             changeAmount(pid, pamount);
         }
 
@@ -137,51 +130,27 @@ $(document).ready(function() {
     });
 
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
-
-
     //checkout button
-
     $(".btn").click(function() {
 
         check = true;
         $(".remove").click();
-
-
         document.getElementById("site-header").style.opacity = "0";
         document.getElementById("site-footer").style.opacity = "0";
         document.getElementById("popup-form").style.opacity = "1";
-
-        //lorryMove();
-
-
-
-
+        document.getElementById("popup-form").style.zIndex = "1001";
     });
-    // $(".pbtn").click(function() {
-    //     //location.reload(true);
-    //     var buy_id = document.getElementsByClassName("buy_id")[0].value;
+    $(".pbtn").click(function() {
 
-    //     window.setTimeout(function() {
-
-    //             // ajex request for remove the relevent item from SESSION store
-    //             $.ajax({
-    //                 url: 'http://localhost/Project/FlyBuy/PageController/downloadPdf',
-    //                 method: 'POST',
-    //                 cache: false,
-    //                 data: {
-    //                     buy_id: buy_id,
-    //                 },
-    //                 success: function(response) {
-    //                     console.log(typeof(response));
-
-    //                     //  
-
-    //                 }
-    //             });
-    //         },
-    //         470);
-    // });
+        document.getElementById("pdf").style.opacity = "0";
+        document.getElementById("pbtn").style.opacity = "0";
+        document.getElementById("psub").style.opacity = "1";
+        document.getElementById("box").style.opacity = "1";
+        document.getElementById("psub").style.zIndex = "1001";
+    });
 });
+
+
 
 //animation
 
@@ -234,13 +203,9 @@ function changeAmount(pid, pamount) {
 }
 
 
-
-
 $(window).on('unload', function() {
     $(window).scrollTop(0);
 });
-
-
 
 
 //for search button

@@ -41,9 +41,12 @@ class PageController extends Controller{
         $this->view('pages/loginSignup');
     }
 
-    public function buyerAccount($id)
+    public function buyerAccount($id, $type = "")
     {
 
+        if ($type == "submit") {
+            $_SESSION['cartarr'] = array();
+        }
         if (!isset($_SESSION['cartarr'])) {
             $_SESSION['cartarr'] = array();
         }
@@ -250,69 +253,72 @@ class PageController extends Controller{
         $data = [
             'buyer_id' => $id,
         ];
-        
+
         $this->view('pages/shoppingCart', $data);
     }
 
     public function downloadPdf($id)
     {
-        
-      
-            $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-            $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-            $pdf->setFontSubsetting(true);
-            $pdf->SetFont('dejavusans', '', 12, '', true);
+        $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->setFontSubsetting(true);
+        $pdf->SetFont('dejavusans', '', 12, '', true);
 
-            // start a new page
-            $pdf->AddPage();
-            $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
-            
-            // date and invoice no
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
-            $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
-            $pdf->writeHTML("<b>INVOICE#</b>12");
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        // start a new page
+        $pdf->AddPage();
+        $pdf->writeHTML('
+<img src="logo.png" width=10px hieght=10px>
+');
+        // date and invoice no
+        $dt = new DateTime();
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        $pdf->writeHTML($dt->format('Y-m-d'));
+        $pdf->writeHTML("<b>INVOICE#</b>12");
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // address
-            $pdf->writeHTML("84 Norton Street,");
-            $pdf->writeHTML("NORMANHURST,");
-            $pdf->writeHTML("New South Wales, 2076");
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        // address
 
-            // bill to
-            $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
-            $pdf->writeHTML("22 South Molle Boulevard,", true, false, false, false, 'R');
-            $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
-            $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        //  $pdf->writeHTML($addr);
+        $pdf->writeHTML("NORMANHURST,");
+        $pdf->writeHTML("New South Wales, 2076");
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // invoice table starts here
-            $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
-            $data = array();
-             foreach ($_SESSION['cartarr'] as $product)
-             {
-             array_push($data, array($product->itemName,$product->amount[1],$product->price,($product->price) * ($product->amount[1])));
-             }
-            $pdf->printTable($header, $data);
-            $pdf->Ln();
+        // bill to
+        $userAdd = $this->buyerModel->findUserById($id);
+        $addr = $userAdd->address;
+        $iparr = explode(",", $addr);
+        $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[0], true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[1], true, false, false, false, 'R');
+        $pdf->writeHTML($iparr[2], true, false, false, false, 'R');
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // comments
-            $pdf->SetFont('', '', 12);
-            $pdf->writeHTML("<b>OTHER COMMENTS:</b>");
-            $pdf->writeHTML("Method of payment: <i>CASH PAYMENT</i>");
-            $pdf->writeHTML("");
-            $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
-            $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
-            $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
+        // invoice table starts here
+        $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
+        $data = array();
+        foreach ($_SESSION['cartarr'] as $product) {
+            array_push($data, array($product->itemName, $product->amount[1], $product->price, ($product->price) * ($product->amount[1])));
+        }
+        $pdf->printTable($header, $data);
+        $pdf->Ln();
 
-            // save pdf file
-            ob_end_clean();
-            $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
-            // echo 'location.reload(true)';
-           
+        // comments
+        $pdf->SetFont('', '', 12);
+        $pdf->writeHTML("<b>OTHER COMMENTS:</b>");
+        $pdf->writeHTML("Method of payment: <i>CASH PAYMENT</i>");
+        $pdf->writeHTML("");
+        $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
+        $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
+        $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
+
+        // save pdf file
+        ob_end_clean();
+        $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
+        // echo 'location.reload(true)';
+        $this->buyerAccount($id);
     }
 
     public function castToArray($arr)
@@ -339,16 +345,17 @@ class PageController extends Controller{
         return $casted_arr;
     }
 
-    public function viewNotification($id){
+    public function viewNotification($id)
+    {
 
         $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
 
         // can be used to sort according to the timestamp
-        usort($notifications, function($a, $b){
+        usort($notifications, function ($a, $b) {
 
             $t1 = strtotime($a['created_at']);
             $t2 = strtotime($b['created_at']);
-            
+
             return $t2 - $t1;
         });
 
