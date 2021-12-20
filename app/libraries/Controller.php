@@ -9,7 +9,7 @@ class Controller{
         require_once '../app/models/' . $model . '.php';
 
         //instantiate model
-        return new $model();
+        return $model::getInstance();
     }
 
     //checks for the view file and load
