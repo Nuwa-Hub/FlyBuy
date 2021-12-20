@@ -18,7 +18,8 @@ $(document).ready(function(){
                     $('.badge').html(data.rowCount);
                 }
                 else{
-                    document.querySelector('.badge').style.opasity = "0";
+                    $('.badge').html("0");
+                    // document.querySelector('.badge').style.opasity = "0";
                 }
             }
         });
@@ -29,5 +30,27 @@ $(document).ready(function(){
     setInterval(function(){
         load_unseen_notification();
     }, 1000);
+
+    // $("itemcard").click(function(e) {
+
+    //     // e.preventDefault();
+
+    //     // var notify_id = document.querySelector('notification_hidden_field').value;
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "http://localhost/Project/FlyBuy/UserController/markNotficationAsRead",
+    //         data: { 
+    //             notify_id : notify_id 
+    //         },
+    //         success: function(result = '') {
+    //             alert('ok');
+    //             load_unseen_notification();
+    //         },
+    //         error: function(result = '') {
+    //             alert('error');
+    //         }
+    //     });
+    // });
 
 });
