@@ -40,7 +40,6 @@
             </div>
             <div class="img-div">
                 <img src="<?php echo URLROOT ?>/public/img/user.png" alt="profile picture">
-                <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
             </div>
             <div class="name"><?php echo $data['user']->username; ?>
                 <label for="name" class="label label-name">Username</label>
@@ -56,8 +55,11 @@
             </div>
         </aside>
 
-        <section class="notification-section">
-            
+        <section class="notification-container">
+            <!-- display notifications here -->
+            <div class="order-container">
+                Here
+            </div>
         </section>
 
         <footer>Copyright</footer>

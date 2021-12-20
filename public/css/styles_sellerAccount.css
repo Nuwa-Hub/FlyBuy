@@ -371,4 +371,18 @@ a.add-item:active{
     grid-row: 4/11;
 }
 
+/* ------------------------------------------notification section------------------------------------- */
+
+.order-container{
+    grid-column: 5/13;
+    grid-row: 3/12;
+    background: #fff;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 180px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 
