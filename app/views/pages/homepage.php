@@ -34,7 +34,7 @@
 	</header>
 		<section>
 			<div id="snow"></div>
-			<h2 id="text"><span>Welcome to</span><br>FlyBuy</h2>
+			<h2 id="text"><span stye="text-shadow: 0 0 3px black, 0 0 10px aqua;color:aqua;">Welcome to</span><br>FlyBuy</h2>
 			<img src="<?php echo URLROOT; ?>/public/img/item1.png" id="item1">
 			<a href="#products" id='btn'>Explore</a>
 			<img src="<?php echo URLROOT; ?>/public/img/item2.png" id="item2">
@@ -92,7 +92,7 @@
 		</div>
 
 		<div class="sec" id="products">
-			<h2>See what we have for you</h2>
+			<h2 style="color:white;">See what we have for you</h2>
 
 			<div class="container" >
 
