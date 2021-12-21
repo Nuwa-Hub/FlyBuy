@@ -13,7 +13,7 @@ class Controller{
         //get instantiated model
         return $this->factory->getModel($model);
         //instantiate model
-        return $model::getInstance();
+        // return $model::getInstance();
     }
 
     //checks for the view file and load

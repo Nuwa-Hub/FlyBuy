@@ -6,7 +6,7 @@ class Buyer implements User
     private $db;
     private static $instance;
 
-    public function __construct()
+    private function __construct()
     {
         $this->db = new Database;
     }
@@ -18,9 +18,6 @@ class Buyer implements User
         }
         return self::$instance;
     }
-
-
-
 
     public function register($data)
     {
