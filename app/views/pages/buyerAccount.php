@@ -91,7 +91,7 @@
   </div>
 
   <div class="sec" id="products">
-    <h2>Featured products</h2>
+    <h2 style="color:white;" >Featured products</h2>
     <div class="container">
       <?php foreach ($data['products'] as $product) : ?>
         <div class="product">

@@ -128,25 +128,23 @@ $(document).ready(function() {
 
 
     });
-
+    var download = false;
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
     //checkout button
     $(".btn").click(function() {
 
+        document.getElementById("pbtn").style.opacity = "1";
+        document.getElementById("btn").style.opacity = "0";
+        document.getElementById("pbtn").style.zIndex = "100";
         check = true;
         $(".remove").click();
-        document.getElementById("site-header").style.opacity = "0";
-        document.getElementById("site-footer").style.opacity = "0";
-        document.getElementById("popup-form").style.opacity = "1";
-        document.getElementById("popup-form").style.zIndex = "1001";
+
+
     });
     $(".pbtn").click(function() {
-
-        document.getElementById("pdf").style.opacity = "0";
-        document.getElementById("pbtn").style.opacity = "0";
         document.getElementById("psub").style.opacity = "1";
-        document.getElementById("box").style.opacity = "1";
-        document.getElementById("psub").style.zIndex = "1001";
+        document.getElementById("pbtn").style.opacity = "0";
+        document.getElementById("psub").style.zIndex = "100";
     });
 });
 
