@@ -33,7 +33,8 @@ nav{
 
 nav a.notification,
 nav a.logout,
-nav a.add-item{
+nav a.add-item,
+nav a.home{
     margin: 5px 10px;
     padding: 5px 10px;
     background: transparent;
@@ -45,13 +46,15 @@ nav a.add-item{
 }
 nav a.notification:hover,
 nav a.logout:hover,
-nav a.add-item:hover{
+nav a.add-item:hover,
+nav a.home:hover{
     transform: scale(1.05);
     opacity: 0.8;
 }
 nav a.notification:active,
 nav a.logout:active,
-nav a.add-item:active{
+nav a.add-item:active,
+nav a.home:active{
     transform: scale(1);
     opacity: 1;
 }
@@ -447,5 +450,73 @@ aside .edit:active{
 
 .card:hover ~ .img-wrapper img{
     opacity: 0;
+}
+
+
+/* ---------edit account------------------- */
+
+.edit-section{
+    grid-column: 5/13;
+    grid-row: 2/12;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr;
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px 3px 20px 3px;
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+}
+
+.edit-section::before{
+    content: '';
+    height: 100vw;
+    width: 100vw;
+    background-color: #23303a;
+    background-image: linear-gradient(315deg, #23303c 0%, #28313b 74%);
+    position: absolute;
+    transform: translate(40%, -5%) rotateZ(45deg);
+    border-radius: 20px;
+}
+
+.edit-section::after{
+    content: '';
+    height: 100vw;
+    width: 100vw;
+    background-color: #23303a;
+    background-image: linear-gradient(315deg, #23303c 0%, #28313b 74%);
+    position: absolute;
+    transform: translate(-90%, -47%) rotateZ(45deg);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.edit.title{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin: 0;
+    padding: 5px;
+    align-self: center;
+    z-index: 2;
+    background-color: #2f4353;
+    background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5em;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+}
+
+.edit-form{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    z-index: 2;
 }
 
