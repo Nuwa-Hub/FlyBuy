@@ -181,12 +181,13 @@ class Seller implements User{
 
         $selrialized = serialize($data);
 
-        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification) VALUES(:seller_id, :buy_id, :notification)');
+        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification, order_price) VALUES(:seller_id, :buy_id, :notification, :order_price)');
 
         //Bind values
         $this->db->bind(':seller_id', $seller_id);
         $this->db->bind(':buy_id', $buyer_id);
         $this->db->bind(':notification', $selrialized);
+        $this->db->bind(':order_price', $data['order_price']);
 
         //Execute function
         if ($this->db->execute()) {
@@ -204,6 +205,26 @@ class Seller implements User{
 
         return $count;
     }
+
+    // public function getSalesHistoryById($id){
+
+    //     $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 1");
+    //     $salesCount = count($this->db->resultSet());
+
+    //     $this->db->query("SELECT d = CONVERT(DATE, created_at), c = COUNT(*)
+    //                     FROM notifications
+    //                     WHERE seller_id = '$id' AND marked = 1 
+    //                     GROUP BY CONVERT(DATE, created_at)
+    //                     ORDER BY d ");
+    //     $results = $this->db->resultSet();
+
+    //     $data = [
+    //         'salesCount' => $salesCount,
+    //         'sales' => $results
+    //     ];
+
+    //     return $data;
+    // }
 
     public function getAllNotificationsById($id){
 

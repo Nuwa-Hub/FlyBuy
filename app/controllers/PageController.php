@@ -98,9 +98,10 @@ class PageController extends Controller{
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'products' => $products
+            'products' => $products,
+            // 'salesHistory' => $this->sellerModel->getSalesHistoryById($id)
         ];
-
+        // print_r($data['salesHistory']);
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
@@ -269,9 +270,7 @@ class PageController extends Controller{
 
         // start a new page
         $pdf->AddPage();
-        $pdf->writeHTML('
-<img src="logo.png" width=10px hieght=10px>
-');
+        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
         // date and invoice no
         $dt = new DateTime();
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);

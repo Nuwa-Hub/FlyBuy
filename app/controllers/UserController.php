@@ -174,12 +174,12 @@ class UserController extends Controller {
 
         $buyer_id = $_POST['buy_id'];
         $cart = [];
-        $order = [];
 
         foreach ($_SESSION['cartarr'] as $product) {
 
             $seller_id = $product->seller_id;
             $cart[$seller_id][$product->item_id] = $product->amount[1];
+            $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
 
         $this->buyerModel->saveCart($buyer_id, $cart);
@@ -210,6 +210,8 @@ class UserController extends Controller {
         
         $this->sellerModel->markAsReadById($id);
     }
+
+    //###add a method to update notification as marked###
 
     public function logout(){
 
