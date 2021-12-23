@@ -61,7 +61,7 @@
         </aside>
 
         <section class="edit-section">
-            <h1 class="edit title">Edit Account</h1>
+            <h1 class="edit title">Edit Profile</h1>
     
             <form class="edit-form" id="edit-form" method="POST" action="<?php echo URLROOT; ?>/UserController/editProfile">
                 <div class="input-field <?php echo (isset($data['editProfileClassNames']['username'])) ? $data['editProfileClassNames']['username'] : ""; ?>">
