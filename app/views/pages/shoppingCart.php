@@ -17,7 +17,7 @@
 
     <header id="site-header">
         <div class="container">
-            <h3>FlyBuy</h3>
+           
             <h1>Shopping cart </h1>
             <div class="search-box">
                 <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchFunction()">
