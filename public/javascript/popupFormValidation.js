@@ -74,15 +74,15 @@ function toggleEdit(element){
 
     if (element != null){
 
-        const itemDetails = element.parentElement.parentElement;
+        const itemDetails = element.parentElement.parentElement.parentElement;
         const itemId = itemDetails.getAttribute('id');
 
         edit.querySelector('.item-id').value = itemId;
 
-        const itemName = itemDetails.querySelector('.item-name').querySelector('div').innerText;
-        const itemDescription = itemDetails.querySelector('.item-name').querySelector('small').innerText;
-        const itemAmount = itemDetails.querySelector('.item-amount').innerText;
-        const itemPrice = itemDetails.querySelector('.item-price').innerText;
+        const itemName = itemDetails.querySelector('.item.name').innerText;
+        const itemDescription = itemDetails.querySelector('.item.description').innerText;
+        const itemAmount = itemDetails.querySelector('.item.amount').innerText;
+        const itemPrice = itemDetails.querySelector('.item.price').innerText;
 
         edit.querySelector('.itemName').value = itemName;
         edit.querySelector('.amount').value = parseInt(itemAmount.split(" ")[0], 10);
@@ -100,7 +100,7 @@ function toggleDelete(element){
 
     if (element != null){
 
-        const itemDetails = element.parentElement.parentElement;
+        const itemDetails = element.parentElement.parentElement.parentElement;
         const itemId = itemDetails.getAttribute('id');
 
         deleteItem.querySelector('.item-id').value = itemId;
@@ -127,6 +127,21 @@ function togglePasswordView(toggleView){
 if (toggleView){
     togglePasswordView(toggleView);
 }
+
+// product list horizontal scrolling
+
+const scrollLeft = document.querySelector('.scroll-left');
+const scrollRight = document.querySelector('.scroll-right');
+
+const productContainer = document.querySelector('.product-container');
+
+scrollRight.addEventListener('click', e => {
+    productContainer.scrollLeft += 300;
+});
+
+scrollLeft.addEventListener('click', e => {
+    productContainer.scrollLeft -= 300;
+});
 
 
 
