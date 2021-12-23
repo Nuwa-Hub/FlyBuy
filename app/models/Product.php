@@ -1,14 +1,25 @@
 <?php
 
+use Product as GlobalProduct;
+
 class Product
 {
 
     private $db;
+    private static $instance;
 
-    public function __construct(){
+    private function __construct()
+    {
         $this->db = new Database;
     }
 
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new Product();
+        }
+        return self::$instance;
+    }
     public function findAllProducts(){
 
         $this->db->query('SELECT * FROM  products');

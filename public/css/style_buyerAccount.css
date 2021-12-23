@@ -184,6 +184,7 @@ section::before {
     width: 100%;
     height: 100px;
     z-index: 10;
+    background: linear-gradient(to top, rgb(2, 0, 36),transparent);
 }
 
 section img {
@@ -198,12 +199,13 @@ section img {
 
 section #text {
     position: absolute;
-    color: #333;
     font-size: 10vw;
     text-align: center;
     line-height: 0.55em;
     font-family: 'Poppins', sans-serif;
     transform: translateY(-130%);
+    text-shadow: 0 0 6px black, 0 0 20px aqua;
+    color:aqua;
 }
 
 section #text span {
@@ -211,7 +213,8 @@ section #text span {
     letter-spacing: 2px;
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
-    color: #555;
+    text-shadow: 0 0 6px black, 0 0 20px aqua;
+    color:aqua;
 }
 
 #btn {

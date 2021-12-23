@@ -13,7 +13,7 @@
 
 <body>
   <header id="header">
-    <a href="#" class="logo">FlyBuy</a>
+    <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy</a>
     <img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
 
     <div class="search-box">
@@ -23,7 +23,7 @@
       </a>
     </div>
     <ul>
-      <li><a href="#" class="active">Home</a></li>
+      <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['user']->buy_id; ?>" class="active">Home</a></li>
       <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
       <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
       <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
@@ -91,7 +91,7 @@
   </div>
 
   <div class="sec" id="products">
-    <h2>Featured products</h2>
+    <h2 style="color:white;" >Featured products</h2>
     <div class="container">
       <?php foreach ($data['products'] as $product) : ?>
         <div class="product">
