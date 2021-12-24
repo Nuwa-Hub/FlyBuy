@@ -17,7 +17,7 @@
 
     <header id="site-header">
         <div class="container">
-            <h3>FlyBuy</h3>
+           
             <h1>Shopping cart </h1>
             <div class="search-box">
                 <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchFunction()">
@@ -49,8 +49,8 @@
                 foreach ($_SESSION['cartarr'] as $product) { ?>
 
                     <li id="pli" class="pli" value="<?php echo $product->itemName ?>">
-                        <article class="product" id="product">
-                            <header>
+                        <article class="product block" id="product">
+                            <header class="pimg">
 
                                 <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
                                 <a class="remove">
@@ -63,9 +63,9 @@
                                 <?php echo $product->description ?>
                             </div>
                             <footer class="content">
-                                <span class="qt-minus">-</span>
+                                <span class="qt-minus ">-</span>
                                 <span class="qt" value="<?= $product->amount[1] ?>"><?php echo $product->amount[1] ?></span>
-                                <span class="qt-plus">+</span>
+                                <span class="qt-plus ">+</span>
                                 <h2 class="full-price">
                                     <?php echo ($product->price) * ($product->amount[1]) ?>
                                 </h2>
@@ -99,10 +99,10 @@
             </div>
             <div class="right">
                 <h1 class="total">Total: <span><?php echo ($total > 0) ? $total + 169 : 0 ?></span>/=</h1>
-
-                <a class="btn" id="btn">Checkout</a>
-                <a class="pbtn" id="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
-                <a class="psub" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a>
+                <input class="buy_id" type="hidden" value="<?php echo $data['buyer_id'];?>">
+                <a class="btn draw-border" id="btn">Checkout</a>
+                <a class="pbtn draw-border" id="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
+                <a class="psub draw-border" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a>
 
             </div>
         </div>

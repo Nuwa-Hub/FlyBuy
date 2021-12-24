@@ -1,8 +1,3 @@
-<?php 
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,42 +22,6 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <a href='<?php echo URLROOT ?>/PageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
-            <a onclick="toggleLogout()" class="logout">Logout</a>
-        </nav>
-
-        <aside>
-            <div class="header">
-                <h3 class="store"><?php echo $data['user']->storeName; ?></h3>
-                <h3>
-                    <i class="fa fa-star checked"></i>
-                    <i class="fa fa-star checked"></i>
-                    <i class="fa fa-star checked"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </h3>
-                <a href='<?php echo URLROOT ?>/PageController/editSellerAccount/<?php echo $data['user']->seller_id; ?>' class="user-edit-icon"><i class="fas fa-user-edit"></i></a>
-            </div>
-            <div class="img-div">
-                <img src="<?php echo URLROOT ?>/public/img/user.png" alt="profile picture">
-                <!-- <a href="#" class="edit-icon"><i class="fas fa-pen"></i></a> -->
-            </div>
-            <div class="name"><?php echo $data['user']->username; ?>
-                <label for="name" class="label label-name">Username</label>
-            </div>
-            <div class="email"><?php echo $data['user']->email; ?>
-                <label for="name" class="label label-name">Email</label>
-            </div>
-            <div class="contact"><?php echo $data['user']->telNo; ?>
-                <label for="name" class="label label-name">Telephone</label>
-            </div>
-            <div class="location"><?php echo $data['user']->address; ?>
-                <label for="name" class="label label-name">Address</label>
-            </div>
-        </aside>
-
-        <section class="control-section">
             <div class="search">
                 <div class="search-box">
                     <input class="search-txt" type="text" placeholder="search here...">
@@ -71,30 +30,95 @@
                     </a>
                 </div>
             </div>
-            <a class="add-item" onclick="toggleDisplay()">New Item+</a>
-        </section>
+            <a href="#" class="add-item" onclick="toggleDisplay()">New Item+</a>
+            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
+        </nav>
+
+        <aside>
+            <div class="header">
+                <div class="title">
+                    <h2 class="store"><?php echo $data['user']->storeName; ?></h2>
+                    <h3 class="rating">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                    </h3>
+                </div>
+                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+            </div>
+            <div class="details">
+                <div class="name">
+                    <i class="fas fa-user"></i>
+                    <?php echo $data['user']->username; ?>
+                </div>
+                <div class="email">
+                    <i class="fas fa-envelope"></i>
+                    <?php echo $data['user']->email; ?>
+                </div>
+                <div class="contact">
+                    <i class="fas fa-phone"></i>
+                    <?php echo $data['user']->telNo; ?>
+                </div>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <?php echo $data['user']->address; ?>
+                </div>
+            </div>
+            <a href='<?php echo URLROOT ?>/PageController/editSellerAccount/<?php echo $data['user']->seller_id; ?>' class="edit">edit account</a>
+        </aside>
 
         <section class="item-container">
-            
-            <?php foreach ($data['products'] as $product): ?>
-                <div class="item-details" id="<?php echo $product->item_id; ?>">
-                    <div class="item-img"><img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item"></div>
-                    <div class="item-name">
-                        <div><?php echo $product->itemName; ?></div>
-                        <small><?php echo $product->description; ?></small>
-                    </div>
-                    <div class="item-price"><?php echo "Rs. ".$product->price; ?></div>
-                    <div class="item-amount"><?php echo $product->amount." Available"; ?></div>
-                    <div class="item-date-added"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?>
-                        <button class="item-edit-btn" onclick="toggleEdit(this)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="item-delete-btn" onclick="toggleDelete(this)">
-                            <i class="fas fa-trash"></i>
-                        </button>
+
+            <div class="store-stats">
+                <div class="sales">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="sales-details details-col">
+                        <div class="no-sales">80</div>
+                        <span>sales</span>
                     </div>
                 </div>
-            <?php endforeach; ?>
+                <div class="earnings">
+                    <i class="far fa-money-bill-alt"></i>
+                    <div class="earnings-details details-col">
+                        <div class="no-earnings">Rs. 4250</div>
+                        <span>earnings</span>
+                    </div>
+                </div>
+                <div class="graphbox">
+                    <canvas id="my-chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="product-wrapper">
+                <button class="scroll-left scroll"><i class="fas fa-arrow-left"></i></button>
+                <div class="product-container">
+                <?php foreach ($data['products'] as $product): ?>
+                    <div class="item-details wrapper" id="<?php echo $product->item_id; ?>">
+                            <div class="card">
+                                <div class="front">
+                                    <h2 class="item name"><?php echo $product->itemName; ?></h2>
+                                    <h2 class="item price"><?php echo "Rs. ".$product->price; ?></h2>
+                                </div>
+                                <div class="right">
+                                    <p class="item description"><?php echo $product->description; ?></p>
+                                    <p class="item amount"><?php echo $product->amount." Available"; ?></p>
+                                    <p class="item date"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></p>
+                                    
+                                    <i class="fas fa-trash" onclick="toggleDelete(this)"></i>
+                                    <i class="fas fa-edit" onclick="toggleEdit(this)"></i>
+                                </div>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item">
+                            </div>
+                        </div>
+                <?php endforeach; ?>
+                </div>
+                <button class="scroll-right scroll"><i class="fas fa-arrow-right"></i></button>
+            </div>
             
         </section>
 
@@ -111,7 +135,7 @@
 
             <div class="closeBtn" onclick="toggleDisplay()">&times;</div>
 
-            <h1 class="title">Add Item</h1>
+            <h1 class="popup title">Add Item</h1>
 
             <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
                 <div class="input-field addItem">
@@ -167,7 +191,7 @@
 
             <div class="closeBtn" onclick="toggleEdit(null)">&times;</div>
 
-            <h1 class="title">Edit Item</h1>
+            <h1 class="popup title">Edit Item</h1>
 
             <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
                 <div class="input-field editItem">
@@ -224,9 +248,7 @@
 
                 <div class="closeBtn" onclick="toggleDelete(null)">&times;</div>
 
-                <h1 class="title">delete?</h1>
-
-                <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+                <h1 class="popup title">delete?</h1>
 
                 <form method="post" class="delete-itemForm" action="<?php echo URLROOT; ?>/ProductController/deleteItem">
 
@@ -253,9 +275,7 @@
 
             <div class="closeBtn" onclick="toggleLogout()">&times;</div>
 
-            <h1 class="title">Do you want to logout?</h1>
-
-            <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+            <h1 class="popup title">logout?</h1>
 
             <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
@@ -268,8 +288,13 @@
 </body>
 
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+<script src="<?php echo URLROOT; ?>/public/javascript/myChart.js"></script>
+
 
 </html>

@@ -10,13 +10,19 @@ class CustomPdfGenerator extends TCPDF
         $this->Image('logo.png', 10, 3, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->SetFont('helvetica', 'B', 30);
         $this->SetTextColor(128, 0, 0);
-      $this->Rect(0, 0, $this->getPageWidth(), $this->getPageHeight(), 
-               'DF', "",  array(124, 235, 255)); 
+        $this->Rect(
+            0,
+            0,
+            $this->getPageWidth(),
+            $this->getPageHeight(),
+            'DF',
+            "",
+            array(124, 235, 255)
+        );
         $this->Cell(0, 15, '', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->Ln();
-       $this->SetFillColor(224, 235, 255);
+        $this->SetFillColor(224, 235, 255);
         $this->Cell(0, 15, 'FlyBuy', 0, false, 'C', true, '', 0, false, 'M', 'M');
-          
     }
 
     public function Footer()
@@ -53,8 +59,8 @@ class CustomPdfGenerator extends TCPDF
         foreach ($data as $row) {
             $this->Cell($w[0], 6, $row[0], 'LR', 0, 'L', $fill);
             $this->Cell($w[1], 6, $row[1], 'LR', 0, 'R', $fill);
-            $this->Cell($w[2], 6, number_format($row[2]), 'LR', 0, 'R', $fill);
-            $this->Cell($w[3], 6, number_format($row[3]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[2], 6, $row[2], 'LR', 0, 'R', $fill);
+            $this->Cell($w[3], 6, $row[3], 'LR', 0, 'R', $fill);
             $this->Ln();
             $fill = !$fill;
             $total += $row[3];
@@ -68,8 +74,14 @@ class CustomPdfGenerator extends TCPDF
 
         $this->Cell($w[0], 6, '', 'LR', 0, 'L', $fill);
         $this->Cell($w[1], 6, '', 'LR', 0, 'R', $fill);
+        $this->Cell($w[2], 6, 'Shipping:', 'LR', 0, 'L', $fill);
+        $this->Cell($w[3], 6, 169.00, 'LR', 0, 'R', $fill);
+        $this->Ln();
+
+        $this->Cell($w[0], 6, '', 'LR', 0, 'L', $fill);
+        $this->Cell($w[1], 6, '', 'LR', 0, 'R', $fill);
         $this->Cell($w[2], 6, 'TOTAL:', 'LR', 0, 'L', $fill);
-        $this->Cell($w[3], 6, $total, 'LR', 0, 'R', $fill);
+        $this->Cell($w[3], 6, $total + 169, 'LR', 0, 'R', $fill);
         $this->Ln();
 
         $this->Cell(array_sum($w), 0, '', 'T');

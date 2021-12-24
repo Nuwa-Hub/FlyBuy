@@ -14,7 +14,7 @@
 
 	<header id="header">
 
-		<a href="#" class="logo">FlyBuy</a>
+		<a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy</a>
 		<img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
 
 

@@ -4,7 +4,11 @@ class UserController extends Controller {
 
     private $isValid = true;
 
-    public function __construct(){}
+    public function __construct(){
+        $this->buyerModel = $this->model('Buyer');
+        $this->sellerModel = $this->model('Seller');
+        $this->productModel = $this->model('Product');
+    }
 
     public function register() {
 
@@ -17,10 +21,10 @@ class UserController extends Controller {
             $userType = $_POST['userType'];
 
             if ($userType == 'buyer'){
-                $this->userModel = $this->model('Buyer');
+                $this->userModel = $this->buyerModel;
             }
             else{
-                $this->userModel = $this->model('Seller');
+                $this->userModel = $this->sellerModel;
             }
 
             $emailExists = $this->userModel->checkEmailExistence($_POST['email']);
@@ -68,10 +72,10 @@ class UserController extends Controller {
             $userType = $_POST['submitLogin'];
             
             if ($userType == 'buyer'){
-                $this->userModel = $this->model('Buyer');
+                $this->userModel = $this->buyerModel;
             }
             else{
-                $this->userModel = $this->model('Seller');
+                $this->userModel = $this->sellerModel;
             }
             
             $users = $this->userModel->findAllUsers();
@@ -114,12 +118,12 @@ class UserController extends Controller {
     public function editProfile(){
         
         if(isset($_POST['seller_id'])){
-            $this->userModel = $this->model('Seller');
+            $this->userModel = $this->sellerModel;
             $id = $_POST['seller_id'];
             $userType = 'seller';
         }
         else{
-            $this->userModel = $this->model('Buyer');
+            $this->userModel = $this->buyerModel;
             $id = $_POST['buyer_id'];
             $userType = 'buyer';
         }
@@ -178,22 +182,18 @@ class UserController extends Controller {
             $cart[$seller_id][$product->item_id] = $product->amount[1];
         }
 
-        $this->buyerModel = $this->model('Buyer');
-        $this->sellerModel = $this->model('Seller');
-
         $this->buyerModel->saveCart($buyer_id, $cart);
 
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
         }
 
-        $_SESSION['cartarr'] = [];
+        
     }
 
     public function getNotificationCount(){
 
         $id = $_POST['seller_id'];
-        $this->sellerModel = $this->model('Seller');
 
         $rowCount =  $this->sellerModel->notificationCount($id);
 
@@ -207,7 +207,6 @@ class UserController extends Controller {
     public function markNotficationAsRead(){
 
         $id = $_POST['notify_id'];
-        $this->sellerModel = $this->model('Seller');
         
         $this->sellerModel->markAsReadById($id);
     }
@@ -224,19 +223,5 @@ class UserController extends Controller {
             
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }
-    }
-
-    public function createUserSession($user) {
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['username'] = $user->username;
-        $_SESSION['email'] = $user->email;
-        header('location:' . URLROOT . '/pages/index');
-    }
-
-    public function logout_temp() {
-        unset($_SESSION['user_id']);
-        unset($_SESSION['username']);
-        unset($_SESSION['email']);
-        header('location:' . URLROOT . '/users/login');
     }
 }

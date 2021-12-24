@@ -1,15 +1,27 @@
 <?php
 
-class Buyer implements User{
+class Buyer implements User
+{
 
     private $db;
+    private static $instance;
 
-    public function __construct(){
+    private function __construct()
+    {
         $this->db = new Database;
     }
 
-    public function register($data){
-        
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new Buyer();
+        }
+        return self::$instance;
+    }
+
+    public function register($data)
+    {
+
         $data['signupData']['password'] = password_hash($data['signupData']['password'], PASSWORD_DEFAULT);
 
         $this->db->query('INSERT INTO buyers (username, email, telNo, address, password, vkey) VALUES(:username, :email, :telNo, :address, :password, :vkey)');
@@ -30,7 +42,8 @@ class Buyer implements User{
         }
     }
 
-    public function login($data) {
+    public function login($data)
+    {
 
         $email = $data['loginData']['email'];
         // $password = $data['loginData']['password'];
@@ -42,8 +55,9 @@ class Buyer implements User{
         return $id;
     }
 
-    public function findUserById($id) {
-        
+    public function findUserById($id)
+    {
+
         $this->db->query('SELECT * FROM buyers WHERE buy_id = :id');
         $this->db->bind(':id', $id);
 
@@ -51,7 +65,8 @@ class Buyer implements User{
     }
 
     //Find user by email. Email is passed in by the Controller.
-    public function checkEmailExistence($email){
+    public function checkEmailExistence($email)
+    {
         //Prepared statement
         $this->db->query('SELECT * FROM buyers WHERE email = :email');
 
@@ -61,14 +76,15 @@ class Buyer implements User{
         $resultSet = $this->db->resultSet();
 
         //Check if email is already registered
-        if(count($resultSet) > 0) {
+        if (count($resultSet) > 0) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function findUserByVKey($vkey){
+    public function findUserByVKey($vkey)
+    {
         //Prepared statement
         $this->db->query('SELECT * FROM buyers WHERE vkey = :vkey LIMIT 1');
 
@@ -79,7 +95,8 @@ class Buyer implements User{
         return $user;
     }
 
-    public function findUserByEmail($email){
+    public function findUserByEmail($email)
+    {
         $this->db->query('SELECT * FROM buyers WHERE email = :email LIMIT 1');
 
         $this->db->bind(':email', $email);
@@ -89,7 +106,8 @@ class Buyer implements User{
         return $user;
     }
 
-    public function findAllUsers(){
+    public function findAllUsers()
+    {
 
         $this->db->query('SELECT * FROM buyers');
         $results = $this->db->resultSet();
@@ -97,7 +115,8 @@ class Buyer implements User{
         return $results;
     }
 
-    public function verifyUser($vkey){
+    public function verifyUser($vkey)
+    {
 
         $this->db->query('UPDATE buyers SET verified = :verified WHERE vkey = :vkey');
 
@@ -111,38 +130,39 @@ class Buyer implements User{
         }
     }
 
-    public function updateUserData($data){
+    public function updateUserData($data)
+    {
 
         $vkey = $data['vkey'];
-        
-        if(isset($data['username']) and !empty($data['username'])){
-            
+
+        if (isset($data['username']) and !empty($data['username'])) {
+
             $this->db->query("UPDATE buyers SET username = :username WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':username', $data['username']);
             $this->db->updateField();
         }
 
-        if(isset($data['password']) and !empty($data['password'])){
+        if (isset($data['password']) and !empty($data['password'])) {
 
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-            
+
             $this->db->query("UPDATE buyers SET password = :password  WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':password', $data['password']);
             $this->db->updateField();
         }
 
-        if(isset($data['address']) and !empty($data['address'])){
-            
+        if (isset($data['address']) and !empty($data['address'])) {
+
             $this->db->query("UPDATE buyers SET address = :address WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':address', $data['address']);
             $this->db->updateField();
         }
 
-        if(isset($data['telNo']) and !empty($data['telNo'])){
-            
+        if (isset($data['telNo']) and !empty($data['telNo'])) {
+
             $this->db->query("UPDATE buyers SET telNo = :telNo WHERE vkey = :vkey");
             $this->db->bind(':vkey', $vkey);
             $this->db->bind(':telNo', $data['telNo']);
@@ -150,7 +170,8 @@ class Buyer implements User{
         }
     }
 
-    public function saveCart($id, $data){
+    public function saveCart($id, $data)
+    {
 
         $selrialized = serialize($data);
 
@@ -168,5 +189,3 @@ class Buyer implements User{
         }
     }
 }
-
-?>
