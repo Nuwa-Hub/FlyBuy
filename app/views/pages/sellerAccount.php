@@ -31,7 +31,7 @@
                 </div>
             </div>
             <a href="#" class="add-item" onclick="toggleDisplay()">New Item+</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 

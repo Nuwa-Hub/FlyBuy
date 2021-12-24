@@ -154,7 +154,7 @@ class PageController extends Controller
         $this->view('pages/editSellerAccount', $data);
     }
 
-    public function viewNotifications($id)
+    public function viewAllNotifications($id)
     {
 
         $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
@@ -173,8 +173,8 @@ class PageController extends Controller
         //find and add for each notification
         foreach ($notifications as $key => $note) {
 
-            $temp_notification_arr = unserialize($notifications[$key]->notification);
-            $notifications[$key]->notification = array();
+            $temp_notification_arr = unserialize($notifications[$key]->item_list);
+            $notifications[$key]->item_list = array();
 
             $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
 
@@ -186,7 +186,7 @@ class PageController extends Controller
                 $item_arr['item'] = $item;
                 $item_arr['quatity'] = $qtt;
 
-                array_push($notifications[$key]->notification, $item_arr);
+                array_push($notifications[$key]->item_list, $item_arr);
             }
         }
 
@@ -195,8 +195,8 @@ class PageController extends Controller
             'user' => $this->sellerModel->findUserById($id),
             'notifications' => $notifications
         ];
-
-        $this->view('pages/notification', $data);
+        print_r($data['notifications'][0]);
+        // $this->view('pages/notification', $data);
     }
 
     public function verifyEmail($userType, $vkey)
