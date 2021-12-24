@@ -99,7 +99,7 @@
             </div>
             <div class="right">
                 <h1 class="total">Total: <span><?php echo ($total > 0) ? $total + 169 : 0 ?></span>/=</h1>
-
+                <input class="buy_id" type="hidden" value="<?php echo $data['buyer_id'];?>">
                 <a class="btn" id="btn">Checkout</a>
                 <a class="pbtn" id="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
                 <a class="psub" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a>

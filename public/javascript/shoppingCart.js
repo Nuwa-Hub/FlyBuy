@@ -138,6 +138,25 @@ $(document).ready(function() {
         document.getElementById("pbtn").style.zIndex = "100";
         check = true;
         $(".remove").click();
+        setTimeout(function() {
+
+            var buy_id = document.querySelector('.buy_id').value;
+            alert(buy_id);
+
+            // ajex request for remove the relevent item from SESSION store
+            $.ajax({
+                url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+                method: 'POST',
+                cache: false,
+                data: {
+                    buy_id: buy_id,
+                },
+                success: function(response) {
+                    //    location.reload(true);
+                    console.log(response);
+                }
+            });
+        }, 20);
 
 
     });
