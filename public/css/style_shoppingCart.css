@@ -72,17 +72,6 @@ body {
     text-shadow: 1px 1px 20px #eaee09;
 }
 
-#site-header h3 {
-    font-size: 26px;
-    font-weight: 3000;
-    color: #e00d0d;
-    padding: 0px 0px 1px 1px;
-    align-items: center;
-    position: relative;
-    text-align: left;
-    margin: 1px 2px 3px;
-}
-
 #site-header ul {
     position: fixed;
     display: flex;
@@ -101,29 +90,30 @@ body {
 }
 
 .badge {
-    padding-left: 9px;
-    padding-right: 9px;
+    padding-left: 22px;
+    padding-right: 12px;
     -webkit-border-radius: 9px;
     -moz-border-radius: 9px;
-    border-radius: 9px;
+    border-radius: 10px;
 }
 
 #cart-item {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
     background: #ff0000;
     color: #fff;
-    padding: 0 5px;
+    padding: 2px 7px 5px 7px;
     vertical-align: top;
 }
 
 #site-header ul li a {
     position: relative;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 700;
     font-family: 'Kanit', sans-serif;
     text-decoration: none;
     padding: 10px 19px;
-    color: blue;
+    color: rgb(0, 0, 0);
     border-radius: 40px;
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
@@ -326,6 +316,24 @@ a:hover {
         box-shadow: #1946d8;
     }*/
 
+.block {
+    position: relative;
+    background: linear-gradient(0deg, #000, #272727);
+}
+
+.block:before,
+.block:after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(45deg, #fb0094, #00ff00, #ffff00, #ff0000);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: -1;
+    animation: steam 2s linear infinite;
+}
+
 .product img {
     width: 100%;
     height: 100%;
@@ -333,10 +341,11 @@ a:hover {
 
 .product header,
 .product .content {
-    background-color: rgb(249, 250, 243);
-    border: 2px solid #ccc;
+    background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     border-style: none none solid none;
     float: left;
+    color: white;
 }
 
 .product header {
@@ -378,6 +387,11 @@ a:hover {
 
 .remove {
     cursor: pointer;
+    background-color: black;
+}
+
+.pimg {
+    background-color: black;
 }
 
 .product .content {
@@ -389,21 +403,22 @@ a:hover {
 }
 
 .product h1 {
-    color: #53b5aa;
+    color: #ffffff;
     font-size: 25px;
     font-weight: 300;
     margin: 17px 0 20px 0;
 }
 
 .product footer.content {
+    background-color: black;
     height: 50px;
     margin: 6px 0 0 0;
     padding: 0;
 }
 
 .product footer .price {
-    background: #fcfcfc;
-    color: #000;
+    background: #000000;
+    color: rgb(255, 255, 255);
     float: right;
     font-size: 15px;
     font-weight: 300;
@@ -413,7 +428,7 @@ a:hover {
 }
 
 .product footer .full-price {
-    background: #53b5aa;
+    background: #000000;
     color: #fff;
     float: right;
     font-size: 22px;
@@ -431,6 +446,7 @@ a:hover {
 .qt,
 .qt-plus,
 .qt-minus {
+    background-color: rgb(0, 0, 0);
     display: block;
     float: left;
 }
@@ -447,7 +463,9 @@ a:hover {
 
 .qt-plus,
 .qt-minus {
-    background: #fcfcfc;
+    display: flex;
+    ;
+    background: #302f2f;
     border: none;
     font-size: 30px;
     font-weight: 300;
@@ -460,11 +478,8 @@ a:hover {
     transition: background .2s linear;
 }
 
-.qt-plus:hover,
-.qt-minus:hover {
-    background: #0cc5af;
-    color: #fff;
-    cursor: pointer;
+.draw-border {
+    background: linear-gradient(0deg, #000, #272727);
 }
 
 .qt-plus {
@@ -502,8 +517,9 @@ a:hover {
 }
 
 #site-footer h1 {
-    background: #fcfcfc;
-    border: 1px solid #ccc;
+    background: #242323;
+    color: rgb(255, 255, 255);
+    border-color: #242323;
     border-style: none none solid none;
     font-size: 24px;
     font-weight: 300;
@@ -533,8 +549,8 @@ a:hover {
 }
 
 .btn {
-    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
-    border: 1px solid #999;
+    background-image: black;
+    border: 1px solid rgb(29, 27, 27);
     border-style: none none solid none;
     cursor: pointer;
     display: block;
@@ -551,13 +567,8 @@ a:hover {
     transition: all .2s linear;
 }
 
-.btn:hover {
-    background: #24d1bd;
-    color: rgb(18, 14, 238);
-}
-
 .type {
-    background: #fcfcfc;
+    background: #9e1e1e;
     font-size: 13px;
     padding: 10px 16px;
     left: 100%;
@@ -576,50 +587,12 @@ a:hover {
     right: -40px;
 }
 
-.red {
-    background: #cb5a5e;
-}
-
-.yellow {
-    background: #f1c40f;
-}
-
-.blue {
-    background: #3598dc;
-}
-
 .minused {
     margin: 0 50px 0 0 !important;
 }
 
 .added {
     margin: 0 -50px 0 0 !important;
-}
-
-.popup-form {
-    opacity: 0;
-    z-index: -10;
-    position: fixed;
-    width: 300px;
-    height: 200px;
-    top: 30%;
-    left: 40%;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background-color: rgb(0, 0, 0);
-    color: white;
-    ;
-}
-
-.submit {
-    opacity: 1;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    top: 30%;
-    padding: 0px;
-    width: 100%;
-    height: 100px;
-    border: none;
 }
 
 .submit img {
@@ -661,12 +634,8 @@ svg {
 .pbtn {
     opacity: 0;
     z-index: -10;
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    border: 1px solid #999;
-    border-style: none none solid none;
     cursor: pointer;
     display: block;
-    color: rgb(18, 14, 238);
     font-size: 20px;
     font-weight: 300;
     padding: 16px 0;
@@ -684,12 +653,8 @@ svg {
 .psub {
     opacity: 0;
     z-index: -10;
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    border: 1px solid #999;
-    border-style: none none solid none;
     cursor: pointer;
     display: block;
-    color: rgb(9, 41, 221);
     font-size: 20px;
     font-weight: 300;
     padding: 16px 0;
@@ -704,12 +669,51 @@ svg {
     bottom: 10px;
 }
 
-.pbtn:hover {
-    background: #24d1bd;
-    color: rgb(18, 14, 238);
+.draw-border {
+    background-color: rgb(66, 63, 63);
+    color: #ffffff;
+    transition: color 0.25s 0.0833333333s;
 }
 
-.psub:hover {
-    color: rgb(18, 14, 238);
-    background: #24d1bd;
+.draw-border::before,
+.draw-border::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.draw-border::before {
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.draw-border::after {
+    border-top-width: 4px;
+    border-right-width: 4px;
+}
+
+.draw-border:hover {
+    color: #ffffff;
+}
+
+.draw-border:hover::before,
+.draw-border:hover::after {
+    border-color: #ffffff;
+    transition: border-color 0s, width 0.25s, height 0.25s;
+    width: 100%;
+    height: 100%;
+}
+
+.draw-border:hover::before {
+    transition-delay: 0s, 0s, 0.25s;
+}
+
+.draw-border:hover::after {
+    transition-delay: 0s, 0.25s, 0s;
 }

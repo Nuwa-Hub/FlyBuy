@@ -53,7 +53,7 @@ $(document).ready(function() {
 
                 // ajex request for remove the relevent item from SESSION store
                 $.ajax({
-                    url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
+                    url: 'http://localhost/Project/FlyBuy/ProductController/updateCart',
                     method: 'POST',
                     cache: false,
                     data: {
@@ -138,6 +138,25 @@ $(document).ready(function() {
         document.getElementById("pbtn").style.zIndex = "100";
         check = true;
         $(".remove").click();
+        setTimeout(function() {
+
+            var buy_id = document.querySelector('.buy_id').value;
+
+
+            // ajex request for remove the relevent item from SESSION store
+            $.ajax({
+                url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+                method: 'POST',
+                cache: false,
+                data: {
+                    buy_id: buy_id,
+                },
+                success: function(response) {
+                    //    location.reload(true);
+                    console.log(response);
+                }
+            });
+        }, 20);
 
 
     });
@@ -185,7 +204,7 @@ function changeTot() {
 
 function changeAmount(pid, pamount) {
     $.ajax({
-        url: 'http://localhost/Project/FlyBuy/ProductController/removeFromCart',
+        url: 'http://localhost/Project/FlyBuy/ProductController/updateCart',
         method: 'post',
         cache: false,
         data: {

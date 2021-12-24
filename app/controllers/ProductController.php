@@ -81,7 +81,7 @@ class ProductController extends Controller
         }
     }
 
-    public function removeFromCart()
+    public function updateCart()
     {
 
         if (isset($_POST['pamount'])) {
