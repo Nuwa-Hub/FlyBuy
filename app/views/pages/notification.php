@@ -76,9 +76,9 @@
                 <input type="radio" name="buttons" id="unmarked">
 
                 <div class="controls">
-                    <label for="all" class="label">All</label>
-                    <label for="marked" class="label">Marked</label>
-                    <label for="unmarked" class="label">Unmarked</label>
+                    <label for="all" class="label"><a href="<?php echo URLROOT; ?>/PageController/viewAllNotifications/<?php echo $data['seller_id']; ?>/all">All</a></label>
+                    <label for="marked" class="label"><a href="<?php echo URLROOT; ?>/PageController/viewAllNotifications/<?php echo $data['seller_id']; ?>/marked">Marked</a></label>
+                    <label for="unmarked" class="label"><a href="<?php echo URLROOT; ?>/PageController/viewAllNotifications/<?php echo $data['seller_id']; ?>/unmarked">Unmarked</a></label>
                 </div>
             </div>
             <div class="content-div">
@@ -87,7 +87,7 @@
 
                     <div class="collapsible notification">
 
-                        <div class="expand-btn" onclick="expand(this)"><i class="fas fa-arrow-circle-down"></i></div>
+                        <div class="expand-btn " onclick="expand(this)"><i class="fas fa-arrow-circle-down"></i></div>
 
                         <label class="order-id">order id: 
                             <span><?php echo $notification->notify_id; ?></span>
@@ -101,27 +101,25 @@
                             <button class="mark" onclick="mark(this)">Mark</button>
 
                             <label class="customer-tel">telephone: 
-                                <span>071-569-4899</span>
+                                <span><?php echo $notification->buyer->telNo; ?></span>
                             </label>
                             <label class="customer-address">address: 
-                                <span>228/2c, Malwaththa Road, Kahanthota Road, Arangala, Malabe</span>
+                                <span><?php echo $notification->buyer->address; ?></span>
                             </label>
 
                             <span class="list-title">Item List: </span>
 
                             <div class="order-details">
-                                <div class="item-name">Sugar 500g</div>
-                                <div class="item-amount">2</div>
-                                <div class="total-price">250 x 2 = Rs. 500</div>
-
-                                <div class="item-name">Sugar 500g</div>
-                                <div class="item-amount">2</div>
-                                <div class="total-price">250 x 2 = Rs. 500</div>
+                                <?php foreach($notification->item_list as $product): ?>
+                                    <div class="item-name"><?php echo $product['item']->itemName; ?></div>
+                                    <div class="item-amount"><?php echo $product['quantity']; ?></div>
+                                    <div class="price"><?php echo 'Rs. ' . $product['item']->price . ' x ' . $product['quantity'] . ' = Rs. ' . $product['item']->price*$product['quantity'] ?></div>
+                                <?php endforeach; ?>
                             </div>
 
                             <div class="bill">
                                 <label class="total">Total</label>
-                                <label class="total-price">Rs. 1000</label>
+                                <label class="total-price"><?php echo 'Rs. ' . $notification->order_price ?></label>
                             </div>
 
                         </div>

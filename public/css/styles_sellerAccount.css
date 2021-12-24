@@ -685,6 +685,10 @@ aside .edit:active{
     letter-spacing: .1em;
 }
 
+.notification-section .controls a{
+    text-decoration: none;
+}
+
 .notification-section .label:hover{
     background-color: #c2b6b6;
     background-image: linear-gradient(315deg, #c2b6b6 0%, #576574 74%);
