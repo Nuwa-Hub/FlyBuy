@@ -80,6 +80,9 @@ class PageController extends Controller
 
     public function sellerAccount($id)
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
 
@@ -93,19 +96,52 @@ class PageController extends Controller
 
         $products = $this->castToObj($products);
 
+        if(!isset($_SESSION['salesHistory'])){
+            $salesHistory = $this->getSalesHistory($id);
+            $_SESSION['salesHistory'] = $salesHistory;
+        }
+        else{
+            $salesHistory = $_SESSION['salesHistory'];
+        }
+
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
             'products' => $products,
-            // 'salesHistory' => $this->sellerModel->getSalesHistoryById($id)
+            'salesHistory' => $salesHistory
         ];
-        // print_r($data['salesHistory']);
+
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
             $this->view('pages/sellerAccount', $data);
         }
     }
+
+    public function getSalesHistory($id){
+
+        $result = $this->sellerModel->getSalesHistoryById($id);
+
+        $salesByYear = $result['salesByYear'];
+        $salesByYearMonth = $result['salesByYearMonth'];
+
+        foreach ($salesByYear as $yearSale) {
+
+            $yearSale->salesByMonth = [];
+
+            foreach ($salesByYearMonth as $yearMonthSale) {
+
+                $splited_year_month = explode('-', $yearMonthSale->ym);
+
+                if($splited_year_month[0] === $yearSale->yr){
+                    $yearSale->salesByMonth[$splited_year_month[1]] = array('month_order_count' => $yearMonthSale->month_order_count, 'month_income' => $yearMonthSale->month_income);
+                }
+            }
+        }
+
+        return $salesByYear;
+    }
+
 
     public function editSellerAccount($id)
     {
@@ -116,6 +152,51 @@ class PageController extends Controller
         ];
 
         $this->view('pages/editSellerAccount', $data);
+    }
+
+    public function viewNotifications($id)
+    {
+
+        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
+
+        // can be used to sort according to the timestamp
+        usort($notifications, function ($a, $b) {
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+
+            return $t2 - $t1;
+        });
+
+        $notifications = $this->castToObj($notifications);
+
+        //find and add for each notification
+        foreach ($notifications as $key => $note) {
+
+            $temp_notification_arr = unserialize($notifications[$key]->notification);
+            $notifications[$key]->notification = array();
+
+            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
+
+            //find the products related to this notification
+            foreach ($temp_notification_arr as $item_id => $qtt) {
+
+                $item = $this->productModel->findProductById($item_id);
+
+                $item_arr['item'] = $item;
+                $item_arr['quatity'] = $qtt;
+
+                array_push($notifications[$key]->notification, $item_arr);
+            }
+        }
+
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id),
+            'notifications' => $notifications
+        ];
+
+        $this->view('pages/notification', $data);
     }
 
     public function verifyEmail($userType, $vkey)
@@ -339,50 +420,5 @@ class PageController extends Controller
         }
 
         return $casted_arr;
-    }
-
-    public function viewNotification($id)
-    {
-
-        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
-
-        // can be used to sort according to the timestamp
-        usort($notifications, function ($a, $b) {
-
-            $t1 = strtotime($a['created_at']);
-            $t2 = strtotime($b['created_at']);
-
-            return $t2 - $t1;
-        });
-
-        $notifications = $this->castToObj($notifications);
-
-        //find and add for each notification
-        foreach ($notifications as $key => $note) {
-
-            $temp_notification_arr = unserialize($notifications[$key]->notification);
-            $notifications[$key]->notification = array();
-
-            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
-
-            //find the products related to this notification
-            foreach ($temp_notification_arr as $item_id => $qtt) {
-
-                $item = $this->productModel->findProductById($item_id);
-
-                $item_arr['item'] = $item;
-                $item_arr['quatity'] = $qtt;
-
-                array_push($notifications[$key]->notification, $item_arr);
-            }
-        }
-
-        $data = [
-            'seller_id' => $id,
-            'user' => $this->sellerModel->findUserById($id),
-            'notifications' => $notifications
-        ];
-
-        $this->view('pages/notification', $data);
     }
 }

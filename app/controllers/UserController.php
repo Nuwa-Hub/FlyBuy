@@ -186,9 +186,7 @@ class UserController extends Controller {
 
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
-        }
-
-        
+        }        
     }
 
     public function getNotificationCount(){
@@ -218,10 +216,11 @@ class UserController extends Controller {
         if(isset($_POST['submitLogout'])){
 
             if (isset($_COOKIE['user_login'])) {
-
                 unset($_COOKIE['user_login']); 
                 setcookie('user_login', null, -1, '/');
             }
+
+            session_destroy ();
             
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }

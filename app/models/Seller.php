@@ -179,6 +179,9 @@ class Seller implements User{
 
     public function saveNotification($buyer_id, $seller_id, $data){
 
+        $order_price = $data['order_price'];
+        unset($data['order_price']);
+
         $selrialized = serialize($data);
 
         $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification, order_price) VALUES(:seller_id, :buy_id, :notification, :order_price)');
@@ -187,7 +190,7 @@ class Seller implements User{
         $this->db->bind(':seller_id', $seller_id);
         $this->db->bind(':buy_id', $buyer_id);
         $this->db->bind(':notification', $selrialized);
-        $this->db->bind(':order_price', $data['order_price']);
+        $this->db->bind(':order_price', $order_price);
 
         //Execute function
         if ($this->db->execute()) {
@@ -206,25 +209,33 @@ class Seller implements User{
         return $count;
     }
 
-    // public function getSalesHistoryById($id){
+    public function getSalesHistoryById($id){
 
-    //     $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 1");
-    //     $salesCount = count($this->db->resultSet());
+        $this->db->query("SELECT 
+                        YEAR(created_at) as yr, 
+                        COUNT(*) as year_order_count, 
+                        SUM(order_price) as year_income
+                        FROM `notifications` 
+                        WHERE seller_id = 14 AND marked = 1 
+                        GROUP BY yr");
+        $resultsY = $this->db->resultSet();
 
-    //     $this->db->query("SELECT d = CONVERT(DATE, created_at), c = COUNT(*)
-    //                     FROM notifications
-    //                     WHERE seller_id = '$id' AND marked = 1 
-    //                     GROUP BY CONVERT(DATE, created_at)
-    //                     ORDER BY d ");
-    //     $results = $this->db->resultSet();
+        $this->db->query("SELECT 
+                        CONCAT(YEAR(created_at),'-',MONTHNAME(created_at)) as ym ,
+                        COUNT(*) as month_order_count,
+                        SUM(order_price) as month_income
+                        FROM `notifications` 
+                        WHERE seller_id = '$id' AND marked = 1 
+                        GROUP BY ym");
+        $resultsYM = $this->db->resultSet();
 
-    //     $data = [
-    //         'salesCount' => $salesCount,
-    //         'sales' => $results
-    //     ];
+        $data = [
+            'salesByYear' => $resultsY,
+            'salesByYearMonth' => $resultsYM
+        ];
 
-    //     return $data;
-    // }
+        return $data;
+    }
 
     public function getAllNotificationsById($id){
 
