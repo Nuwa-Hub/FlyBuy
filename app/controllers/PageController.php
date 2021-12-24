@@ -184,7 +184,7 @@ class PageController extends Controller
                 $item = $this->productModel->findProductById($item_id);
 
                 $item_arr['item'] = $item;
-                $item_arr['quatity'] = $qtt;
+                $item_arr['quantity'] = $qtt;
 
                 array_push($notifications[$key]->item_list, $item_arr);
             }
@@ -195,8 +195,8 @@ class PageController extends Controller
             'user' => $this->sellerModel->findUserById($id),
             'notifications' => $notifications
         ];
-        print_r($data['notifications'][0]);
-        // $this->view('pages/notification', $data);
+
+        $this->view('pages/notification', $data);
     }
 
     public function verifyEmail($userType, $vkey)
