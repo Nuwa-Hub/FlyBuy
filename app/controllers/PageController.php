@@ -99,6 +99,7 @@ class PageController extends Controller
         if(!isset($_SESSION['salesHistory'])){
             $salesHistory = $this->getSalesHistory($id);
             $_SESSION['salesHistory'] = $salesHistory;
+            echo '<script> sessionStorage.setItem("data", "' . $_SESSION['salesHistory'] . '");</script>';
         }
         else{
             $salesHistory = $_SESSION['salesHistory'];
@@ -110,7 +111,7 @@ class PageController extends Controller
             'products' => $products,
             'salesHistory' => $salesHistory
         ];
-
+    
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
