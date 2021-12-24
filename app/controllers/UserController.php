@@ -202,12 +202,12 @@ class UserController extends Controller {
         echo json_encode($data);
     }
 
-    public function markNotficationAsRead(){
+    // public function markNotficationAsRead(){
 
-        $id = $_POST['notify_id'];
+    //     $id = $_POST['notify_id'];
         
-        $this->sellerModel->markAsReadById($id);
-    }
+    //     $this->sellerModel->markAsReadById($id);
+    // }
 
     //###add a method to update notification as marked###
 

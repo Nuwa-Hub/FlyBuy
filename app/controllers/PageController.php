@@ -154,10 +154,10 @@ class PageController extends Controller
         $this->view('pages/editSellerAccount', $data);
     }
 
-    public function viewAllNotifications($id)
+    public function viewAllNotifications($id, $type = 'all')
     {
 
-        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
+        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id, $type));
 
         // can be used to sort according to the timestamp
         usort($notifications, function ($a, $b) {
@@ -193,7 +193,8 @@ class PageController extends Controller
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'type' => $type
         ];
 
         $this->view('pages/notification', $data);
