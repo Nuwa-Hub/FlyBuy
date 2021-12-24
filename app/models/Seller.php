@@ -202,7 +202,7 @@ class Seller implements User{
 
     public function notificationCount($id){
 
-        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND isRead = 0");
+        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 0");
         $results = $this->db->resultSet();
         $count = count($results);
 
