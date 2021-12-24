@@ -261,13 +261,13 @@ class Seller implements User{
         return $results;
     }
 
-    // public function markAsReadById($id){
+    public function markNotificationById($id){
 
-    //     $this->db->query("UPDATE notifications SET isRead = 1 WHERE notify_id = :notify_id");
-    //     $this->db->bind(':notify_id', $id);
+        $this->db->query("UPDATE notifications SET marked = 1 WHERE notify_id = :notify_id");
+        $this->db->bind(':notify_id', $id);
         
-    //     $this->db->updateField();
-    // }
+        $this->db->updateField();
+    }
 }
 
 ?>

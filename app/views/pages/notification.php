@@ -30,7 +30,7 @@
                 </div>
             </div>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewNotification/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -90,7 +90,7 @@
                         <div class="expand-btn " onclick="expand(this)"><i class="fas fa-arrow-circle-down"></i></div>
 
                         <label class="order-id">order id: 
-                            <span><?php echo $notification->notify_id; ?></span>
+                            <span id="order-id"><?php echo $notification->notify_id; ?></span>
                         </label>
                         <label class="customer-name">customer name: 
                             <span><?php echo $notification->buyer->username; ?></span>

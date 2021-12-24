@@ -144,21 +144,3 @@ if (productContainer){
         productContainer.scrollLeft -= 300;
     });
 }
-
-
-// notification marking
-
-function expand(element){
-    element.classList.toggle('expanded');
-
-    const collapsible = element.parentElement.querySelector('.collapsible.content');
-    collapsible.classList.toggle('active');
-}
-
-function mark(element){
-    const expandBtn = element.parentElement.parentElement.querySelector('.expand-btn');
-    expandBtn.classList.add('marked');
-}
-
-
-
