@@ -1,15 +1,18 @@
 <?php
 
-class PageController extends Controller{
+class PageController extends Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->productModel = $this->model('Product');
         $this->buyerModel = $this->model('Buyer');
         $this->sellerModel = $this->model('Seller');
     }
 
-    public function index(){
+    public function index()
+    {
 
         $products = $this->castToArray($this->productModel->findAllProducts());
 
@@ -34,11 +37,13 @@ class PageController extends Controller{
         $this->view('pages/homepage', $data);
     }
 
-    public function loginSignup(){
+    public function loginSignup()
+    {
         $this->view('pages/loginSignup');
     }
 
-    public function buyerAccount($id){
+    public function buyerAccount($id)
+    {
 
         if (!isset($_SESSION['cartarr'])) {
             $_SESSION['cartarr'] = array();
@@ -73,7 +78,11 @@ class PageController extends Controller{
         }
     }
 
-    public function sellerAccount($id){
+    public function sellerAccount($id)
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
 
@@ -87,10 +96,19 @@ class PageController extends Controller{
 
         $products = $this->castToObj($products);
 
+        if(!isset($_SESSION['salesHistory'])){
+            $salesHistory = $this->getSalesHistory($id);
+            $_SESSION['salesHistory'] = $salesHistory;
+        }
+        else{
+            $salesHistory = $_SESSION['salesHistory'];
+        }
+
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'products' => $products
+            'products' => $products,
+            'salesHistory' => $salesHistory
         ];
 
         if (!isset($_COOKIE['user_login'])) {
@@ -100,7 +118,33 @@ class PageController extends Controller{
         }
     }
 
-    public function editSellerAccount($id){
+    public function getSalesHistory($id){
+
+        $result = $this->sellerModel->getSalesHistoryById($id);
+
+        $salesByYear = $result['salesByYear'];
+        $salesByYearMonth = $result['salesByYearMonth'];
+
+        foreach ($salesByYear as $yearSale) {
+
+            $yearSale->salesByMonth = [];
+
+            foreach ($salesByYearMonth as $yearMonthSale) {
+
+                $splited_year_month = explode('-', $yearMonthSale->ym);
+
+                if($splited_year_month[0] === $yearSale->yr){
+                    $yearSale->salesByMonth[$splited_year_month[1]] = array('month_order_count' => $yearMonthSale->month_order_count, 'month_income' => $yearMonthSale->month_income);
+                }
+            }
+        }
+
+        return $salesByYear;
+    }
+
+
+    public function editSellerAccount($id)
+    {
 
         $data = [
             'seller_id' => $id,
@@ -110,7 +154,53 @@ class PageController extends Controller{
         $this->view('pages/editSellerAccount', $data);
     }
 
-    public function verifyEmail($userType, $vkey){
+    public function viewAllNotifications($id)
+    {
+
+        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
+
+        // can be used to sort according to the timestamp
+        usort($notifications, function ($a, $b) {
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+
+            return $t2 - $t1;
+        });
+
+        $notifications = $this->castToObj($notifications);
+
+        //find and add for each notification
+        foreach ($notifications as $key => $note) {
+
+            $temp_notification_arr = unserialize($notifications[$key]->item_list);
+            $notifications[$key]->item_list = array();
+
+            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
+
+            //find the products related to this notification
+            foreach ($temp_notification_arr as $item_id => $qtt) {
+
+                $item = $this->productModel->findProductById($item_id);
+
+                $item_arr['item'] = $item;
+                $item_arr['quatity'] = $qtt;
+
+                array_push($notifications[$key]->item_list, $item_arr);
+            }
+        }
+
+        $data = [
+            'seller_id' => $id,
+            'user' => $this->sellerModel->findUserById($id),
+            'notifications' => $notifications
+        ];
+        print_r($data['notifications'][0]);
+        // $this->view('pages/notification', $data);
+    }
+
+    public function verifyEmail($userType, $vkey)
+    {
 
         if ($userType == 'buyer') {
             $user = $this->buyerModel->findUserByVKey($vkey);
@@ -132,7 +222,8 @@ class PageController extends Controller{
         $this->view('pages/verifyEmail');
     }
 
-    public function emailVerified($userType, $vkey){
+    public function emailVerified($userType, $vkey)
+    {
 
         if ($userType == 'buyer') {
             $this->buyerModel->verifyUser($vkey);
@@ -143,7 +234,8 @@ class PageController extends Controller{
         $this->view('pages/emailVerified');
     }
 
-    public function forgotPassword(){
+    public function forgotPassword()
+    {
 
         $data = [
             'className' => '',
@@ -203,7 +295,8 @@ class PageController extends Controller{
         $this->view('pages/forgotPsw', $data);
     }
 
-    public function changePassword($vkeyBuyer, $vkeySeller){
+    public function changePassword($vkeyBuyer, $vkeySeller)
+    {
 
         $data = [
             'vkeyBuyer' => $vkeyBuyer,
@@ -236,75 +329,77 @@ class PageController extends Controller{
         $this->view('pages/changePsw', $data);
     }
 
-    public function shoppingCart($id){
+    public function shoppingCart($id)
+    {
 
         $data = [
             'buyer_id' => $id,
         ];
-        
+
         $this->view('pages/shoppingCart', $data);
     }
 
-    public function downloadPdf($id){
-        
-      
-            $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-            $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-            $pdf->setFontSubsetting(true);
-            $pdf->SetFont('dejavusans', '', 12, '', true);
+    public function downloadPdf($id)
+    {
 
-            // start a new page
-            $pdf->AddPage();
-            $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
-            // date and invoice no
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
-            $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
-            $pdf->writeHTML("<b>INVOICE#</b>12");
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // address
-            $pdf->writeHTML("84 Norton Street,");
-            $pdf->writeHTML("NORMANHURST,");
-            $pdf->writeHTML("New South Wales, 2076");
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->setFontSubsetting(true);
+        $pdf->SetFont('dejavusans', '', 12, '', true);
 
-            // bill to
-            $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
-            $pdf->writeHTML("22 South Molle Boulevard,", true, false, false, false, 'R');
-            $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
-            $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
-            $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        // start a new page
+        $pdf->AddPage();
+        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+        // date and invoice no
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+        $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
+        $pdf->writeHTML("<b>INVOICE#</b>12");
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // invoice table starts here
-            $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
-            $data = array();
-             foreach ($_SESSION['cartarr'] as $product)
-             {
-             array_push($data, array($product->itemName,$product->amount[1],$product->price,($product->price) * ($product->amount[1])));
-             }
-            $pdf->printTable($header, $data);
-            $pdf->Ln();
+        // address
+        $pdf->writeHTML("84 Norton Street,");
+        $pdf->writeHTML("NORMANHURST,");
+        $pdf->writeHTML("New South Wales, 2076");
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // comments
-            $pdf->SetFont('', '', 12);
-            $pdf->writeHTML("<b>OTHER COMMENTS:</b>");
-            $pdf->writeHTML("Method of payment: <i>CASH PAYMENT</i>");
-            $pdf->writeHTML("");
-            $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
-            $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
-            $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
+        // bill to
+        $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
+        $pdf->writeHTML("22 South Molle Boulevard,", true, false, false, false, 'R');
+        $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
+        $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-            // save pdf file
-            ob_end_clean();
-            $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
-            // echo 'location.reload(true)';
-           
+        // invoice table starts here
+        $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
+        $data = array();
+        foreach ($_SESSION['cartarr'] as $product) {
+            array_push($data, array($product->itemName, $product->amount[1], $product->price, ($product->price) * ($product->amount[1])));
+        }
+        $pdf->printTable($header, $data);
+        $pdf->Ln();
+
+        // comments
+        $pdf->SetFont('', '', 12);
+        $pdf->writeHTML("<b>OTHER COMMENTS:</b>");
+        $pdf->writeHTML("Method of payment: <i>CASH PAYMENT</i>");
+        $pdf->writeHTML("");
+        $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
+        $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
+        $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
+        $_SESSION['cartarr'] = [];
+        // save pdf file
+        ob_end_clean();
+        $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
+        // echo 'location.reload(true)';
+
     }
 
-    public function castToArray($arr){
+    public function castToArray($arr)
+    {
 
         $casted_arr = [];
 
@@ -315,7 +410,8 @@ class PageController extends Controller{
         return $casted_arr;
     }
 
-    public function castToObj($arr){
+    public function castToObj($arr)
+    {
 
         $casted_arr = [];
 
@@ -324,49 +420,5 @@ class PageController extends Controller{
         }
 
         return $casted_arr;
-    }
-
-    public function viewNotification($id){
-
-        $notifications = $this->castToArray($this->sellerModel->getAllNotificationsById($id));
-
-        // can be used to sort according to the timestamp
-        usort($notifications, function($a, $b){
-
-            $t1 = strtotime($a['created_at']);
-            $t2 = strtotime($b['created_at']);
-            
-            return $t2 - $t1;
-        });
-
-        $notifications = $this->castToObj($notifications);
-
-        //find and add for each notification
-        foreach ($notifications as $key => $note) {
-
-            $temp_notification_arr = unserialize($notifications[$key]->notification);
-            $notifications[$key]->notification = array();
-
-            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
-
-            //find the products related to this notification
-            foreach ($temp_notification_arr as $item_id => $qtt) {
-
-                $item = $this->productModel->findProductById($item_id);
-
-                $item_arr['item'] = $item;
-                $item_arr['quatity'] = $qtt;
-
-                array_push($notifications[$key]->notification, $item_arr);
-            }
-        }
-
-        $data = [
-            'seller_id' => $id,
-            'user' => $this->sellerModel->findUserById($id),
-            'notifications' => $notifications
-        ];
-        print_r($data['notifications']);
-        // $this->view('pages/notification', $data);
     }
 }

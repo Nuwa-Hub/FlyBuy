@@ -146,9 +146,7 @@
 
       <div class="closeBtn" onclick="toggleLogout()">&times;</div>
 
-      <h1 class="title">Do you want to logout?</h1>
-
-      <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+      <h1 class="popup title">logout</h1>
 
       <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
         <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
