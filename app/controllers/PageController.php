@@ -196,7 +196,6 @@ class PageController extends Controller
             'notifications' => $notifications,
             'type' => $type
         ];
-
         $this->view('pages/notification', $data);
     }
 

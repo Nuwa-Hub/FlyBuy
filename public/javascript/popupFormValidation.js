@@ -135,14 +135,30 @@ const scrollRight = document.querySelector('.scroll-right');
 
 const productContainer = document.querySelector('.product-container');
 
-scrollRight.addEventListener('click', e => {
-    productContainer.scrollLeft += 300;
-});
+if (productContainer){
+    scrollRight.addEventListener('click', e => {
+        productContainer.scrollLeft += 300;
+    });
+    
+    scrollLeft.addEventListener('click', e => {
+        productContainer.scrollLeft -= 300;
+    });
+}
 
-scrollLeft.addEventListener('click', e => {
-    productContainer.scrollLeft -= 300;
-});
 
+// notification marking
+
+function expand(element){
+    element.classList.toggle('expanded');
+
+    const collapsible = element.parentElement.querySelector('.collapsible.content');
+    collapsible.classList.toggle('active');
+}
+
+function mark(element){
+    const expandBtn = element.parentElement.parentElement.querySelector('.expand-btn');
+    expandBtn.classList.add('marked');
+}
 
 
 
