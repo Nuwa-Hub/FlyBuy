@@ -71,9 +71,9 @@
 
         <section class="notification-section">
             <div class="tab-bar">
-                <input type="radio" name="buttons" id="all" checked>
-                <input type="radio" name="buttons" id="marked">
-                <input type="radio" name="buttons" id="unmarked">
+                <input type="radio" name="buttons" id="all" <?php echo ($data['type'] == 'all') ? 'checked' : ''; ?>>
+                <input type="radio" name="buttons" id="marked" <?php echo ($data['type'] == 'marked') ? 'checked' : ''; ?>>
+                <input type="radio" name="buttons" id="unmarked" <?php echo ($data['type'] == 'unmarked') ? 'checked' : ''; ?>>
 
                 <div class="controls">
                     <label for="all" class="label"><a href="<?php echo URLROOT; ?>/PageController/viewAllNotifications/<?php echo $data['seller_id']; ?>/all">All</a></label>

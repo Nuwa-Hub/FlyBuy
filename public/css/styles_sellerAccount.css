@@ -682,11 +682,15 @@ aside .edit:active{
     border-radius: 20px 3px 20px 3px;
     cursor: pointer;
     margin: 20px;
+    padding: 0 10px;
     letter-spacing: .1em;
 }
 
 .notification-section .controls a{
     text-decoration: none;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
 }
 
 .notification-section .label:hover{
