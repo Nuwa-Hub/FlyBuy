@@ -366,7 +366,7 @@ class PageController extends Controller{
             'user' => $this->sellerModel->findUserById($id),
             'notifications' => $notifications
         ];
-
-        $this->view('pages/notification', $data);
+        print_r($data['notifications']);
+        // $this->view('pages/notification', $data);
     }
 }
