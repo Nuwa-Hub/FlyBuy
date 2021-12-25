@@ -179,14 +179,18 @@ class Seller implements User{
 
     public function saveNotification($buyer_id, $seller_id, $data){
 
+        $order_price = $data['order_price'];
+        unset($data['order_price']);
+
         $selrialized = serialize($data);
 
-        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification) VALUES(:seller_id, :buy_id, :notification)');
+        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification, order_price) VALUES(:seller_id, :buy_id, :notification, :order_price)');
 
         //Bind values
         $this->db->bind(':seller_id', $seller_id);
         $this->db->bind(':buy_id', $buyer_id);
         $this->db->bind(':notification', $selrialized);
+        $this->db->bind(':order_price', $order_price);
 
         //Execute function
         if ($this->db->execute()) {
@@ -198,24 +202,68 @@ class Seller implements User{
 
     public function notificationCount($id){
 
-        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND isRead = 0");
+        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 0");
         $results = $this->db->resultSet();
         $count = count($results);
 
         return $count;
     }
 
-    public function getAllNotificationsById($id){
+    public function getSalesHistoryById($id){
 
-        $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id'");
+        $this->db->query("SELECT 
+                        YEAR(created_at) as yr, 
+                        COUNT(*) as year_order_count, 
+                        SUM(order_price) as year_income
+                        FROM `notifications` 
+                        WHERE seller_id = '$id' AND marked = 1 
+                        GROUP BY yr");
+        $resultsY = $this->db->resultSet();
+
+        $this->db->query("SELECT 
+                        CONCAT(YEAR(created_at),'-',MONTHNAME(created_at)) as ym ,
+                        COUNT(*) as month_order_count,
+                        SUM(order_price) as month_income
+                        FROM `notifications` 
+                        WHERE seller_id = '$id' AND marked = 1 
+                        GROUP BY ym");
+        $resultsYM = $this->db->resultSet();
+
+        $data = [
+            'salesByYear' => $resultsY,
+            'salesByYearMonth' => $resultsYM
+        ];
+
+        return $data;
+    }
+
+    public function getAllNotificationsById($id, $type){
+
+        switch ($type) {
+            case 'all':
+                $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id'");
+                break;
+
+            case 'marked':
+                $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 1");
+                break;
+
+            case 'unmarked':
+                $this->db->query("SELECT * FROM  notifications WHERE seller_id = '$id' AND marked = 0");
+                break;
+            
+            default:
+                break;
+        }
+
         $results = $this->db->resultSet();
 
         return $results;
     }
 
-    public function markAsReadById($id){
+    public function markNotificationById($id){
 
-        $this->db->query("UPDATE notifications SET isRead = 1 WHERE notify_id = :notify_id");
+        $this->db->query("UPDATE notifications SET marked = 1 WHERE notify_id = :notify_id");
         $this->db->bind(':notify_id', $id);
         
         $this->db->updateField();

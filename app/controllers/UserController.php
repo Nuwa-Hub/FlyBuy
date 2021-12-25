@@ -174,22 +174,26 @@ class UserController extends Controller {
 
         $buyer_id = $_POST['buy_id'];
         $cart = [];
-        $order = [];
 
         foreach ($_SESSION['cartarr'] as $product) {
 
             $seller_id = $product->seller_id;
             $cart[$seller_id][$product->item_id] = $product->amount[1];
+            $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
 
         $this->buyerModel->saveCart($buyer_id, $cart);
 
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
+<<<<<<< HEAD
         }
 
          $_SESSION['cartarray'] = $_SESSION['cartarr'];
          $_SESSION['cartarr']=[];
+=======
+        }        
+>>>>>>> cb7b4f836e0747b14e096b742a25564403cbb351
     }
 
     public function getNotificationCount(){
@@ -205,11 +209,10 @@ class UserController extends Controller {
         echo json_encode($data);
     }
 
-    public function markNotficationAsRead(){
-
-        $id = $_POST['notify_id'];
+    public function markNotfication(){
         
-        $this->sellerModel->markAsReadById($id);
+        $id = $_POST['notify_id'];
+        $this->sellerModel->markNotificationById($id);
     }
 
     public function logout(){
@@ -217,10 +220,11 @@ class UserController extends Controller {
         if(isset($_POST['submitLogout'])){
 
             if (isset($_COOKIE['user_login'])) {
-
                 unset($_COOKIE['user_login']); 
                 setcookie('user_login', null, -1, '/');
             }
+
+            session_destroy ();
             
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }
