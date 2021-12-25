@@ -188,7 +188,8 @@ class UserController extends Controller {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
         }
 
-        
+         $_SESSION['cartarray'] = $_SESSION['cartarr'];
+         $_SESSION['cartarr']=[];
     }
 
     public function getNotificationCount(){

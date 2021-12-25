@@ -294,7 +294,7 @@ class PageController extends Controller
         // invoice table starts here
         $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
         $data = array();
-        foreach ($_SESSION['cartarr'] as $product) {
+        foreach ($_SESSION['cartarray'] as $product) {
             array_push($data, array($product->itemName, $product->amount[1], $product->price, ($product->price) * ($product->amount[1])));
         }
         $pdf->printTable($header, $data);
@@ -308,7 +308,8 @@ class PageController extends Controller
         $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
         $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
         $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
-        $_SESSION['cartarr'] = [];
+        session_unset();
+        session_destroy();
         // save pdf file
         ob_end_clean();
         $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
