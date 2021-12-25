@@ -134,6 +134,7 @@ $(document).ready(function() {
     $(".btn").click(function() {
         document.getElementById("popup-menu").style.zIndex = "100";
         var cartel = document.querySelector('.badge').innerHTML;
+
         if (cartel > 0) {
             document.querySelector('.badge').innerHTML = 0;
             popupbox();
