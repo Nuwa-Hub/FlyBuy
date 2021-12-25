@@ -135,14 +135,12 @@ const scrollRight = document.querySelector('.scroll-right');
 
 const productContainer = document.querySelector('.product-container');
 
-scrollRight.addEventListener('click', e => {
-    productContainer.scrollLeft += 300;
-});
-
-scrollLeft.addEventListener('click', e => {
-    productContainer.scrollLeft -= 300;
-});
-
-
-
-
+if (productContainer){
+    scrollRight.addEventListener('click', e => {
+        productContainer.scrollLeft += 300;
+    });
+    
+    scrollLeft.addEventListener('click', e => {
+        productContainer.scrollLeft -= 300;
+    });
+}

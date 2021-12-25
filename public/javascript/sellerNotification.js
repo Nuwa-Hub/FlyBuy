@@ -29,27 +29,32 @@ $(document).ready(function() {
     setInterval(function() {
         load_unseen_notification();
     }, 1000);
-
-    // $("itemcard").click(function(e) {
-
-    //     // e.preventDefault();
-
-    //     // var notify_id = document.querySelector('notification_hidden_field').value;
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "http://localhost/Project/FlyBuy/UserController/markNotficationAsRead",
-    //         data: { 
-    //             notify_id : notify_id 
-    //         },
-    //         success: function(result = '') {
-    //             alert('ok');
-    //             load_unseen_notification();
-    //         },
-    //         error: function(result = '') {
-    //             alert('error');
-    //         }
-    //     });
-    // });
-
 });
+
+// notification marking
+
+function expand(element){
+    element.classList.toggle('expanded');
+
+    const collapsible = element.parentElement.querySelector('.collapsible.content');
+    collapsible.classList.toggle('active');
+}
+
+function mark(element){
+
+    const notify_id = parseInt(element.parentElement.parentElement.querySelector('#order-id').innerText);
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost/Project/FlyBuy/UserController/markNotfication",
+        data: { 
+            notify_id : notify_id 
+        },
+        success: function(result = '') {
+            window.location.reload();
+        },
+        error: function(result = '') {
+            alert('error');
+        }
+    });
+}
