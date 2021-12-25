@@ -732,7 +732,7 @@ svg {
 .popup-menu {
     opacity: 0;
     ;
-    z-index: -20;
+    z-index: -200;
     position: fixed;
     width: 400px;
     height: 450px;
