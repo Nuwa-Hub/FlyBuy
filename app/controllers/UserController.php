@@ -176,17 +176,17 @@ class UserController extends Controller {
         $cart = [];
         $order = [];
 
-        foreach ($_SESSION['cartarr'] as $product) {
+        // foreach ($_SESSION['cartarr'] as $product) {
 
-            $seller_id = $product->seller_id;
-            $cart[$seller_id][$product->item_id] = $product->amount[1];
-        }
+        //     $seller_id = $product->seller_id;
+        //     $cart[$seller_id][$product->item_id] = $product->amount[1];
+        // }
 
-        $this->buyerModel->saveCart($buyer_id, $cart);
+        // $this->buyerModel->saveCart($buyer_id, $cart);
 
-        foreach ($cart as $seller_id => $order) {
-            $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
-        }
+        // foreach ($cart as $seller_id => $order) {
+        //     $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
+        // }
 
          $_SESSION['cartarray'] = $_SESSION['cartarr'];
          $_SESSION['cartarr']=[];
