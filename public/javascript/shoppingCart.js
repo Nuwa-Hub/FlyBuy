@@ -132,68 +132,73 @@ $(document).ready(function() {
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
     //checkout button
     $(".btn").click(function() {
+        document.getElementById("popup-menu").style.zIndex = "100";
+        var cartel = document.querySelector('.badge').innerHTML;
+        if (cartel > 0) {
+            document.querySelector('.badge').innerHTML = 0;
+            popupbox();
+            document.getElementById("popup-menu").style.opacity = "1";
+            document.getElementById("btn").style.opacity = "0";
 
-        document.getElementById("pbtn").style.opacity = "1";
-        document.getElementById("btn").style.opacity = "0";
-        document.getElementById("pbtn").style.zIndex = "100";
-        check = true;
-        $(".remove").click();
-        setTimeout(function() {
+            check = true;
+            $(".remove").click();
+            setTimeout(function() {
 
-            var buy_id = document.querySelector('.buy_id').value;
+                var buy_id = document.querySelector('.buy_id').value;
 
 
-            // ajex request for remove the relevent item from SESSION store
-            $.ajax({
-                url: 'http://localhost/Project/FlyBuy/UserController/checkout',
-                method: 'POST',
-                cache: false,
-                data: {
-                    buy_id: buy_id,
-                },
-                success: function(response) {
-                    //    location.reload(true);
-                    console.log(response);
-                }
-            });
-        }, 20);
-
+                // ajex request for remove the relevent item from SESSION store
+                $.ajax({
+                    url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+                    method: 'POST',
+                    cache: false,
+                    data: {
+                        buy_id: buy_id,
+                    },
+                    success: function(response) {
+                        //    location.reload(true);
+                        console.log(response);
+                    }
+                });
+            }, 20);
+        } else {
+            alertbox();
+        }
 
     });
-    $(".pbtn").click(function() {
-        document.getElementById("psub").style.opacity = "1";
-        document.getElementById("pbtn").style.opacity = "0";
-        document.getElementById("psub").style.zIndex = "100";
+    $(".row").click(function() {
+        window.setTimeout(function() {
+            var buy_id = document.querySelector('.buy_id').value;
+            var web = "http://localhost/Project/FlyBuy/PageController/downloadPdf/" + buy_id;
+            window.location.replace(web);
+        }, 3200);
+        window.setTimeout(function() {
+            var buy_id = document.querySelector('.buy_id').value;
+            var web = "http://localhost/Project/FlyBuy/PageController/buyerAccount/" + buy_id + "/submit ";
+
+            window.location.replace(web);
+        }, 5200);
+        //document.getElementById("psub").style.opacity = "1";
+        //document.getElementById("psub").style.opacity = "1";
+        //  document.getElementById("pbtn").style.opacity = "0";
+        //  document.getElementById("psub").style.zIndex = "100";
     });
 });
 
+/*alert box */
 
-
-//animation
-
-function lorryMove() {
-    var id = null;
-    var ele = document.getElementById("lorry");
-    var pos = 0;
-    clearInterval(id);
-    id = setInterval(frame, 5);
-
-
-    function frame() {
-        if (pos == 650) {
-            clearInterval(id);
-            ele.style.left = '20px';
-            document.getElementById("lorry").style.opacity = "0";
-
-        } else {
-            pos++;
-            //  elem.style.top = pos + 'px';
-            ele.style.left = pos + 'px';
-        }
-    }
-
+function alertbox() {
+    $('.overlay').addClass('is-active');
+    setTimeout(function() {
+        $('.overlay').removeClass('is-active');
+    }, 3000);
 }
 
+/*popup box*/
+function popupbox() {
+    $('.popup-menu').addClass('display');
+
+}
 
 function changeTot() {
     var el = $(this);
@@ -284,3 +289,4 @@ $(document).ready(function() {
     });
 
 });
+//alertbox
