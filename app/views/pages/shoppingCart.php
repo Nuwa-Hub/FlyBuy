@@ -17,7 +17,7 @@
 
     <header id="site-header">
         <div class="container">
-           
+
             <h1>Shopping cart </h1>
             <div class="search-box">
                 <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchFunction()">
@@ -28,7 +28,7 @@
             <ul>
 
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">Home</a></li>
-                <li><a href="#" ><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
+                <li><a href="#"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger" value="<?php echo sizeof($_SESSION['cartarr']) ?>"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">About Us</a></li>
             </ul>
@@ -99,16 +99,51 @@
             </div>
             <div class="right">
                 <h1 class="total">Total: <span><?php echo ($total > 0) ? $total + 169 : 0 ?></span>/=</h1>
-                <input class="buy_id" type="hidden" value="<?php echo $data['buyer_id'];?>">
+                <input class="buy_id" type="hidden" value="<?php echo $data['buyer_id']; ?>">
                 <a class="btn draw-border" id="btn">Checkout</a>
-                <a class="pbtn draw-border" id="pbtn" href='<?php echo URLROOT; ?>/PageController/downloadPdf/<?php echo $data['buyer_id']; ?>'>Download</a>
-                <a class="psub draw-border" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a>
+
+                <!-- <a class="psub draw-border" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a> -->
 
             </div>
         </div>
     </footer>
     <!-- popup form -->
-
+    <div class="popup-menu" id="popup-menu">>
+        <h1 class="success">Checkout Success!</h1>
+       
+            <div class="row">
+                <div id="ms-container">
+                    <label for="ms-download">
+                    
+                        <div class="ms-content"> 
+                            <div class="ms-content-inside">  
+                          
+                                <input type="checkbox" id="ms-download" />
+                        
+                                <div class="ms-line-down-container">
+                                    <div class="ms-line-down"></div>
+                                </div>
+                                <div class="ms-line-point"></div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        
+        <!-- <a class="pbtn draw-border downloadbtn" id="pbtn">Download</a> -->
+    </div>
+     <!-- Section 1 - Notification-->
+    <section class="section-notification">
+        <ul class="nav">
+            <li class="overlay">
+                <ul class="notifications">
+                    <li>
+                        <span><h1>Cart shouldn't be empty!</h1></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
     <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
