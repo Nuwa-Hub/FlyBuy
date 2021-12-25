@@ -184,12 +184,12 @@ class Seller implements User{
 
         $selrialized = serialize($data);
 
-        $this->db->query('INSERT INTO notifications (seller_id, buy_id, notification, order_price) VALUES(:seller_id, :buy_id, :notification, :order_price)');
+        $this->db->query('INSERT INTO notifications (seller_id, buy_id, item_list, order_price) VALUES(:seller_id, :buy_id, :item_list, :order_price)');
 
         //Bind values
         $this->db->bind(':seller_id', $seller_id);
         $this->db->bind(':buy_id', $buyer_id);
-        $this->db->bind(':notification', $selrialized);
+        $this->db->bind(':item_list', $selrialized);
         $this->db->bind(':order_price', $order_price);
 
         //Execute function
