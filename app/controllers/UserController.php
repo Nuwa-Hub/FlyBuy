@@ -178,6 +178,11 @@ class UserController extends Controller {
         foreach ($_SESSION['cartarr'] as $product) {
 
             $seller_id = $product->seller_id;
+
+            if(!isset($cart[$seller_id]['order_price'])){
+                $cart[$seller_id]['order_price'] = 0;
+            }
+
             $cart[$seller_id][$product->item_id] = $product->amount[1];
             $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
@@ -186,7 +191,9 @@ class UserController extends Controller {
 
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
-        }        
+        }
+        
+        echo json_encode($cart);
     }
 
     public function getNotificationCount(){
