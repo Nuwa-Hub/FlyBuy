@@ -186,14 +186,7 @@ class UserController extends Controller {
 
         foreach ($cart as $seller_id => $order) {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
-<<<<<<< HEAD
-        }
-
-         $_SESSION['cartarray'] = $_SESSION['cartarr'];
-         $_SESSION['cartarr']=[];
-=======
         }        
->>>>>>> cb7b4f836e0747b14e096b742a25564403cbb351
     }
 
     public function getNotificationCount(){
