@@ -710,11 +710,12 @@ svg {
 /*popup menu*/
 
 .popup-menu {
+    border: 5px solid rgb(255, 255, 255);
     opacity: 0;
     z-index: -200;
     position: fixed;
     width: 400px;
-    height: 450px;
+    height: 440px;
     background: linear-gradient(90deg, rgba(2, 0, 36, 0.7122199221485469) 100%, rgba(3, 0, 255, 0.7906512946975666) 100%, rgba(12, 25, 247, 0.09877454399728647) 100%);
     top: 150px;
     left: 35%;
