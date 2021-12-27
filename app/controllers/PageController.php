@@ -344,7 +344,9 @@ class PageController extends Controller
 
     public function downloadPdf($id)
     {
-
+        $custmor = $this->buyerModel->findUserById($id);
+        $customerAddress = $custmor->address;
+        $addr = explode(",", $customerAddress);
 
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -356,25 +358,26 @@ class PageController extends Controller
         $pdf->SetTextColor(255, 255, 255);
         // start a new page
         $pdf->AddPage();
-        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+
         // date and invoice no
+        $currentDate = new DateTime();
+        
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
-        $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
+      
+         $pdf->writeHTML($currentDate->format('Y-m-d'));
         $pdf->writeHTML("<b>INVOICE#</b>");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-        // address
-        $pdf->writeHTML("84 Norton Street,");
-        $pdf->writeHTML("NORMANHURST,");
-        $pdf->writeHTML("New South Wales, 2076");
+        // logo
+        $pdf->writeHTML('<img src="../../public/img/logo.png" width=10px hieght=10px>');
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // bill to
-        $pdf->writeHTML("<style>html{color:white;}</style>");
         $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
-        $pdf->writeHTML("<h3>22 South Molle Boulevard,</h3>", true, false, false, false, 'R');
-        $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
-        $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
+        $pdf->writeHTML($addr[0], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[1], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[2], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[3], true, false, false, false, 'R');
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // invoice table starts here
