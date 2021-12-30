@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 
-<body>
+
   <header id="header">
     <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy</a>
     <img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
@@ -117,7 +117,7 @@
                   <p><?php echo $product->description; ?></p>
                   <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php $product->amount ?>">
+                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php echo $product->amount;?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
                   <input type="hidden" name="buyer_id" class="buyer_id" value="<?php echo $data['buyer_id']; ?>">
@@ -146,9 +146,7 @@
 
       <div class="closeBtn" onclick="toggleLogout()">&times;</div>
 
-      <h1 class="title">Do you want to logout?</h1>
-
-      <img src="<?php echo URLROOT; ?>/public/img/warn.png" alt="warn.png" class="warn-img">
+      <h1 class="popup title">logout</h1>
 
       <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
         <input type="submit" class="logout btn" name="submitLogout" value="Confirm">

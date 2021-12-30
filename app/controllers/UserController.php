@@ -1,29 +1,31 @@
 <?php
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     private $isValid = true;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->buyerModel = $this->model('Buyer');
         $this->sellerModel = $this->model('Seller');
         $this->productModel = $this->model('Product');
     }
 
-    public function register() {
+    public function register()
+    {
 
-        if(isset($_POST['submitSignup'])){
+        if (isset($_POST['submitSignup'])) {
 
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             $userType = $_POST['userType'];
 
-            if ($userType == 'buyer'){
+            if ($userType == 'buyer') {
                 $this->userModel = $this->buyerModel;
-            }
-            else{
+            } else {
                 $this->userModel = $this->sellerModel;
             }
 
@@ -34,13 +36,13 @@ class UserController extends Controller {
             $data = $signupValidator->validateForm();
 
             foreach ($data['signupErrors'] as $field => $errorValue) {
-                if ($errorValue != 'none' and $errorValue != ''){
+                if ($errorValue != 'none' and $errorValue != '') {
                     $this->isValid = false;
                     break;
                 }
             }
 
-            if ($this->isValid){
+            if ($this->isValid) {
                 //Register user from model function
                 if ($this->userModel->register($data)) {
 
@@ -50,60 +52,56 @@ class UserController extends Controller {
                     $path = URLROOT . '/PageController/emailVerified';
                     sendMail($email, 'signup', $additionalData, $path);
                     header('location: ' . URLROOT . '/PageController/verifyEmail/' . $userType . '/' . $data['vkey']);
-                } 
-                else {
+                } else {
                     die('Something went wrong.');
                 }
-            }
-            else{
+            } else {
                 $this->view('pages/loginSignup', $data);
             }
         }
     }
 
-    public function login() {
-        
-        if(isset($_POST['submitLogin'])){
+    public function login()
+    {
+
+        if (isset($_POST['submitLogin'])) {
 
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $userType = $_POST['submitLogin'];
-            
-            if ($userType == 'buyer'){
+
+            if ($userType == 'buyer') {
                 $this->userModel = $this->buyerModel;
-            }
-            else{
+            } else {
                 $this->userModel = $this->sellerModel;
             }
-            
+
             $users = $this->userModel->findAllUsers();
-            
+
             $loginValidator = new LoginValidator($_POST, $users, $userType);
 
             $data = $loginValidator->validateForm($userType);
 
             foreach ($data['loginErrors'] as $field => $errorValue) {
-                if ($errorValue != 'none' and $errorValue != ''){
+                if ($errorValue != 'none' and $errorValue != '') {
                     $this->isValid = false;
                     break;
                 }
             }
 
-            if ($this->isValid){
-                
+            if ($this->isValid) {
+
                 setcookie('user_login', $data['loginData']['email'], time() + 86400, "/");
                 $id = $this->userModel->login($data);
 
-                if($userType === 'buyer'){
+                if ($userType === 'buyer') {
                     header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
-                }
-                else{
+                } else {
                     header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
                 }
-            }
-            else{
+            } else {
                 $this->view('pages/loginSignup', $data);
             }
         }
@@ -115,14 +113,14 @@ class UserController extends Controller {
     call editProfile from model
     check for seller_id and buyer_id
     */
-    public function editProfile(){
-        
-        if(isset($_POST['seller_id'])){
+    public function editProfile()
+    {
+
+        if (isset($_POST['seller_id'])) {
             $this->userModel = $this->sellerModel;
             $id = $_POST['seller_id'];
             $userType = 'seller';
-        }
-        else{
+        } else {
             $this->userModel = $this->buyerModel;
             $id = $_POST['buyer_id'];
             $userType = 'buyer';
@@ -134,43 +132,40 @@ class UserController extends Controller {
 
         $data = $editProfileValidator->validateForm();
         $data['user'] = $user;
-        
+
         foreach ($data['editProfileErrors'] as $field => $errorValue) {
-            if ($errorValue != 'none' and $errorValue != ''){
+            if ($errorValue != 'none' and $errorValue != '') {
                 $this->isValid = false;
                 break;
             }
         }
 
-        if ($this->isValid){
-            
+        if ($this->isValid) {
+
             $data['editProfileData']['vkey'] = $user->vkey;
             $this->userModel->updateUserData($data['editProfileData']);
 
-            if(!empty($data['editProfileData']['password'])){ // need to logout the user
+            if (!empty($data['editProfileData']['password'])) { // need to logout the user
                 $this->view('pages/loginSignup');
-            }
-            else if($userType === 'buyer'){
+            } else if ($userType === 'buyer') {
                 header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
-            }
-            else{
+            } else {
                 header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
             }
-        }
-        else{
+        } else {
 
-            if($userType === 'buyer'){
+            if ($userType === 'buyer') {
                 // $data['buyer_id'] = $id;
                 // $this->view('pages/editBuyerAccount', $data);
-            }
-            else{
+            } else {
                 $data['seller_id'] = $id;
                 $this->view('pages/editSellerAccount', $data);
             }
         }
     }
 
-    public function checkout(){
+    public function checkout()
+    {
 
         $buyer_id = $_POST['buy_id'];
         $cart = [];
@@ -178,7 +173,19 @@ class UserController extends Controller {
 
         foreach ($_SESSION['cartarr'] as $product) {
 
+            $data = [
+                'item_id'   => $product->item_id,
+                'amount'      => $product->amount[0] - $product->amount[1],
+            ];
+            
             $seller_id = $product->seller_id;
+
+            $this->productModel->updateEachFeild($data);
+
+            if (!isset($cart[$seller_id]['order_price'])) {
+                $cart[$seller_id]['order_price'] = 0;
+            }
+
             $cart[$seller_id][$product->item_id] = $product->amount[1];
         }
 
@@ -188,10 +195,12 @@ class UserController extends Controller {
             $this->sellerModel->saveNotification($buyer_id, $seller_id, $order);
         }
 
-        
+        $_SESSION['cartarray'] = $_SESSION['cartarr'];
+        $_SESSION['cartarr'] = [];
     }
 
-    public function getNotificationCount(){
+    public function getNotificationCount()
+    {
 
         $id = $_POST['seller_id'];
 
@@ -204,23 +213,25 @@ class UserController extends Controller {
         echo json_encode($data);
     }
 
-    public function markNotficationAsRead(){
+    public function markNotficationAsRead()
+    {
 
         $id = $_POST['notify_id'];
-        
+
         $this->sellerModel->markAsReadById($id);
     }
 
-    public function logout(){
+    public function logout()
+    {
 
-        if(isset($_POST['submitLogout'])){
+        if (isset($_POST['submitLogout'])) {
 
             if (isset($_COOKIE['user_login'])) {
 
-                unset($_COOKIE['user_login']); 
+                unset($_COOKIE['user_login']);
                 setcookie('user_login', null, -1, '/');
             }
-            
+
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }
     }
