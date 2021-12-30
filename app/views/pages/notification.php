@@ -12,7 +12,7 @@
         crossorigin="anonymous" 
     />
     
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerNotification.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
     <title>FlyBuy | Notification</title>
 </head>

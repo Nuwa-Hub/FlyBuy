@@ -73,9 +73,14 @@
         </aside>
 
         <section class="item-container">
-            <div class="year">
-                <input type="date" name="" id="datePicker">
-            </div>
+            <label>Year: </label>
+            <select name="year" id="year" data-component="date">
+                <?php 
+                    for($year=2020; $year <= date('Y'); $year++){
+                        echo '<option value="' . $year . '">' . $year . '</option>';
+                    }
+                ?>
+            </select>
             <div class="store-stats">
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>

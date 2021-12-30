@@ -15,7 +15,7 @@ $(document).ready(function() {
 const ctx = document.getElementById('my-chart').getContext('2d');
 Chart.defaults.font.color = 'white';
 const myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{

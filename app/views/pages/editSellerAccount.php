@@ -12,7 +12,7 @@
         crossorigin="anonymous" 
     />
     
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_editSellerAccount.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
     <title>FlyBuy | Edit</title>
 </head>
@@ -38,7 +38,13 @@
                         <span class="fa fa-star"></span>
                     </h3>
                 </div>
-                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+                <div class="profilePic">
+                    <form>
+                        <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture" class="profile-img">
+                        <i class="fa fa-camera" onclick="upload(this)"></i>
+                        <input type="file" accept="img/*" class="file-input" onchange="submitImage(event)">
+                    </form>
+                </div>
             </div>
             <div class="details">
                 <div class="name">
@@ -156,5 +162,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+<script>
+    function upload(element){
+        const input = element.nextElementSibling;
+        
+        // force click the input for file uploading
+        input.click();
+    }
+
+    function submitImage(event){
+        const img = document.querySelector('.profile-img');
+        img.src = URL.createObjectURL(event.target.files[0]);
+
+        const form = event.target.parentElement;
+        // force submit the form
+        form.submit();
+    }
+</script>
 
 </html>
