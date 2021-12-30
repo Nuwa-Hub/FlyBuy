@@ -1,3 +1,17 @@
+$(document).ready(function() {
+
+    let seller_id = document.querySelector('.seller-id.notify').value;
+
+    $.ajax({
+        url: "http://localhost/Project/FlyBuy/PageController/getSalesHistory/" + seller_id,
+        method: "POST",
+        success: function(data) {
+
+            console.log(data);
+        }
+    });
+});
+
 const ctx = document.getElementById('my-chart').getContext('2d');
 Chart.defaults.font.color = 'white';
 const myChart = new Chart(ctx, {

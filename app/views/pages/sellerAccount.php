@@ -71,7 +71,9 @@
         </aside>
 
         <section class="item-container">
-
+            <div class="year">
+                <input type="date" name="" id="datePicker">
+            </div>
             <div class="store-stats">
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>
@@ -92,17 +94,21 @@
                 </div>
             </div>
             
+        </section>
+
+        <section class="product-section">
             <div class="product-wrapper">
                 <button class="scroll-left scroll"><i class="fas fa-arrow-left"></i></button>
                 <div class="product-container">
-                <?php foreach ($data['products'] as $product): ?>
-                    <div class="item-details wrapper" id="<?php echo $product->item_id; ?>">
+                    <?php foreach ($data['products'] as $product): ?>
+                        <div class="item-details wrapper" id="<?php echo $product->item_id; ?>">
                             <div class="card">
                                 <div class="front">
                                     <h2 class="item name"><?php echo $product->itemName; ?></h2>
                                     <h2 class="item price"><?php echo "Rs. ".$product->price; ?></h2>
+                                    <img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item">
                                 </div>
-                                <div class="right">
+                                <div class="back">
                                     <p class="item description"><?php echo $product->description; ?></p>
                                     <p class="item amount"><?php echo $product->amount." Available"; ?></p>
                                     <p class="item date"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></p>
@@ -111,15 +117,11 @@
                                     <i class="fas fa-edit" onclick="toggleEdit(this)"></i>
                                 </div>
                             </div>
-                            <div class="img-wrapper">
-                                <img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item">
-                            </div>
                         </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
                 <button class="scroll-right scroll"><i class="fas fa-arrow-right"></i></button>
             </div>
-            
         </section>
 
         <footer>Copyright</footer>

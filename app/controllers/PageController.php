@@ -80,9 +80,9 @@ class PageController extends Controller
 
     public function sellerAccount($id)
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        // if (session_status() === PHP_SESSION_NONE) {
+        //     session_start();
+        // }
 
         $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
 
@@ -96,21 +96,21 @@ class PageController extends Controller
 
         $products = $this->castToObj($products);
 
-        if(!isset($_SESSION['salesHistory'])){
-            $salesHistory = $this->getSalesHistory($id);
-            $_SESSION['salesHistory'] = $salesHistory;
-            // echo '<script> sessionStorage.setItem("salesHistory", "' . $_SESSION['salesHistory'] . '");</script>';
-        }
-        else{
-            $salesHistory = $_SESSION['salesHistory'];
-        }
+        // if(!isset($_SESSION['salesHistory'])){
+        //     $salesHistory = $this->getSalesHistory($id);
+        //     $_SESSION['salesHistory'] = $salesHistory;
+        //     // echo '<script> sessionStorage.setItem("salesHistory", "' . $_SESSION['salesHistory'] . '");</script>';
+        // }
+        // else{
+        //     $salesHistory = $_SESSION['salesHistory'];
+        // }
         // $salesHistory = $this->getSalesHistory($id);
 
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
             'products' => $products,
-            'salesHistory' => $salesHistory
+            // 'salesHistory' => $salesHistory
         ];
         // print_r($data['salesHistory']);
         if (!isset($_COOKIE['user_login'])) {
@@ -141,7 +141,8 @@ class PageController extends Controller
             }
         }
 
-        return $salesByYear;
+        // return $salesByYear;
+        echo json_encode($salesByYear);
     }
 
 
