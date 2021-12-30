@@ -393,10 +393,12 @@ a:hover {
 }
 
 .pimg {
+    border-radius: 20px;
     background-color: black;
 }
 
 .product .content {
+    border-radius: 20px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     height: 140px;
@@ -412,6 +414,7 @@ a:hover {
 }
 
 .product footer.content {
+    border-radius: 20px;
     background-color: black;
     height: 50px;
     margin: 6px 0 0 0;
