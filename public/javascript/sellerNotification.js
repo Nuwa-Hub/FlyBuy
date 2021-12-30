@@ -46,7 +46,7 @@ function mark(element){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/Project/FlyBuy/UserController/markNotfication",
+        url: "http://localhost/Project/FlyBuy/UserController/markNotificationAsRead",
         data: { 
             notify_id : notify_id 
         },

@@ -46,7 +46,7 @@
                         <span class="fa fa-star"></span>
                     </h3>
                 </div>
-                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+                <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
             </div>
             <div class="details">
                 <div class="name">

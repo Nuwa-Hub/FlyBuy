@@ -113,6 +113,7 @@ class PageController extends Controller
             // 'salesHistory' => $salesHistory
         ];
         // print_r($data['salesHistory']);
+        // print_r($data['user']->profilePic);
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
@@ -130,7 +131,20 @@ class PageController extends Controller
 
         foreach ($salesByYear as $yearSale) {
 
-            $yearSale->salesByMonth = [];
+            $yearSale->salesByMonth = array(
+                'January' => array('month_order_count' => 0, 'month_income' => 0),
+                'February' => array('month_order_count' => 0, 'month_income' => 0),
+                'March' => array('month_order_count' => 0, 'month_income' => 0),
+                'April' => array('month_order_count' => 0, 'month_income' => 0),
+                'May' => array('month_order_count' => 0, 'month_income' => 0),
+                'June' => array('month_order_count' => 0, 'month_income' => 0),
+                'July' => array('month_order_count' => 0, 'month_income' => 0),
+                'August' => array('month_order_count' => 0, 'month_income' => 0),
+                'September' => array('month_order_count' => 0, 'month_income' => 0),
+                'October' => array('month_order_count' => 0, 'month_income' => 0),
+                'November' => array('month_order_count' => 0, 'month_income' => 0),
+                'December' => array('month_order_count' => 0, 'month_income' => 0)
+            );
 
             foreach ($salesByYearMonth as $yearMonthSale) {
 
