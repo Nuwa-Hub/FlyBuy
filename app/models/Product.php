@@ -30,7 +30,7 @@ class Product
 
     public function addProduct($data){
 
-        $this->db->query('INSERT INTO  products  (itemName,amount,price,description,seller_id) VALUES (:itemName, :amount, :price, :description, :seller_id)');
+        $this->db->query('INSERT INTO  products  (itemName,amount,price,description,seller_id,item_image) VALUES (:itemName, :amount, :price, :description, :seller_id, :item_image)');
 
         //Bind values
         $this->db->bind(':itemName', $data['itemName']);
@@ -38,6 +38,7 @@ class Product
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':seller_id', $data['seller_id']);
+        $this->db->bind(':item_image', $data['item_image']);
 
         //Execute function
         if ($this->db->execute()) {
@@ -51,6 +52,14 @@ class Product
     public function findProductById($id) {
         
         $this->db->query('SELECT * FROM products WHERE item_id = :id');
+        $this->db->bind(':id', $id);
+
+        return $this->db->single();
+    }
+
+    public function getProductImgNameById($id){
+
+        $this->db->query('SELECT item_image FROM products WHERE item_id = :id');
         $this->db->bind(':id', $id);
 
         return $this->db->single();
@@ -88,6 +97,13 @@ class Product
         $this->db->bind(':item_id', $item_id);
         $this->db->bind(':description', $data['description']);
         $this->db->updateField();
+
+        if(isset($data['item_image'])){
+            $this->db->query("UPDATE products SET item_image = :item_image WHERE item_id = :item_id");
+            $this->db->bind(':item_id', $item_id);
+            $this->db->bind(':item_image', $data['item_image']);
+            $this->db->updateField();
+        }
     }
 
     public function deleteItemById($id){
