@@ -6,6 +6,7 @@ function changeVal(el) {
 
     var qt = parseFloat(el.parent().children(".qt").html());
     var price = parseFloat(el.parent().children(".price").children(".price").html());
+
     var eq = Math.round(price * qt * 100) / 100;
 
     el.parent().children(".full-price").html(eq);
@@ -15,6 +16,7 @@ function changeVal(el) {
 // change grand total and sub total
 
 function changeTotal(el) {
+
     var price = 0;
     var ele = document.getElementsByClassName("full-price");
 
@@ -23,10 +25,9 @@ function changeTotal(el) {
     }
 
     price = Math.round(price * 100) / 100;
-    // var tax = Math.round(price * 0.05 * 100) /
-    //100;
 
     var shipping = parseFloat($(".shipping span").html());
+
     var fullPrice = Math.round((price + shipping) * 100) / 100;
 
     if (price == 0) {
@@ -42,10 +43,13 @@ function changeTotal(el) {
 $(document).ready(function() {
 
     $(".remove").click(function() {
-        //  alert(this.length);
+
         var el = $(this);
+
         el.parent().parent().addClass("removed");
+
         if (check == false) {
+
             setTimeout(function() {
 
                 var $elid = el.closest('header');
@@ -65,6 +69,7 @@ $(document).ready(function() {
                     }
                 });
             }, 470);
+
         }
 
     });
@@ -74,24 +79,25 @@ $(document).ready(function() {
     $(".qt-plus").click(function() {
 
         child = $(this).parent().children(".qt");
-        //  location.reload(true);
 
         var $el = child.closest('footer');
-
         pid = $el.find(".pid").val();
         pamount = parseInt($(this).parent().children(".qt").html());
         pmaxAmount = Number($el.find(".pmaxAmount").val());
 
         if (pmaxAmount > pamount) {
+
             $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
-            //  alert(pmaxAmount);
+
             $(this).parent().children(".full-price").addClass("added");
 
             var el = $(this);
+
             window.setTimeout(function() {
                 el.parent().children(".full-price").removeClass("added");
                 changeVal(el);
             }, 150);
+
             pamount = parseInt($(this).parent().children(".qt").html());
 
             changeAmount(pid, pamount);
@@ -104,24 +110,24 @@ $(document).ready(function() {
         child = $(this).parent().children(".qt");
 
         if (parseInt(child.html()) > 1) {
+
             child.html(parseInt(child.html()) - 1);
 
             var $el = child.closest('footer');
-
             var pid = $el.find(".pid").val();
             var pamount = parseInt(child.html());
-            //  alert(typeof pamount);
-            //  location.reload(true);
 
-            //call fuction (http request)
             changeAmount(pid, pamount);
         }
 
         $(this).parent().children(".full-price").addClass("minused");
 
         var el = $(this);
+
         window.setTimeout(function() {
+
             el.parent().children(".full-price").removeClass("minused");
+
             changeVal(el);
         }, 150);
 
@@ -129,23 +135,31 @@ $(document).ready(function() {
 
     });
     var download = false;
+
     window.setTimeout(function() { $(".is-open").removeClass("is-open") }, 1200);
+
     //checkout button
     $(".btn").click(function() {
+
         document.getElementById("popup-menu").style.zIndex = "100";
         var cartel = document.querySelector('.badge').innerHTML;
+
         if (cartel > 0) {
+
             document.querySelector('.badge').innerHTML = 0;
+
             popupbox();
+
             document.getElementById("popup-menu").style.opacity = "1";
             document.getElementById("btn").style.opacity = "0";
 
             check = true;
+
             $(".remove").click();
+
             setTimeout(function() {
 
                 var buy_id = document.querySelector('.buy_id').value;
-
 
                 // ajex request for remove the relevent item from SESSION store
                 $.ajax({
@@ -156,58 +170,75 @@ $(document).ready(function() {
                         buy_id: buy_id,
                     },
                     success: function(response) {
-                        //    location.reload(true);
+
                         console.log(response);
                     }
                 });
+
             }, 20);
+
         } else {
+
             alertbox();
+
         }
 
     });
     $(".row").click(function() {
+
         window.setTimeout(function() {
+
             var buy_id = document.querySelector('.buy_id').value;
             var web = "http://localhost/Project/FlyBuy/PageController/downloadPdf/" + buy_id;
+
             window.location.replace(web);
+
         }, 3200);
+
         window.setTimeout(function() {
+
             var buy_id = document.querySelector('.buy_id').value;
             var web = "http://localhost/Project/FlyBuy/PageController/buyerAccount/" + buy_id + "/submit ";
 
             window.location.replace(web);
+
         }, 5200);
-        //document.getElementById("psub").style.opacity = "1";
-        //document.getElementById("psub").style.opacity = "1";
-        //  document.getElementById("pbtn").style.opacity = "0";
-        //  document.getElementById("psub").style.zIndex = "100";
+
     });
+
 });
 
 /*alert box */
 
 function alertbox() {
+
     $('.overlay').addClass('is-active');
+
     setTimeout(function() {
+
         $('.overlay').removeClass('is-active');
+
     }, 3000);
 }
 
 /*popup box*/
 function popupbox() {
+
     $('.popup-menu').addClass('display');
 
 }
 
 function changeTot() {
+
     var el = $(this);
+
     changeVal(el);
 }
 
 
 
 function changeAmount(pid, pamount) {
+
     $.ajax({
         url: 'http://localhost/Project/FlyBuy/ProductController/updateCart',
         method: 'post',
@@ -218,7 +249,6 @@ function changeAmount(pid, pamount) {
         },
         success: function(response) {
             console.log(response);
-
         }
     });
 
@@ -226,27 +256,35 @@ function changeAmount(pid, pamount) {
 
 
 $(window).on('unload', function() {
+
     $(window).scrollTop(0);
+
 });
 
 
 //for search button
 
 function searchFunction() {
+
     var input, filter, ul, li, a, i, txtValue;
+
     input = document.getElementById("pinput");
     filter = input.value.toUpperCase();
 
     li = document.getElementsByTagName("li");
 
-
     for (i = 3; i < li.length; i++) {
+
         a = li[i].getElementsByTagName("h1")[0];
 
         if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+
             li[i].style.display = "";
+
         } else {
+
             li[i].style.display = "none";
+
         }
     }
 }
@@ -257,18 +295,23 @@ window.addEventListener("scroll", changeItem);
 function changeItem() {
 
     var ele = document.getElementsByTagName("article");
+
     for (i = 0; i < ele.length; i++) {
 
         ele[i].style.transform = "skewX(-17deg)";
+
     }
     window.setTimeout(function() {
+
         var ele = document.getElementsByTagName("article");
+
         for (i = 0; i < ele.length; i++) {
+
             ele[i].style.transform = "skewX(0deg)";
+
         }
     }, 445);
-    //  location.reload(true);
-    //  ele.style.transform = "skewX(-7deg)";
+
 }
 
 
@@ -289,4 +332,3 @@ $(document).ready(function() {
     });
 
 });
-//alertbox

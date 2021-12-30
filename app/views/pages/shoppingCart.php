@@ -51,7 +51,6 @@
                     <li id="pli" class="pli" value="<?php echo $product->itemName ?>">
                         <article class="product block" id="product">
                             <header class="pimg">
-
                                 <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
                                 <a class="remove">
                                     <img src="<?php echo URLROOT; ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="">

@@ -393,10 +393,12 @@ a:hover {
 }
 
 .pimg {
+    border-radius: 20px;
     background-color: black;
 }
 
 .product .content {
+    border-radius: 20px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     height: 140px;
@@ -412,6 +414,7 @@ a:hover {
 }
 
 .product footer.content {
+    border-radius: 20px;
     background-color: black;
     height: 50px;
     margin: 6px 0 0 0;
@@ -466,6 +469,7 @@ a:hover {
 .qt-plus,
 .qt-minus {
     display: flex;
+    cursor: pointer;
     ;
     background: #302f2f;
     border: none;
@@ -643,27 +647,6 @@ svg {
     padding: 16px 0;
     width: 290px;
     height: 30px !important;
-    ;
-    ;
-    text-align: center;
-    -webkit-transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    -ms-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    transition: all .2s linear;
-    position: fixed;
-    bottom: 10px;
-}
-
-.psub {
-    opacity: 0;
-    z-index: -10;
-    cursor: pointer;
-    display: block;
-    font-size: 20px;
-    font-weight: 300;
-    padding: 16px 0;
-    width: 290px;
     text-align: center;
     -webkit-transition: all .2s linear;
     -moz-transition: all .2s linear;
@@ -730,12 +713,12 @@ svg {
 /*popup menu*/
 
 .popup-menu {
+    border: 5px solid rgb(255, 255, 255);
     opacity: 0;
-    ;
     z-index: -200;
     position: fixed;
     width: 400px;
-    height: 450px;
+    height: 440px;
     background: linear-gradient(90deg, rgba(2, 0, 36, 0.7122199221485469) 100%, rgba(3, 0, 255, 0.7906512946975666) 100%, rgba(12, 25, 247, 0.09877454399728647) 100%);
     top: 150px;
     left: 35%;
