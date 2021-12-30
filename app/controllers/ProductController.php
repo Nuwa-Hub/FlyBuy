@@ -10,11 +10,12 @@ class ProductController extends Controller
 
     public function addItem()
     {
-
         if (isset($_POST['submitAddItem'])) {
 
-            $this->product = $this->model('Product');
-            $this->product->addProduct($_POST);
+            $file = $_FILES['itemImage'];
+
+            $_POST['item_image'] = $this->uploadProductImage($file);
+            $this->productmodel->addProduct($_POST);
 
             $id = $_POST['seller_id'];
 
@@ -26,14 +27,43 @@ class ProductController extends Controller
     {
 
         if (isset($_POST['submitEditItem'])) {
+            
+            $file = $_FILES['itemImage'];
 
-            $this->product = $this->model('Product');
-            $this->product->updateEachFeild($_POST);
+            if($file['error'] === 0){
+                $this->removeProductImage($_POST['item_id']);
+                $_POST['item_image'] = $this->uploadProductImage($file);
+            }
+
+            $this->productmodel->updateEachFeild($_POST);
 
             $id = $_POST['seller_id'];
 
             header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
         }
+    }
+
+    public function removeProductImage($id){
+        $imageDestination = '../public/img/uploads/itemImages/' . $this->productmodel->getProductImgNameById($id)->item_image;
+        unlink($imageDestination);
+    }
+
+    public function uploadProductImage($file){
+
+        $imgNewName = 'defaltItemImage.png';
+
+        if($file['error'] === 0){
+
+            $tempExt = explode('.', $file['name']);
+            $imgExt = strtolower(end($tempExt));
+
+            $imgNewName = uniqid('', true) . '.' . $imgExt;
+            $imgDestination = '../public/img/uploads/itemImages/' . $imgNewName;
+
+            move_uploaded_file($file['tmp_name'], $imgDestination);
+        }
+
+        return $imgNewName;
     }
 
     public function deleteItem()
@@ -43,8 +73,8 @@ class ProductController extends Controller
 
             $item_id = $_POST['item_id'];
 
-            $this->product = $this->model('Product');
-            $this->product->deleteItemById($item_id);
+            $this->removeProductImage($item_id);
+            $this->productmodel->deleteItemById($item_id);
 
             $id = $_POST['seller_id'];
 

@@ -9,7 +9,7 @@ class CustomPdfGenerator extends TCPDF
         $this->Image('logo.jpg', 500);
         $this->Image('logo.png', 10, 3, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->SetFont('helvetica', 'B', 30);
-        $this->SetTextColor(128, 0, 0);
+        $this->SetTextColor(255, 255, 255);
         $this->Rect(
             0,
             0,
@@ -17,11 +17,11 @@ class CustomPdfGenerator extends TCPDF
             $this->getPageHeight(),
             'DF',
             "",
-            array(124, 235, 255)
+            array(0)
         );
         $this->Cell(0, 15, '', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->Ln();
-        $this->SetFillColor(224, 235, 255);
+        $this->SetFillColor(0, 0, 0);
         $this->Cell(0, 15, 'FlyBuy', 0, false, 'C', true, '', 0, false, 'M', 'M');
     }
 
@@ -29,14 +29,15 @@ class CustomPdfGenerator extends TCPDF
     {
         $this->SetY(-15);
         $this->SetFont('helvetica', 'I', 15);
+        $this->SetTextColor(255, 255, 255);
         $this->Cell(0, 10, 'Thank you for your business!', 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 
     public function printTable($header, $data)
     {
         $this->SetFillColor(0, 0, 0);
-        $this->SetTextColor(255);
-        $this->SetDrawColor(128, 0, 0);
+        $this->SetTextColor(255, 255, 255);
+        $this->SetDrawColor(255, 255, 255);
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B', 12);
 
@@ -48,8 +49,8 @@ class CustomPdfGenerator extends TCPDF
         $this->Ln();
 
         // Color and font restoration
-        $this->SetFillColor(224, 235, 255);
-        $this->SetTextColor(0);
+        $this->SetFillColor(0, 0, 0);
+        $this->SetTextColor(255, 255, 255);
         $this->SetFont('');
 
         // table data

@@ -120,7 +120,8 @@ class PageController extends Controller
         }
     }
 
-    public function getSalesHistory($id){
+    public function getSalesHistory($id)
+    {
 
         $result = $this->sellerModel->getSalesHistoryById($id);
 
@@ -135,7 +136,7 @@ class PageController extends Controller
 
                 $splited_year_month = explode('-', $yearMonthSale->ym);
 
-                if($splited_year_month[0] === $yearSale->yr){
+                if ($splited_year_month[0] === $yearSale->yr) {
                     $yearSale->salesByMonth[$splited_year_month[1]] = array('month_order_count' => $yearMonthSale->month_order_count, 'month_income' => $yearMonthSale->month_income);
                 }
             }
@@ -345,7 +346,9 @@ class PageController extends Controller
 
     public function downloadPdf($id)
     {
-
+        $custmor = $this->buyerModel->findUserById($id);
+        $customerAddress = $custmor->address;
+        $addr = explode(",", $customerAddress);
 
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -354,27 +357,30 @@ class PageController extends Controller
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         $pdf->setFontSubsetting(true);
         $pdf->SetFont('dejavusans', '', 12, '', true);
-
+        $pdf->SetTextColor(255, 255, 255);
         // start a new page
         $pdf->AddPage();
-        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+
         // date and invoice no
-        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
-        $pdf->writeHTML("<b>DATE:</b> 01/01/2021");
-        $pdf->writeHTML("<b>INVOICE#</b>12");
+        $currentDate = new DateTime();
+
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-        // address
-        $pdf->writeHTML("84 Norton Street,");
-        $pdf->writeHTML("NORMANHURST,");
-        $pdf->writeHTML("New South Wales, 2076");
+        $pdf->writeHTML($currentDate->format('Y-m-d'));
+        $pdf->writeHTML(" <h3>Date</h3>");
+        $pdf->writeHTML("<b>INVOICE#</b>");
+        $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
+
+        // logo
+        $pdf->writeHTML('<img src="../../public/img/logo.png" width=10px hieght=10px>');
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // bill to
         $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
-        $pdf->writeHTML("22 South Molle Boulevard,", true, false, false, false, 'R');
-        $pdf->writeHTML("KOOROOMOOL,", true, false, false, false, 'R');
-        $pdf->writeHTML("Queensland, 4854", true, false, false, false, 'R');
+        $pdf->writeHTML($addr[0], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[1], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[2], true, false, false, false, 'R');
+        $pdf->writeHTML($addr[3], true, false, false, false, 'R');
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // invoice table starts here

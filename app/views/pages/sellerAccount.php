@@ -11,6 +11,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous" 
     />
+    <!-- <script src="https://kit.fontawesome.com/f4df70b5dd.js" crossorigin="anonymous"></script> -->
     
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
@@ -48,6 +49,7 @@
                     </h3>
                 </div>
                 <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+
             </div>
             <div class="details">
                 <div class="name">
@@ -106,7 +108,7 @@
                                 <div class="front">
                                     <h2 class="item name"><?php echo $product->itemName; ?></h2>
                                     <h2 class="item price"><?php echo "Rs. ".$product->price; ?></h2>
-                                    <img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item">
+                                    <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="item">
                                 </div>
                                 <div class="back">
                                     <p class="item description"><?php echo $product->description; ?></p>
@@ -139,7 +141,7 @@
 
             <h1 class="popup title">Add Item</h1>
 
-            <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
+            <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem" enctype="multipart/form-data">
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -173,6 +175,10 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
+                <div>
+                    <input type="file" name="itemImage" accept="image/*">
+                </div>
+
                 <input class="seller-id notify" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
 
                 <button class="add-item btn" name="submitAddItem">Add</button>
@@ -195,7 +201,7 @@
 
             <h1 class="popup title">Edit Item</h1>
 
-            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
+            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem" enctype="multipart/form-data">
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -227,6 +233,10 @@
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product->description); ?>">
                     <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div>
+                    <input type="file" name="itemImage" accept="image/*">
                 </div>
 
                 <input class="item-id" type="hidden" name="item_id">

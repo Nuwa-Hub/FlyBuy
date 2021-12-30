@@ -164,8 +164,11 @@ class UserController extends Controller
         }
     }
 
-    public function checkout()
-    {
+    // public function editProfilePic(){
+    //     print_r($_POST);
+    // }
+
+    public function checkout(){
 
         $buyer_id = $_POST['buy_id'];
         $cart = [];
