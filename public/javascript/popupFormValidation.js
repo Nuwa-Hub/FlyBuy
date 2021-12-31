@@ -16,7 +16,7 @@ if (form){
     addItemBtn.addEventListener('click', (e) => {
 
         correct = true
-        
+        console.log(correct);
         for (let i = 0; i < inputField.length-1; i++){
             if (inputField[i].querySelector('input').value == ''){
                 setError(inputField[i], 'Cannot be blank');
