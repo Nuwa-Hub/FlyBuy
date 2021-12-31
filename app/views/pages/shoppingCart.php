@@ -53,7 +53,7 @@
                             <header class="pimg">
                                 <input type="hidden" class="pid" value="<?php echo  $product->item_id ?>">
                                 <a class="remove">
-                                    <img src="<?php echo URLROOT; ?>/public/img/kottu_mee.png" alt="">
+                                    <img src="<?php echo URLROOT; ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="">
                                     <h3>Remove product</h3>
                                 </a>
                             </header>

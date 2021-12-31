@@ -16,9 +16,10 @@ $(document).ready(function() {
 
                 if (data.rowCount > 0) {
                     $('.badge').html(data.rowCount);
+                    document.getElementById('indicator').classList.add('badge-danger');
                 } else {
                     $('.badge').html("0");
-                    // document.querySelector('.badge').style.opasity = "0";
+                    document.getElementById('indicator').classList.remove('badge-danger');
                 }
             }
         });
@@ -46,7 +47,7 @@ function mark(element){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/Project/FlyBuy/UserController/markNotfication",
+        url: "http://localhost/Project/FlyBuy/UserController/markNotificationAsRead",
         data: { 
             notify_id : notify_id 
         },

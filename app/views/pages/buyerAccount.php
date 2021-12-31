@@ -100,14 +100,14 @@
             <h3 class="name"><?php echo $product->itemName; ?></h3>
             <span class="price"><?php echo "Rs. " . $product->price; ?></span>
             <a class="popup-btn">View item</a>
-            <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" class="product-img" alt="">
+            <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" class="product-img" alt="">
           </div>
           <div class="popup-view">
             <form method="post" action="<?php echo URLROOT; ?>/ProductController/addToCart">
               <div class="popup-card">
                 <a><i class="fas fa-times close-btn"></i></a>
                 <div class="product-img">
-                  <img src="<?php echo URLROOT ?>/public/img/kottu_mee.png" alt="">
+                  <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="">
                 </div>
                 <div class="info">
                   <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
