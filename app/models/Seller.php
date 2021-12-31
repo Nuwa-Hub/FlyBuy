@@ -288,6 +288,16 @@ class Seller implements User{
         
         $this->db->updateField();
     }
+
+    public function clearUserFields($id){
+
+        $this->db->query("UPDATE sellers SET email = :email WHERE seller_id = :id");
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', '');
+
+        $this->db->execute();
+    }
 }
 
 ?>

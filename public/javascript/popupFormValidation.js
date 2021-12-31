@@ -16,7 +16,7 @@ if (form){
     addItemBtn.addEventListener('click', (e) => {
 
         correct = true
-        console.log(correct);
+        
         for (let i = 0; i < inputField.length-1; i++){
             if (inputField[i].querySelector('input').value == ''){
                 setError(inputField[i], 'Cannot be blank');
@@ -37,6 +37,47 @@ if (form){
     });
 }
 
+const deleteAccountForm = document.querySelector(".deleteAccountForm");
+const deleteAccountBtn = document.querySelector('.deleteAcount.btn');
+
+// delete account form
+if (deleteAccountForm){
+
+    deleteAccountBtn.addEventListener('click', (e) => {
+
+        e.preventDefault();
+
+        const passwordInput = document.querySelector('.deleteAccountpsw');
+        const idInput = document.querySelector('.deleteAccountUserId');
+        const userTypeInput = document.querySelector('.deleteAccountUserType');
+
+        const password = passwordInput.value;
+        const id = idInput.value;
+        const userType = userTypeInput.value;
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/Project/FlyBuy/UserController/deleteUser",
+            data: { 
+                password : password,
+                id : id,
+                userType : userType
+            },
+            success: function(result = '') {
+                
+                const data = JSON.parse(result);
+                
+                if(data.deleteAccountClassNames.password === 'success'){
+                    setSuccess(passwordInput.parentElement);
+                    window.location.reload();
+                }
+                else{
+                    setError(passwordInput.parentElement, data.deleteAccountErrors.password);
+                }
+            }
+        });
+    });
+}
 
 function setError(element, msg){
     element.classList.add('error');
@@ -64,6 +105,11 @@ function toggleDisplay(){
 
 function toggleLogout(){
     let logout = document.querySelector('.popup-window.logout');
+    logout.classList.toggle('active');
+}
+
+function toggleDeleteAccount(){
+    let logout = document.querySelector('.popup-window.deleteAccount');
     logout.classList.toggle('active');
 }
 
