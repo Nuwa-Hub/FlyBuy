@@ -77,7 +77,7 @@
                 <label class="year-label">Year: </label>
                 <select name="year" id="year" data-component="date" onchange="yearChanged(event)">
                     <?php 
-                        for($year=2021; $year <= date('Y'); $year++){
+                        for($year=2020; $year <= date('Y'); $year++){
                             echo '<option value="' . $year . '">' . $year . '</option>';
                         }
                     ?>

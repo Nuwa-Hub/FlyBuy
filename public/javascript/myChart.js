@@ -10,45 +10,7 @@ let currYearSales = 0;
 const ctx = document.getElementById('my-chart').getContext('2d');
 Chart.defaults.font.color = 'white';
 
-let myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [{
-            label: 'Earnings',
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ]
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: {
-                ticks: {
-                    color: '#bbb'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#000'
-                }
-            }
-        }
-    }
-});
+let myChart = null;
 
 $(document).ready(function() {
 
@@ -66,7 +28,9 @@ $(document).ready(function() {
             let dataObj = JSON.parse(data);
             console.log(dataObj);
             allData = dataObj;
-            
+
+            let new_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
             for (let i = 0; i < dataObj.length; i++) {
                 let element = dataObj[i];
                 
@@ -75,7 +39,7 @@ $(document).ready(function() {
                     currYearIncome = element.year_income;
 
                     for (let i = 0; i < 12; i++){
-                        myChart.data.datasets[i].data = element.salesByMonth[arr[i]].month_income;
+                        new_data[i] = element.salesByMonth[arr[i]].month_income;
                     }
                 }
 
@@ -86,6 +50,46 @@ $(document).ready(function() {
                 break;
                 
             }
+
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Earnings',
+                        data: new_data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#bbb'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#000'
+                            }
+                        }
+                    }
+                }
+            });
         }
     });
 
@@ -99,6 +103,12 @@ function yearChanged(event){
     console.log(selected_year);
     // console.log(myChart.data);
 
+    if (myChart != null){
+        myChart.destroy();
+    }
+
+    let new_data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
     for (let i = 0; i < allData.length; i++) {
         let element = allData[i];
         
@@ -107,7 +117,7 @@ function yearChanged(event){
             currYearIncome = element.year_income;
 
             for (let i = 0; i < 12; i++){
-                myChart.data.datasets[i].data = element.salesByMonth[arr[i]].month_income;
+                new_data[i] = element.salesByMonth[arr[i]].month_income;
             }
         }
 
@@ -118,6 +128,46 @@ function yearChanged(event){
         break;
         
     }
+
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Earnings',
+                data: new_data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#bbb'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#000'
+                    }
+                }
+            }
+        }
+    });
 
 }
 
