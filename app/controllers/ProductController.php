@@ -44,13 +44,19 @@ class ProductController extends Controller
     }
 
     public function removeProductImage($id){
-        $imageDestination = '../public/img/uploads/itemImages/' . $this->productmodel->getProductImgNameById($id)->item_image;
-        unlink($imageDestination);
+
+        $imgName = $this->productmodel->getProductImgNameById($id)->item_image;
+        $defaultImg = "defaultItemImage.png";
+
+        if(strcmp($imgName, $defaultImg) !== 0){
+            $imageDestination = '../public/img/uploads/itemImages/' . $imgName;
+            unlink($imageDestination);
+        }
     }
 
     public function uploadProductImage($file){
 
-        $imgNewName = 'defaltItemImage.png';
+        $imgNewName = 'defaultItemImage.png';
 
         if($file['error'] === 0){
 

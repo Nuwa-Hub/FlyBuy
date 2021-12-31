@@ -39,10 +39,11 @@
                     </h3>
                 </div>
                 <div class="profilePic">
-                    <form>
-                        <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture" class="profile-img">
+                    <form class="profilePic-form" id="profilePic-form" method="POST" action="<?php echo URLROOT; ?>/UserController/editProfilePicture" enctype="multipart/form-data">
+                        <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture" class="profile-img">
                         <i class="fa fa-camera" onclick="upload(this)"></i>
-                        <input type="file" accept="img/*" class="file-input" onchange="submitImage(event)">
+                        <input name="profilePic" type="file" accept="image/*" class="file-input" onchange="submitImage(event)">
+                        <input class="seller-id pic" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
                     </form>
                 </div>
             </div>
