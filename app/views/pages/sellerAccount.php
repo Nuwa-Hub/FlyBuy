@@ -32,7 +32,7 @@
                 </div>
             </div>
             <a href="#" class="add-item" onclick="toggleDisplay()">New Item+</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -73,14 +73,16 @@
         </aside>
 
         <section class="item-container">
-            <label>Year: </label>
-            <select name="year" id="year" data-component="date">
-                <?php 
-                    for($year=2020; $year <= date('Y'); $year++){
-                        echo '<option value="' . $year . '">' . $year . '</option>';
-                    }
-                ?>
-            </select>
+            <div class="year-div">
+                <label class="year-label">Year: </label>
+                <select name="year" id="year" data-component="date" onchange="yearChanged(event)">
+                    <?php 
+                        for($year=2020; $year <= date('Y'); $year++){
+                            echo '<option value="' . $year . '">' . $year . '</option>';
+                        }
+                    ?>
+                </select>
+            </div>
             <div class="store-stats">
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>
