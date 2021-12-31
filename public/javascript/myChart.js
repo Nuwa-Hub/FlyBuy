@@ -41,14 +41,17 @@ $(document).ready(function() {
                     for (let i = 0; i < 12; i++){
                         new_data[i] = element.salesByMonth[arr[i]].month_income;
                     }
+
+                    // set the current values in the page
+                    no_of_sales.innerText = currYearSales;
+                    earnings.innerText = currYearIncome;
+
+                    break;
                 }
-
-                // set the current values in the page
-                no_of_sales.innerText = currYearSales;
-                earnings.innerText = currYearIncome;
-
-                break;
-                
+                else{
+                    no_of_sales.innerText = 0;
+                    earnings.innerText = 0;
+                }
             }
 
             myChart = new Chart(ctx, {
@@ -119,13 +122,17 @@ function yearChanged(event){
             for (let i = 0; i < 12; i++){
                 new_data[i] = element.salesByMonth[arr[i]].month_income;
             }
+
+            // set the current values in the page
+            no_of_sales.innerText = currYearSales;
+            earnings.innerText = currYearIncome;
+
+            break;
         }
-
-        // set the current values in the page
-        no_of_sales.innerText = currYearSales;
-        earnings.innerText = currYearIncome;
-
-        break;
+        else{
+            no_of_sales.innerText = 0;
+            earnings.innerText = 0;
+        }
         
     }
 
