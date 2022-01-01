@@ -14,7 +14,7 @@ let correct = true;
 if (form){
 
     addItemBtn.addEventListener('click', (e) => {
-
+        // e.preventDefault();
         correct = true
         console.log(correct);
         for (let i = 0; i < inputField.length-1; i++){
@@ -56,6 +56,9 @@ function toggleDisplay(){
     let addItem = document.querySelector('.popup-window.addItem');
     addItem.classList.toggle('active');
 
+    let inputField = document.querySelector('.input-field.addItem.file-upload');
+    inputField.classList.remove('success');
+
     // Closing the popup window will remove the displayed errors
     for (let i = 0; i < inputField.length-1; i++){
         removeError(inputField[i]);
@@ -73,6 +76,10 @@ function toggleEdit(element){
     edit.classList.toggle('active');
 
     if (element != null){
+
+        let inputField = document.querySelector('.input-field.editItem.file-upload');
+        inputField.querySelector('.image-upload').value = '';
+        inputField.classList.remove('success');
 
         const itemDetails = element.parentElement.parentElement.parentElement;
         const itemId = itemDetails.getAttribute('id');
@@ -144,3 +151,20 @@ if (productContainer){
         productContainer.scrollLeft -= 300;
     });
 }
+
+// image upload 
+
+function addImage(event){
+    const input = event.target.parentElement.querySelector('input');
+    input.click();
+}
+
+function imageAdded(event){
+    if (event.target.value != ''){
+        event.target.parentElement.classList.add('success');
+    }
+    else{
+        event.target.parentElement.classList.remove('success');
+    }
+}
+

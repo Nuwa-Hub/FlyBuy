@@ -240,18 +240,28 @@ form{
 }
 
 .file-upload{
-    width: 70%;
+    width: 15%;
     height: 2.1em;
     background-color: #f0f0f0;
     margin: 0.4em 0;
     border-radius: 2.1em;
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 1fr;
     padding: 0 0.3em;
     position: relative;
+    transition: .4s;
+    cursor: pointer;
 }
 
-/* .file-upload i{
+.file-upload input{
+    visibility: none;
+}
+
+.file-upload .tooltip .tooltip-text{
+    min-width: 200px;
+}
+
+.file-upload i{
     color: #333;
 }
 
@@ -261,4 +271,4 @@ form{
 }
 .file-upload:active{
     transform: scale(0.95);
-} */
+}

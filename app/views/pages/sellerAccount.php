@@ -151,15 +151,14 @@
             <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem" enctype="multipart/form-data">
                 
 
-                <!-- <div class="input-field addItem file-upload">
+                <div class="input-field addItem file-upload" onclick="addImage(event)">
                     <i class="fas fa-camera"></i>
-                    <input name="itemName" type="text" placeholder="Upload Image" class="itemName">
                     <i class="fas fa-exclamation-circle tooltip">
                         <small class="tooltip-text">Error</small>
                     </i>
                     <i class="fas fa-check-circle"></i>
-                    <input type="file" name="itemImage" accept="image/*" class="image-upload">
-                </div> -->
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
 
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
@@ -217,6 +216,16 @@
             <h1 class="popup title">Edit Item</h1>
 
             <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem" enctype="multipart/form-data">
+
+                <div class="input-field editItem file-upload" onclick="addImage(event)">
+                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
+
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -248,11 +257,6 @@
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product->description); ?>">
                     <i class="fas fa-check-circle"></i>
-                </div>
-
-                <div class="input-field addItem file-upload">
-                    <i class="fas fa-file-upload"></i>
-                    <input type="file" name="itemImage" accept="image/*" class="image-upload">
                 </div>
 
                 <input class="item-id" type="hidden" name="item_id">
