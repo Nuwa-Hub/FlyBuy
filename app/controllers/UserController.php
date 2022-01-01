@@ -292,4 +292,40 @@ class UserController extends Controller
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }
     }
+
+    public function deleteUser(){
+
+        $userType = $_POST['userType'];
+        $id = $_POST['id'];
+
+        if ($userType === 'seller') {
+            $this->userModel = $this->sellerModel;
+        }
+        else {
+            $this->userModel = $this->buyerModel;
+        }
+
+        $user = $this->userModel->findUserById($id);
+
+        $deleteAccountValidator = new DeleteAccountValidator($_POST, $user);
+
+        $data = $deleteAccountValidator->validateForm();
+
+        foreach ($data['deleteAccountErrors'] as $field => $errorValue) {
+            if ($errorValue != 'none' and $errorValue != '') {
+                $this->isValid = false;
+                break;
+            }
+        }
+
+        if($this->isValid){
+            
+            $this->userModel->clearUserFields($id);
+
+            unset($_COOKIE['user_login']);
+            setcookie('user_login', null, -1, '/');
+        }
+        
+        echo json_encode($data);
+    }
 }

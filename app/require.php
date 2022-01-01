@@ -20,6 +20,7 @@ require_once 'helpers/LoginValidator.php';
 require_once 'helpers/SignupValidator.php';
 require_once 'helpers/changePswValidator.php';
 require_once 'helpers/EditProfileValidator.php';
+require_once 'helpers/DeleteAccountValidator.php';
 
 require_once 'config/config.php';
 

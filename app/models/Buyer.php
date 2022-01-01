@@ -208,4 +208,14 @@ class Buyer implements User
             return false;
         }
     }
+
+    public function clearUserFields($id){
+
+        $this->db->query("UPDATE buyers SET email = :email WHERE buy_id = :id");
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', '');
+
+        $this->db->execute();
+    }
 }
