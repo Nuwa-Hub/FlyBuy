@@ -41,11 +41,8 @@
                 <div class="title">
                     <h2 class="store"><?php echo $data['user']->storeName; ?></h2>
                     <h3 class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
+                    <span class="stars"><?php echo $data['user']->rating; ?></span>
+                    <span><?php echo $data['user']->rating; ?></span>
                     </h3>
                 </div>
                 <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
@@ -324,6 +321,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/myChart.js"></script>
