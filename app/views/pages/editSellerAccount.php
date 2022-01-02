@@ -65,6 +65,7 @@
                     <?php echo $data['user']->address; ?>
                 </div>
             </div>
+            <a href="#" onclick="toggleDeleteAccount()" class="deleteAccount-btn">Delete account</a>
         </aside>
 
         <section class="edit-section">
@@ -149,8 +150,47 @@
 
             <h1 class="popup title">logout?</h1>
 
-            <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
+            <form method="post" cladeleteAccountss="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- -----------------------------Popup window to confirm delete account--------------------------------------- -->
+
+    <div class="popup-window deleteAccount">
+
+        <div class="overlay"></div>
+
+        <div class="content">
+
+            <div class="closeBtn" onclick="toggleDeleteAccount()">&times;</div>
+
+            <h1 class="popup title">Enter your password to confirm delete !</h1>
+
+            <form method="post" class="deleteAccountForm">
+
+                <div class="input-field">
+
+                    <i class="fas fa-lock"></i>
+
+                    <input name="password" type="password" placeholder="Password" class="deleteAccountpsw">
+                    
+                    <i class="fas fa-eye togglePassword"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+
+                </div>
+                
+                <input class="deleteAccountUserId" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+                <input class="deleteAccountUserType" type="hidden" name="user_type" value="seller">
+
+                <button class="deleteAcount btn" name="submitDeleteAccount">Delete</button>
+
             </form>
 
         </div>

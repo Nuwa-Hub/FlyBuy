@@ -154,7 +154,11 @@ class PageController extends Controller
             'user' => $this->sellerModel->findUserById($id)
         ];
 
-        $this->view('pages/editSellerAccount', $data);
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/editSellerAccount', $data);
+        }
     }
 
     public function viewAllNotifications($id, $type = 'all')
@@ -200,7 +204,11 @@ class PageController extends Controller
             'type' => $type
         ];
 
-        $this->view('pages/notification', $data);
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/notification', $data);
+        }
     }
 
     public function verifyEmail($userType, $vkey)
