@@ -13,7 +13,7 @@
     <title>Shopping Cart</title>
 </head>
 
-<body>
+<body onmousedown="return false" onselectstart="return false">
 
     <header id="site-header">
         <div class="container">
@@ -33,11 +33,7 @@
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">About Us</a></li>
             </ul>
         </div>
-
-
     </header>
-
-
 
     <div class="container">
         <section id="cart">

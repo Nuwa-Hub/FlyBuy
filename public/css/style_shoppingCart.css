@@ -122,7 +122,7 @@ body {
 
 #site-header ul li a:hover,
 #site-header ul li a.active {
-    background: blue;
+    background-image: linear-gradient(120deg, #304739 0%, #0e5579 100%);
     color: white;
     transition: 0.6s;
 }
@@ -155,7 +155,6 @@ a {
     -o-transition: color .2s linear;
     transition: color .2s linear;
     position: relative;
-    ;
 }
 
 a:hover {
@@ -188,6 +187,9 @@ a:hover {
     font-style: normal;
     vertical-align: middle;
 }
+
+
+/* search box */
 
 .search-box {
     position: absolute;
@@ -252,6 +254,9 @@ a:hover {
     width: 0px;
 }
 
+
+/* item container */
+
 .container {
     font-family: 'Open Sans', sans-serif;
     margin: 0 auto;
@@ -298,7 +303,6 @@ a:hover {
 
 .product {
     border: 1px solid rgb(12, 12, 12);
-    ;
     /* transform: skewX(-7deg); */
     margin: 20px 0;
     width: 100%;
@@ -310,13 +314,6 @@ a:hover {
     -o-transition: margin .2s linear, opacity .2s linear;
     transition: margin .2s linear, opacity .2s linear;
 }
-
-
-/*.product:hover {
-        border-color: black;
-        border-width: 2px;
-        box-shadow: #1946d8;
-    }*/
 
 .block {
     position: relative;
@@ -414,7 +411,6 @@ a:hover {
 }
 
 .product footer.content {
-    border-radius: 20px;
     background-color: black;
     height: 50px;
     margin: 6px 0 0 0;
@@ -470,7 +466,7 @@ a:hover {
 .qt-minus {
     display: flex;
     cursor: pointer;
-    ;
+    color: #6e6e6e !important;
     background: #302f2f;
     border: none;
     font-size: 30px;
@@ -482,6 +478,22 @@ a:hover {
     -ms-transition: background .2s linear;
     -o-transition: background .2s linear;
     transition: background .2s linear;
+}
+
+.qt-minus:hover {
+    color: #ffffff !important;
+}
+
+.qt-plus:hover {
+    color: #ffffff !important;
+}
+
+.qt-minus:active {
+    box-shadow: 0px 3px 4px #aaa inset, 0px 2px 3px #fff;
+}
+
+.qt-plus:active {
+    box-shadow: 0px 3px 4px #aaa inset, 0px 2px 3px #fff;
 }
 
 .draw-border {
@@ -513,6 +525,9 @@ a:hover {
     text-align: center;
 }
 
+
+/* subtotal and shipping button */
+
 .subtotal {
     color: white;
 }
@@ -521,6 +536,9 @@ a:hover {
     color: white;
     position: fixed;
 }
+
+
+/* footer */
 
 #site-footer h1 {
     background: #242323;
@@ -632,29 +650,8 @@ svg {
 
 .box {
     opacity: 0;
-    ;
     width: 40px;
     height: 40px;
-}
-
-.pbtn {
-    opacity: 1;
-    z-index: 1000;
-    cursor: pointer;
-    display: block;
-    font-size: 20px;
-    font-weight: 300;
-    padding: 16px 0;
-    width: 290px;
-    height: 30px !important;
-    text-align: center;
-    -webkit-transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    -ms-transition: all .2s linear;
-    -o-transition: all .2s linear;
-    transition: all .2s linear;
-    position: fixed;
-    bottom: 10px;
 }
 
 
