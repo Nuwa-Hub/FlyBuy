@@ -11,6 +11,7 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous" 
     />
+    <!-- <script src="https://kit.fontawesome.com/f4df70b5dd.js" crossorigin="anonymous"></script> -->
     
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
@@ -31,7 +32,7 @@
                 </div>
             </div>
             <a href="#" class="add-item" onclick="toggleDisplay()">New Item+</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -47,7 +48,8 @@
                         <span class="fa fa-star"></span>
                     </h3>
                 </div>
-                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+                <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
+
             </div>
             <div class="details">
                 <div class="name">
@@ -71,7 +73,16 @@
         </aside>
 
         <section class="item-container">
-
+            <div class="year-div">
+                <label class="year-label">Year: </label>
+                <select name="year" id="year" data-component="date" onchange="yearChanged(event)">
+                    <?php 
+                        for($year=2020; $year <= date('Y'); $year++){
+                            echo '<option value="' . $year . '">' . $year . '</option>';
+                        }
+                    ?>
+                </select>
+            </div>
             <div class="store-stats">
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>
@@ -92,17 +103,21 @@
                 </div>
             </div>
             
+        </section>
+
+        <section class="product-section">
             <div class="product-wrapper">
                 <button class="scroll-left scroll"><i class="fas fa-arrow-left"></i></button>
                 <div class="product-container">
-                <?php foreach ($data['products'] as $product): ?>
-                    <div class="item-details wrapper" id="<?php echo $product->item_id; ?>">
+                    <?php foreach ($data['products'] as $product): ?>
+                        <div class="item-details wrapper" id="<?php echo $product->item_id; ?>">
                             <div class="card">
                                 <div class="front">
                                     <h2 class="item name"><?php echo $product->itemName; ?></h2>
                                     <h2 class="item price"><?php echo "Rs. ".$product->price; ?></h2>
+                                    <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="item">
                                 </div>
-                                <div class="right">
+                                <div class="back">
                                     <p class="item description"><?php echo $product->description; ?></p>
                                     <p class="item amount"><?php echo $product->amount." Available"; ?></p>
                                     <p class="item date"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></p>
@@ -111,15 +126,11 @@
                                     <i class="fas fa-edit" onclick="toggleEdit(this)"></i>
                                 </div>
                             </div>
-                            <div class="img-wrapper">
-                                <img src="<?php echo URLROOT ?>/public/img/sugar500g.jpg" alt="item">
-                            </div>
                         </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
                 <button class="scroll-right scroll"><i class="fas fa-arrow-right"></i></button>
             </div>
-            
         </section>
 
         <footer>Copyright</footer>
@@ -137,7 +148,18 @@
 
             <h1 class="popup title">Add Item</h1>
 
-            <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem">
+            <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem" enctype="multipart/form-data">
+                
+
+                <div class="input-field addItem file-upload" onclick="addImage(event)">
+                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
+
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -193,7 +215,17 @@
 
             <h1 class="popup title">Edit Item</h1>
 
-            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem">
+            <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem" enctype="multipart/form-data">
+
+                <div class="input-field editItem file-upload" onclick="addImage(event)">
+                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
+
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">

@@ -209,8 +209,6 @@ class ValidateOperator{
         }
     }
 
-
-
     protected function setError($key, $val){
         $this->errors[$key] = $val;
     }

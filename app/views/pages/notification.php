@@ -12,7 +12,7 @@
         crossorigin="anonymous" 
     />
     
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerNotification.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
     <title>FlyBuy | Notification</title>
 </head>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -46,7 +46,7 @@
                         <span class="fa fa-star"></span>
                     </h3>
                 </div>
-                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+                <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
             </div>
             <div class="details">
                 <div class="name">

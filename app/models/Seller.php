@@ -92,8 +92,8 @@ class Seller implements User{
     }
 
     public function findUserByEmail($email){
-        $this->db->query('SELECT * FROM sellers WHERE email = :email');
 
+        $this->db->query('SELECT * FROM sellers WHERE email = :email');
         $this->db->bind(':email', $email);
 
         $user = $this->db->single();
@@ -175,6 +175,26 @@ class Seller implements User{
             $this->db->bind(':storeName', $data['storeName']);
             $this->db->updateField();
         }
+    }
+
+    public function getProfilePicNameById($id){
+
+        $this->db->query("SELECT profilePic FROM sellers WHERE seller_id = :id");
+        $this->db->bind(':id', $id);
+
+        $profilePicName = $this->db->single();
+
+        return $profilePicName;
+    }
+
+    public function updateProfilePicName($id, $newImgName){
+
+        $this->db->query("UPDATE sellers SET profilePic = :profilePic WHERE seller_id = :id");
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':profilePic', $newImgName);
+        
+        $this->db->updateField();
     }
 
     public function saveNotification($buyer_id, $seller_id, $data){
@@ -267,6 +287,16 @@ class Seller implements User{
         $this->db->bind(':notify_id', $id);
         
         $this->db->updateField();
+    }
+
+    public function clearUserFields($id){
+
+        $this->db->query("UPDATE sellers SET email = :email WHERE seller_id = :id");
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', '');
+
+        $this->db->execute();
     }
 }
 

@@ -14,7 +14,7 @@ let correct = true;
 if (form){
 
     addItemBtn.addEventListener('click', (e) => {
-
+        // e.preventDefault();
         correct = true
         
         for (let i = 0; i < inputField.length-1; i++){
@@ -37,6 +37,47 @@ if (form){
     });
 }
 
+const deleteAccountForm = document.querySelector(".deleteAccountForm");
+const deleteAccountBtn = document.querySelector('.deleteAcount.btn');
+
+// delete account form
+if (deleteAccountForm){
+
+    deleteAccountBtn.addEventListener('click', (e) => {
+
+        e.preventDefault();
+
+        const passwordInput = document.querySelector('.deleteAccountpsw');
+        const idInput = document.querySelector('.deleteAccountUserId');
+        const userTypeInput = document.querySelector('.deleteAccountUserType');
+
+        const password = passwordInput.value;
+        const id = idInput.value;
+        const userType = userTypeInput.value;
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/Project/FlyBuy/UserController/deleteUser",
+            data: { 
+                password : password,
+                id : id,
+                userType : userType
+            },
+            success: function(result = '') {
+                
+                const data = JSON.parse(result);
+                
+                if(data.deleteAccountClassNames.password === 'success'){
+                    setSuccess(passwordInput.parentElement);
+                    window.location.reload();
+                }
+                else{
+                    setError(passwordInput.parentElement, data.deleteAccountErrors.password);
+                }
+            }
+        });
+    });
+}
 
 function setError(element, msg){
     element.classList.add('error');
@@ -56,6 +97,9 @@ function toggleDisplay(){
     let addItem = document.querySelector('.popup-window.addItem');
     addItem.classList.toggle('active');
 
+    let inputField = document.querySelector('.input-field.addItem.file-upload');
+    inputField.classList.remove('success');
+
     // Closing the popup window will remove the displayed errors
     for (let i = 0; i < inputField.length-1; i++){
         removeError(inputField[i]);
@@ -67,12 +111,21 @@ function toggleLogout(){
     logout.classList.toggle('active');
 }
 
+function toggleDeleteAccount(){
+    let logout = document.querySelector('.popup-window.deleteAccount');
+    logout.classList.toggle('active');
+}
+
 function toggleEdit(element){
 
     let edit = document.querySelector('.popup-window.editItem');
     edit.classList.toggle('active');
 
     if (element != null){
+
+        let inputField = document.querySelector('.input-field.editItem.file-upload');
+        inputField.querySelector('.image-upload').value = '';
+        inputField.classList.remove('success');
 
         const itemDetails = element.parentElement.parentElement.parentElement;
         const itemId = itemDetails.getAttribute('id');
@@ -144,3 +197,20 @@ if (productContainer){
         productContainer.scrollLeft -= 300;
     });
 }
+
+// image upload 
+
+function addImage(event){
+    const input = event.target.parentElement.querySelector('input');
+    input.click();
+}
+
+function imageAdded(event){
+    if (event.target.value != ''){
+        event.target.parentElement.classList.add('success');
+    }
+    else{
+        event.target.parentElement.classList.remove('success');
+    }
+}
+

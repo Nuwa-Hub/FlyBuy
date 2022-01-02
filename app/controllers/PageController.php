@@ -80,9 +80,6 @@ class PageController extends Controller
 
     public function sellerAccount($id)
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
         $products = $this->castToArray($this->sellerModel->findAllSellerProducts($id));
 
@@ -96,22 +93,12 @@ class PageController extends Controller
 
         $products = $this->castToObj($products);
 
-        if (!isset($_SESSION['salesHistory'])) {
-            $salesHistory = $this->getSalesHistory($id);
-            $_SESSION['salesHistory'] = $salesHistory;
-            // echo '<script> sessionStorage.setItem("salesHistory", "' . $_SESSION['salesHistory'] . '");</script>';
-        } else {
-            $salesHistory = $_SESSION['salesHistory'];
-        }
-        // $salesHistory = $this->getSalesHistory($id);
-
         $data = [
             'seller_id' => $id,
             'user' => $this->sellerModel->findUserById($id),
-            'products' => $products,
-            'salesHistory' => $salesHistory
+            'products' => $products
         ];
-        // print_r($data['salesHistory']);
+        
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
@@ -129,7 +116,20 @@ class PageController extends Controller
 
         foreach ($salesByYear as $yearSale) {
 
-            $yearSale->salesByMonth = [];
+            $yearSale->salesByMonth = array(
+                'January' => array('month_order_count' => 0, 'month_income' => 0),
+                'February' => array('month_order_count' => 0, 'month_income' => 0),
+                'March' => array('month_order_count' => 0, 'month_income' => 0),
+                'April' => array('month_order_count' => 0, 'month_income' => 0),
+                'May' => array('month_order_count' => 0, 'month_income' => 0),
+                'June' => array('month_order_count' => 0, 'month_income' => 0),
+                'July' => array('month_order_count' => 0, 'month_income' => 0),
+                'August' => array('month_order_count' => 0, 'month_income' => 0),
+                'September' => array('month_order_count' => 0, 'month_income' => 0),
+                'October' => array('month_order_count' => 0, 'month_income' => 0),
+                'November' => array('month_order_count' => 0, 'month_income' => 0),
+                'December' => array('month_order_count' => 0, 'month_income' => 0)
+            );
 
             foreach ($salesByYearMonth as $yearMonthSale) {
 
@@ -141,7 +141,8 @@ class PageController extends Controller
             }
         }
 
-        return $salesByYear;
+        // return $salesByYear;
+        echo json_encode($salesByYear);
     }
 
 
@@ -153,7 +154,11 @@ class PageController extends Controller
             'user' => $this->sellerModel->findUserById($id)
         ];
 
-        $this->view('pages/editSellerAccount', $data);
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/editSellerAccount', $data);
+        }
     }
 
     public function viewAllNotifications($id, $type = 'all')
@@ -199,7 +204,11 @@ class PageController extends Controller
             'type' => $type
         ];
 
-        $this->view('pages/notification', $data);
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/notification', $data);
+        }
     }
 
     public function verifyEmail($userType, $vkey)

@@ -108,10 +108,7 @@ class UserController extends Controller
     }
 
     /*
-    create common edit method which takes usertype
-    create model according to type
-    call editProfile from model
-    check for seller_id and buyer_id
+    common methods to edit user profile details
     */
     public function editProfile()
     {
@@ -145,11 +142,14 @@ class UserController extends Controller
             $data['editProfileData']['vkey'] = $user->vkey;
             $this->userModel->updateUserData($data['editProfileData']);
 
-            if (!empty($data['editProfileData']['password'])) { // need to logout the user
-                $this->view('pages/loginSignup');
-            } else if ($userType === 'buyer') {
+            if (!empty($data['editProfileData']['password'])) {
+                $_POST['submitLogout'] = '';
+                $this->logout();
+            }
+            else if ($userType === 'buyer') {
                 header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
-            } else {
+            }
+            else {
                 header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);
             }
         } else {
@@ -164,8 +164,65 @@ class UserController extends Controller
         }
     }
 
-    public function checkout()
-    {
+    public function editProfilePicture(){
+
+        if (isset($_POST['seller_id'])) {
+            $this->userModel = $this->sellerModel;
+            $id = $_POST['seller_id'];
+        }
+        else {
+            $this->userModel = $this->buyerModel;
+            $id = $_POST['buyer_id'];
+        }
+
+        $file = $_FILES['profilePic'];
+
+        if($file['error'] === 0){
+
+            $this->removeProfilePic($id, $this->userModel);
+            $newImgName = $this->uploadProfilePicToServer($file);
+
+            $this->userModel->updateProfilePicName($id, $newImgName);
+        }
+
+        if (isset($_POST['seller_id'])) {
+            header('location: ' . URLROOT . '/PageController/editSellerAccount/' . $id);
+        }
+        else {
+            // header('location: ' . URLROOT . '/PageController/editBuyerAccount/' . $id);
+        }
+    }
+
+    public function removeProfilePic($id, $userModel){
+
+        $imgName = $userModel->getProfilePicNameById($id)->profilePic;
+        $defaultImg = "defaultProfilePic.png";
+        
+        if(strcmp($imgName, $defaultImg) !== 0){
+            $imageDestination = '../public/img/uploads/profilePics/' . $imgName;
+            unlink($imageDestination);
+        }
+    }
+
+    public function uploadProfilePicToServer($file){
+
+        $imgNewName = 'defaultProfilePic.png';
+
+        if($file['error'] === 0){
+
+            $tempExt = explode('.', $file['name']);
+            $imgExt = strtolower(end($tempExt));
+
+            $imgNewName = uniqid('', true) . '.' . $imgExt;
+            $imgDestination = '../public/img/uploads/profilePics/' . $imgNewName;
+
+            move_uploaded_file($file['tmp_name'], $imgDestination);
+        }
+
+        return $imgNewName;
+    }
+
+    public function checkout(){
 
         $buyer_id = $_POST['buy_id'];
         $cart = [];
@@ -213,12 +270,12 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function markNotficationAsRead()
+    public function markNotificationAsRead()
     {
 
         $id = $_POST['notify_id'];
 
-        $this->sellerModel->markAsReadById($id);
+        $this->sellerModel->markNotificationById($id);
     }
 
     public function logout()
@@ -234,5 +291,41 @@ class UserController extends Controller
 
             header('location: ' . URLROOT . '/PageController/loginSignup');
         }
+    }
+
+    public function deleteUser(){
+
+        $userType = $_POST['userType'];
+        $id = $_POST['id'];
+
+        if ($userType === 'seller') {
+            $this->userModel = $this->sellerModel;
+        }
+        else {
+            $this->userModel = $this->buyerModel;
+        }
+
+        $user = $this->userModel->findUserById($id);
+
+        $deleteAccountValidator = new DeleteAccountValidator($_POST, $user);
+
+        $data = $deleteAccountValidator->validateForm();
+
+        foreach ($data['deleteAccountErrors'] as $field => $errorValue) {
+            if ($errorValue != 'none' and $errorValue != '') {
+                $this->isValid = false;
+                break;
+            }
+        }
+
+        if($this->isValid){
+            
+            $this->userModel->clearUserFields($id);
+
+            unset($_COOKIE['user_login']);
+            setcookie('user_login', null, -1, '/');
+        }
+        
+        echo json_encode($data);
     }
 }

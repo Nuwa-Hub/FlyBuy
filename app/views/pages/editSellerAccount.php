@@ -12,7 +12,7 @@
         crossorigin="anonymous" 
     />
     
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_sellerAccount.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_editSellerAccount.css">
     <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
     <title>FlyBuy | Edit</title>
 </head>
@@ -22,7 +22,7 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
-            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<span id="cart-item" class="badge badge-danger"></span></a>
+            <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
         </nav>
 
@@ -38,7 +38,14 @@
                         <span class="fa fa-star"></span>
                     </h3>
                 </div>
-                <img src="<?php echo URLROOT; ?>/public/img/Nancy-Momoland-Net-Worth-834x1024.jpeg" alt="profile picture">
+                <div class="profilePic">
+                    <form class="profilePic-form" id="profilePic-form" method="POST" action="<?php echo URLROOT; ?>/UserController/editProfilePicture" enctype="multipart/form-data">
+                        <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture" class="profile-img">
+                        <i class="fa fa-camera" onclick="upload(this)"></i>
+                        <input name="profilePic" type="file" accept="image/*" class="file-input" onchange="submitImage(event)">
+                        <input class="seller-id pic" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+                    </form>
+                </div>
             </div>
             <div class="details">
                 <div class="name">
@@ -58,6 +65,7 @@
                     <?php echo $data['user']->address; ?>
                 </div>
             </div>
+            <a href="#" onclick="toggleDeleteAccount()" class="deleteAccount-btn">Delete account</a>
         </aside>
 
         <section class="edit-section">
@@ -142,8 +150,47 @@
 
             <h1 class="popup title">logout?</h1>
 
-            <form method="post" class="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
+            <form method="post" cladeleteAccountss="logoutForm" action="<?php echo URLROOT; ?>/UserController/logout">
                 <input type="submit" class="logout btn" name="submitLogout" value="Confirm">
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- -----------------------------Popup window to confirm delete account--------------------------------------- -->
+
+    <div class="popup-window deleteAccount">
+
+        <div class="overlay"></div>
+
+        <div class="content">
+
+            <div class="closeBtn" onclick="toggleDeleteAccount()">&times;</div>
+
+            <h1 class="popup title">Enter your password to confirm delete !</h1>
+
+            <form method="post" class="deleteAccountForm">
+
+                <div class="input-field">
+
+                    <i class="fas fa-lock"></i>
+
+                    <input name="password" type="password" placeholder="Password" class="deleteAccountpsw">
+                    
+                    <i class="fas fa-eye togglePassword"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+
+                </div>
+                
+                <input class="deleteAccountUserId" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
+                <input class="deleteAccountUserType" type="hidden" name="user_type" value="seller">
+
+                <button class="deleteAcount btn" name="submitDeleteAccount">Delete</button>
+
             </form>
 
         </div>
@@ -156,5 +203,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+<script>
+    function upload(element){
+        const input = element.nextElementSibling;
+        
+        // force click the input for file uploading
+        input.click();
+    }
+
+    function submitImage(event){
+        const img = document.querySelector('.profile-img');
+        img.src = URL.createObjectURL(event.target.files[0]);
+
+        const form = event.target.parentElement;
+        // force submit the form
+        form.submit();
+    }
+</script>
 
 </html>
