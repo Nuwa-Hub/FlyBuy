@@ -291,6 +291,8 @@ section #text span {
 
 .product .product-card .product-img {
     z-index: 1;
+    max-width: 220px;
+    max-height: 210px;
     position: absolute;
     max-width: 220px;
     top: 30%;
@@ -387,6 +389,8 @@ section #text span {
 
 .product .popup-card .product-img img {
     z-index: 2;
+    max-height: 400px;
+    max-width: 300px;
     position: relative;
     width: 400px;
     left: -5px;
