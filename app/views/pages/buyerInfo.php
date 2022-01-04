@@ -26,7 +26,7 @@
 <body>
   <div class="wrapper">
     <div class="name">
-      <img src="<?php echo URLROOT; ?>/public/img/avatar2.png"style="width:200px;height:200px;">
+      <img src="<?php echo URLROOT; ?>/public/img/avatar2.png"style="width:150px;height:150px;">
       <h1 style="color:white;font-family:Great Vibes;font-size: 55px;">Welcome</h1>
       <h1 style="color:white;"><?php echo $data['user']->username; ?></h1><br><br>
       <div class="info">
@@ -42,69 +42,7 @@
         <div class="item">
           <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
           <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
-        </div>
-        <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
+          <h3 id="store" style="color:#303030;font-family:cursive;font-size:20px;">RC STORES</h3>
           <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
           <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
           <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    

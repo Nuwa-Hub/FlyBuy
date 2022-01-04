@@ -215,15 +215,20 @@ html {
 .item #date{
     position: absolute;
     left: 116px;
-    top: 45px;
+    bottom: 35px;
 }
 .item #quantity{
     position: absolute;
-    right: 200px;
+    right: 50px;
     top: 5px;
 }
 .item #price{
     position: absolute;
-    right: 200px;
+    right: 50px;
     bottom: 5px;
+}
+.item #store{
+    position: absolute;
+    left: 450px;
+    top: 5px;
 }

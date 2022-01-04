@@ -480,7 +480,7 @@ input[type=number] {
 }
 
 
-/*star ratings*/
+/*star ratings start*/
 
 span.stars,
 span.stars span {
@@ -497,6 +497,8 @@ span.stars span {
     background-position: 0 0;
     background-image: url(../img/yellow-star.svg);
 }
+/*star ratings end*/
+
 
 #snow {
     position: fixed;
