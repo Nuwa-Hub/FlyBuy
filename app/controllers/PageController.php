@@ -439,4 +439,17 @@ class PageController extends Controller
 
         return $casted_arr;
     }
+    /*buyerinfo */
+    public function buyerInfo($id)
+    {
+
+        $data = [
+            'buyer_id' => $id,
+            'user' => $this->buyerModel->findUserById($id),
+        ];
+
+        $this->view('pages/buyerInfo', $data);
+    }
 }
+
+

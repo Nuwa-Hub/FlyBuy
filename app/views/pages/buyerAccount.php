@@ -25,6 +25,7 @@
     <ul>
       <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['user']->buy_id; ?>" class="active">Home</a></li>
       <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
+      <li><a href="<?php echo URLROOT; ?>/PageController/buyerInfo/<?php echo $data['user']->buy_id; ?>">Account</a></li>
       <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
       <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
     </ul>
@@ -184,6 +185,12 @@
 
 </body>
 
+<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
@@ -198,5 +205,7 @@
 <script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/slideshow.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 </html>

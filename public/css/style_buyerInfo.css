@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background-image: url("../img/chris.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 15;
+}
+
+#header .logo {
+    color: #00008B;
+    font-weight: 700;
+    font-size: 2.7em;
+    text-decoration: none;
+}
+
+#header ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header ul li {
+    position: relative;
+    list-style: none;
+    margin: 0 20px;
+    padding: 0;
+}
+
+#header ul li a {
+    position: relative;
+    font-size: 19px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    padding: 6px 15px;
+    color: #444;
+    border-radius: 40px;
+    transition: 0.6s;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    cursor: pointer;
+}
+
+#header ul li a:hover {
+    transform: scale(1.1);
+    color: #777;
+}
+
+#header.sticky {
+    padding: 5px 50px;
+    background-image: linear-gradient(to right, #434343 20%, black 80%);
+    transition: 0.6s;
+}
+
+#header.sticky ul li a {
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+#header.sticky .logo {
+    color: #ddd;
+}
+
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+#cart-item {
+    font-size: 18px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+}
+
+@keyframes shine {
+    from {
+        box-shadow: 2px 2px 3px 7px #fc0505;
+    }
+    to {
+        box-shadow: 2px 2px 5px 7px #fc0505;
+    }
+}
+
+#header.sticky .search-box:hover>.search-txt {
+    width: 300px;
+    padding: 0 7px;
+    color: black;
+}
+
+.search-box {
+    position: relative;
+    background: #333;
+    height: 2.6em;
+    width: fit-content;
+    border-radius: 2.1em;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-box a {
+    text-decoration: none;
+}
+
+.search-btn {
+    color: #666;
+    width: 2.1em;
+    height: 2.1em;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #fff;
+    font-size: 1em;
+    transition: 0.4s;
+    width: 300px;
+}
+
+.search-box:hover>.search-btn {
+    color: #000;
+}
+
+#header.sticky .search-box {
+    background: #888;
+}
+
+#header.sticky .search-txt::placeholder {
+    color: #222;
+}
+.wrapper{
+    background-color: black;
+    width: 96%;
+    height: 100%;
+    position: absolute;
+    left: 2%;
+    top: 12%;
+    opacity: 0.9;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.wrapper >div{
+    padding: 1em;
+}
+.name{
+    text-align: center; /*center items in a grid*/
+    font-size: 16px;
+}
+.orders{
+    text-align: center;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    border-radius: 10px;
+}
+.info{
+    text-align: left;
+}
+.orderList{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 545px;
+}
+/*items*/
+.item{
+    display: flex;
+    padding: 0;
+    margin: 8px;
+    position: relative;
+    border-radius: 8px;
+    background: white;
+}
+.item #name{
+    position: absolute;
+    left: 116px;
+    top: 5px;
+}
+.item #date{
+    position: absolute;
+    left: 116px;
+    bottom: 35px;
+}
+.item #quantity{
+    position: absolute;
+    right: 50px;
+    top: 5px;
+}
+.item #price{
+    position: absolute;
+    right: 50px;
+    bottom: 5px;
+}
+.item #store{
+    position: absolute;
+    left: 450px;
+    top: 5px;
+}

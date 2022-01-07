@@ -41,15 +41,11 @@
                 <div class="title">
                     <h2 class="store"><?php echo $data['user']->storeName; ?></h2>
                     <h3 class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
+                    <span class="stars"><?php echo $data['user']->rating; ?></span>
+                    <span><?php echo $data['user']->rating; ?></span>
                     </h3>
                 </div>
                 <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
-
             </div>
             <div class="details">
                 <div class="name">
@@ -149,6 +145,17 @@
             <h1 class="popup title">Add Item</h1>
 
             <form class="add item-form" id="add item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/addItem" enctype="multipart/form-data">
+                
+
+                <div class="input-field addItem file-upload" onclick="addImage(event)">
+                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
+
                 <div class="input-field addItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -182,10 +189,6 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
 
-                <div>
-                    <input type="file" name="itemImage" accept="image/*">
-                </div>
-
                 <input class="seller-id notify" type="hidden" name="seller_id" value="<?php echo $data['seller_id']; ?>">
 
                 <button class="add-item btn" name="submitAddItem">Add</button>
@@ -209,6 +212,16 @@
             <h1 class="popup title">Edit Item</h1>
 
             <form class="edit item-form" id="edit item-form" method="POST" action="<?php echo URLROOT; ?>/ProductController/editItem" enctype="multipart/form-data">
+
+                <div class="input-field editItem file-upload" onclick="addImage(event)">
+                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text">Error</small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                    <input type="file" name="itemImage" accept="image/*" class="image-upload" onchange="imageAdded(event)">
+                </div>
+
                 <div class="input-field editItem">
                     <i class="fas fa-archive"></i>
                     <input name="itemName" type="text" placeholder="Item Name" class="itemName">
@@ -240,10 +253,6 @@
                     <i class="fas fa-file-alt"></i>
                     <input name="description" type="text" placeholder="Description" class="description" value="<?php echo htmlspecialchars($product->description); ?>">
                     <i class="fas fa-check-circle"></i>
-                </div>
-
-                <div>
-                    <input type="file" name="itemImage" accept="image/*">
                 </div>
 
                 <input class="item-id" type="hidden" name="item_id">
@@ -311,6 +320,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/myChart.js"></script>
