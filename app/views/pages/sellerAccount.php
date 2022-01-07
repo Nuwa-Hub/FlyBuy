@@ -46,7 +46,6 @@
                     </h3>
                 </div>
                 <img src="<?php echo URLROOT; ?>/public/img/uploads/profilePics/<?php echo $data['user']->profilePic?>" alt="profile picture">
-
             </div>
             <div class="details">
                 <div class="name">
@@ -84,14 +83,14 @@
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>
                     <div class="sales-details details-col">
-                        <div class="no-sales">80</div>
+                        <div class="no-sales">0</div>
                         <span>sales</span>
                     </div>
                 </div>
                 <div class="earnings">
                     <i class="far fa-money-bill-alt"></i>
                     <div class="earnings-details details-col">
-                        <div class="no-earnings">Rs. 4250</div>
+                        <div class="no-earnings">Rs. 0</div>
                         <span>earnings</span>
                     </div>
                 </div>

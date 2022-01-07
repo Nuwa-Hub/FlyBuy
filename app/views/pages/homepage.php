@@ -135,8 +135,11 @@
 
 		</div>
 
-	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
+	<!-- put every jquery script under this script -->
+
+
+	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
 	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
