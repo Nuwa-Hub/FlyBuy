@@ -24,8 +24,8 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <div class="search">
-                <div class="search-box">
-                    <input class="search-txt" type="text" placeholder="search here...">
+                <div class="search-box" id="<?php echo $data['user']->seller_id; ?>">
+                    <input class="search-txt" id="searchBox" type="text" placeholder="search here...">
                     <a class="search-btn" href="#">
                         <i class="fas fa-search"></i>
                     </a>
@@ -87,14 +87,14 @@
                 <div class="sales">
                     <i class="fas fa-chart-line"></i>
                     <div class="sales-details details-col">
-                        <div class="no-sales">80</div>
+                        <div class="no-sales">0</div>
                         <span>sales</span>
                     </div>
                 </div>
                 <div class="earnings">
                     <i class="far fa-money-bill-alt"></i>
                     <div class="earnings-details details-col">
-                        <div class="no-earnings">Rs. 4250</div>
+                        <div class="no-earnings">Rs. 0</div>
                         <span>earnings</span>
                     </div>
                 </div>

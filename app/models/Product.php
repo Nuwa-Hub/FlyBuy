@@ -20,6 +20,7 @@ class Product
         }
         return self::$instance;
     }
+
     public function findAllProducts(){
 
         $this->db->query('SELECT * FROM  products');

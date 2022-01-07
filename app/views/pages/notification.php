@@ -21,14 +21,6 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
-            <div class="search">
-                <div class="search-box">
-                    <input class="search-txt" type="text" placeholder="search here...">
-                    <a class="search-btn" href="#">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
-            </div>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
             <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>

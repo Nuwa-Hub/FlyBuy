@@ -17,7 +17,7 @@
     <img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
 
     <div class="search-box">
-      <input class="search-txt" type="text" name="" placeholder="Search for products">
+      <input class="search-txt" id="searchBox" type="text" name="" placeholder="Search for products">
       <a class="search-btn" href="#">
         <i class="fas fa-search"></i>
       </a>
@@ -92,48 +92,74 @@
 
   <div class="sec" id="products">
     <h2 style="color:white;" >Featured products</h2>
-    <div class="container">
+
+    <div class="container" id="buyerAccount">
+
       <?php foreach ($data['products'] as $product) : ?>
+
         <div class="product">
+
           <div class="product-card">
+
             <h3 class="name"><?php echo $product->itemName; ?></h3>
             <span class="price"><?php echo "Rs. " . $product->price; ?></span>
             <a class="popup-btn">View item</a>
             <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" class="product-img" alt="">
+
           </div>
+
           <div class="popup-view">
+
             <form method="post" action="<?php echo URLROOT; ?>/ProductController/addToCart">
+
               <div class="popup-card">
+
                 <a><i class="fas fa-times close-btn"></i></a>
+
                 <div class="product-img">
                   <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image?>" alt="">
                 </div>
+
                 <div class="info">
-                  <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
+
+                  <h2><?php echo $product->itemName; ?>
+                    <br>
+                    <span><?php echo $product->seller->storeName; ?></span>
+                  </h2>
+
                   <h3>
                     <span class="stars"><?php echo $product->seller->rating; ?></span>
                     <span><?php echo $product->seller->rating; ?></span>
                   </h3>
+
                   <p><?php echo $product->description; ?></p>
+
                   <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                   <span class="quantity">Quantity :</span>
-                  <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php echo $product->amount;?>">
+
+                  <input type="number" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php echo $product->amount;?>">
 
                   <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
                   <input type="hidden" name="buyer_id" class="buyer_id" value="<?php echo $data['buyer_id']; ?>">
                   <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
 
                   <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                    </i>&nbsp;&nbsp;Add tocart</button>
+                  <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add tocart</button>
+
                 </div>
+
               </div>
+
             </form>
+
           </div>
+
         </div>
+
       <?php endforeach; ?>
 
     </div>
+
   </div>
 
   <!--Popup window to confirm logout-->
@@ -158,15 +184,16 @@
 
 </body>
 
-<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
-
-<script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
-
-<script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
-<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+<!-- <script src="<?php // echo URLROOT; ?>/public/javascript/jquery.min.js"></script> -->
+<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
+
 <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
+<script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 <script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
