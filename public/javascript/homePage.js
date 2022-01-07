@@ -46,7 +46,7 @@ closeBtns.forEach((closeBtn) => {
 
 // When document is ready...
 $(document).ready(function() {
-    alert("df");
+    
     // If cookie is set, scroll to the position saved in the cookie.
     if ($.cookie("scroll") !== null) {
         $(document).scrollTop($.cookie("scroll"));
@@ -61,3 +61,31 @@ $(document).ready(function() {
     });
 
 });
+
+//for search button
+
+function searchElement() {
+
+    var input, filter, ul, li, a, i, txtValue;
+
+    input = document.getElementById("pinput");
+    filter = input.value.toUpperCase();
+
+    products = document.getElementsByClassName("product");
+
+
+    for (i = 0; i < products.length; i++) {
+
+        a = products[i].getElementsByTagName("h3")[0];
+
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+            products[i].style.display = "";
+
+        } else {
+
+            products[i].style.display = "none";
+
+        }
+    }
+}

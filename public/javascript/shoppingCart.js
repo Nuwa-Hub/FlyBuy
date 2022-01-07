@@ -178,7 +178,8 @@ $(document).ready(function() {
             popupbox();
 
             document.getElementById("popup-menu").style.opacity = "1";
-            document.getElementById("btn").style.opacity = "0";
+            document.getElementById("btn").style.opacity = "0"; 
+            document.getElementById("progress").style.opacity = "0";;
 
             check = true;
 
@@ -251,6 +252,8 @@ function alertbox() {
 /*popup box*/
 function popupbox() {
 
+
+    
     $('.popup-menu').addClass('display');
 
 }
