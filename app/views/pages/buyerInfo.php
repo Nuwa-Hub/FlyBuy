@@ -39,16 +39,26 @@
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
       <div class="orderList">
-      <?php foreach ($data['products'] as $product): ?>
         <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;"><?php echo $product->itemName; ?></h3>  
-          <h3 id="store" style="color:#303030;font-family:cursive;font-size:20px;">RC STORES</h3>
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;"><?php echo $product->itemName; ?></h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;"><?php echo "Rs. ".$product->price; ?></h3>    
+        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
+          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
         </div>
-        <?php endforeach; ?>
+        <div class="item">
+        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
+          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
+        </div>
+        <div class="item">
+        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
+          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
+        </div>
+        <div class="item">
+        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
+          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
+        </div>
+        <div class="item">
+        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
+          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
+        </div>
       </div>
     </div>
   </div>
