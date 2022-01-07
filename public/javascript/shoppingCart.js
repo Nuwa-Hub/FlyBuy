@@ -1,4 +1,31 @@
 var check = false;
+var bar = $("progress");
+var scrollValue = 0;
+
+ 
+//progress bar
+$(window).scroll(
+
+    function()
+    {
+
+    bar.css("display","block");
+
+    scrollValue = $(window).scrollTop();
+
+    bar.attr("max", $("body").outerHeight()-$(window).height());
+
+    bar.attr("value", scrollValue);
+
+    if(!scrollValue)
+    {
+
+    bar.css("display","none");
+
+    }
+
+});
+
 
 //change the sub totals of each items
 
@@ -296,10 +323,11 @@ function changeItem() {
 
     var ele = document.getElementsByTagName("article");
 
+  
+    
     for (i = 0; i < ele.length; i++) {
-
-        ele[i].style.transform = "skewX(-17deg)";
-
+       ele[i].style.transform = "skewX(-17deg)";
+   
     }
     window.setTimeout(function() {
 
@@ -308,7 +336,7 @@ function changeItem() {
         for (i = 0; i < ele.length; i++) {
 
             ele[i].style.transform = "skewX(0deg)";
-
+           
         }
     }, 445);
 

@@ -32,6 +32,7 @@
                 </li>
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">About Us</a></li>
             </ul>
+            <progress value="0" max="144"></progress>
         </div>
     </header>
 
