@@ -79,6 +79,14 @@ class Seller implements User{
 
         return $this->db->single();
     }
+
+    public function findStoreNameById($id) {
+
+        $this->db->query('SELECT storeName FROM sellers WHERE seller_id = :id');
+        $this->db->bind(':id', $id);
+
+        return $this->db->single();
+    }
     
     public function findUserByVKey($vkey){
         //Prepared statement

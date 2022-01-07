@@ -180,21 +180,8 @@ class PageController extends Controller
         //find and add for each notification
         foreach ($notifications as $key => $note) {
 
-            $temp_notification_arr = unserialize($notifications[$key]->item_list);
-            $notifications[$key]->item_list = array();
-
+            $notifications[$key]->item_list = unserialize($notifications[$key]->item_list);
             $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
-
-            //find the products related to this notification
-            foreach ($temp_notification_arr as $item_id => $qtt) {
-
-                $item = $this->productModel->findProductById($item_id);
-
-                $item_arr['item'] = $item;
-                $item_arr['quantity'] = $qtt;
-
-                array_push($notifications[$key]->item_list, $item_arr);
-            }
         }
 
         $data = [

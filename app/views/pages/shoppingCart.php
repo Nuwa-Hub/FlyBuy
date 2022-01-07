@@ -13,7 +13,7 @@
     <title>Shopping Cart</title>
 </head>
 
-<body onmousedown="return false" onselectstart="return false">
+<body>
 
     <header id="site-header">
         <div class="container">
@@ -32,7 +32,7 @@
                 </li>
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">About Us</a></li>
             </ul>
-            <progress value="0" max="144"></progress>
+            <progress value="0" max="144" class="progress" id="progress"></progress>
         </div>
     </header>
 
