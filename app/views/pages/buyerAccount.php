@@ -166,7 +166,7 @@
 
 </body>
 
-<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
+
 
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
@@ -176,8 +176,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
 
-<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
-<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
+<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 <script src="<?php echo URLROOT; ?>/public/javascript/slideshow.js"></script>
 <!-- <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script> -->
 <script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>

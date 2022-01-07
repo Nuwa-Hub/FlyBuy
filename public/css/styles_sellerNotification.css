@@ -523,3 +523,22 @@ aside .edit:active{
     background-image: linear-gradient(315deg, #c2b6b6 0%, #576574 74%);
     color: #ddd;
 }
+
+/*star ratings start*/
+span.stars,
+span.stars span {
+    display: block;
+    background: url(../img/white-star.svg) 0 0 repeat-x;
+    width: 100px;
+    /* width of a star multiplied by 5 */
+    height: 20px;
+    /* the height of the star */
+    background-size: 20px 20px;
+}
+
+span.stars span {
+    background-position: 0 0;
+    background-image: url(../img/yellow-star.svg);
+}
+/*star ratings end*/
+
