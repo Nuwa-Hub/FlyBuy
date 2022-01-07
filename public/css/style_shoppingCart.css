@@ -9,20 +9,6 @@ body {
 }
 
 
-/* @keyframes colorchange {
-    0% {
-        background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgb(53, 53, 170) 55%, rgba(0, 212, 255, 1) 100%);
-    }
-    35% {
-        background: linear-gradient(180deg, rgba(9, 9, 121, 1) 0%, rgba(2, 0, 36, 1) 35%, rgb(53, 53, 170) 55%, rgba(0, 212, 255, 1) 100%);
-    }
-    60% {
-        background: linear-gradient(180deg, rgb(53, 53, 170) 0%, rgba(9, 9, 121, 1) 35%, rgba(2, 0, 36, 1) 55%, rgba(0, 212, 255, 1) 100%);
-    }
-    100% {
-        background: linear-gradient(180deg, rgba(0, 212, 255, 1) 0%, rgb(53, 53, 170) 35%, rgba(9, 9, 121, 1) 55%, rgba(2, 0, 36, 1) 100%);
-    }
-} */
 
 
 /*disappear scroll bars*/
@@ -55,7 +41,7 @@ body {
     position: fixed;
     z-index: 10;
     width: 100%;
-    height: 60px;
+    height: 50px;
     top: 0;
     left: 0;
 }
@@ -253,7 +239,30 @@ a:hover {
     line-height: 40px;
     width: 0px;
 }
-
+progress{
+    position: fixed;
+    top: 16%;
+    left: 0;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    z-index: 1000;
+  }
+  
+  /* progress bar */
+  progress::-webkit-progress-bar {
+              background: black;
+              border-radius: 50px;
+              padding: 1px;
+          }
+  
+          progress::-webkit-progress-value {
+              border-radius: 50px;
+              box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+              background:
+                 -webkit-linear-gradient(45deg, #fb0094, #00ff00, #ffff00, #ff0000);
+               
+              
+          }
 
 /* item container */
 
@@ -384,6 +393,7 @@ a:hover {
     transition: bottom .2s linear;
 }
 
+/* remove item */
 .remove {
     cursor: pointer;
     background-color: black;

@@ -106,6 +106,13 @@ class Product
         }
     }
 
+    public function reduceAmount($data){
+        $this->db->query("UPDATE products SET amount = :amount  WHERE item_id = :item_id");
+        $this->db->bind(':item_id', $data['item_id']);
+        $this->db->bind(':amount', $data['amount']);
+        $this->db->updateField();
+    }
+
     public function deleteItemById($id){
 
         $this->db->query('DELETE FROM products WHERE item_id = :id');

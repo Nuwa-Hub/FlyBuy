@@ -206,8 +206,10 @@ function addImage(event){
 }
 
 function imageAdded(event){
+    const element = event.target.parentElement;
     if (event.target.value != ''){
-        event.target.parentElement.classList.add('success');
+        removeError(element);
+        setSuccess(element);
     }
     else{
         event.target.parentElement.classList.remove('success');

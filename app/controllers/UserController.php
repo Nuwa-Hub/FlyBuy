@@ -237,13 +237,14 @@ class UserController extends Controller
             
             $seller_id = $product->seller_id;
 
-            $this->productModel->updateEachFeild($data);
+            $this->productModel->reduceAmount($data);
 
             if (!isset($cart[$seller_id]['order_price'])) {
                 $cart[$seller_id]['order_price'] = 0;
             }
 
             $cart[$seller_id][$product->item_id] = $product->amount[1];
+            $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
 
         $this->buyerModel->saveCart($buyer_id, $cart);

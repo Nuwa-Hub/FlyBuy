@@ -31,11 +31,8 @@
                 <div class="title">
                     <h2 class="store"><?php echo $data['user']->storeName; ?></h2>
                     <h3 class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
+                    <span class="stars"><?php echo $data['user']->rating; ?></span>
+                    <span><?php echo $data['user']->rating; ?></span>
                     </h3>
                 </div>
                 <div class="profilePic">
@@ -203,6 +200,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script language="JavaScript" type="text/javascript" src="<?php echo URLROOT; ?>/public/javascript/sellerNotification.js"></script>
+
+<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
+
 <script>
     function upload(element){
         const input = element.nextElementSibling;
