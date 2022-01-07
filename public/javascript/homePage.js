@@ -40,7 +40,7 @@ closeBtns.forEach((closeBtn) => {
         });
     });
 });
-<<<<<<< HEAD
+
 
 
 
