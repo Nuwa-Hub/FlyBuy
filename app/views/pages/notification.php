@@ -21,6 +21,14 @@
     <main>
         <nav>
             <a href="#" class="logo">FlyBuy</a>
+            <div class="search">
+                <div class="search-box">
+                    <input class="search-txt" type="text" placeholder="search here...">
+                    <a class="search-btn" href="#">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+            </div>
             <a href='<?php echo URLROOT ?>/pageController/sellerAccount/<?php echo $data['user']->seller_id; ?>' class="home">Home</a>
             <a href="<?php echo URLROOT ?>/PageController/viewAllNotifications/<?php echo $data['user']->seller_id; ?>" class="notification">Notification<small id="indicator" class="badge"></small></a>
             <a href="#" onclick="toggleLogout()" class="logout">Logout</a>
@@ -100,9 +108,9 @@
 
                             <div class="order-details">
                                 <?php foreach($notification->item_list as $product): ?>
-                                    <div class="item-name"><?php echo $product['item']->itemName; ?></div>
+                                    <div class="item-name"><?php echo $product['itemName']; ?></div>
                                     <div class="item-amount"><?php echo $product['quantity']; ?></div>
-                                    <div class="price"><?php echo 'Rs. ' . $product['item']->price . ' x ' . $product['quantity'] . ' = Rs. ' . $product['item']->price*$product['quantity'] ?></div>
+                                    <div class="price"><?php echo 'Rs. ' . $product['price'] . ' x ' . $product['quantity'] . ' = Rs. ' . $product['price']*$product['quantity'] ?></div>
                                 <?php endforeach; ?>
                             </div>
 

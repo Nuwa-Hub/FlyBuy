@@ -5,7 +5,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->productModel = $this->model('Product');
+        $this->productmodel = $this->model('Product');
     }
 
     public function addItem()
@@ -15,7 +15,7 @@ class ProductController extends Controller
             $file = $_FILES['itemImage'];
 
             $_POST['item_image'] = $this->uploadProductImage($file);
-            $this->productModel->addProduct($_POST);
+            $this->productmodel->addProduct($_POST);
 
             $id = $_POST['seller_id'];
 
@@ -35,7 +35,7 @@ class ProductController extends Controller
                 $_POST['item_image'] = $this->uploadProductImage($file);
             }
 
-            $this->productModel->updateEachFeild($_POST);
+            $this->productmodel->updateEachFeild($_POST);
 
             $id = $_POST['seller_id'];
 
@@ -45,7 +45,7 @@ class ProductController extends Controller
 
     public function removeProductImage($id){
 
-        $imgName = $this->productModel->getProductImgNameById($id)->item_image;
+        $imgName = $this->productmodel->getProductImgNameById($id)->item_image;
         $defaultImg = "defaultItemImage.png";
 
         if(strcmp($imgName, $defaultImg) !== 0){
@@ -80,7 +80,7 @@ class ProductController extends Controller
             $item_id = $_POST['item_id'];
 
             $this->removeProductImage($item_id);
-            $this->productModel->deleteItemById($item_id);
+            $this->productmodel->deleteItemById($item_id);
 
             $id = $_POST['seller_id'];
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
             }
 
             if ($item) {
-                $item = $this->productModel->findProductById($pid);
+                $item = $this->productmodel->findProductById($pid);
                 $ar = array($item->amount, $pqty);
                 $item->amount = $ar;
                 array_push($_SESSION['cartarr'], $item);

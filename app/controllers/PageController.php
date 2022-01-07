@@ -178,24 +178,11 @@ class PageController extends Controller
         $notifications = $this->castToObj($notifications);
 
         //find and add for each notification
-        // foreach ($notifications as $key => $note) {
+        foreach ($notifications as $key => $note) {
 
-        //     $temp_item_arr = unserialize($notifications[$key]->item_list);
-        //     $notifications[$key]->item_list = array();
-
-        //     $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
-
-        //     //find the products related to this notification
-        //     foreach ($temp_item_arr as $item_id => $qtt) {
-
-        //         $item = $this->productModel->findProductById($item_id);
-
-        //         $item_arr['item'] = $item;
-        //         $item_arr['quantity'] = $qtt;
-
-        //         array_push($notifications[$key]->item_list, $item_arr);
-        //     }
-        // }
+            $notifications[$key]->item_list = unserialize($notifications[$key]->item_list);
+            $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
+        }
 
         $data = [
             'seller_id' => $id,
@@ -203,12 +190,12 @@ class PageController extends Controller
             'notifications' => $notifications,
             'type' => $type
         ];
-        print_r($data['notifications']);
-        // if (!isset($_COOKIE['user_login'])) {
-        //     header('location: ' . URLROOT . '/PageController/loginSignup');
-        // } else {
-        //     $this->view('pages/notification', $data);
-        // }
+
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/notification', $data);
+        }
     }
 
     public function verifyEmail($userType, $vkey)

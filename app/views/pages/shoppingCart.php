@@ -98,7 +98,7 @@
                 <input class="buy_id" type="hidden" value="<?php echo $data['buyer_id']; ?>">
                 <a class="btn draw-border" id="btn">Checkout</a>
 
-                <!-- <a class="psub draw-border" id="psub" href='<?php //echo URLROOT; ?>/PageController/buyerAccount/<?php //echo $data['buyer_id']; ?>/<?php //echo "submit"; ?> '>Home</a> -->
+                <!-- <a class="psub draw-border" id="psub" href='<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>/<?php echo "submit"; ?> '>Home</a> -->
 
             </div>
         </div>

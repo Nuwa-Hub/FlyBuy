@@ -243,8 +243,7 @@ class UserController extends Controller
                 $cart[$seller_id]['order_price'] = 0;
             }
 
-            // $cart[$seller_id][$product->item_id] = $product->amount[1];
-            $cart[$seller_id][$product->item_id] = array('itemName' => $product->itemName, 'price' => $product->price, 'cart_amount' => $product->amount[1]);
+            $cart[$seller_id][$product->item_id] = array("itemName" => $product->itemName, "price" => $product->price, "quantity" => $product->amount[1]);
             $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
 
