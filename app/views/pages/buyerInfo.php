@@ -39,13 +39,65 @@
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
       <div class="orderList">
+      <?php foreach ($data['products'] as $product): ?>
         <div class="item">
-          <label>Placed on 31 Dec 2021</label>
+            <input type="checkbox" id="<?php echo $product->item_id; ?>">
+          <label for="<?php echo $product->item_id; ?>"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></label>
           <div class="details">
             <h2>Order details<h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe, excepturi quae blanditiis tempora rem voluptatem facilis assumenda dignissimos suscipit quia nisi quod totam ipsa! Nesciunt cum molestias ipsam eaque sunt.</p>
+               <!--Table start-->
+            <div class="container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--Table end-->
           </div>
         </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
