@@ -360,8 +360,8 @@ class PageController extends Controller
 
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-        $pdf->writeHTML($currentDate->format('Y-m-d'));
-        $pdf->writeHTML(" <h3>Date</h3>");
+      
+        $pdf->writeHTML(" <h3>Date : ".$currentDate->format('Y-m-d')."</h3>");
         $pdf->writeHTML("<b>INVOICE#</b>");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
