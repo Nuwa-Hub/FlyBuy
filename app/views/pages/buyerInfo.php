@@ -40,24 +40,11 @@
       <h1 style="color:white;">Order history</h1>
       <div class="orderList">
         <div class="item">
-        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
-          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
-        </div>
-        <div class="item">
-        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
-          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
-        </div>
-        <div class="item">
-        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
-          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
-        </div>
-        <div class="item">
-        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
-          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
-        </div>
-        <div class="item">
-        <input type="image" src="<?php echo URLROOT; ?>/public/img/cart.png" name="submit" width="50px" height="50px" alt="submit"/>  
-          <h3 id="name" style="color:white;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>     
+          <label>Placed on 31 Dec 2021</label>
+          <div class="details">
+            <h2>Order details<h2>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe, excepturi quae blanditiis tempora rem voluptatem facilis assumenda dignissimos suscipit quia nisi quod totam ipsa! Nesciunt cum molestias ipsam eaque sunt.</p>
+          </div>
         </div>
       </div>
     </div>
