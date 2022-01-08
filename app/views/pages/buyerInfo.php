@@ -41,8 +41,8 @@
       <div class="orderList">
       <?php foreach ($data['cart_list'] as $cart): ?>
         <div class="item">
-            <input type="checkbox" id="<?php echo $cart->item_id; ?>">
-          <label for="<?php echo $cart->item_id; ?>"><?php echo date('Y-m-d H:i:s', strtotime($cart->created_at)); ?></label>
+            <input type="checkbox" id="<?php echo $cart['cart_id']; ?>">
+          <label for="<?php echo $cart['cart_id']; ?>"><?php echo date('Y-m-d H:i:s', strtotime($cart['created_at'])); ?></label>
           <div class="details">
             <h2>Order details<h2>
                <!--Table start-->
@@ -56,10 +56,17 @@
                   </tr>
                 </thead>
                 <tbody>
+                <?php foreach($cart['item_list'] as $item): ?>
                   <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
+                    <td><?php echo $item['itemName']; ?></td>
+                    <td><?php echo $item['quantity']; ?></td>
+                    <td><?php echo $item['quantity']*$item['price']; ?></td>
+                  </tr>
+                  <?php endforeach; ?>
+                  <tr>
+                    <td></td>
+                    <td style="font-weight:600;">Sum of Total</td>
+                    <td style="font-weight:600;background:#6495ED"><?php echo $cart['cart_price']; ?></td>
                   </tr>
                 </tbody>
               </table>
