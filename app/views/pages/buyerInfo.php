@@ -42,7 +42,7 @@
       <?php foreach ($data['cart_list'] as $cart): ?>
         <div class="item">
             <input type="checkbox" id="<?php echo $cart['cart_id']; ?>">
-          <label for="<?php echo $cart['cart_id']; ?>"><?php echo date('Y-m-d H:i:s', strtotime($cart['created_at'])); ?></label>
+          <label for="<?php echo $cart['cart_id']; ?>"><?php echo "Placed on      ".date('Y-m-d', strtotime($cart['created_at']))." at ".date('H:i:s', strtotime($cart['created_at'])); ?></label>
           <div class="details">
             <h2>Order details<h2>
                <!--Table start-->
