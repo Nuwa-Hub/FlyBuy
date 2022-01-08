@@ -39,10 +39,10 @@
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
       <div class="orderList">
-      <?php foreach ($data['products'] as $product): ?>
+      <?php foreach ($data['cart_list'] as $cart): ?>
         <div class="item">
-            <input type="checkbox" id="<?php echo $product->item_id; ?>">
-          <label for="<?php echo $product->item_id; ?>"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></label>
+            <input type="checkbox" id="<?php echo $cart->item_id; ?>">
+          <label for="<?php echo $cart->item_id; ?>"><?php echo date('Y-m-d H:i:s', strtotime($cart->created_at)); ?></label>
           <div class="details">
             <h2>Order details<h2>
                <!--Table start-->
@@ -56,36 +56,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
-                  <tr>
-                    <td>Cell 1</td>
-                    <td>Cell 2</td>
-                    <td>Cell 3</td>
-                  </tr>
                   <tr>
                     <td>Cell 1</td>
                     <td>Cell 2</td>
