@@ -64,3 +64,11 @@ function addField(){
 function removeField(){
     storeName.classList.add('remove');
 }
+
+
+// prevent the copy paste in confirmpassword 
+
+window.onload = () => {
+    const myInput = document.getElementById('pass');
+    myInput.onpaste = e => e.preventDefault();
+   }

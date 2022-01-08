@@ -198,37 +198,100 @@ html {
     overflow-y: scroll;
     height: 545px;
 }
-/*items*/
+/*items start*/
 .item{
-    display: flex;
-    padding: 0;
-    margin: 8px;
     position: relative;
-    border-radius: 8px;
-    background: white;
+    max-width: 800px;
+    overflow: hidden;
+    font-weight: 500;
 }
-.item #name{
+.item input{
+    display: none;
+}
+.item label{
+    position: relative;
+    font-weight: 600;
+    background:#fff ;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.8);
+    color: #1c1c6b;
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1;
+}
+.item label:after{
+    content: "";
     position: absolute;
-    left: 116px;
-    top: 5px;
+    top: 3px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: url(../img/arrow.svg) no-repeat 0 0;
 }
-.item #date{
-    position: absolute;
-    left: 116px;
-    bottom: 35px;
+.item input:checked + label:after{
+    transform: rotate(90deg);
+    transition: all 0.3s ease;
 }
-.item #quantity{
-    position: absolute;
-    right: 50px;
-    top: 5px;
+.details{
+    max-height: 1px;
+    overflow: hidden;
+    border-radius: 4px;
+    line-height: 1.4;
+    position: relative;
+    top: -100%;
+    transition: all 0.3s ease;
 }
-.item #price{
-    position: absolute;
-    right: 50px;
-    bottom: 5px;
+.item input:checked ~ .details{
+    max-height: fit-content;
+    padding-bottom: 25px;
+    background: #fff;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.8);
+    
 }
-.item #store{
-    position: absolute;
-    left: 450px;
-    top: 5px;
+.details h2{
+    margin-bottom: 10px;
+    padding: 15px 15px 0;
+    color: #1c1c6b;
 }
+.details p{
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+/*items start*/
+
+/*table start*/
+table {
+    position: relative;
+    justify-content: center;
+    width: 750px;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: rgb(219, 219, 219);
+  }
+  th,
+  td {
+    padding: 15px;
+    color: rgb(255, 255, 255);
+  }
+  th {
+    text-align: left;
+  }
+  thead th {
+    background-color: #0e1842;
+  }
+  tbody tr:hover {
+    background-color: rgba(66, 69, 92, 0.623);
+  }
+  tbody td {
+    position: relative;
+  }
+  tr,
+  td{
+      color: black;
+  }
+  /*table end*/

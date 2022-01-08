@@ -40,29 +40,6 @@ closeBtns.forEach((closeBtn) => {
         });
     });
 });
-
-
-
-
-
-// When document is ready...
-$(document).ready(function() {
-    
-    // If cookie is set, scroll to the position saved in the cookie.
-    if ($.cookie("scroll") !== null) {
-        $(document).scrollTop($.cookie("scroll"));
-    }
-
-    // When scrolling happens....
-    $(window).on("scroll", function() {
-
-        // Set a cookie that holds the scroll position.
-        $.cookie("scroll", $(document).scrollTop());
-
-    });
-
-});
-
 //for search button
 
 function searchElement() {
@@ -73,13 +50,23 @@ function searchElement() {
     filter = input.value.toUpperCase();
 
     products = document.getElementsByClassName("product");
-
+ 
 
     for (i = 0; i < products.length; i++) {
 
         a = products[i].getElementsByTagName("h3")[0];
+        store=products[i].getElementsByTagName("div")[1].getElementsByTagName("span")[0];
 
         if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+
+            products[i].style.display = "";
+
+        } else {
+
+            products[i].style.display = "none";
+
+        }    
+         if (store.innerHTML.toUpperCase().indexOf(filter) > -1) {
 
             products[i].style.display = "";
 

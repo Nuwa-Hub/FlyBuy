@@ -39,14 +39,65 @@
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
       <div class="orderList">
+      <?php foreach ($data['products'] as $product): ?>
         <div class="item">
-          <img src="<?php echo URLROOT; ?>/public/img/kottu mee.png"style="width:100px;height:100px;">
-          <h3 id="name" style="color:#303030;font-family:cursive;font-size:20px;">Prima kottu mee</h3>  
-          <h3 id="store" style="color:#303030;font-family:cursive;font-size:20px;">RC STORES</h3>
-          <h3 id="date" style="color:#303030;font-family:cursive;font-size:20px;">Placed on 31 Dec 2021</h3>   
-          <h3 id="quantity" style="color:#303030;font-family:cursive;font-size:20px;">Quantity:-2</h3>   
-          <h3 id="price" style="color:blue;font-family:cursive;font-size:25px;">Total: Rs.890</h3>    
+            <input type="checkbox" id="<?php echo $product->item_id; ?>">
+          <label for="<?php echo $product->item_id; ?>"><?php echo date('Y-m-d H:i:s', strtotime($product->created_at)); ?></label>
+          <div class="details">
+            <h2>Order details<h2>
+               <!--Table start-->
+            <div class="container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                  <tr>
+                    <td>Cell 1</td>
+                    <td>Cell 2</td>
+                    <td>Cell 3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--Table end-->
+          </div>
         </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
@@ -78,13 +129,13 @@
 <script src="<?php echo URLROOT; ?>/public/javascript/popupFormValidation.js"></script>
 
 <script src="<?php echo URLROOT; ?>/public/javascript/jquery.min.js"></script>
-<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="<?php echo URLROOT ?>/public/javaScript/shoppingCart.js"></script>
 
-<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
-<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
-<script src="<?php echo URLROOT; ?>/public/javascript/slideshow.js"></script>
+
+
+
 
 </html>

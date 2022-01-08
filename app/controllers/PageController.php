@@ -360,8 +360,8 @@ class PageController extends Controller
 
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-        $pdf->writeHTML($currentDate->format('Y-m-d'));
-        $pdf->writeHTML(" <h3>Date</h3>");
+      
+        $pdf->writeHTML(" <h3>Date : ".$currentDate->format('Y-m-d')."</h3>");
         $pdf->writeHTML("<b>INVOICE#</b>");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
@@ -430,6 +430,21 @@ class PageController extends Controller
     /*buyerinfo */
     public function buyerInfo($id)
     {
+        $products = $this->castToArray($this->productModel->findAllProducts());
+
+        usort($products, function ($a, $b) {
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+
+            return $t2 - $t1;
+        });
+
+        for ($i = 0; $i < count($products); $i++) {
+            $products[$i]['seller'] = $this->sellerModel->findUserById($products[$i]['seller_id']);
+        }
+
+        $products = $this->castToObj($products);
 
         $carts = $this->castToArray($this->buyerModel->getAllCartsById($id));
 
