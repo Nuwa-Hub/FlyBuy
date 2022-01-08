@@ -19,7 +19,7 @@
 
 
 		<div class="search-box">
-			<input class="search-txt" type="text" name="" placeholder="Search for products">
+		<input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchElement()">
 			<a class="search-btn" href="#">
 				<i class="fas fa-search"></i>
 			</a>

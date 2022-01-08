@@ -115,7 +115,7 @@
 
                             <div class="input-field <?php echo isset($data['signupClassNames']['confirmPsw']) ? $data['signupClassNames']['confirmPsw'] : ''; ?>">
                                 <i class="fas fa-lock"></i>
-                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw">
+                                <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" id="pass">
                                 <i class="fas fa-eye togglePassword"></i>
                                 <i class="fas fa-exclamation-circle tooltip">
                                     <small class="tooltip-text"><?php echo isset($data['signupErrors']['confirmPsw']) ? $data['signupErrors']['confirmPsw'] : ''; ?></small>
