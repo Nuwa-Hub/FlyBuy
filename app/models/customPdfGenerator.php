@@ -80,7 +80,7 @@ class CustomPdfGenerator extends TCPDF
         $this->Cell($w[0], 6, '', 'LR', 0, 'L', $fill);
         $this->Cell($w[1], 6, '', 'LR', 0, 'R', $fill);
         $this->Cell($w[2], 6, 'Shipping:', 'LR', 0, 'L', $fill);
-        $this->Cell($w[3], 6, 169.00, 'LR', 0, 'R', $fill);
+        $this->Cell($w[3], 6, '169.00', 'LR', 0, 'R', $fill);
         $this->Ln();
 
         $this->Cell($w[0], 6, '', 'LR', 0, 'L', $fill);

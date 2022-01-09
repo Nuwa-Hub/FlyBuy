@@ -40,6 +40,38 @@ closeBtns.forEach((closeBtn) => {
         });
     });
 });
+//rating popup start
+
+var popupViews2 = document.querySelectorAll('.container-new');
+var popupBtns2 = document.querySelectorAll('.popup-rate');
+var closeBtns2 = document.querySelectorAll('.close-btn');
+
+
+var popup1 = function(popupClick) {
+    popupViews2[popupClick].classList.add('active');
+
+    document.body.style.overflowY = 'hidden';
+}
+
+popupBtns2.forEach((popupBtn, i) => {
+    popupBtn.addEventListener("click", () => {
+        popup1(i)
+
+    });
+});
+
+closeBtns2.forEach((closeBtn) => {
+    closeBtn.addEventListener("click", () => {
+        popupViews2.forEach((popupView) => {
+            popupView.classList.remove('active');
+
+            document.body.style.overflowY = '';
+        });
+    });
+});
+//rating popup end
+
+
 //for search button
 
 function searchElement() {
@@ -71,4 +103,43 @@ function searchElement() {
     }
 }
 
+//rating
+function rate(num,id){
 
+    setTimeout(function() {
+
+        // ajex request for remove the relevent item from SESSION store
+        $.ajax({
+            url: 'http://localhost/Project/FlyBuy/UserController/giveRating',
+            method: 'POST',
+            cache: false,
+            data: {
+                seller_id: id,
+                rating:num
+            },
+            success: function(response) {
+
+                console.log(response);
+            }
+        });
+
+    }, 200);
+
+}
+
+var now = new Date();
+var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) - now;
+
+if (millisTill10 < 0) {
+     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+}
+
+setTimeout(function(){
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost/Project/FlyBuy/UserController/updateRating",
+        success: function(result = '') {}
+    });
+}, 
+millisTill10);
