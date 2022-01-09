@@ -106,10 +106,7 @@ function searchElement() {
 //rating
 function rate(num,id){
 
-    alert(num);
     setTimeout(function() {
-
-      
 
         // ajex request for remove the relevent item from SESSION store
         $.ajax({
