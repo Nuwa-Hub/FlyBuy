@@ -212,6 +212,16 @@ class Buyer implements User
         }
     }
 
+    public function getAllCartsById($id){
+
+        $this->db->query("SELECT * FROM carts WHERE buy_id = :id");
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+
+        return $results;
+    }
+
     public function clearUserFields($id){
 
         $this->db->query("UPDATE buyers SET email = :email WHERE buy_id = :id");

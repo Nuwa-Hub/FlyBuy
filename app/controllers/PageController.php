@@ -440,13 +440,71 @@ class PageController extends Controller
 
         return $casted_arr;
     }
+
     /*buyerinfo */
     public function buyerInfo($id)
     {
+        // $products = $this->castToArray($this->productModel->findAllProducts());
+
+        // usort($products, function ($a, $b) {
+
+        //     $t1 = strtotime($a['created_at']);
+        //     $t2 = strtotime($b['created_at']);
+
+        //     return $t2 - $t1;
+        // });
+
+        // for ($i = 0; $i < count($products); $i++) {
+        //     $products[$i]['seller'] = $this->sellerModel->findUserById($products[$i]['seller_id']);
+        // }
+
+        // $products = $this->castToObj($products);
+
+        $carts = $this->castToArray($this->buyerModel->getAllCartsById($id));
+
+        // can be used to sort according to the timestamp
+        usort($carts, function ($a, $b) {
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+
+            return $t2 - $t1;
+        });
+
+        $carts = $this->castToObj($carts);
+        $cart_list = array();
+
+        foreach ($carts as $oneCart) {
+
+            $oneCart->item_list = unserialize($oneCart->cart);
+            unset($oneCart->cart);
+
+            $cart_price = 0;
+            $cart_details = array();
+            $item_list = array();
+
+            foreach ($oneCart->item_list as $seller_item_list) {
+
+                $cart_price += $seller_item_list['order_price'];
+                unset($seller_item_list['order_price']);
+
+                foreach ($seller_item_list as $item) {
+                    array_push($item_list, $item);
+                }
+            }
+
+            $cart_details['item_list'] = $item_list;
+            $cart_details['cart_id'] = $oneCart->cart_id;
+            $cart_details['created_at'] = $oneCart->created_at;
+            $cart_details['cart_price'] = $cart_price;
+
+            array_push($cart_list, $cart_details);
+        }
 
         $data = [
             'buyer_id' => $id,
             'user' => $this->buyerModel->findUserById($id),
+            'cart_list' => $cart_list
         ];
 
         $this->view('pages/buyerInfo', $data);

@@ -243,10 +243,6 @@ class UserController extends Controller
                 $cart[$seller_id]['order_price'] = 0;
             }
 
-            if (!isset($cart[$seller_id]['storeName'])) {
-                $cart[$seller_id]['storeName'] = $this->sellerModel->findStoreNameById($seller_id)->storeName;
-            }
-
             $cart[$seller_id][$product->item_id] = array("itemName" => $product->itemName, "price" => $product->price, "quantity" => $product->amount[1]);
             $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
