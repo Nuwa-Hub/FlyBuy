@@ -35,7 +35,7 @@
         <i class="fas fa-map-marker-alt" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->address; ?></span></i><br><br>
         <i class="fa fa-phone" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->telNo; ?></span></i>
       </div>
-      <a href='<?php echo URLROOT ?>/PageController/editBuyerAccount/<?php echo $data['user']->buyer_id; ?>' class="edit">edit account</a>
+      <a href='<?php echo URLROOT ?>/PageController/editBuyerAccount/<?php echo $data['buyer_id']; ?>' class="edit">Edit account</a>
     </div>
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
@@ -52,6 +52,7 @@
                 <thead>
                   <tr>
                     <th>Product</th>
+                    <th>Unit price</th>
                     <th>Quantity</th>
                     <th>Total</th>
                   </tr>
@@ -60,11 +61,13 @@
                 <?php foreach($cart['item_list'] as $item): ?>
                   <tr>
                     <td><?php echo $item['itemName']; ?></td>
+                    <td><?php echo $item['price']; ?></td>
                     <td><?php echo $item['quantity']; ?></td>
                     <td><?php echo $item['quantity']*$item['price']; ?></td>
                   </tr>
                   <?php endforeach; ?>
                   <tr>
+                    <td></td>
                     <td></td>
                     <td style="font-weight:600;">Sum of Total</td>
                     <td style="font-weight:600;background:#6495ED"><?php echo $cart['cart_price']; ?></td>
