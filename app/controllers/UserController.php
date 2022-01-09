@@ -227,7 +227,7 @@ class UserController extends Controller
         $buyer_id = $_POST['buy_id'];
         $cart = [];
         $order = [];
-
+      
         foreach ($_SESSION['cartarr'] as $product) {
 
             $data = [
@@ -255,6 +255,7 @@ class UserController extends Controller
 
         $_SESSION['cartarray'] = $_SESSION['cartarr'];
         $_SESSION['cartarr'] = [];
+        $_SESSION['buyer_id']=$buyer_id;
     }
 
     public function getNotificationCount()

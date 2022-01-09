@@ -51,13 +51,14 @@ function searchElement() {
 
     products = document.getElementsByClassName("product");
  
+    $(document).scrollTop(1300);
 
     for (i = 0; i < products.length; i++) {
 
         a = products[i].getElementsByTagName("h3")[0];
         store=products[i].getElementsByTagName("div")[1].getElementsByTagName("span")[0];
 
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1 || store.innerHTML.toUpperCase().indexOf(filter) > -1) {
 
             products[i].style.display = "";
 
@@ -66,15 +67,7 @@ function searchElement() {
             products[i].style.display = "none";
 
         }    
-         if (store.innerHTML.toUpperCase().indexOf(filter) > -1) {
-
-            products[i].style.display = "";
-
-        } else {
-
-            products[i].style.display = "none";
-
-        }
+   
     }
 }
 

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FlyBuy | Home</title>
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_buyerInfo.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style_editBuyerAccount.css">
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styles_popup.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
@@ -35,48 +35,10 @@
         <i class="fas fa-map-marker-alt" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->address; ?></span></i><br><br>
         <i class="fa fa-phone" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->telNo; ?></span></i>
       </div>
-      <a href='<?php echo URLROOT ?>/PageController/editBuyerAccount/<?php echo $data['user']->buyer_id; ?>' class="edit">edit account</a>
+      
     </div>
     <div class="orders">
       <h1 style="color:white;">Order history</h1>
-      <div class="orderList">
-      <?php foreach ($data['cart_list'] as $cart): ?>
-        <div class="item">
-            <input type="checkbox" id="<?php echo $cart['cart_id']; ?>">
-          <label for="<?php echo $cart['cart_id']; ?>"><?php echo "Placed on      ".date('Y-m-d', strtotime($cart['created_at']))." at ".date('H:i:s', strtotime($cart['created_at'])); ?></label>
-          <div class="details">
-            <h2>Order details<h2>
-               <!--Table start-->
-            <div class="container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php foreach($cart['item_list'] as $item): ?>
-                  <tr>
-                    <td><?php echo $item['itemName']; ?></td>
-                    <td><?php echo $item['quantity']; ?></td>
-                    <td><?php echo $item['quantity']*$item['price']; ?></td>
-                  </tr>
-                  <?php endforeach; ?>
-                  <tr>
-                    <td></td>
-                    <td style="font-weight:600;">Sum of Total</td>
-                    <td style="font-weight:600;background:#6495ED"><?php echo $cart['cart_price']; ?></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!--Table end-->
-          </div>
-        </div>
-        <?php endforeach; ?>
-      </div>
     </div>
   </div>
 
