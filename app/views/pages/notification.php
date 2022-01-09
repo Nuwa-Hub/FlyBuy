@@ -108,9 +108,9 @@
 
                             <div class="order-details">
                                 <?php foreach($notification->item_list as $product): ?>
-                                    <div class="item-name"><?php echo $product['item']->itemName; ?></div>
+                                    <div class="item-name"><?php echo $product['itemName']; ?></div>
                                     <div class="item-amount"><?php echo $product['quantity']; ?></div>
-                                    <div class="price"><?php echo 'Rs. ' . $product['item']->price . ' x ' . $product['quantity'] . ' = Rs. ' . $product['item']->price*$product['quantity'] ?></div>
+                                    <div class="price"><?php echo 'Rs. ' . $product['price'] . ' x ' . $product['quantity'] . ' = Rs. ' . $product['price']*$product['quantity'] ?></div>
                                 <?php endforeach; ?>
                             </div>
 

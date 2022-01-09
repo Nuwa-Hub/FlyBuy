@@ -243,7 +243,7 @@ class UserController extends Controller
                 $cart[$seller_id]['order_price'] = 0;
             }
 
-            $cart[$seller_id][$product->item_id] = $product->amount[1];
+            $cart[$seller_id][$product->item_id] = array("itemName" => $product->itemName, "price" => $product->price, "quantity" => $product->amount[1]);
             $cart[$seller_id]['order_price'] += $product->price * $product->amount[1];
         }
 
@@ -277,6 +277,25 @@ class UserController extends Controller
         $id = $_POST['notify_id'];
 
         $this->sellerModel->markNotificationById($id);
+    }
+
+    public function getProductSearchResult(){
+
+        if (isset($_POST['seller_id'])) {
+
+            $id = $_POST['seller_id'];
+
+            $allSellerProducts = $this->sellerModel->findAllSellerProducts($id);
+            echo json_encode($allSellerProducts);
+        }
+        else {
+
+            $allProducts = $this->productModel->findAllProducts();
+            foreach ($allProducts as $product) {
+                $product->seller = $this->sellerModel->findUserById($product->seller_id);
+            }
+            echo json_encode($allProducts);
+        }
     }
 
     public function logout()

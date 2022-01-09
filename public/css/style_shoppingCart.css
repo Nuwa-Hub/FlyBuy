@@ -3,7 +3,7 @@ body {
     overflow-x: hidden;
     background-attachment: fixed;
     padding-top: 0px;
-    -webkit-animation: colorchange 20s infinite;
+   
     animation: colorchange 40s infinite;
     background-color: rgb(2, 2, 71);
 }
@@ -252,14 +252,14 @@ progress{
   progress::-webkit-progress-bar {
               background: black;
               border-radius: 50px;
-              padding: 1px;
+              padding: 3px;
           }
   
           progress::-webkit-progress-value {
               border-radius: 50px;
               box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
               background:
-                 -webkit-linear-gradient(45deg, #fb0094, #00ff00, #ffff00, #ff0000);
+                 -webkit-linear-gradient(45deg, #ffffff, #ffffff, #ffffff, #ffffff);
                
               
           }
@@ -335,7 +335,7 @@ progress{
     position: absolute;
     left: -2px;
     top: -2px;
-    background: linear-gradient(45deg, #fb0094, #00ff00, #ffff00, #ff0000);
+    background: linear-gradient(45deg, #ffc2e6, #d1ffd1, #ffffba, #ffcbcb);
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     z-index: -1;
@@ -727,7 +727,7 @@ svg {
     width: 400px;
     height: 440px;
     background: linear-gradient(90deg, rgba(2, 0, 36, 0.7122199221485469) 100%, rgba(3, 0, 255, 0.7906512946975666) 100%, rgba(12, 25, 247, 0.09877454399728647) 100%);
-    top: 150px;
+    top: 120px;
     left: 35%;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;

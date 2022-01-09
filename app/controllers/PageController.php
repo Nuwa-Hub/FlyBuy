@@ -180,21 +180,8 @@ class PageController extends Controller
         //find and add for each notification
         foreach ($notifications as $key => $note) {
 
-            $temp_notification_arr = unserialize($notifications[$key]->item_list);
-            $notifications[$key]->item_list = array();
-
+            $notifications[$key]->item_list = unserialize($notifications[$key]->item_list);
             $notifications[$key]->buyer = $this->buyerModel->findUserById($notifications[$key]->buy_id);
-
-            //find the products related to this notification
-            foreach ($temp_notification_arr as $item_id => $qtt) {
-
-                $item = $this->productModel->findProductById($item_id);
-
-                $item_arr['item'] = $item;
-                $item_arr['quantity'] = $qtt;
-
-                array_push($notifications[$key]->item_list, $item_arr);
-            }
         }
 
         $data = [
@@ -373,8 +360,8 @@ class PageController extends Controller
 
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-        $pdf->writeHTML($currentDate->format('Y-m-d'));
-        $pdf->writeHTML(" <h3>Date</h3>");
+      
+        $pdf->writeHTML(" <h3>Date : ".$currentDate->format('Y-m-d')."</h3>");
         $pdf->writeHTML("<b>INVOICE#</b>");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
@@ -439,13 +426,71 @@ class PageController extends Controller
 
         return $casted_arr;
     }
+
     /*buyerinfo */
     public function buyerInfo($id)
     {
+        // $products = $this->castToArray($this->productModel->findAllProducts());
+
+        // usort($products, function ($a, $b) {
+
+        //     $t1 = strtotime($a['created_at']);
+        //     $t2 = strtotime($b['created_at']);
+
+        //     return $t2 - $t1;
+        // });
+
+        // for ($i = 0; $i < count($products); $i++) {
+        //     $products[$i]['seller'] = $this->sellerModel->findUserById($products[$i]['seller_id']);
+        // }
+
+        // $products = $this->castToObj($products);
+
+        $carts = $this->castToArray($this->buyerModel->getAllCartsById($id));
+
+        // can be used to sort according to the timestamp
+        usort($carts, function ($a, $b) {
+
+            $t1 = strtotime($a['created_at']);
+            $t2 = strtotime($b['created_at']);
+
+            return $t2 - $t1;
+        });
+
+        $carts = $this->castToObj($carts);
+        $cart_list = array();
+
+        foreach ($carts as $oneCart) {
+
+            $oneCart->item_list = unserialize($oneCart->cart);
+            unset($oneCart->cart);
+
+            $cart_price = 0;
+            $cart_details = array();
+            $item_list = array();
+
+            foreach ($oneCart->item_list as $seller_item_list) {
+
+                $cart_price += $seller_item_list['order_price'];
+                unset($seller_item_list['order_price']);
+
+                foreach ($seller_item_list as $item) {
+                    array_push($item_list, $item);
+                }
+            }
+
+            $cart_details['item_list'] = $item_list;
+            $cart_details['cart_id'] = $oneCart->cart_id;
+            $cart_details['created_at'] = $oneCart->created_at;
+            $cart_details['cart_price'] = $cart_price;
+
+            array_push($cart_list, $cart_details);
+        }
 
         $data = [
             'buyer_id' => $id,
             'user' => $this->buyerModel->findUserById($id),
+            'cart_list' => $cart_list
         ];
 
         $this->view('pages/buyerInfo', $data);

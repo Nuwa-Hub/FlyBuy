@@ -24,8 +24,8 @@
         <nav>
             <a href="#" class="logo">FlyBuy</a>
             <div class="search">
-                <div class="search-box">
-                    <input class="search-txt" type="text" placeholder="search here...">
+                <div class="search-box" id="<?php echo $data['user']->seller_id; ?>">
+                    <input class="search-txt" id="searchBox" type="text" placeholder="search here...">
                     <a class="search-btn" href="#">
                         <i class="fas fa-search"></i>
                     </a>

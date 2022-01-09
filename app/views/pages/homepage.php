@@ -19,7 +19,7 @@
 
 
 		<div class="search-box">
-			<input class="search-txt" type="text" name="" placeholder="Search for products">
+		<input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchElement()">
 			<a class="search-btn" href="#">
 				<i class="fas fa-search"></i>
 			</a>
@@ -142,10 +142,6 @@
 	<script src="<?php echo URLROOT; ?>/public/javascript/homePage.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/star.js"></script>
 
-	<script src="<?php echo URLROOT; ?>/public/javascript/particles.js"></script>
-	<script src="<?php echo URLROOT; ?>/public/javascript/app.js"></script>
-
-	<script src="<?php echo URLROOT; ?>/public/javascript/snow.js"></script>
 	<script src="<?php echo URLROOT; ?>/public/javascript/slideshow.js"></script>
 
 </body>
