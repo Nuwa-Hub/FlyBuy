@@ -125,7 +125,6 @@
                   <!--Popup window to Rate start-->
                   <div class="container-new">
                     <div class="feedback">
-                    <a><i class="fas fa-times close-btn-rate"></i></a>
                       <div class="rating">
                         <input type="radio" class="rating-5" name="rating" id="<?php echo "rating-5".$product->item_id; ?>">
                         <label for="<?php echo "rating-5".$product->item_id; ?>"></label>
