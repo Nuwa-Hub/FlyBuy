@@ -51,6 +51,7 @@ function searchElement() {
 
     products = document.getElementsByClassName("product");
  
+    $(document).scrollTop(1300);
 
     for (i = 0; i < products.length; i++) {
 
