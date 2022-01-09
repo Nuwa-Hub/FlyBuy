@@ -297,6 +297,51 @@ class Seller implements User{
         $this->db->updateField();
     }
 
+    public function updateAllSellerRating(){
+
+        $this->db->query('SELECT * FROM temp_rating');
+        $allTempRating = $this->db->resultSet();
+
+        foreach ($allTempRating as $tempRating) {
+
+            $seller_id = $tempRating->seller_id;
+            $temp_sum = $tempRating->tempRating_sum;
+            $temp_count = $tempRating->tempRating_count;
+
+            $this->db->query('SELECT rating, rating_count FROM sellers WHERE seller_id = :seller_id');
+            $this->db->bind(':seller_id', $seller_id);
+    
+            $cur_rating_details = $this->db->single();
+
+            $cur_rating = $cur_rating_details->rating;
+            $cur_count = $cur_rating_details->rating_count;
+
+            $new_count = $cur_count + $temp_count;
+            $new_rating = (($cur_rating * $cur_count) + $temp_sum) / $new_count;
+
+            $this->db->query("UPDATE sellers SET rating = :rating, rating_count = :rating_count WHERE seller_id = :seller_id");
+            $this->db->bind(':rating', $new_rating);
+            $this->db->bind(':rating_count', $new_count);
+            $this->db->bind(':seller_id', $seller_id);
+
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        $this->db->query("DELETE FROM temp_rating");
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function clearUserFields($id){
 
         $this->db->query("UPDATE sellers SET email = :email WHERE seller_id = :id");
