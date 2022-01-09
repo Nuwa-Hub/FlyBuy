@@ -46,7 +46,7 @@ closeBtns.forEach((closeBtn) => {
 
 // When document is ready...
 $(document).ready(function() {
-    alert("df");
+    // alert("df");
     // If cookie is set, scroll to the position saved in the cookie.
     if ($.cookie("scroll") !== null) {
         $(document).scrollTop($.cookie("scroll"));
