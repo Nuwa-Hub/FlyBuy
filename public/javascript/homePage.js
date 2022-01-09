@@ -103,4 +103,29 @@ function searchElement() {
     }
 }
 
+//rating
+function rate(num,id){
+
+    alert(num);
+    setTimeout(function() {
+
+        var buy_id = document.querySelector('.buy_id').value;
+
+        // ajex request for remove the relevent item from SESSION store
+        $.ajax({
+            url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+            method: 'POST',
+            cache: false,
+            data: {
+                buy_id: buy_id,
+            },
+            success: function(response) {
+
+                console.log(response);
+            }
+        });
+
+    }, 20);
+
+}
 
