@@ -198,3 +198,45 @@ html {
     overflow-y: scroll;
     height: 545px;
 }
+.edit.title{
+    color: white;
+    padding: 20px ;
+
+}
+.edit-form .input-field{
+    margin-top: 20px;
+}
+.deleteAccount-btn{
+    position: absolute;
+    top:40px ;
+    left:0 ;
+    margin: 5px 10px;
+    padding: 5px 20px;
+    background: transparent;
+    text-decoration: none;
+    color: #ffffff;
+    border: 4px solid #1082f5;
+    border-radius: 40px;
+    position: relative;
+    transition: 0.4s;
+    font-weight: 500;
+    font-size: 1.1em;
+    cursor: pointer;
+    height: fit-content;
+    width: fit-content;
+}
+
+.deleteAccount-btn:hover{
+    transform: scale(1.05);
+    font-weight: 600;
+    font-size: 1.3em;
+    background: rgb(51, 45, 45);
+}
+.deleteAccount-btn:active{
+    transform: scale(1);
+}
+.edit.btn.new{
+    margin-top: 40px;
+    background: #0b0a3b;
+    font-size: 15px;
+}

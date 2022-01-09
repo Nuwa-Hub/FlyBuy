@@ -40,6 +40,38 @@ closeBtns.forEach((closeBtn) => {
         });
     });
 });
+//rating popup start
+
+var popupViews2 = document.querySelectorAll('.container-new');
+var popupBtns2 = document.querySelectorAll('.popup-rate');
+var closeBtns2 = document.querySelectorAll('.close-btn');
+
+
+var popup1 = function(popupClick) {
+    popupViews2[popupClick].classList.add('active');
+
+    document.body.style.overflowY = 'hidden';
+}
+
+popupBtns2.forEach((popupBtn, i) => {
+    popupBtn.addEventListener("click", () => {
+        popup1(i)
+
+    });
+});
+
+closeBtns2.forEach((closeBtn) => {
+    closeBtn.addEventListener("click", () => {
+        popupViews2.forEach((popupView) => {
+            popupView.classList.remove('active');
+
+            document.body.style.overflowY = '';
+        });
+    });
+});
+//rating popup end
+
+
 //for search button
 
 function searchElement() {
