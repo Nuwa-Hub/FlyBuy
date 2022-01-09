@@ -109,7 +109,7 @@ function rate(num,id){
     alert(num);
     setTimeout(function() {
 
-        var buy_id = document.querySelector('.buy_id').value;
+      
 
         // ajex request for remove the relevent item from SESSION store
         $.ajax({
@@ -130,3 +130,19 @@ function rate(num,id){
 
 }
 
+var now = new Date();
+var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) - now;
+
+if (millisTill10 < 0) {
+     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+}
+
+setTimeout(function(){
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost/Project/FlyBuy/UserController/updateRating",
+        success: function(result = '') {}
+    });
+}, 
+millisTill10);
