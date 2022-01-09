@@ -326,19 +326,17 @@ function changeItem() {
 
     var ele = document.getElementsByTagName("article");
 
-  
-    
     for (i = 0; i < ele.length; i++) {
-       ele[i].style.transform = "skewX(-17deg)";
-   
+    //   ele[i].style.transform = "skewX(-17deg)";
+    ele[i].classList.add("rotate");
     }
     window.setTimeout(function() {
 
         var ele = document.getElementsByTagName("article");
 
         for (i = 0; i < ele.length; i++) {
-
-            ele[i].style.transform = "skewX(0deg)";
+           
+            ele[i].classList.remove("rotate");
            
         }
     }, 445);

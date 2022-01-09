@@ -4,7 +4,6 @@ body {
     background-attachment: fixed;
     padding-top: 0px;
    
-    animation: colorchange 40s infinite;
     background-color: rgb(2, 2, 71);
 }
 
@@ -265,7 +264,18 @@ progress{
           }
 
 /* item container */
-
+.rotate{
+    transform-origin: top left;
+    animation: rotated 0.3s;
+}
+@keyframes rotated {
+    from {
+        transform :skewX(0deg);
+    }
+    to {
+        transform :skewX(-17deg);
+    }
+}
 .container {
     font-family: 'Open Sans', sans-serif;
     margin: 0 auto;
@@ -326,7 +336,7 @@ progress{
 
 .block {
     position: relative;
-    background: linear-gradient(0deg, #000, #272727);
+    background: linear-gradient(45deg, #ffc2e6, #d1ffd1, #ffffba, #ffcbcb);
 }
 
 .block:before,
@@ -588,7 +598,7 @@ progress{
     border-style: none none solid none;
     cursor: pointer;
     display: block;
-    color: rgb(11, 7, 226);
+   
     font-size: 20px;
     font-weight: 600;
     padding: 16px 0;
@@ -716,7 +726,6 @@ svg {
     transition-delay: 0s, 0.25s, 0s;
 }
 
-
 /*popup menu*/
 
 .popup-menu {
@@ -760,7 +769,6 @@ svg {
     bottom: 200px;
 }
 
-
 /*dowload button*/
 
 .ms-content {
@@ -783,7 +791,8 @@ svg {
     position: relative;
 }
 
-.ms-line-down-container {
+.ms-line-down-container
+{
     position: absolute;
     top: 0;
     left: 0;
@@ -793,11 +802,13 @@ svg {
     transition: transform 0s ease;
 }
 
-#ms-download {
+#ms-download 
+{
     display: none;
 }
 
-#ms-download:checked~.ms-line-down-container {
+#ms-download:checked~.ms-line-down-container 
+{
     transform: rotate(-360deg);
     transition: transform 1.5s ease 1.25s;
 }
