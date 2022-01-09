@@ -201,6 +201,7 @@ html {
 /*items start*/
 .item{
     position: relative;
+    margin-left: 100px;
     max-width: 800px;
     overflow: hidden;
     font-weight: 500;
@@ -261,7 +262,7 @@ html {
     padding-right: 15px;
     
 }
-/*items start*/
+/*items end*/
 
 /*table start*/
 table {
