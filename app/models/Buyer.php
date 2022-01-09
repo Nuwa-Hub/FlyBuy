@@ -203,6 +203,9 @@ class Buyer implements User
 
         //Execute function
         if ($this->db->execute()) {
+
+            $lastID=$this->db->lastInsertID();
+            $_SESSION['last_id']=$lastID;
             return true;
         } else {
             return false;

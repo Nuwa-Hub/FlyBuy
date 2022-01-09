@@ -98,7 +98,7 @@ class PageController extends Controller
             'user' => $this->sellerModel->findUserById($id),
             'products' => $products
         ];
-        
+
         if (!isset($_COOKIE['user_login'])) {
             header('location: ' . URLROOT . '/PageController/loginSignup');
         } else {
@@ -374,13 +374,15 @@ class PageController extends Controller
 
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
-      
-        $pdf->writeHTML(" <h3>Date : ".$currentDate->format('Y-m-d')."</h3>");
-        $pdf->writeHTML("<b>INVOICE#</b>");
+
+        $pdf->writeHTML(" <h3>Date : " . $currentDate->format('Y-m-d') . "</h3>");
+        $pdf->writeHTML("<b>INVOICE#".$_SESSION['last_id']."</b>");
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // logo
-        $pdf->writeHTML('<img src="../../public/img/logo.png" width=10px hieght=10px>');
+        $pdf->Image('logo.png', 10, 3, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+        $pdf->Image('logo.jpg', 500);
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // bill to
@@ -407,7 +409,19 @@ class PageController extends Controller
         $pdf->writeHTML("");
         $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
         $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
-        $pdf->writeHTML("FlyBuy.com", true, false, false, false, 'C');
+        $pdf->writeHTML("cosmosflybuy@gmail.com", true, false, false, false, 'C');
+
+        // new style
+        $style = array(
+            'border' => 2,
+            'padding' => 'auto',
+            'fgcolor' => array(0, 0, 0),
+            'bgcolor' => array(255, 255, 255)
+        );
+      
+        // QRCODE,H : QR-CODE Best error correction
+        $pdf->write2DBarcode($_SESSION['last_id'].$_SESSION['buyer_id'], 'QRCODE,H', 80, 210, 50, 50, $style, 'N');
+      
         session_unset();
         session_destroy();
         // save pdf file
@@ -510,5 +524,3 @@ class PageController extends Controller
         $this->view('pages/buyerInfo', $data);
     }
 }
-
-
