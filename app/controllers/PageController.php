@@ -160,6 +160,20 @@ class PageController extends Controller
             $this->view('pages/editSellerAccount', $data);
         }
     }
+    public function editBuyerAccount($id)
+    {
+
+        $data = [
+            'buyer_id' => $id,
+            'user' => $this->buyerModel->findUserById($id)
+        ];
+
+        if (!isset($_COOKIE['user_login'])) {
+            header('location: ' . URLROOT . '/PageController/loginSignup');
+        } else {
+            $this->view('pages/editBuyerAccount', $data);
+        }
+    }
 
     public function viewAllNotifications($id, $type = 'all')
     {
