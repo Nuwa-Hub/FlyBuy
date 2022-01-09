@@ -44,7 +44,7 @@ closeBtns.forEach((closeBtn) => {
 
 var popupViews2 = document.querySelectorAll('.container-new');
 var popupBtns2 = document.querySelectorAll('.popup-rate');
-var closeBtns2 = document.querySelectorAll('.close-btn');
+var closeBtns2 = document.querySelectorAll('.close-btn-rate');
 
 
 var popup1 = function(popupClick) {
@@ -64,7 +64,6 @@ closeBtns2.forEach((closeBtn) => {
     closeBtn.addEventListener("click", () => {
         popupViews2.forEach((popupView) => {
             popupView.classList.remove('active');
-
             document.body.style.overflowY = '';
         });
     });
