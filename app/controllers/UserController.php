@@ -147,7 +147,7 @@ class UserController extends Controller
                 $this->logout();
             }
             else if ($userType === 'buyer') {
-                header('location: ' . URLROOT . '/PageController/buyerAccount/' . $id);
+                header('location: ' . URLROOT . '/PageController/buyerInfo/' . $id);
             }
             else {
                 header('location: ' . URLROOT . '/PageController/sellerAccount/' . $id);

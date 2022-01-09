@@ -35,10 +35,66 @@
         <i class="fas fa-map-marker-alt" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->address; ?></span></i><br><br>
         <i class="fa fa-phone" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->telNo; ?></span></i>
       </div>
-      
+      <a href="#" onclick="toggleDeleteAccount()" class="deleteAccount-btn">Delete account</a>
     </div>
     <div class="orders">
-      <h1 style="color:white;">Order history</h1>
+    <section class="edit-section">
+            <h1 class="edit title">Edit Profile</h1>
+    
+            <form class="edit-form" id="edit-form" method="POST" action="<?php echo URLROOT; ?>/UserController/editProfile">
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['username'])) ? $data['editProfileClassNames']['username'] : ""; ?>">
+                    <i class="fas fa-user"></i>
+                    <input name="username" type="text" placeholder="Username" class="username" value="<?php echo (isset($data['editProfileData']['username'])) ? $data['editProfileData']['username'] : "";?>">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['username']; ?></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['telNo'])) ? $data['editProfileClassNames']['telNo'] : ""; ?>">
+                    <i class="fas fa-mobile-alt"></i>
+                    <input name="telNo" type="text" placeholder="Telephone" class="telNo" value="<?php echo (isset($data['editProfileData']['telNo'])) ? $data['editProfileData']['telNo'] : "";?>">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['telNo']; ?></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['address'])) ? $data['editProfileClassNames']['address'] : ""; ?>">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <input name="address" type="text" placeholder="Address" class="address" value="<?php echo (isset($data['editProfileData']['address'])) ? $data['editProfileData']['address'] : "";?>">
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['address']; ?></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['password'])) ? $data['editProfileClassNames']['password'] : ""; ?>">
+                    <i class="fas fa-lock"></i>
+                    <input name="password" type="password" placeholder="Password" class="psw" value="<?php echo (isset($data['editProfileData']['password'])) ? $data['editProfileData']['password'] : "";?>">
+                    <i class="fas fa-eye togglePassword"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['password']; ?></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div class="input-field <?php echo (isset($data['editProfileClassNames']['confirmPsw'])) ? $data['editProfileClassNames']['confirmPsw'] : ""; ?>">
+                    <i class="fas fa-lock"></i>
+                    <input name="confirmPsw" type="password" placeholder="Confirm Password" class="confirm-psw" value="<?php echo (isset($data['editProfileData']['confirmPsw'])) ? $data['editProfileData']['confirmPsw'] : "";?>">
+                    <i class="fas fa-eye togglePassword"></i>
+                    <i class="fas fa-exclamation-circle tooltip">
+                        <small class="tooltip-text"><?php echo $data['editProfileErrors']['confirmPsw']; ?></small>
+                    </i>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <input class="buyer-id notify" type="hidden" name="buyer_id" value="<?php echo $data['buyer_id']; ?>">
+
+                <input type="submit" class="edit btn new" name="submitEditProfile" value="Edit">
+
+            </form>
+        </section>
     </div>
   </div>
 
@@ -61,6 +117,45 @@
     </div>
 
   </div>
+
+  <!-- -----------------------------Popup window to confirm delete account--------------------------------------- -->
+
+  <div class="popup-window deleteAccount">
+
+  <div class="overlay"></div>
+
+  <div class="content">
+
+      <div class="closeBtn" onclick="toggleDeleteAccount()">&times;</div>
+
+      <h1 class="popup title">Enter your password to confirm delete !</h1>
+
+      <form method="post" class="deleteAccountForm">
+
+          <div class="input-field">
+
+              <i class="fas fa-lock"></i>
+
+              <input name="password" type="password" placeholder="Password" class="deleteAccountpsw">
+              
+              <i class="fas fa-eye togglePassword"></i>
+              <i class="fas fa-exclamation-circle tooltip">
+                  <small class="tooltip-text"></small>
+              </i>
+              <i class="fas fa-check-circle"></i>
+
+          </div>
+          
+          <input class="deleteAccountUserId" type="hidden" name="buyer_id" value="<?php echo $data['buyer_id']; ?>">
+          <input class="deleteAccountUserType" type="hidden" name="user_type" value="buyer">
+
+          <button class="deleteAcount btn" name="submitDeleteAccount">Delete</button>
+
+      </form>
+
+  </div>
+
+</div>
 
 </body>
 
