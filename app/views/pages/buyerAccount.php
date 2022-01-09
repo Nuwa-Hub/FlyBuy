@@ -122,7 +122,7 @@
                   <span><?php echo $product->seller->rating; ?></span>
                   <a class="popup-rate">Rate seller</a>
 
-                  <!--Popup window to Rate end-->
+                  <!--Popup window to Rate start-->
                   <div class="container-new">
                     <div class="feedback">
                       <div class="rating">

@@ -155,8 +155,8 @@ class UserController extends Controller
         } else {
 
             if ($userType === 'buyer') {
-                // $data['buyer_id'] = $id;
-                // $this->view('pages/editBuyerAccount', $data);
+                $data['buyer_id'] = $id;
+                $this->view('pages/editBuyerAccount', $data);
             } else {
                 $data['seller_id'] = $id;
                 $this->view('pages/editSellerAccount', $data);
@@ -258,6 +258,14 @@ class UserController extends Controller
         $_SESSION['buyer_id']=$buyer_id;
     }
 
+    public function giveRating(){
+
+        $seller_id = $_POST['seller_id'];
+        $rating = $_POST['rating'];
+        
+        $this->buyerModel->updateTempRating($seller_id, $rating);
+    }
+
     public function getNotificationCount()
     {
 
@@ -348,5 +356,9 @@ class UserController extends Controller
         }
         
         echo json_encode($data);
+    }
+
+    public function updateRating(){
+        $this->sellerModel->updateAllSellerRating();
     }
 }

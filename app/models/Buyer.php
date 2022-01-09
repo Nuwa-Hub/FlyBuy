@@ -212,6 +212,41 @@ class Buyer implements User
         }
     }
 
+    public function updateTempRating($seller_id, $rating){
+
+        $this->db->query('SELECT * FROM temp_rating WHERE seller_id = :seller_id');
+        $this->db->bind(':seller_id', $seller_id);
+
+        $seller_tempRating = $this->db->single();
+
+        if(count($seller_tempRating) === 0){
+
+            $this->db->query('INSERT INTO temp_rating (seller_id, tempRating_sum, tempRating_count) VALUES(:seller_id, :tempRating_sum, :tempRating_count)');
+
+            //Bind values
+            $this->db->bind(':seller_id', $seller_id);
+            $this->db->bind(':tempRating_sum', $rating);
+            $this->db->bind(':tempRating_count', 1);
+        }
+        else{
+
+            $cur_sum = $seller_tempRating->tempRating_sum;
+            $cur_count = $seller_tempRating->tempRating_count;
+
+            $this->db->query("UPDATE buyers SET tempRating_sum = :tempRating_sum, tempRating_count = :tempRating_count WHERE seller_id = :seller_id");
+            $this->db->bind(':tempRating_sum', $cur_sum + $rating);
+            $this->db->bind(':tempRating_count', $cur_count + 1);
+            $this->db->bind(':seller_id', $seller_id);
+        }
+
+        //Execute function
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAllCartsById($id){
 
         $this->db->query("SELECT * FROM carts WHERE buy_id = :id");
