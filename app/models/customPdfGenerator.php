@@ -5,8 +5,9 @@ class CustomPdfGenerator extends TCPDF
 {
     public function Header()
     {
+
         $image_file = 'logo.png';
-        $this->Image('logo.jpg', 500);
+        $this->Image('logo.png', 500);
         $this->Image('logo.png', 10, 3, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->SetFont('helvetica', 'B', 30);
         $this->SetTextColor(255, 255, 255);
@@ -30,6 +31,9 @@ class CustomPdfGenerator extends TCPDF
         $this->SetY(-15);
         $this->SetFont('helvetica', 'I', 15);
         $this->SetTextColor(255, 255, 255);
+
+      
+        
         $this->Cell(0, 10, 'Thank you for your business!', 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 

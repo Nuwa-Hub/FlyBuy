@@ -87,6 +87,11 @@ class Database{
     public function updateField(){
         $this->execute();
     }
+
+    public function lastInsertID(){
+        $last_id = $this->dbHandler->lastInsertId();
+        return $last_id;
+    }
 }
 
 ?>
