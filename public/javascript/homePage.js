@@ -113,11 +113,12 @@ function rate(num,id){
 
         // ajex request for remove the relevent item from SESSION store
         $.ajax({
-            url: 'http://localhost/Project/FlyBuy/UserController/checkout',
+            url: 'http://localhost/Project/FlyBuy/UserController/giveRating',
             method: 'POST',
             cache: false,
             data: {
-                buy_id: buy_id,
+                seller_id: id,
+                rating:num
             },
             success: function(response) {
 
@@ -125,7 +126,7 @@ function rate(num,id){
             }
         });
 
-    }, 20);
+    }, 200);
 
 }
 
