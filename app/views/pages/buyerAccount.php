@@ -16,8 +16,8 @@
 
 
 <header id="header">
-  <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy</a>
-  <img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
+  <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy
+  <img src="<?php echo URLROOT; ?>/public/img/logo.svg" id="flybuy-logo" style="width:65px;height:65px;position:absolute;margin-left:10px"></a>
 
   <div class="search-box">
     <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchElement()">
@@ -116,11 +116,13 @@
                 <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image ?>" alt="">
               </div>
               <div class="info">
-                <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
+                <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span>
+                <a class="popup-rate">Rate seller</a></h2>
+                
                 <h3>
                   <span class="stars"><?php echo $product->seller->rating; ?></span>
                   <span><?php echo $product->seller->rating; ?></span>
-                  <a class="popup-rate">Rate seller</a>
+                  <!-- <a class="popup-rate">Rate seller</a> -->
 
                   <!--Popup window to Rate start-->
                   <div class="container-new">

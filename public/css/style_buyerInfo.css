@@ -24,15 +24,15 @@ html {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 15;
+    padding: 12px 50px;
 }
 
 #header .logo {
-    color: #00008B;
+    color: #ddd;
     font-weight: 700;
     font-size: 2.7em;
     text-decoration: none;
@@ -71,20 +71,6 @@ html {
     color: #777;
 }
 
-#header.sticky {
-    padding: 5px 50px;
-    background-image: linear-gradient(to right, #434343 20%, black 80%);
-    transition: 0.6s;
-}
-
-#header.sticky ul li a {
-    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
-}
-
-#header.sticky .logo {
-    color: #ddd;
-}
-
 .badge {
     padding-left: 9px;
     padding-right: 9px;
@@ -110,62 +96,6 @@ html {
     }
 }
 
-#header.sticky .search-box:hover>.search-txt {
-    width: 300px;
-    padding: 0 7px;
-    color: black;
-}
-
-.search-box {
-    position: relative;
-    background: #333;
-    height: 2.6em;
-    width: fit-content;
-    border-radius: 2.1em;
-    padding: 0.3em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.search-box a {
-    text-decoration: none;
-}
-
-.search-btn {
-    color: #666;
-    width: 2.1em;
-    height: 2.1em;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-txt {
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: #fff;
-    font-size: 1em;
-    transition: 0.4s;
-    width: 300px;
-}
-
-.search-box:hover>.search-btn {
-    color: #000;
-}
-
-#header.sticky .search-box {
-    background: #888;
-}
-
-#header.sticky .search-txt::placeholder {
-    color: #222;
-}
 .wrapper{
     background-color: black;
     width: 96%;
@@ -226,14 +156,14 @@ html {
 .item label:after{
     content: "";
     position: absolute;
-    top: 3px;
+    top: 2px;
     right: 10px;
-    width: 40px;
-    height: 40px;
-    background: url(../img/arrow.svg) no-repeat 0 0;
+    width: 38px;
+    height: 36px;
+    background: url(../img/cart.svg) no-repeat 0 0;
 }
 .item input:checked + label:after{
-    transform: rotate(90deg);
+    transform: scale(-1,1);
     transition: all 0.3s ease;
 }
 .details{
