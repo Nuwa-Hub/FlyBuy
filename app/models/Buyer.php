@@ -213,7 +213,7 @@ class Buyer implements User
     }
 
     public function updateTempRating($seller_id, $rating){
-
+     
         $this->db->query('SELECT * FROM temp_rating WHERE seller_id = :seller_id');
         $this->db->bind(':seller_id', $seller_id);
 

@@ -82,7 +82,7 @@ function searchElement() {
 
     products = document.getElementsByClassName("product");
  
-    $(document).scrollTop(1300);
+    $(document).scrollTop(1200);
 
     for (i = 0; i < products.length; i++) {
 
@@ -103,7 +103,7 @@ function searchElement() {
 }
 
 //rating
-function rate(num,id){
+function rate(rating,seller_id){
 
     setTimeout(function() {
 
@@ -113,16 +113,16 @@ function rate(num,id){
             method: 'POST',
             cache: false,
             data: {
-                seller_id: id,
-                rating:num
+                seller_id: seller_id,
+                rating:rating
             },
             success: function(response) {
-
+//alert("dff");
                 console.log(response);
             }
         });
 
-    }, 200);
+    }, 20);
 
 }
 
