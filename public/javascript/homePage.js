@@ -48,7 +48,7 @@ var closeBtns2 = document.querySelectorAll('.close-btn-rate');
 
 
 var popup1 = function(popupClick) {
-    popupViews2[popupClick].classList.add('active');
+    popupViews2[popupClick].classList.add('active1');
 
     document.body.style.overflowY = 'hidden';
 }
@@ -60,11 +60,13 @@ popupBtns2.forEach((popupBtn, i) => {
     });
 });
 
+
+
 closeBtns2.forEach((closeBtn) => {
     closeBtn.addEventListener("click", () => {
         popupViews2.forEach((popupView) => {
-            popupView.classList.remove('active');
-            document.body.style.overflowY = '';
+            popupView.classList.remove('active1');
+           
         });
     });
 });
@@ -104,6 +106,13 @@ function searchElement() {
 
 //rating
 function rate(rating,seller_id){
+
+    var ratedivs = document.querySelectorAll('.container-new');
+
+    // for (let index = 0; index < ratedivs.length; index++) {
+    //    //  ratedivs[index].style.display = "none";
+        
+    // }
 
     setTimeout(function() {
 

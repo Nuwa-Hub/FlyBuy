@@ -271,9 +271,11 @@ progress{
 @keyframes rotated {
     from {
         transform :skewX(0deg);
+       
     }
     to {
         transform :skewX(-17deg);
+   
     }
 }
 .container {
