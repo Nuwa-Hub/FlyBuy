@@ -16,8 +16,8 @@
 
 
 <header id="header">
-  <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy</a>
-  <img src="<?php echo URLROOT; ?>/public/img/logo.png" id="flybuy-logo" style="width:65px;height:65px;position:fixed;left:210px;">
+  <a href="<?php echo URLROOT; ?>/PageController/home" class="logo">FlyBuy
+  <img src="<?php echo URLROOT; ?>/public/img/logo.svg" id="flybuy-logo" style="width:65px;height:65px;position:absolute;margin-left:10px"></a>
 
   <div class="search-box">
     <input class="search-txt" id="pinput" type="text" name="" placeholder="Search for products" onkeyup="searchElement()">
@@ -116,25 +116,27 @@
                 <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image ?>" alt="">
               </div>
               <div class="info">
-                <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span></h2>
+                <h2><?php echo $product->itemName; ?><br><span><?php echo $product->seller->storeName; ?></span>
+                <a class="popup-rate">Rate seller</a></h2>
+                
                 <h3>
                   <span class="stars"><?php echo $product->seller->rating; ?></span>
                   <span><?php echo $product->seller->rating; ?></span>
-                  <a class="popup-rate">Rate seller</a>
+                  <!-- <a class="popup-rate">Rate seller</a> -->
 
                   <!--Popup window to Rate start-->
                   <div class="container-new">
                     <div class="feedback">
                       <div class="rating">
-                        <input type="radio" class="rating-5" name="rating" id="<?php echo "rating-5".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-5" onclick="rate(5,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-5".$product->item_id; ?>">
                         <label for="<?php echo "rating-5".$product->item_id; ?>"></label>
-                        <input type="radio" class="rating-4" name="rating" id="<?php echo "rating-4".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-4" onclick="rate(4,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-4".$product->item_id; ?>">
                         <label for="<?php echo "rating-4".$product->item_id; ?>"></label>
-                        <input type="radio" class="rating-3" name="rating" id="<?php echo "rating-3".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-3" onclick="rate(3,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-3".$product->item_id; ?>">
                         <label for="<?php echo "rating-3".$product->item_id; ?>"></label>
-                        <input type="radio" class="rating-2" name="rating" id="<?php echo "rating-2".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-2" onclick="rate(2,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-2".$product->item_id; ?>">
                         <label for="<?php echo "rating-2".$product->item_id; ?>"></label>
-                        <input type="radio" class="rating-1" name="rating" id="<?php echo "rating-1".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-1" onclick="rate(1,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-1".$product->item_id; ?>">
                         <label for="<?php echo "rating-1".$product->item_id; ?>"></label>
                         <div class="emoji-wrapper">
                           <div class="emoji">

@@ -259,10 +259,10 @@ class UserController extends Controller
     }
 
     public function giveRating(){
-
+       
         $seller_id = $_POST['seller_id'];
         $rating = $_POST['rating'];
-        
+      
         $this->buyerModel->updateTempRating($seller_id, $rating);
     }
 
