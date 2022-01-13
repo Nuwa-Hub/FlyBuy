@@ -105,7 +105,7 @@ function searchElement() {
 }
 
 //rating
-function rate(rating,seller_id){
+function rate(rating, seller_id, buyer_id){
 
     var ratedivs = document.querySelectorAll('.container-new');
 
@@ -123,7 +123,8 @@ function rate(rating,seller_id){
             cache: false,
             data: {
                 seller_id: seller_id,
-                rating:rating
+                rating:rating,
+                buyer_id:buyer_id
             },
             success: function(response) {
 //alert("dff");
@@ -136,7 +137,7 @@ function rate(rating,seller_id){
 }
 
 var now = new Date();
-var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) - now;
+var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 22, 20, 0, 0) - now;
 
 if (millisTill10 < 0) {
      millisTill10 += 86400000;

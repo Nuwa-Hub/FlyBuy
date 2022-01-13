@@ -128,15 +128,15 @@
                   <div class="container-new">
                     <div class="feedback">
                       <div class="rating">
-                        <input type="radio" class="close-btn-rate rating-5" onclick="rate(5,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-5".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-5" onclick="rate(5,<?php echo $product->seller->seller_id; ?>, <?php echo $data['user']->buy_id; ?>)" name="rating" id="<?php echo "rating-5".$product->item_id; ?>">
                         <label for="<?php echo "rating-5".$product->item_id; ?>"></label>
-                        <input type="radio" class="close-btn-rate rating-4" onclick="rate(4,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-4".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-4" onclick="rate(4,<?php echo $product->seller->seller_id; ?>, <?php echo $data['user']->buy_id; ?>)" name="rating" id="<?php echo "rating-4".$product->item_id; ?>">
                         <label for="<?php echo "rating-4".$product->item_id; ?>"></label>
-                        <input type="radio" class="close-btn-rate rating-3" onclick="rate(3,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-3".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-3" onclick="rate(3,<?php echo $product->seller->seller_id; ?>, <?php echo $data['user']->buy_id; ?>)" name="rating" id="<?php echo "rating-3".$product->item_id; ?>">
                         <label for="<?php echo "rating-3".$product->item_id; ?>"></label>
-                        <input type="radio" class="close-btn-rate rating-2" onclick="rate(2,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-2".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-2" onclick="rate(2,<?php echo $product->seller->seller_id; ?>, <?php echo $data['user']->buy_id; ?>)" name="rating" id="<?php echo "rating-2".$product->item_id; ?>">
                         <label for="<?php echo "rating-2".$product->item_id; ?>"></label>
-                        <input type="radio" class="close-btn-rate rating-1" onclick="rate(1,<?php echo $product->seller->seller_id; ?>)" name="rating" id="<?php echo "rating-1".$product->item_id; ?>">
+                        <input type="radio" class="close-btn-rate rating-1" onclick="rate(1,<?php echo $product->seller->seller_id; ?>, <?php echo $data['user']->buy_id; ?>)" name="rating" id="<?php echo "rating-1".$product->item_id; ?>">
                         <label for="<?php echo "rating-1".$product->item_id; ?>"></label>
                         <div class="emoji-wrapper">
                           <div class="emoji">

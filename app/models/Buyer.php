@@ -212,30 +212,33 @@ class Buyer implements User
         }
     }
 
-    public function updateTempRating($seller_id, $rating){
+    public function updateTempRating($seller_id, $rating, $buyer_id){
      
         $this->db->query('SELECT * FROM temp_rating WHERE seller_id = :seller_id');
         $this->db->bind(':seller_id', $seller_id);
 
-        $tempRating_arr = $this->db->resultSet(); //this returns a single object, hence error(uncountable)!
+        $tempRating_arr = $this->db->resultSet();
 
         if(count($tempRating_arr) === 0){
 
-            $this->db->query('INSERT INTO temp_rating (seller_id, tempRating_sum, tempRating_count) VALUES(:seller_id, :tempRating_sum, :tempRating_count)');
+            $buyer_list = serialize(array($buyer_id => $rating));
+
+            $this->db->query('INSERT INTO temp_rating (seller_id, buyer_list) VALUES(:seller_id, :buyer_list)');
 
             //Bind values
             $this->db->bind(':seller_id', $seller_id);
-            $this->db->bind(':tempRating_sum', $rating);
-            $this->db->bind(':tempRating_count', 1);
+            $this->db->bind(':buyer_list', $buyer_list);
         }
         else{
 
-            $cur_sum = $tempRating_arr[0]->tempRating_sum;
-            $cur_count = $tempRating_arr[0]->tempRating_count;
+            $tempRating = $tempRating_arr[0];
 
-            $this->db->query("UPDATE temp_rating SET tempRating_sum = :tempRating_sum, tempRating_count = :tempRating_count WHERE seller_id = :seller_id");
-            $this->db->bind(':tempRating_sum', $cur_sum + $rating);
-            $this->db->bind(':tempRating_count', $cur_count + 1);
+            $tempBuyerList = unserialize($tempRating->buyer_list);
+            $tempBuyerList[$buyer_id] = $rating;
+
+            $this->db->query("UPDATE temp_rating SET buyer_list = :buyer_list WHERE seller_id = :seller_id");
+
+            $this->db->bind(':buyer_list', serialize($tempBuyerList));
             $this->db->bind(':seller_id', $seller_id);
         }
 

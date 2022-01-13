@@ -305,19 +305,45 @@ class Seller implements User{
         foreach ($allTempRating as $tempRating) {
 
             $seller_id = $tempRating->seller_id;
-            $temp_sum = $tempRating->tempRating_sum;
-            $temp_count = $tempRating->tempRating_count;
+            $temp_buyerList = unserialize($tempRating->buyer_list);
 
-            $this->db->query('SELECT rating, rating_count FROM sellers WHERE seller_id = :seller_id');
+            $this->db->query('SELECT * FROM seller_rating WHERE seller_id = :seller_id');
             $this->db->bind(':seller_id', $seller_id);
-    
-            $cur_rating_details = $this->db->single();
+            $ratingRows = $this->db->resultSet();
 
-            $cur_rating = $cur_rating_details->rating;
-            $cur_count = $cur_rating_details->rating_count;
+            if(count($ratingRows) > 0){
+                $cur_buyerList = unserialize($ratingRows[0]->buyer_list);
+            }
+            else{
+                $cur_buyerList = array();
+            }
 
-            $new_count = $cur_count + $temp_count;
-            $new_rating = (($cur_rating * $cur_count) + $temp_sum) / $new_count;
+            foreach ($temp_buyerList as $buyer_id => $rating) {
+                $cur_buyerList[$buyer_id] = $rating;
+            }
+
+            if(count($ratingRows) > 0){
+
+                $this->db->query("UPDATE seller_rating SET buyer_list = :buyer_list WHERE seller_id = :seller_id");
+                $this->db->bind(':buyer_list', serialize($cur_buyerList));
+                $this->db->bind(':seller_id', $seller_id);
+            }
+            else{
+
+                $this->db->query("INSERT INTO seller_rating (seller_id, buyer_list) VALUES(:seller_id, :buyer_list)");
+                $this->db->bind(':buyer_list', serialize($cur_buyerList));
+                $this->db->bind(':seller_id', $seller_id);
+            }
+            $this->db->execute();
+
+            $rating_sum = 0;
+
+            foreach ($cur_buyerList as $id => $value) {
+                $rating_sum += $value;
+            }
+
+            $new_count = count($cur_buyerList);
+            $new_rating = $rating_sum / $new_count;
 
             $this->db->query("UPDATE sellers SET rating = :rating, rating_count = :rating_count WHERE seller_id = :seller_id");
             $this->db->bind(':rating', $new_rating);

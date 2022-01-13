@@ -262,8 +262,9 @@ class UserController extends Controller
        
         $seller_id = $_POST['seller_id'];
         $rating = $_POST['rating'];
+        $buyer_id = $_POST['buyer_id'];
       
-        $this->buyerModel->updateTempRating($seller_id, $rating);
+        $this->buyerModel->updateTempRating($seller_id, $rating, $buyer_id);
     }
 
     public function getNotificationCount()
