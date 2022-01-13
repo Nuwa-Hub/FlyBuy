@@ -217,7 +217,7 @@ class Buyer implements User
         $this->db->query('SELECT * FROM temp_rating WHERE seller_id = :seller_id');
         $this->db->bind(':seller_id', $seller_id);
 
-        $seller_tempRating = $this->db->single();
+        $seller_tempRating = $this->db->single(); //this returns a single object, hence error(uncountable)!
 
         if(count($seller_tempRating) === 0){
 
