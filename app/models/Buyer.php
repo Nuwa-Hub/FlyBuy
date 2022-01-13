@@ -217,9 +217,9 @@ class Buyer implements User
         $this->db->query('SELECT * FROM temp_rating WHERE seller_id = :seller_id');
         $this->db->bind(':seller_id', $seller_id);
 
-        $seller_tempRating = $this->db->single(); //this returns a single object, hence error(uncountable)!
+        $tempRating_arr = $this->db->resultSet(); //this returns a single object, hence error(uncountable)!
 
-        if(count($seller_tempRating) === 0){
+        if(count($tempRating_arr) === 0){
 
             $this->db->query('INSERT INTO temp_rating (seller_id, tempRating_sum, tempRating_count) VALUES(:seller_id, :tempRating_sum, :tempRating_count)');
 
@@ -230,10 +230,10 @@ class Buyer implements User
         }
         else{
 
-            $cur_sum = $seller_tempRating->tempRating_sum;
-            $cur_count = $seller_tempRating->tempRating_count;
+            $cur_sum = $tempRating_arr[0]->tempRating_sum;
+            $cur_count = $tempRating_arr[0]->tempRating_count;
 
-            $this->db->query("UPDATE buyers SET tempRating_sum = :tempRating_sum, tempRating_count = :tempRating_count WHERE seller_id = :seller_id");
+            $this->db->query("UPDATE temp_rating SET tempRating_sum = :tempRating_sum, tempRating_count = :tempRating_count WHERE seller_id = :seller_id");
             $this->db->bind(':tempRating_sum', $cur_sum + $rating);
             $this->db->bind(':tempRating_count', $cur_count + 1);
             $this->db->bind(':seller_id', $seller_id);
