@@ -324,12 +324,7 @@ class Seller implements User{
             $this->db->bind(':rating_count', $new_count);
             $this->db->bind(':seller_id', $seller_id);
 
-            //Execute function
-            if ($this->db->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            $this->db->execute();
         }
 
         $this->db->query("DELETE FROM temp_rating");

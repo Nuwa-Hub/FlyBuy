@@ -139,7 +139,7 @@ var now = new Date();
 var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) - now;
 
 if (millisTill10 < 0) {
-     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+     millisTill10 += 86400000;
 }
 
 setTimeout(function(){
@@ -147,7 +147,9 @@ setTimeout(function(){
     $.ajax({
         type: "POST",
         url: "http://localhost/Project/FlyBuy/UserController/updateRating",
-        success: function(result = '') {}
+        success: function(result = '') {
+            window.location.reload();
+        }
     });
 }, 
 millisTill10);
