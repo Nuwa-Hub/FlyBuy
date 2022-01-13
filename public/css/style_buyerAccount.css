@@ -366,10 +366,11 @@ section #text span {
 }
 
 .product .popup-card {
-    position: relative;
+    position: absolute;
+    top: 80px;
     display: flex;
-    width: 800px;
-    height: 500px;
+    width: 1000px;
+    height: 600px;
     margin: 20px;
 }
 
@@ -390,8 +391,8 @@ section #text span {
 
 .product .popup-card .product-img img {
     z-index: 2;
-    max-height: 400px;
-    max-width: 300px;
+    max-width: 500px;
+    max-height: 530px;
     position: relative;
     width: 400px;
     left: -5px;
@@ -444,7 +445,7 @@ section #text span {
 .product .popup-card .info .price {
     font-size: 45px;
     font-weight: 300;
-    margin-top: 300px;
+    bottom: 100px;
     position: absolute;
 }
 
@@ -458,8 +459,8 @@ section #text span {
     text-transform: uppercase;
     padding: 10px;
     border-radius: 20px;
-    margin-top: 50%;
-    margin-left: 23%;
+    right: 40px;
+    bottom: 20px;
     position: absolute;
 }
 
@@ -468,8 +469,7 @@ section #text span {
 }
 
 .product .popup-card .info .quantity {
-    margin-top: 406px;
-    margin-left: 5px;
+    bottom: 42px;
     font-size: 15px;
     position: absolute;
 }
@@ -482,6 +482,7 @@ input[type=number] {
     margin-left: 90px;
     margin-top: 404px;
     position: absolute;
+    bottom: 40px;
 }
 
 
