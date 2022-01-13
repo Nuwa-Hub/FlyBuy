@@ -44,11 +44,11 @@ closeBtns.forEach((closeBtn) => {
 
 var popupViews2 = document.querySelectorAll('.container-new');
 var popupBtns2 = document.querySelectorAll('.popup-rate');
-var closeBtns2 = document.querySelectorAll('.close-btn');
+var closeBtns2 = document.querySelectorAll('.close-btn-rate');
 
 
 var popup1 = function(popupClick) {
-    popupViews2[popupClick].classList.add('active');
+    popupViews2[popupClick].classList.add('active1');
 
     document.body.style.overflowY = 'hidden';
 }
@@ -60,12 +60,13 @@ popupBtns2.forEach((popupBtn, i) => {
     });
 });
 
+
+
 closeBtns2.forEach((closeBtn) => {
     closeBtn.addEventListener("click", () => {
         popupViews2.forEach((popupView) => {
-            popupView.classList.remove('active');
-
-            document.body.style.overflowY = '';
+            popupView.classList.remove('active1');
+           
         });
     });
 });
@@ -83,7 +84,7 @@ function searchElement() {
 
     products = document.getElementsByClassName("product");
  
-    $(document).scrollTop(1300);
+    $(document).scrollTop(1200);
 
     for (i = 0; i < products.length; i++) {
 
@@ -104,7 +105,14 @@ function searchElement() {
 }
 
 //rating
-function rate(num,id){
+function rate(rating, seller_id, buyer_id){
+
+    var ratedivs = document.querySelectorAll('.container-new');
+
+    // for (let index = 0; index < ratedivs.length; index++) {
+    //    //  ratedivs[index].style.display = "none";
+        
+    // }
 
     setTimeout(function() {
 
@@ -114,16 +122,17 @@ function rate(num,id){
             method: 'POST',
             cache: false,
             data: {
-                seller_id: id,
-                rating:num
+                seller_id: seller_id,
+                rating:rating,
+                buyer_id:buyer_id
             },
             success: function(response) {
-
+//alert("dff");
                 console.log(response);
             }
         });
 
-    }, 200);
+    }, 20);
 
 }
 
@@ -131,7 +140,7 @@ var now = new Date();
 var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) - now;
 
 if (millisTill10 < 0) {
-     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+     millisTill10 += 86400000;
 }
 
 setTimeout(function(){
@@ -139,7 +148,9 @@ setTimeout(function(){
     $.ajax({
         type: "POST",
         url: "http://localhost/Project/FlyBuy/UserController/updateRating",
-        success: function(result = '') {}
+        success: function(result = '') {
+            window.location.reload();
+        }
     });
 }, 
 millisTill10);
