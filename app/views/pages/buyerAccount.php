@@ -274,6 +274,33 @@
 
 </div>
 
+<!--Footer-->
+
+<footer id="footer">
+  <div class="blocks">
+      <div class="logo">powered by<br>
+      <img src="<?php echo URLROOT; ?>/public/img/cosmos.png" id="cosmos" style="width:200px;position:absolute;margin-left:10px"><br><br><br><br><br>
+      <span class="copyright">&copy; FlyBuy.All Rights Reserved.</span>
+      </div>
+      <div class="app">Download our app<br>
+      <img src="<?php echo URLROOT; ?>/public/img/footer/playstore.svg" id="icons" style="width:120px;position:absolute;margin-left:40px;margin-top:20px;cursor:pointer;">
+      <img src="<?php echo URLROOT; ?>/public/img/footer/iphone.svg" id="icons" style="width:120px;position:absolute;margin-left:40px;margin-top:75px;cursor:pointer;">
+</div>
+      <div class="follow">Follow us<br>
+      <img src="<?php echo URLROOT; ?>/public/img/footer/fb.svg" style="width:40px;position:absolute;margin-left:10px;margin-top:20px;cursor:pointer;">
+      <img src="<?php echo URLROOT; ?>/public/img/footer/insta.svg" style="width:40px;position:absolute;margin-left:70px;margin-top:20px;cursor:pointer;">
+      <img src="<?php echo URLROOT; ?>/public/img/footer/twitter.svg" style="width:40px;position:absolute;margin-left:130px;margin-top:20px;cursor:pointer;">
+      </div>
+      <div class="contact">Contact us
+      <div class="info">
+      <br>
+      <i class="fas fa-phone" style="font-size:18px;color:#b3b3b3;"><span style="font-family:poppins;font-weight:400;color:#b3b3b3;"> 070 4915685</span></i><br>
+      <i class="fas fa-envelope" style="font-size:18px;color:#b3b3b3;margin-top:15px;"><span style="font-family:poppins;font-weight:400;color:#b3b3b3;"> Flybuy19cse@gmail.com</span></i></div>
+      </div>
+  </div>
+
+</footer>
+
 </body>
 
 
