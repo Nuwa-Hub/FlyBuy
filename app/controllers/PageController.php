@@ -431,6 +431,8 @@ class PageController extends Controller
         $pdf->printTable($header, $data);
         $pdf->Ln();
 
+
+    
         // comments
         $pdf->SetFont('', '', 12);
 
@@ -446,7 +448,11 @@ class PageController extends Controller
 
         $pdf->writeHTML("cosmosflybuy@gmail.com", true, false, false, false, 'C');
 
+        $pdf->Ln();
 
+        $pdf->writeHTML("");
+
+        $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
         // QR code style
         $style = array(
 
@@ -460,6 +466,8 @@ class PageController extends Controller
         // QRCODE,H : QR-CODE Best error correction
         $pdf->write2DBarcode($_SESSION['last_id'].$_SESSION['buyer_id'], 'QRCODE,H', 80, 210, 50, 50, $style, 'N');
       
+        $pdf->Ln();
+
         session_unset();
 
         session_destroy();

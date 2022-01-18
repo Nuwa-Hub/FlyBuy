@@ -27,7 +27,7 @@
   </div>
   <ul>
     <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['user']->buy_id; ?>" class="active">Home</a></li>
-    <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
+    <li id="cart" class="cart"><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
     <li><a href="<?php echo URLROOT; ?>/PageController/buyerInfo/<?php echo $data['user']->buy_id; ?>">Account</a></li>
     <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
     <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
@@ -109,7 +109,7 @@
           <img src="<?php echo URLROOT ?>/public/img/uploads/itemImages/<?php echo $product->item_image ?>" class="product-img" alt="">
         </div>
         <div class="popup-view">
-          <form method="post" action="<?php echo URLROOT; ?>/ProductController/addToCart">
+        
             <div class="popup-card">
               <a><i class="fas fa-times close-btn"></i></a>
               <div class="product-img">
@@ -234,18 +234,20 @@
                 <p><?php echo $product->description; ?></p>
                 <span class="price"><?php echo "Rs. " . $product->price . "/unit"; ?></span>
                 <span class="quantity">Quantity :</span>
-                <input type="number" name="pqty" class="pqty" value="1" id="quantity" name="quantity" min="1" max="<?php echo $product->amount; ?>">
+                <input type="number" name="pqty" id="<?php echo $product->item_id ?>" class="<?php echo $product->item_id ?>" value="1" id="quantity" name="quantity" min="1" max="<?php echo $product->amount; ?>">
 
                 <input type="hidden" name="pid" class="pid" value="<?php echo $product->item_id ?>">
                 <input type="hidden" name="buyer_id" class="buyer_id" value="<?php echo $data['buyer_id']; ?>">
                 <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
 
                 <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                <button class="btn btn-info btn-block addItemBtn add-cart-btn" name="addTocart"><i class="fas fa-cart-plus">
-                  </i>&nbsp;&nbsp;Add tocart</button>
+                <button id="addTocart" onclick="addtoCart(<?php echo $product->item_id ?>,<?php echo $data['buyer_id']; ?>)" class="btn btn-info btn-block addItemBtn add-cart-btn" ><i class="fas fa-cart-plus">
+                  </i>&nbsp;&nbsp;Add tocart
+                  <span class="cart-item2"></span>
+                </button>  
               </div>
             </div>
-          </form>
+      
         </div>
       </div>
 

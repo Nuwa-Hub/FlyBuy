@@ -91,7 +91,7 @@ class ProductController extends Controller
     public function addToCart()
     {
 
-        if (isset($_POST['addTocart'])) {
+        if (isset($_POST['pqty'])) {
             $item = true;
             $pid = $_POST['pid'];
             $pqty = $_POST['pqty'];
@@ -109,46 +109,70 @@ class ProductController extends Controller
                 $ar = array($item->amount, $pqty);
                 $item->amount = $ar;
                 array_push($_SESSION['cartarr'], $item);
-                header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
+
+                $data = [
+                    'add' => '1'
+                ];
+        
+                
+              //  header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
             } else {
-                print_r("Already added");
-                header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
+
+                $data = [
+                    'add' => '0'
+                ];
+              //  print_r("Already added");
+              //  header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
             }
+            echo json_encode($data);
         }
     }
 
     public function updateCart()
     {
 
-        if (isset($_POST['pamount'])) {
+        if (isset($_POST['pamount']))
+        {
             
-            echo'console.log("dfsdf")';
-            
-
             $pid = $_POST['pid'];
+
             $pamount = $_POST['pamount'];
 
 
-            foreach ($_SESSION['cartarr'] as $product) {
+            foreach ($_SESSION['cartarr'] as $product) 
+            {
+
                 if ($product->item_id == $pid) {
+
                     $product->amount[1] = $pamount;
+
                 }
             }
         }
 
-        //for delete the cart item when click the remove utton
-        if (isset($_POST['ppid'])) {
+        //for delete the cart item when click the remove button
+
+        if (isset($_POST['ppid'])) 
+        {
+
             $ppid = $_POST['ppid'];
-            foreach ($_SESSION['cartarr'] as $product) {
+
+            foreach ($_SESSION['cartarr'] as $product) 
+            {
 
                 if (($key = array_search($product, $_SESSION['cartarr'])) !== false && $product->item_id == $ppid) {
+
                     unset($_SESSION['cartarr'][$key]);
+
                 }
+
             }
         }
 
         // Get no.of items available in the cart table
-        if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') {
+
+        if (isset($_GET['cartItem']) && isset($_GET['cartItem']) == 'cart_item') 
+        {
             echo sizeof($_SESSION['cartarr']);
         }
     }
