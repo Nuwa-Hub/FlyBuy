@@ -89,10 +89,10 @@
                 <div class="rm_wrapper">
                     <div id="rm_container" class="rm_container">
                         <ul>
-                            <li data-images="rm_container_1" data-rotation="-15"><img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/1.jpg" /></li>
-                            <li data-images="rm_container_2" data-rotation="-5"><img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/2.jpg" /></li>
-                            <li data-images="rm_container_3" data-rotation="5"><img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/3.jpg" /></li>
-                            <li data-images="rm_container_4" data-rotation="15"><img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/4.jpg" /></li>
+                            <li data-images="rm_container_1" data-rotation="-15"><img src="../img/about/1.jpg" /></li>
+                            <li data-images="rm_container_2" data-rotation="-5"><img src="../img/about/2.jpg" /></li>
+                            <li data-images="rm_container_3" data-rotation="5"><img src="../img/about/3.jpg" /></li>
+                            <li data-images="rm_container_4" data-rotation="15"><img src="../img/about/4.jpg" /></li>
                         </ul>
                         <div id="rm_mask_left" class="rm_mask_left"></div>
                         <div id="rm_mask_right" class="rm_mask_right"></div>
@@ -101,28 +101,28 @@
                         <h2>Fashion Explosion 2013</h2>
                         <div style="display:none;">
                             <div id="rm_container_1">
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/1.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/5.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/6.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/7.jpg" />
+                                <img src="../img/about/1.jpg" />
+                                <img src="../img/about/f1.jpg" />
+                                <img src="../img/about/v1.jpg" />
+                                <img src="../img/about/s1.jpg" />
                             </div>
                             <div id="rm_container_2">
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/2.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/8.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/9.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/10.jpg" />
+                                <img src="../img/about/2.jpg" />
+                                <img src="../img/about/f2.jpg" />
+                                <img src="../img/about/v2.png" />
+                                <img src="../img/about/s2.jpg" />
                             </div>
                             <div id="rm_container_3">
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/3.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/11.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/12.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/13.jpg" />
+                                <img src="../img/about/3.jpg" />
+                                <img src="../img/about/f3.jpg" />
+                                <img src="../img/about/v3.jpg" />
+                                <img src="../img/about/s3.jpg" />
                             </div>
                             <div id="rm_container_4">
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/4.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/14.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/15.jpg" />
-                                <img src="https://tympanus.net/Tutorials/RotatingImageSlider/images/16.jpg" />
+                                <img src="../img/about/4.jpg" />
+                                <img src="../img/about/f4.jpg" />
+                                <img src="../img/about/v4.jpg" />
+                                <img src="../img/about/s4.jpg" />
                             </div>
                         </div>
                     </div>
