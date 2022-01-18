@@ -66,7 +66,7 @@ body {
     align-items: center;
     margin: 1px;
     padding: 1px 0px 2px 0px;
-    left: 900px;
+    left: 970px;
     top: 55px;
 }
 
@@ -323,9 +323,10 @@ progress{
 }
 
 .product {
-    border: 1px solid rgb(12, 12, 12);
+    border: 1px solid rgb(255, 255, 255);
     /* transform: skewX(-7deg); */
-    margin: 20px 0;
+    padding: 4px;
+    margin: 20px 0px;
     width: 100%;
     height: 195px;
     position: relative;
