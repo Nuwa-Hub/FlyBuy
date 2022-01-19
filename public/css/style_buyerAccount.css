@@ -103,6 +103,9 @@ html {
 .cart.shake {
 	animation: shakeCart 0.4s ease-in-out forwards;
 }
+.btn.shake {
+	animation: shakeCart 0.4s ease-in-out forwards;
+}
 @keyframes shakeCart {
 	15% {
 		transform: translateX(9px);
@@ -842,8 +845,7 @@ span.stars span {
 	transition: 0.3s;
 }
 /*rate end*/
-<<<<<<< HEAD
-=======
+
 
 /*footer*/
 
@@ -898,5 +900,76 @@ span.stars span {
     transition: 0.4s;
 }
 
-  
->>>>>>> aee7c531b2979966c3b8525bc2145f6c43cbb3a1
+ 
+/*alert box style*/
+
+.section-notification .nav>li.is-active .notifications {
+    z-index: 100;
+    display: flex;
+    -webkit-animation: note 800ms ease-in-out forwards;
+    animation: note 800ms ease-in-out forwards;
+    transform-origin: center 60px;
+}
+
+
+/*swinging*/
+
+@keyframes note {
+    0% {
+        opacity: 0;
+        transform: scale(0.1) rotate(30deg) translateY(50px) rotateX(90deg);
+    }
+    50% {
+        transform: rotate(-10deg) rotateX(-2deg);
+        opacity: 1;
+    }
+    70% {
+        transform: rotate(3deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.section-notification .notifications {
+    background: #00043a;
+   display: none;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 20%;
+    left: 74%;
+    right: 10%;
+    width: 200px;
+    height: 80px;
+    z-index: 100;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    margin-left: -95px;
+    cursor: default;
+}
+
+.section-notification .notifications:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 10px;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(0, 151, 167, 0);
+    border-top-color: #00043a;
+    border-width: 26px;
+    margin-left: -16px;
+}
+
+.section-notification .notifications li {
+    padding: 1px;
+    font-family: "Roboto", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    text-align: center;
+    font-size: 18px;
+    text-align: center;
+} 
+

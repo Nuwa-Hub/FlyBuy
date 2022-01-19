@@ -42,9 +42,13 @@ class PageController extends Controller
         $this->view('pages/loginSignup');
     }
 
-    public function aboutUs()
+    public function aboutUs($id)
     {
-        $this->view('pages/aboutUs');
+        $data = [
+            'buyer_id' => $id,
+        ];
+
+        $this->view('pages/aboutUs',$data);
     }
 
     public function buyerAccount($id)

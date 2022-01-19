@@ -29,7 +29,7 @@
     <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['user']->buy_id; ?>" class="active">Home</a></li>
     <li id="cart" class="cart"><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
     <li><a href="<?php echo URLROOT; ?>/PageController/buyerInfo/<?php echo $data['user']->buy_id; ?>">Account</a></li>
-    <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
+    <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs/<?php echo $data['user']->buy_id; ?>">About us</a></li>
     <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
   </ul>
 </header>
@@ -241,7 +241,8 @@
                 <input type="hidden" name="pmaxAmount" class="pmaxAmount" value="<?php echo $product->amount ?>">
 
                 <!--     <a href="#" class="add-cart-btn" name="addTocart">Add to cart</a>-->
-                <button id="addTocart" onclick="addtoCart(<?php echo $product->item_id ?>,<?php echo $data['buyer_id']; ?>)" class="btn btn-info btn-block addItemBtn add-cart-btn" ><i class="fas fa-cart-plus">
+                <button id="addTocart" onclick="addtoCart(<?php echo $product->item_id ?>,<?php echo $data['buyer_id']; ?>)" class="btn btn-info btn-block addItemBtn add-cart-btn" >
+                <i class="fas fa-cart-plus">
                   </i>&nbsp;&nbsp;Add tocart
                   <span class="cart-item2"></span>
                 </button>  
@@ -254,7 +255,21 @@
     <?php endforeach; ?>
 
   </div>
+   <!-- Section 1 - Notification-->
+   <section class="section-notification">
+        <ul class="nav">
+            <li class="overlay">
+                <ul class="notifications">
+                    <li>
+                        <span><h1>Already added!</h1></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 </div>
+
+ 
 
 <!--Popup window to confirm logout-->
 

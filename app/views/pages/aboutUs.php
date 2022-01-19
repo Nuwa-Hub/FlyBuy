@@ -18,7 +18,7 @@
             <img src="<?php echo URLROOT; ?>/public/img/logo.svg" id="flybuy-logo" style="width:65px;height:65px;position:absolute;margin-left:10px"></a>
 
         <ul>
-            <li><a href="#" class="active">Home</a></li>
+            <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>" class="active">Home</a></li>
             <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
             <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
         </ul>

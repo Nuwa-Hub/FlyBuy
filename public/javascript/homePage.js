@@ -197,7 +197,32 @@ $(document).ready(function () {
 						cart.removeClass("shake");
 					}, 500);
 				}, 1000);
+			} else {
+				alertbox();
+				button.addClass("shake");
+
+				setTimeout(function () {
+					var popupViews = document.querySelectorAll(".popup-view");
+					popupViews.forEach((popupView) => {
+						popupView.classList.remove("active");
+
+						document.body.style.overflowY = "";
+					});
+				}, 1200);
 			}
 		}, 200);
 	});
 });
+
+/*alert box */
+
+function alertbox() {
+
+    $('.overlay').addClass('is-active');
+
+    setTimeout(function() {
+
+        $('.overlay').removeClass('is-active');
+
+    }, 1200);
+}
