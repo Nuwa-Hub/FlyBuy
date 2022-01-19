@@ -89,10 +89,10 @@
                 <div class="rm_wrapper">
                     <div id="rm_container" class="rm_container">
                         <ul>
-                            <li data-images="rm_container_1" data-rotation="-15"><img src="../img/about/1.jpg" /></li>
-                            <li data-images="rm_container_2" data-rotation="-5"><img src="../img/about/2.jpg" /></li>
-                            <li data-images="rm_container_3" data-rotation="5"><img src="../img/about/3.jpg" /></li>
-                            <li data-images="rm_container_4" data-rotation="15"><img src="../img/about/4.jpg" /></li>
+                            <li data-images="rm_container_1" data-rotation="-15"><img src="<?php echo URLROOT; ?>/public/img/about/1.jpg" /></li>
+                            <li data-images="rm_container_2" data-rotation="-5"><img src="<?php echo URLROOT; ?>/public/img/about/2.jpg" /></li>
+                            <li data-images="rm_container_3" data-rotation="5"><img src="<?php echo URLROOT; ?>/public/img/about/3.jpg" /></li>
+                            <li data-images="rm_container_4" data-rotation="15"><img src="<?php echo URLROOT; ?>/public/img/about/4.jpg" /></li>
                         </ul>
                         <div id="rm_mask_left" class="rm_mask_left"></div>
                         <div id="rm_mask_right" class="rm_mask_right"></div>
@@ -101,28 +101,28 @@
                         <h2>Fashion Explosion 2013</h2>
                         <div style="display:none;">
                             <div id="rm_container_1">
-                                <img src="../img/about/1.jpg" />
-                                <img src="../img/about/f1.jpg" />
-                                <img src="../img/about/v1.jpg" />
-                                <img src="../img/about/s1.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/1.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/f1.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/v1.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/s1.jpg" />
                             </div>
                             <div id="rm_container_2">
-                                <img src="../img/about/2.jpg" />
-                                <img src="../img/about/f2.jpg" />
-                                <img src="../img/about/v2.png" />
-                                <img src="../img/about/s2.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/2.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/f2.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/v2.png" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/s2.jpg" />
                             </div>
                             <div id="rm_container_3">
-                                <img src="../img/about/3.jpg" />
-                                <img src="../img/about/f3.jpg" />
-                                <img src="../img/about/v3.jpg" />
-                                <img src="../img/about/s3.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/3.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/f3.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/v3.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/s3.jpg" />
                             </div>
                             <div id="rm_container_4">
-                                <img src="../img/about/4.jpg" />
-                                <img src="../img/about/f4.jpg" />
-                                <img src="../img/about/v4.jpg" />
-                                <img src="../img/about/s4.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/4.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/f4.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/v4.jpg" />
+                                <img src="<?php echo URLROOT; ?>/public/img/about/s4.jpg" />
                             </div>
                         </div>
                     </div>
@@ -150,6 +150,34 @@
             <div class="container-divider"></div>
         </div>
     </div>
+
+    <!--Footer-->
+
+    <footer id="footer">
+        <div class="blocks">
+            <div class="logo">powered by<br>
+                <img src="<?php echo URLROOT; ?>/public/img/cosmos.png" id="cosmos" style="width:200px;position:absolute;margin-left:10px"><br><br><br><br><br>
+                <span class="copyright">&copy; FlyBuy.All Rights Reserved.</span>
+            </div>
+            <div class="app">Download our app<br>
+                <img src="<?php echo URLROOT; ?>/public/img/footer/playstore.svg" id="icons" style="width:120px;position:absolute;margin-left:40px;margin-top:20px;cursor:pointer;">
+                <img src="<?php echo URLROOT; ?>/public/img/footer/iphone.svg" id="icons" style="width:120px;position:absolute;margin-left:40px;margin-top:75px;cursor:pointer;">
+            </div>
+            <div class="follow">Follow us<br>
+                <img src="<?php echo URLROOT; ?>/public/img/footer/fb.svg" style="width:40px;position:absolute;margin-left:10px;margin-top:20px;cursor:pointer;">
+                <img src="<?php echo URLROOT; ?>/public/img/footer/insta.svg" style="width:40px;position:absolute;margin-left:70px;margin-top:20px;cursor:pointer;">
+                <img src="<?php echo URLROOT; ?>/public/img/footer/twitter.svg" style="width:40px;position:absolute;margin-left:130px;margin-top:20px;cursor:pointer;">
+            </div>
+            <div class="contact">Contact us
+                <div class="info">
+                    <br>
+                    <i class="fas fa-phone" style="font-size:18px;color:#b3b3b3;"><span style="font-family:poppins;font-weight:400;color:#b3b3b3;"> 070 4915685</span></i><br>
+                    <i class="fas fa-envelope" style="font-size:18px;color:#b3b3b3;margin-top:15px;"><span style="font-family:poppins;font-weight:400;color:#b3b3b3;"> Flybuy19cse@gmail.com</span></i>
+                </div>
+            </div>
+        </div>
+
+    </footer>
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>

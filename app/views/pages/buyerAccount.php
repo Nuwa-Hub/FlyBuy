@@ -253,10 +253,8 @@
       </div>
 
     <?php endforeach; ?>
-
-  </div>
    <!-- Section 1 - Notification-->
-   <section class="section-notification">
+  
         <ul class="nav">
             <li class="overlay">
                 <ul class="notifications">
@@ -266,7 +264,9 @@
                 </ul>
             </li>
         </ul>
-    </section>
+  
+  </div>
+
 </div>
 
  
