@@ -51,6 +51,11 @@ class PageController extends Controller
         $this->view('pages/aboutUs',$data);
     }
 
+    public function homeaboutUs()
+    {
+        $this->view('pages/homeaboutUs');
+    }
+
     public function buyerAccount($id)
     {
 

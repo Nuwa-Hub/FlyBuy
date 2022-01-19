@@ -28,7 +28,7 @@
 		<ul>
 			<li><a href="#" class="active">Home</a></li>
 			<li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-			<li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
+			<li><a href="<?php echo URLROOT; ?>/PageController/homeaboutUs">About us</a></li>
 		</ul>
 
 	</header>
