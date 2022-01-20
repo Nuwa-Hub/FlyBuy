@@ -30,7 +30,7 @@
                 <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">Home</a></li>
                 <li><a href="#"><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger" value="<?php echo sizeof($_SESSION['cartarr']) ?>"><?php echo sizeof($_SESSION['cartarr']) ?></span></i></a>
                 </li>
-                <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>">About Us</a></li>
+                <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs/<?php echo $data['buyer_id']; ?>">About Us</a></li>
             </ul>
             <progress value="0" max="144" class="progress" id="progress"></progress>
         </div>
