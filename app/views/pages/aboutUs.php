@@ -20,7 +20,7 @@
         <ul>
             <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['buyer_id']; ?>" class="active">Home</a></li>
             <li><a href="<?php echo URLROOT; ?>/PageController/loginSignup">Login/Sign up</a></li>
-            <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
+            <li><a href="#">About us</a></li>
         </ul>
 
     </header>
