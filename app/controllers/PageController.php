@@ -42,6 +42,20 @@ class PageController extends Controller
         $this->view('pages/loginSignup');
     }
 
+    public function aboutUs($id)
+    {
+        $data = [
+            'buyer_id' => $id,
+        ];
+
+        $this->view('pages/aboutUs',$data);
+    }
+
+    public function homeaboutUs()
+    {
+        $this->view('pages/homeaboutUs');
+    }
+
     public function buyerAccount($id)
     {
 
@@ -355,17 +369,27 @@ class PageController extends Controller
     public function downloadPdf($id)
     {
         $custmor = $this->buyerModel->findUserById($id);
+
         $customerAddress = $custmor->address;
+
         $addr = explode(",", $customerAddress);
 
         $pdf = new CustomPdfGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
         $pdf->setFontSubsetting(true);
+
         $pdf->SetFont('dejavusans', '', 12, '', true);
+
         $pdf->SetTextColor(255, 255, 255);
+
         // start a new page
         $pdf->AddPage();
 
@@ -376,58 +400,92 @@ class PageController extends Controller
 
 
         $pdf->writeHTML(" <h3>Date : " . $currentDate->format('Y-m-d') . "</h3>");
+
         $pdf->writeHTML("<b>INVOICE#".$_SESSION['last_id']."</b>");
+
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // logo
         $pdf->Image('logo.png', 10, 3, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+
         $pdf->writeHTML('<img src="logo.png" width=10px hieght=10px>');
+
         $pdf->Image('logo.jpg', 500);
+
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // bill to
         $pdf->writeHTML("<b>BILL TO:</b>", true, false, false, false, 'R');
+
         $pdf->writeHTML($addr[0], true, false, false, false, 'R');
+
         $pdf->writeHTML($addr[1], true, false, false, false, 'R');
+
         $pdf->writeHTML($addr[2], true, false, false, false, 'R');
+
         $pdf->writeHTML($addr[3], true, false, false, false, 'R');
+
         $pdf->Write(0, "\n", '', 0, 'C', true, 0, false, false, 0);
 
         // invoice table starts here
         $header = array('DESCRIPTION', 'UNITS', 'RATE $', 'AMOUNT');
         $data = array();
+
         foreach ($_SESSION['cartarray'] as $product) {
+
             array_push($data, array($product->itemName, $product->amount[1], $product->price, ($product->price) * ($product->amount[1])));
+
         }
+
         $pdf->printTable($header, $data);
         $pdf->Ln();
 
+
+    
         // comments
         $pdf->SetFont('', '', 12);
+
         $pdf->writeHTML("<b>OTHER COMMENTS:</b>");
+
         $pdf->writeHTML("Method of payment: <i>CASH PAYMENT</i>");
+
         $pdf->writeHTML("");
+
         $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
+
         $pdf->writeHTML("If you have any questions about this invoice, please contact:", true, false, false, false, 'C');
+
         $pdf->writeHTML("cosmosflybuy@gmail.com", true, false, false, false, 'C');
 
-        // new style
+        $pdf->Ln();
+
+        $pdf->writeHTML("");
+
+        $pdf->Write(0, "\n\n\n", '', 0, 'C', true, 0, false, false, 0);
+        // QR code style
         $style = array(
+
             'border' => 2,
             'padding' => 'auto',
             'fgcolor' => array(0, 0, 0),
             'bgcolor' => array(255, 255, 255)
+            
         );
       
         // QRCODE,H : QR-CODE Best error correction
         $pdf->write2DBarcode($_SESSION['last_id'].$_SESSION['buyer_id'], 'QRCODE,H', 80, 210, 50, 50, $style, 'N');
       
+        $pdf->Ln();
+
         session_unset();
+
         session_destroy();
+
         // save pdf file
         ob_end_clean();
+
         $pdf->Output(__DIR__ . '/invoice#13.pdf', 'D');
-        // echo 'location.reload(true)';
+    
 
     }
 

@@ -353,15 +353,17 @@ section #text span {
     visibility: visible;
     margin: 0;
     height: 100%;
-    overflow-y: hidden;
+    overflow-x: hidden;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
 .product .popup-card {
-    position: relative;
+    position: absolute;
+    top: 80px;
+    left: 280px;
     display: flex;
-    width: 800px;
-    height: 500px;
+    width: 1000px;
+    height: 600px;
     margin: 20px;
 }
 
@@ -382,8 +384,8 @@ section #text span {
 
 .product .popup-card .product-img img {
     z-index: 2;
-    max-height: 400px;
-    max-width: 300px;
+    max-width: 500px;
+    max-height: 530px;
     position: relative;
     width: 400px;
     left: -5px;
@@ -436,22 +438,22 @@ section #text span {
 .product .popup-card .info .price {
     font-size: 45px;
     font-weight: 300;
-    margin-top: 300px;
+    bottom: 100px;
     position: absolute;
 }
 
 .product .popup-card .info .add-cart-btn {
     color: whitesmoke;
     background: turquoise;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 10px 50px;
+    padding: 10px;
     border-radius: 20px;
-    margin-top: 50%;
-    margin-left: 23%;
+    right: 40px;
+    bottom: 20px;
     position: absolute;
 }
 
@@ -460,8 +462,7 @@ section #text span {
 }
 
 .product .popup-card .info .quantity {
-    margin-top: 406px;
-    margin-left: 5px;
+    bottom: 42px;
     font-size: 15px;
     position: absolute;
 }
@@ -474,6 +475,7 @@ input[type=number] {
     margin-left: 90px;
     margin-top: 404px;
     position: absolute;
+    bottom: 40px;
 }
 
 
@@ -600,3 +602,56 @@ span.stars span {
 }
 /*slide words end*/
 /*slider end*/
+
+/*footer*/
+
+#footer{
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,8,108,1) 100%);
+    height: 30vh;
+}
+#footer .blocks{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+#footer .blocks .follow{
+    margin-top: 15px;
+    color: #ececec;
+    font-size: 22px;
+    font-family: poppins ;
+    font-weight: 600;
+}
+#footer .blocks .contact{
+    margin-top: 15px;
+    color: #ececec;
+    font-size: 22px;
+    font-family: poppins ;
+    font-weight: 600;
+}
+#footer .blocks .app{
+    margin-top: 15px;
+    color: #ececec;
+    font-size: 22px;
+    font-family: poppins ;
+    font-weight: 600;
+}
+#footer .blocks .logo{
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-left: 28px;
+    color: #ececec;
+    font-size: 16px;
+    font-family: poppins ;
+    font-weight: 500;
+}
+#footer .blocks .logo .copyright{
+    color: #ececec;
+    font-size: 12px;
+}
+#footer .blocks .app img:hover{
+    transform: scale(1.2);
+    transition: 0.4s;
+}
+#footer .blocks .follow img:hover{
+    transform: scale(1.2);
+    transition: 0.4s;
+}
