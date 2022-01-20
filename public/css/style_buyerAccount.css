@@ -930,9 +930,9 @@ span.stars span {
     }
 }
 .notifications {
-    background: #00043a;
+    background: #2432f0;
    display: none;
-    border-radius: 4px;
+    border-radius: 30px;
     position: fixed;
     bottom: 20%;
     left: 74%;
@@ -956,7 +956,7 @@ span.stars span {
     position: absolute;
     pointer-events: none;
     border-color: rgba(0, 151, 167, 0);
-    border-top-color: #00043a;
+    border-top-color: #2432f0;
     border-width: 26px;
     margin-left: -16px;
 }
