@@ -18,7 +18,7 @@
     <ul>
       <li><a href="<?php echo URLROOT; ?>/PageController/buyerAccount/<?php echo $data['user']->buy_id; ?>">Home</a></li>
       <li><a href='<?php echo URLROOT; ?>/PageController/shoppingCart/<?php echo $data['user']->buy_id; ?>'><i class="fas fa-cart-plus"><span id="cart-item" class="badge badge-danger"><?php echo sizeof($_SESSION['cartarr']); ?></span></i></a> </li>
-      <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs">About us</a></li>
+      <li><a href="<?php echo URLROOT; ?>/PageController/aboutUs/<?php echo $data['user']->buy_id; ?>">About us</a></li>
       <li><a onclick="toggleLogout()" class="logout">Logout</a></li>
     </ul>
   </header>
