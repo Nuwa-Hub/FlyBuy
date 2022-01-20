@@ -119,7 +119,7 @@ function rate(rating, seller_id, buyer_id) {
 
 var now = new Date();
 var millisTill10 =
-	new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 0, 0) -
+	new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 19, 0, 0) -
 	now;
 
 if (millisTill10 < 0) {
