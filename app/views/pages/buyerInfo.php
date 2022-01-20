@@ -28,7 +28,7 @@
     <div class="name">
       <img src="<?php echo URLROOT; ?>/public/img/avatar2.png"style="width:150px;height:150px;">
       <h1 style="color:white;font-family:Great Vibes;font-size: 55px;">Welcome</h1>
-      <h1 style="color:white;"><?php echo $data['user']->username; ?></h1><br><br>
+      <h1 style="color:white;"><?php $full=$data['user']->username; $name=explode(" ",$full); echo $name[0] ?></h1><br><br>
       <div class="info">
         <i class="fas fa-user-alt" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->username; ?></span></i><br><br>
         <i class="fa fa-envelope" style="font-size:25px;color:white"><span style="font-family: Myriad Pro;"> <?php echo $data['user']->email; ?></span></i><br><br>
@@ -52,9 +52,9 @@
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Unit price</th>
+                    <th>Unit price(Rs.)</th>
                     <th>Quantity</th>
-                    <th>Total</th>
+                    <th>Total(Rs.)</th>
                   </tr>
                 </thead>
                 <tbody>
