@@ -59,17 +59,409 @@
             </div>
         </div>
         <div class="story-container">
-            <div class="need-for-dx-container">
-                <h3 class="text-center">
-                    Need for DX
-                </h3>
-                <p>
-                    Application Programming Interfaces (APIs) have taken the world by storm and are now the de facto standard of software communication. Almost every software product nowadays consumes APIs. The business model of numerous companies around the world relies upon the consumption of their APIs. API providers, therefore, strive to increase API adoption rates by spending millions of dollars every year to improve developer experience. This is usually done by providing Software Development Kits (SDKs) and API documentation to developer consuming their API(s). Developing SDKs and writing documentation, however, are arduous, monotonous and error-prone tasks. It is a slow process and costs a lot of time and money.
-                </p>
-                <div class="img-container">
 
-                </div>
-            </div>
+           <!-- /* about us*/ -->
+           <div class="us">
+
+<div class="contact-area">
+  <div class="contact">
+    <main>
+      <section>
+        <div class="content">
+        <img class="team4" src="<?php echo URLROOT; ?>/public/img/admin4.jpeg" />
+
+          <aside>
+            <h1>Akash Tharuka</h1>
+            <p>Hi, I'm Akash Tharuka and I'm a full stack developer.(190623V)</p>
+          </aside>
+
+          <button class="button1">
+            <span>Contact Me</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+              <g class="nc-icon-wrapper" fill="#444444">
+                <path d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="title1">
+        
+        </div>
+      </section>
+
+
+    </main>
+
+    <nav class="nav1">
+      <a href="#" class="gmail">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 3v10c0 .567-.433 1-1 1h-1V4.925L8 9.233 2 4.925V14H1c-.567 0-1-.433-1-1V3c0-.283.108-.533.287-.712C.467 2.107.718 2 1 2h.333L8 6.833 14.667 2H15c.283 0 .533.108.713.288.179.179.287.429.287.712z"
+              fill-rule="evenodd" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Email</h1>
+          <span>akash.19@cse.mrt.ac.lk</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="facebook">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+            stroke-linejoin="round" stroke-miterlimit="1.414">
+            <path
+              d="M15.117 0H.883C.395 0 0 .395 0 .883v14.234c0 .488.395.883.883.883h7.663V9.804H6.46V7.39h2.086V5.607c0-2.066 1.262-3.19 3.106-3.19.883 0 1.642.064 1.863.094v2.16h-1.28c-1 0-1.195.48-1.195 1.18v1.54h2.39l-.31 2.42h-2.08V16h4.077c.488 0 .883-.395.883-.883V.883C16 .395 15.605 0 15.117 0"
+              fill-rule="nonzero" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Facebook</h1>
+          <span> Akash Tharuka</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="twitter">
+        <div class="icon">
+        <img src="https://img.icons8.com/color/48/000000/apple-phone.png"/>
+
+        </div>
+
+        <div class="content">
+          <h1>Telephone Number</h1>
+        <span>+94715694899</span>
+        </div>
+
+        <svg class="arrow" xmlns="<?php echo URLROOT; ?>/public/img/smartphone.png" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+</div>
+
+<div class="contact-area">
+  <div class="contact">
+    <main>
+      <section>
+        <div class="content">
+        <img class="team1" src="<?php echo URLROOT; ?>/public/img/admin1.jpg" />
+
+          <aside>
+            <h1>Nuwan Deshapriya</h1>
+            <p>Hi, I'm Nuwan Deshapriya and I'm a full stack developer.(190458T)</p>
+          </aside>
+
+          <button class="button2">
+            <span>Contact Me</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+              <g class="nc-icon-wrapper" fill="#444444">
+                <path d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="title2">
+        
+        </div>
+      </section>
+
+
+    </main>
+
+    <nav class="nav2">
+      <a href="#" class="gmail">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 3v10c0 .567-.433 1-1 1h-1V4.925L8 9.233 2 4.925V14H1c-.567 0-1-.433-1-1V3c0-.283.108-.533.287-.712C.467 2.107.718 2 1 2h.333L8 6.833 14.667 2H15c.283 0 .533.108.713.288.179.179.287.429.287.712z"
+              fill-rule="evenodd" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Email</h1>
+          <span>nuwanp.19@cse.mrt.ac.lk</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="facebook">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+            stroke-linejoin="round" stroke-miterlimit="1.414">
+            <path
+              d="M15.117 0H.883C.395 0 0 .395 0 .883v14.234c0 .488.395.883.883.883h7.663V9.804H6.46V7.39h2.086V5.607c0-2.066 1.262-3.19 3.106-3.19.883 0 1.642.064 1.863.094v2.16h-1.28c-1 0-1.195.48-1.195 1.18v1.54h2.39l-.31 2.42h-2.08V16h4.077c.488 0 .883-.395.883-.883V.883C16 .395 15.605 0 15.117 0"
+              fill-rule="nonzero" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Facebook</h1>
+          <span>Nuwan Deshapriya</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="twitter">
+        <div class="icon">
+        <img src="https://img.icons8.com/color/48/000000/apple-phone.png"/>
+        </div>
+
+        <div class="content">
+          <h1>Telephone Number</h1>
+          <span>+94775929879</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="contact-area">
+  <div class="contact">
+    <main>
+      <section>
+        <div class="content">
+        <img class="team3" src="<?php echo URLROOT; ?>/public/img/admin3.jpeg" />
+
+
+          <aside>
+            <h1>Kalana Rubasinghe</h1>
+            <p>Hi, I'm Kalana Rubasinghe and I'm a full stack developer.(190530H)</p>
+          </aside>
+
+          <button class="button3">
+            <span>Contact Me</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+              <g class="nc-icon-wrapper" fill="#444444">
+                <path d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="title3">
+        
+        </div>
+      </section>
+
+
+    </main>
+
+    <nav class="nav3">
+      <a href="#" class="gmail">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 3v10c0 .567-.433 1-1 1h-1V4.925L8 9.233 2 4.925V14H1c-.567 0-1-.433-1-1V3c0-.283.108-.533.287-.712C.467 2.107.718 2 1 2h.333L8 6.833 14.667 2H15c.283 0 .533.108.713.288.179.179.287.429.287.712z"
+              fill-rule="evenodd" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Email</h1>
+          <span>kalana.19@cse.mrt.ac.lk</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="facebook">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+            stroke-linejoin="round" stroke-miterlimit="1.414">
+            <path
+              d="M15.117 0H.883C.395 0 0 .395 0 .883v14.234c0 .488.395.883.883.883h7.663V9.804H6.46V7.39h2.086V5.607c0-2.066 1.262-3.19 3.106-3.19.883 0 1.642.064 1.863.094v2.16h-1.28c-1 0-1.195.48-1.195 1.18v1.54h2.39l-.31 2.42h-2.08V16h4.077c.488 0 .883-.395.883-.883V.883C16 .395 15.605 0 15.117 0"
+              fill-rule="nonzero" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Facebook</h1>
+          <span>Kalana Rubasinghe</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="twitter">
+        <div class="icon">
+        <img src="https://img.icons8.com/color/48/000000/apple-phone.png"/>
+        </div>
+
+        <div class="content">
+          <h1>Telephone Number</h1>
+          <span>+94771993753</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+</div>
+
+
+
+
+<div class="contact-area">
+  <div class="contact">
+    <main>
+      <section>
+        <div class="content">
+        <img class="team2" src="<?php echo URLROOT; ?>/public/img/admin2.jpg" />
+
+          <aside>
+            <h1>Ransika Costa</h1>
+            <p>Hi, I'm Ransika Costa and I'm a full stack developer.(190112E)</p>
+          </aside>
+
+          <button class="button4">
+            <span>Contact Me</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+              <g class="nc-icon-wrapper" fill="#444444">
+                <path d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="title4">
+         
+        </div>
+      </section>
+
+
+    </main>
+
+    <nav class="nav4">
+      <a href="#" class="gmail">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 3v10c0 .567-.433 1-1 1h-1V4.925L8 9.233 2 4.925V14H1c-.567 0-1-.433-1-1V3c0-.283.108-.533.287-.712C.467 2.107.718 2 1 2h.333L8 6.833 14.667 2H15c.283 0 .533.108.713.288.179.179.287.429.287.712z"
+              fill-rule="evenodd" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Email</h1>
+          <span>rumal.19@cse.mrt.ac.lk</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="facebook">
+        <div class="icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"
+            stroke-linejoin="round" stroke-miterlimit="1.414">
+            <path
+              d="M15.117 0H.883C.395 0 0 .395 0 .883v14.234c0 .488.395.883.883.883h7.663V9.804H6.46V7.39h2.086V5.607c0-2.066 1.262-3.19 3.106-3.19.883 0 1.642.064 1.863.094v2.16h-1.28c-1 0-1.195.48-1.195 1.18v1.54h2.39l-.31 2.42h-2.08V16h4.077c.488 0 .883-.395.883-.883V.883C16 .395 15.605 0 15.117 0"
+              fill-rule="nonzero" />
+          </svg>
+        </div>
+
+        <div class="content">
+          <h1>Facebook</h1>
+          <span>Ransika Costa</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+
+      <a href="#" class="twitter">
+        <div class="icon">
+        <img src="https://img.icons8.com/color/48/000000/apple-phone.png"/>
+        </div>
+
+        <div class="content">
+          <h1>Telephone Number</h1>
+          <span>+94704915685</span>
+        </div>
+
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+          <g class="nc-icon-wrapper" fill="#444444">
+            <path d="M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z"></path>
+          </g>
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+</div>
+
+</div>
+
+            <!-- /*end about us*/ -->
             <div class="container-divider"></div>
             <div class="our-tech-container">
                 <h3 class="text-center">
