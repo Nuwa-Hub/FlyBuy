@@ -92,6 +92,7 @@ class ProductController extends Controller
     {
 
         if (isset($_POST['pqty'])) {
+            
             $item = true;
             $pid = $_POST['pid'];
             $pqty = $_POST['pqty'];
@@ -113,16 +114,13 @@ class ProductController extends Controller
                 $data = [
                     'add' => '1'
                 ];
-        
-                
-              //  header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
+    
             } else {
 
                 $data = [
                     'add' => '0'
                 ];
-              //  print_r("Already added");
-              //  header('location: ' . URLROOT . '/PageController/buyerAccount/' . $buyer_id);
+             
             }
             echo json_encode($data);
         }
