@@ -1,4 +1,4 @@
 # FlyBuy
 E-commerce system
 
-![screenshot](2.png)
+![Screenshot](screenshot.png)
